@@ -260,7 +260,7 @@ function head({ title, description, canonicalPath, prefix, extraLd }) {
 <meta property="og:description" content="${description}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="nl_NL">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23155fb0' stroke-width='2.4'%3E%3Ccircle cx='17' cy='18' r='3.5'/%3E%3Ccircle cx='8' cy='5' r='1.6' fill='%23155fb0' stroke='none'/%3E%3Cpath d='M8 8v5l3 2 3 6M8 13h6l3-6'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="${prefix}img/logo-icoon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -784,7 +784,7 @@ function buildHomeBody() {
     </div>
     <div class="grid-4">
       ${SERVICES.map((s, i) => `<a href="diensten/${s.slug}.html" class="card reveal reveal-d${i}">
-        <span class="icon-badge">${ICONS[s.icon]}</span>
+        <span class="icon-badge${s.icon === 'wheelchair' ? ' is-logo' : ''}">${s.icon === 'wheelchair' ? '<img src="img/logo-icoon.png" alt="">' : ICONS[s.icon]}</span>
         <h3>${s.h1}</h3>
         <p>${truncate(s.lead, 90)}</p>
       </a>`).join('\n      ')}
