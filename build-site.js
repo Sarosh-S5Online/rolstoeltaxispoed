@@ -275,13 +275,13 @@ ${CSS}
 function nav(prefix) {
   return `<nav id="nav">
   <div class="wrap nav-inner">
-    <a href="${prefix}index.html" class="logo">${logoMark(prefix)}</a>
+    <a href="/" class="logo">${logoMark(prefix)}</a>
     <ul class="nav-links">
-      <li><a href="${prefix}index.html#diensten">Diensten</a></li>
-      <li><a href="${prefix}diensten/spoedvervoer-rolstoeltaxi.html" class="nav-spoed"><span class="nav-spoed-dot"></span>Spoed nu</a></li>
-      <li><a href="${prefix}tarieven.html">Tarieven</a></li>
-      <li><a href="${prefix}over-ons.html">Over ons</a></li>
-      <li><a href="${prefix}veelgestelde-vragen.html">FAQ</a></li>
+      <li><a href="/#diensten">Diensten</a></li>
+      <li><a href="/diensten/spoedvervoer-rolstoeltaxi" class="nav-spoed"><span class="nav-spoed-dot"></span>Spoed nu</a></li>
+      <li><a href="/tarieven">Tarieven</a></li>
+      <li><a href="/over-ons">Over ons</a></li>
+      <li><a href="/veelgestelde-vragen">FAQ</a></li>
       <li><a href="tel:${SITE.phoneTel}" class="btn btn-nav">Bel direct</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false">☰</button>
@@ -290,18 +290,18 @@ function nav(prefix) {
 
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigatiemenu">
   <button class="mobile-close" id="mobileClose" aria-label="Menu sluiten">✕</button>
-  <a href="${prefix}index.html#diensten">Diensten</a>
-  <a href="${prefix}diensten/spoedvervoer-rolstoeltaxi.html" class="nav-spoed"><span class="nav-spoed-dot"></span>Spoed nu</a>
-  <a href="${prefix}tarieven.html">Tarieven</a>
-  <a href="${prefix}over-ons.html">Over ons</a>
-  <a href="${prefix}veelgestelde-vragen.html">FAQ</a>
+  <a href="/#diensten">Diensten</a>
+  <a href="/diensten/spoedvervoer-rolstoeltaxi" class="nav-spoed"><span class="nav-spoed-dot"></span>Spoed nu</a>
+  <a href="/tarieven">Tarieven</a>
+  <a href="/over-ons">Over ons</a>
+  <a href="/veelgestelde-vragen">FAQ</a>
   <a href="tel:${SITE.phoneTel}" class="btn">Bel direct</a>
 </div>`;
 }
 
 function footer(prefix) {
-  const serviceLinks = SERVICES.map(s => `<li><a href="${prefix}diensten/${s.slug}.html">${s.nav}</a></li>`).join('\n          ');
-  const regioLinks = REGIOS.map(r => `<li><a href="${prefix}contact.html#formulier">${r}</a></li>`).join('\n          ');
+  const serviceLinks = SERVICES.map(s => `<li><a href="/diensten/${s.slug}">${s.nav}</a></li>`).join('\n          ');
+  const regioLinks = REGIOS.map(r => `<li><a href="/contact#formulier">${r}</a></li>`).join('\n          ');
   return `<footer>
   <div class="wrap">
     <div class="foot-grid">
@@ -327,9 +327,9 @@ function footer(prefix) {
           <li><a href="tel:${SITE.phoneTel}">${SITE.phoneDisplay}</a></li>
           <li><a href="mailto:${SITE.email}">${SITE.email}</a></li>
           <li>Onderdeel van ${SITE.parentBrand}</li>
-          <li style="margin-top:10px"><a href="${prefix}over-ons.html">Over ons</a></li>
-          <li><a href="${prefix}contact.html">Direct reserveren</a></li>
-          <li><a href="${prefix}privacyverklaring.html">Privacyverklaring</a></li>
+          <li style="margin-top:10px"><a href="/over-ons">Over ons</a></li>
+          <li><a href="/contact">Direct reserveren</a></li>
+          <li><a href="/privacyverklaring">Privacyverklaring</a></li>
         </ul>
       </div>
     </div>
@@ -491,7 +491,7 @@ function serviceLd(svc) {
   "serviceType": "${svc.h1}",
   "provider": { "@type": "TaxiService", "name": "${SITE.name}", "telephone": "${SITE.phoneTel}" },
   "areaServed": "Nederland",
-  "url": "${SITE.domain}/diensten/${svc.slug}.html"
+  "url": "${SITE.domain}/diensten/${svc.slug}"
 }
 </script>
 <script type="application/ld+json">
@@ -505,7 +505,7 @@ function serviceLd(svc) {
 </script>
 ${breadcrumbLd([
   { label: 'Home', url: `${SITE.domain}/` },
-  { label: 'Diensten', url: `${SITE.domain}/index.html#diensten` },
+  { label: 'Diensten', url: `${SITE.domain}/#diensten` },
   { label: svc.nav },
 ])}`;
 }
@@ -516,13 +516,13 @@ function buildServiceBody(svc) {
 <header class="page-hero has-photo" style="background-image:url('${p}img/${svc.images[0].src}')">
   <div class="wrap">
     <div class="hero-box reveal">
-      ${breadcrumbNav([{ label: 'Home', href: `${p}index.html` }, { label: 'Diensten', href: `${p}index.html#diensten` }, { label: svc.nav }])}
+      ${breadcrumbNav([{ label: 'Home', href: `/` }, { label: 'Diensten', href: `/#diensten` }, { label: svc.nav }])}
       <span class="eyebrow">${svc.eyebrow}</span>
       <h1>${svc.h1}</h1>
       <p class="lead">${svc.lead}</p>
       <div class="hero-cta">
         <a href="tel:${SITE.phoneTel}" class="btn btn-yellow">Bel direct: ${SITE.phoneDisplay}</a>
-        <a href="${p}contact.html" class="btn btn-ghost">Of plan online</a>
+        <a href="/contact" class="btn btn-ghost">Of plan online</a>
       </div>
     </div>
   </div>
@@ -617,7 +617,7 @@ function buildServiceBody(svc) {
     <div class="related-grid">
       ${svc.related.map(slug => {
         const rel = SERVICES.find(s => s.slug === slug);
-        return `<a href="${p}diensten/${rel.slug}.html" class="related-card reveal">
+        return `<a href="/diensten/${rel.slug}" class="related-card reveal">
         <span>${rel.nav}</span><span class="arrow">→</span>
       </a>`;
       }).join('\n      ')}
@@ -651,7 +651,7 @@ function buildServiceBody(svc) {
     <div class="reveal reveal-d3">
       <a href="tel:${SITE.phoneTel}" class="btn">Bel ${SITE.phoneDisplay}</a>
     </div>
-    <p class="cta-sub reveal reveal-d3">Of <a href="${p}contact.html" style="color:var(--accent)">plan online een rit</a> · ook per WhatsApp bereikbaar</p>
+    <p class="cta-sub reveal reveal-d3">Of <a href="/contact" style="color:var(--accent)">plan online een rit</a> · ook per WhatsApp bereikbaar</p>
   </div>
 </section>`;
 }
@@ -700,7 +700,7 @@ function buildHomeBody() {
       </div>
       <div class="hero-cta reveal-d3">
         <a href="tel:${SITE.phoneTel}" class="btn btn-yellow">Bel direct: ${SITE.phoneDisplay}</a>
-        <a href="contact.html" class="btn btn-ghost">Of plan online</a>
+        <a href="/contact" class="btn btn-ghost">Of plan online</a>
       </div>
       <div class="trust reveal-d3">
         <span class="trust-item">${svgCheck()}<b>24/7</b> bereikbaar</span>
@@ -783,7 +783,7 @@ function buildHomeBody() {
       <p>Van een acute ziekenhuisrit tot een vaste wekelijkse afspraak: Rolstoeltaxi Spoed regelt het, met dezelfde bussen en chauffeurs.</p>
     </div>
     <div class="grid-4">
-      ${SERVICES.map((s, i) => `<a href="diensten/${s.slug}.html" class="card reveal reveal-d${i}">
+      ${SERVICES.map((s, i) => `<a href="/diensten/${s.slug}" class="card reveal reveal-d${i}">
         <span class="icon-badge${s.icon === 'wheelchair' ? ' is-logo' : ''}">${s.icon === 'wheelchair' ? '<img src="img/logo-icoon.png" alt="">' : ICONS[s.icon]}</span>
         <h3>${s.h1}</h3>
         <p>${truncate(s.lead, 90)}</p>
@@ -853,21 +853,21 @@ function buildHomeBody() {
       <h2>Onze bussen <span class="serif-i">in actie</span></h2>
     </div>
     <div class="projects">
-      <a href="diensten/spoedvervoer-rolstoeltaxi.html" class="project p1 reveal">
+      <a href="/diensten/spoedvervoer-rolstoeltaxi" class="project p1 reveal">
         <img class="ph-img" src="img/spoedrit-amsterdam-centraal.jpg" alt="Rolstoelbus met laadklep bij Amsterdam Centraal" loading="lazy" width="1000" height="1250">
         <div class="project-info">
           <span class="tag">Spoedvervoer · Amsterdam</span>
           <h3>Laadklep uitgeklapt, klaar voor vertrek</h3>
         </div>
       </a>
-      <a href="diensten/spoed-ziekenhuisvervoer.html" class="project p2 reveal reveal-d1">
+      <a href="/diensten/spoed-ziekenhuisvervoer" class="project p2 reveal reveal-d1">
         <img class="ph-img" src="img/rolstoelbus-torenhof.jpg" alt="Rolstoelbus bij een zorginstelling" loading="lazy" width="1000" height="667">
         <div class="project-info">
           <span class="tag">Ziekenhuis &amp; zorg · regio</span>
           <h3>Ophalen bij de ingang van de instelling</h3>
         </div>
       </a>
-      <a href="diensten/luchthavenvervoer-spoed.html" class="project p3 reveal reveal-d2">
+      <a href="/diensten/luchthavenvervoer-spoed" class="project p3 reveal reveal-d2">
         <img class="ph-img" src="img/luchthavenvervoer-bagage.jpg" alt="Rolstoelbus bij een terminal met reizigers en bagage" loading="lazy" width="1000" height="667">
         <div class="project-info">
           <span class="tag">Luchthavenvervoer</span>
@@ -887,7 +887,7 @@ function buildHomeBody() {
       <p>Met extra veel ritten in en rond de grote steden. Staat uw plaats er niet bij? Bel gerust, we rijden landelijk.</p>
     </div>
     <div class="area-list reveal">
-      ${REGIOS.map(r => `<a href="contact.html#formulier">${r}</a>`).join('\n      ')}
+      ${REGIOS.map(r => `<a href="/contact#formulier">${r}</a>`).join('\n      ')}
     </div>
   </div>
 </section>
@@ -964,7 +964,7 @@ function buildHomeBody() {
       </div>
       <div class="faq-item reveal">
         <button class="faq-q" aria-expanded="false">In welke regio's rijdt Rolstoeltaxi Spoed?</button>
-        <div class="faq-a"><p>We rijden in Nederland, met extra veel ritten in en rond Amsterdam, Rotterdam, Den Haag, Utrecht, Amersfoort en Hilversum. Bekijk ook onze <a href="veelgestelde-vragen.html" style="color:var(--accent)">volledige FAQ-pagina</a>.</p></div>
+        <div class="faq-a"><p>We rijden in Nederland, met extra veel ritten in en rond Amsterdam, Rotterdam, Den Haag, Utrecht, Amersfoort en Hilversum. Bekijk ook onze <a href="/veelgestelde-vragen" style="color:var(--accent)">volledige FAQ-pagina</a>.</p></div>
       </div>
     </div>
   </div>
@@ -980,7 +980,7 @@ function buildHomeBody() {
     <div class="reveal reveal-d3">
       <a href="tel:${SITE.phoneTel}" class="btn">Bel ${SITE.phoneDisplay}</a>
     </div>
-    <p class="cta-sub reveal reveal-d3">Of <a href="contact.html" style="color:var(--accent-2)">plan online een rit</a> · ook per <a href="https://wa.me/${SITE.whatsapp}" style="color:var(--accent-2)">WhatsApp</a></p>
+    <p class="cta-sub reveal reveal-d3">Of <a href="/contact" style="color:var(--accent-2)">plan online een rit</a> · ook per <a href="https://wa.me/${SITE.whatsapp}" style="color:var(--accent-2)">WhatsApp</a></p>
   </div>
 </section>`;
 }
@@ -1003,7 +1003,7 @@ function buildContactBody() {
   return `<!-- PAGE HERO -->
 <header class="page-hero" style="padding-bottom:40px">
   <div class="wrap">
-    ${breadcrumbNav([{ label: 'Home', href: 'index.html' }, { label: 'Contact' }])}
+    ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Contact' }])}
     <span class="eyebrow reveal">Direct reserveren</span>
     <h1 class="reveal reveal-d1">Plan uw <span class="serif-i">rit</span></h1>
     <p class="lead reveal reveal-d2">Bij spoed belt u ons liever direct. Voor een geplande rit vult u hieronder het formulier in, dan nemen we snel contact op.</p>
@@ -1020,7 +1020,7 @@ function buildContactBody() {
         <form id="bookingForm" action="https://api.web3forms.com/submit" method="POST">
           <input type="hidden" name="access_key" value="VUL-HIER-UW-WEB3FORMS-ACCESS-KEY-IN">
           <input type="hidden" name="subject" value="Nieuwe ritaanvraag via rolstoeltaxispoed.nl">
-          <input type="hidden" name="redirect" value="https://rolstoeltaxispoed.nl/bedankt.html">
+          <input type="hidden" name="redirect" value="https://rolstoeltaxispoed.nl/bedankt">
           <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off">
           <div class="form-row">
             <div class="field">
@@ -1096,7 +1096,7 @@ function buildOverOnsBody() {
 <header class="page-hero has-photo" style="background-image:url('img/rolstoelbus-voorkant.jpg')">
   <div class="wrap">
     <div class="hero-box reveal">
-      ${breadcrumbNav([{ label: 'Home', href: 'index.html' }, { label: 'Over ons' }])}
+      ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Over ons' }])}
       <span class="eyebrow">Over ons</span>
       <h1>De spoedtak van <span class="serif-i">${SITE.parentBrand}</span></h1>
       <p class="lead">Dezelfde ervaring en dezelfde bussen als ${SITE.parentBrand}, speciaal ingericht op ritten die niet konden wachten.</p>
@@ -1132,7 +1132,7 @@ function buildOverOnsBody() {
       <h2>Wij rijden <span class="serif-i">in Nederland</span></h2>
     </div>
     <div class="area-list reveal">
-      ${REGIOS.map(r => `<a href="contact.html#formulier">${r}</a>`).join('\n      ')}
+      ${REGIOS.map(r => `<a href="/contact#formulier">${r}</a>`).join('\n      ')}
     </div>
   </div>
 </section>
@@ -1147,7 +1147,7 @@ function buildOverOnsBody() {
     <div class="reveal reveal-d3">
       <a href="tel:${SITE.phoneTel}" class="btn">Bel ${SITE.phoneDisplay}</a>
     </div>
-    <p class="cta-sub reveal reveal-d3">Of <a href="contact.html" style="color:var(--accent)">plan online een rit</a></p>
+    <p class="cta-sub reveal reveal-d3">Of <a href="/contact" style="color:var(--accent)">plan online een rit</a></p>
   </div>
 </section>`;
 }
@@ -1158,7 +1158,7 @@ function buildTarievenBody() {
   return `<!-- PAGE HERO -->
 <header class="page-hero" style="padding-bottom:40px">
   <div class="wrap">
-    ${breadcrumbNav([{ label: 'Home', href: 'index.html' }, { label: 'Tarieven' }])}
+    ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Tarieven' }])}
     <span class="eyebrow reveal">Transparant</span>
     <h1 class="reveal reveal-d1">Onze <span class="serif-i">tarieven</span></h1>
     <p class="lead reveal reveal-d2">Ook bij spoed geldt: u hoort de prijs altijd vooraf aan de telefoon. Geen verrassingen achteraf.</p>
@@ -1237,7 +1237,7 @@ function buildTarievenBody() {
     <div class="reveal reveal-d3">
       <a href="tel:${SITE.phoneTel}" class="btn">Bel ${SITE.phoneDisplay}</a>
     </div>
-    <p class="cta-sub reveal reveal-d3">Of <a href="contact.html" style="color:var(--accent-2)">plan online een rit</a></p>
+    <p class="cta-sub reveal reveal-d3">Of <a href="/contact" style="color:var(--accent-2)">plan online een rit</a></p>
   </div>
 </section>`;
 }
@@ -1273,7 +1273,7 @@ function buildFaqBody() {
   return `<!-- PAGE HERO -->
 <header class="page-hero" style="padding-bottom:20px">
   <div class="wrap">
-    ${breadcrumbNav([{ label: 'Home', href: 'index.html' }, { label: 'Veelgestelde vragen' }])}
+    ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Veelgestelde vragen' }])}
     <span class="eyebrow reveal">Veelgestelde vragen</span>
     <h1 class="reveal reveal-d1">Alles wat u wilt <span class="serif-i">weten</span></h1>
     <p class="lead reveal reveal-d2">Staat uw vraag er niet bij? Bel of app ons gerust, we denken graag mee.</p>
@@ -1301,7 +1301,7 @@ function buildFaqBody() {
     <div class="reveal reveal-d3">
       <a href="tel:${SITE.phoneTel}" class="btn">Bel ${SITE.phoneDisplay}</a>
     </div>
-    <p class="cta-sub reveal reveal-d3">Of <a href="contact.html" style="color:var(--accent-2)">plan online een rit</a></p>
+    <p class="cta-sub reveal reveal-d3">Of <a href="/contact" style="color:var(--accent-2)">plan online een rit</a></p>
   </div>
 </section>`;
 }
@@ -1312,7 +1312,7 @@ function buildPrivacyBody() {
   return `<!-- PAGE HERO -->
 <header class="page-hero" style="padding-bottom:20px">
   <div class="wrap">
-    ${breadcrumbNav([{ label: 'Home', href: 'index.html' }, { label: 'Privacyverklaring' }])}
+    ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Privacyverklaring' }])}
     <span class="eyebrow reveal">Juridisch</span>
     <h1 class="reveal reveal-d1">Privacy<span class="serif-i">verklaring</span></h1>
     <p class="lead reveal reveal-d2">Laatst bijgewerkt: 2026. ${SITE.name} gaat zorgvuldig om met uw persoonsgegevens.</p>
@@ -1359,7 +1359,7 @@ function buildBedanktBody() {
     <p class="lead reveal reveal-d2" style="margin-left:auto;margin-right:auto">We reageren zo snel mogelijk om de rit en de prijs te bevestigen. Heeft u haast? Bel gerust direct.</p>
     <div class="hero-cta reveal reveal-d3" style="justify-content:center">
       <a href="tel:${SITE.phoneTel}" class="btn">Bel ${SITE.phoneDisplay}</a>
-      <a href="index.html" class="btn btn-ghost">Terug naar de homepage</a>
+      <a href="/" class="btn btn-ghost">Terug naar de homepage</a>
     </div>
   </div>
 </header>`;
@@ -1383,7 +1383,7 @@ for (const svc of SERVICES) {
   const html = page({
     title: svc.metaTitle,
     description: svc.metaDescription,
-    canonicalPath: `diensten/${svc.slug}.html`,
+    canonicalPath: `diensten/${svc.slug}`,
     prefix: '../',
     extraLd: serviceLd(svc),
     bodyHtml: buildServiceBody(svc),
@@ -1395,7 +1395,7 @@ for (const svc of SERVICES) {
 fs.writeFileSync(path.join(ROOT, 'contact.html'), page({
   title: 'Direct reserveren | Rolstoeltaxi Spoed',
   description: 'Plan online een rit met Rolstoeltaxi Spoed, of bel direct bij spoed. 24/7 bereikbaar in Nederland.',
-  canonicalPath: 'contact.html',
+  canonicalPath: 'contact',
   prefix: '',
   extraLd: contactLd(),
   bodyHtml: buildContactBody(),
@@ -1406,7 +1406,7 @@ fs.writeFileSync(path.join(ROOT, 'contact.html'), page({
 fs.writeFileSync(path.join(ROOT, 'over-ons.html'), page({
   title: 'Over ons | Rolstoeltaxi Spoed — spoedtak van Rolstoeltaxi Holland',
   description: 'Maak kennis met Rolstoeltaxi Spoed: de spoedtak van Rolstoeltaxi Holland. Dezelfde ervaren chauffeurs, ingericht op snel schakelen bij spoed.',
-  canonicalPath: 'over-ons.html',
+  canonicalPath: 'over-ons',
   prefix: '',
   extraLd: '',
   bodyHtml: buildOverOnsBody(),
@@ -1417,7 +1417,7 @@ fs.writeFileSync(path.join(ROOT, 'over-ons.html'), page({
 fs.writeFileSync(path.join(ROOT, 'tarieven.html'), page({
   title: 'Tarieven | Rolstoeltaxi Spoed',
   description: 'Hoe is de prijs van een rit bij Rolstoeltaxi Spoed opgebouwd? Transparant en altijd vooraf genoemd, ook bij spoed.',
-  canonicalPath: 'tarieven.html',
+  canonicalPath: 'tarieven',
   prefix: '',
   extraLd: '',
   bodyHtml: buildTarievenBody(),
@@ -1428,7 +1428,7 @@ fs.writeFileSync(path.join(ROOT, 'tarieven.html'), page({
 fs.writeFileSync(path.join(ROOT, 'veelgestelde-vragen.html'), page({
   title: 'Veelgestelde vragen | Rolstoeltaxi Spoed',
   description: 'Antwoord op de meest gestelde vragen over spoedvervoer, tarieven, vergoeding en reserveren bij Rolstoeltaxi Spoed.',
-  canonicalPath: 'veelgestelde-vragen.html',
+  canonicalPath: 'veelgestelde-vragen',
   prefix: '',
   extraLd: faqLd(),
   bodyHtml: buildFaqBody(),
@@ -1438,7 +1438,7 @@ fs.writeFileSync(path.join(ROOT, 'veelgestelde-vragen.html'), page({
 fs.writeFileSync(path.join(ROOT, 'privacyverklaring.html'), page({
   title: 'Privacyverklaring | Rolstoeltaxi Spoed',
   description: 'Lees hoe Rolstoeltaxi Spoed omgaat met uw persoonsgegevens.',
-  canonicalPath: 'privacyverklaring.html',
+  canonicalPath: 'privacyverklaring',
   prefix: '',
   extraLd: '',
   bodyHtml: buildPrivacyBody(),
@@ -1448,7 +1448,7 @@ fs.writeFileSync(path.join(ROOT, 'privacyverklaring.html'), page({
 fs.writeFileSync(path.join(ROOT, 'bedankt.html'), page({
   title: 'Bedankt voor uw aanvraag | Rolstoeltaxi Spoed',
   description: 'Uw aanvraag is ontvangen. Rolstoeltaxi Spoed neemt zo snel mogelijk contact met u op.',
-  canonicalPath: 'bedankt.html',
+  canonicalPath: 'bedankt',
   prefix: '',
   extraLd: '',
   bodyHtml: buildBedanktBody(),
@@ -1458,10 +1458,10 @@ fs.writeFileSync(path.join(ROOT, 'bedankt.html'), page({
 
 /* ============================== SITEMAP & ROBOTS ============================== */
 
-const staticPages = ['', 'over-ons.html', 'tarieven.html', 'contact.html', 'veelgestelde-vragen.html', 'privacyverklaring.html'];
+const staticPages = ['', 'over-ons', 'tarieven', 'contact', 'veelgestelde-vragen', 'privacyverklaring'];
 const urls = [
   ...staticPages.map(p => `${SITE.domain}/${p}`),
-  ...SERVICES.map(s => `${SITE.domain}/diensten/${s.slug}.html`),
+  ...SERVICES.map(s => `${SITE.domain}/diensten/${s.slug}`),
 ];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
