@@ -1,0 +1,13 @@
+{
+  "name": "rolstoeltaxispoed-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build-site.js",
+  "scripts": {
+    "build": "node build-site.js",
+    "start": "node serve.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
