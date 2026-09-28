@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rolstoelvervoer (gepland) | Rolstoeltaxi Spoed</title>
-<meta name="description" content="Niet elke rit is spoed. Rolstoeltaxi Spoed verzorgt ook vooraf geplande ritten voor dagbesteding, familiebezoek en afspraken, met dezelfde rolstoelbussen en chauffeurs.">
+<title>Rolstoelvervoer: vaste en geplande ritten | Rolstoeltaxi Spoed</title>
+<meta name="description" content="Niet elke rit is spoed. Rolstoeltaxi Spoed plant ook vaste en eenmalige ritten voor dagbesteding, familiebezoek en afspraken, met dezelfde bussen en chauffeurs.">
 <link rel="canonical" href="https://rolstoeltaxispoed.nl/diensten/rolstoelvervoer">
-<meta property="og:title" content="Rolstoelvervoer (gepland) | Rolstoeltaxi Spoed">
-<meta property="og:description" content="Niet elke rit is spoed. Rolstoeltaxi Spoed verzorgt ook vooraf geplande ritten voor dagbesteding, familiebezoek en afspraken, met dezelfde rolstoelbussen en chauffeurs.">
+<meta property="og:title" content="Rolstoelvervoer: vaste en geplande ritten | Rolstoeltaxi Spoed">
+<meta property="og:description" content="Niet elke rit is spoed. Rolstoeltaxi Spoed plant ook vaste en eenmalige ritten voor dagbesteding, familiebezoek en afspraken, met dezelfde bussen en chauffeurs.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="nl_NL">
 <link rel="icon" type="image/png" href="../img/logo-icoon.png">
@@ -31,7 +31,9 @@
   "@type": "FAQPage",
   "mainEntity": [
     {"@type":"Question","name":"Kan ik een vaste wekelijkse rit afspreken?","acceptedAnswer":{"@type":"Answer","text":"Ja, dat plannen we graag in als terugkerende afspraak, zodat u er niet iedere keer opnieuw voor hoeft te bellen."}},
-    {"@type":"Question","name":"Kan er ook een scootmobiel mee?","acceptedAnswer":{"@type":"Answer","text":"Ja, de laadklep is geschikt voor scootmobielen. Geef dit door bij het boeken, dan houden we daar rekening mee."}}
+    {"@type":"Question","name":"Kan er ook een scootmobiel mee?","acceptedAnswer":{"@type":"Answer","text":"Ja, de laadklep is geschikt voor scootmobielen. Geef dit door bij het boeken, dan houden we daar rekening mee."}},
+    {"@type":"Question","name":"Wordt de rit vergoed?","acceptedAnswer":{"@type":"Answer","text":"Dat verschilt per situatie. Vraag het na bij uw zorgverzekeraar, gemeente of zorginstelling. Wij verstrekken desgevraagd een factuur."}},
+    {"@type":"Question","name":"Kan ik een geplande rit nog wijzigen?","acceptedAnswer":{"@type":"Answer","text":"Ja, bel ons zodra uw planning verandert. We denken mee over een nieuw tijdstip."}}
   ]
 }
 </script>
@@ -570,19 +572,94 @@ footer .foot-logo{height:32px;width:auto;margin-bottom:14px;display:block}
   html{scroll-behavior:auto}
 }
 
+/* ---------- nav: dropdowns + light links over photo hero ---------- */
+.nav-links{gap:26px}
+.has-dd{position:relative}
+.has-dd>a .caret{font-size:10px;opacity:.7;margin-left:2px}
+.dd{position:absolute;top:100%;left:-18px;padding-top:16px;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .2s ease,transform .2s ease,visibility .2s;z-index:120}
+.dd>ul{list-style:none;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 22px 50px rgba(15,26,46,.2);padding:10px;min-width:250px}
+.dd-wide>ul{display:grid;grid-template-columns:repeat(2,minmax(150px,1fr));min-width:340px}
+.has-dd:hover .dd,.has-dd:focus-within .dd{opacity:1;visibility:visible;transform:none}
+.dd a{display:block;padding:9px 14px;border-radius:8px;font-size:14.5px;font-weight:500;color:#0f1a2e!important;white-space:nowrap}
+.dd a:hover{background:var(--bg-2);color:var(--accent)!important}
+.dd-all{grid-column:1/-1;border-top:1px solid var(--line);margin-top:6px;padding-top:6px}
+.dd-all a{font-weight:700;color:var(--accent)!important}
+nav:has(~ .hero) .nav-links>li>a:not(.btn):not(.nav-spoed),
+nav:has(~ .page-hero.has-photo) .nav-links>li>a:not(.btn):not(.nav-spoed){color:#e6edf9}
+nav:has(~ .hero) .nav-links>li>a:not(.btn):not(.nav-spoed):hover,
+nav:has(~ .page-hero.has-photo) .nav-links>li>a:not(.btn):not(.nav-spoed):hover{color:#fff}
+nav:has(~ .hero) .nav-spoed,nav:has(~ .page-hero.has-photo) .nav-spoed{color:#ff8a80!important}
+nav:has(~ .hero) .hamburger,nav:has(~ .page-hero.has-photo) .hamburger{color:#eef3fb;border-color:rgba(238,243,251,.35)}
+nav.scrolled:has(~ .hero) .nav-links>li>a:not(.btn):not(.nav-spoed),
+nav.scrolled:has(~ .page-hero.has-photo) .nav-links>li>a:not(.btn):not(.nav-spoed){color:#3d4a63}
+nav.scrolled:has(~ .hero) .nav-spoed,nav.scrolled:has(~ .page-hero.has-photo) .nav-spoed{color:#d64545!important}
+nav.scrolled:has(~ .hero) .hamburger,nav.scrolled:has(~ .page-hero.has-photo) .hamburger{color:var(--ink);border-color:var(--line)}
+nav:has(~ .page-hero.has-photo) .logo-text{color:#eef3fb}
+nav:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow)}
+nav.scrolled:has(~ .page-hero.has-photo) .logo-text{color:var(--ink)}
+nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
+
+/* ---------- location / hub pages ---------- */
+.proof{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px}
+.proof span{background:rgba(255,255,255,.08);border:1px solid rgba(238,243,251,.22);border-radius:8px;padding:7px 13px;font-size:13px;color:#dbe6f7}
+.proof b{color:var(--yellow);font-weight:800}
+.split{display:grid;grid-template-columns:1.25fr 1fr;gap:52px;align-items:center;margin-top:36px}
+@media(max-width:900px){.split{grid-template-columns:1fr;gap:32px}}
+.split p{color:var(--ink-dim);margin-bottom:16px;font-size:16.5px}
+.photo-card{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--bg-2)}
+.photo-card img{display:block;width:100%;height:100%;object-fit:cover}
+.photo-card.landscape{aspect-ratio:4/3}
+.photo-card.portrait{aspect-ratio:3/4;max-width:400px;margin:0 auto}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+@media(max-width:1000px){.grid-3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.grid-3{grid-template-columns:1fr}}
+.spot{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;box-shadow:var(--shadow)}
+.spot h3{font-size:18px;margin-bottom:8px;font-weight:700}
+.spot p{color:var(--ink-dim);font-size:15.5px}
+.trip-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:44px}
+@media(max-width:800px){.trip-list{grid-template-columns:1fr}}
+.trip-list li{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;display:flex;gap:14px;align-items:flex-start}
+.trip-list .ar{color:var(--accent);font-weight:800;flex-shrink:0}
+.trip-list b{display:block;font-size:17px;margin-bottom:2px}
+.trip-list span{color:var(--ink-dim);font-size:15px}
+.spoed-band{padding:80px 0}
+.spoed-band .wrap{max-width:860px}
+.spoed-band h2{font-size:clamp(28px,4vw,42px);margin-bottom:18px}
+.spoed-band p{color:var(--ink-dim);font-size:18px;margin-bottom:26px}
+.hub-group{margin-top:56px}
+.hub-group:first-of-type{margin-top:36px}
+.hub-group>h2{font-size:clamp(24px,3vw,32px);margin-bottom:6px}
+.hub-group>p{color:var(--ink-dim);max-width:60ch}
+.long p{color:var(--ink-dim);margin-bottom:16px;font-size:16.5px;max-width:70ch}
+.long h2{font-size:clamp(24px,3vw,32px);margin:42px 0 14px}
+.long h2:first-child{margin-top:0}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+@media(max-width:900px){.gallery{grid-template-columns:repeat(2,1fr)}}
+.gallery .photo-card{aspect-ratio:4/3}
+.gallery .photo-card.tall{grid-row:span 2;aspect-ratio:auto}
+@media(max-width:900px){.gallery .photo-card.tall{grid-row:auto;aspect-ratio:4/3}}
+
+/* ---------- contrast on dark photo heroes ---------- */
+.hero-box .serif-i,.night .serif-i{color:#66aaff}
+
+.page-hero.has-photo .hero-box p.lead{margin-bottom:0;font-size:17px}
+.page-hero.has-photo .hero-box .hero-cta{margin-bottom:22px}
+
 </style>
 </head>
 <body>
 
 <nav id="nav">
   <div class="wrap nav-inner">
-    <a href="/" class="logo"><span class="logo-icon"><img src="../img/logo-icoon.png" alt="" width="20" height="20"></span><span class="logo-text">Rolstoeltaxi<b>Spoed</b></span></a>
+    <a href="/" class="logo"><span class="logo-icon"><img src="/img/logo-icoon.png" alt="" width="20" height="20" aria-hidden="true"></span><span class="logo-text">Rolstoeltaxi<b>Spoed</b></span></a>
     <ul class="nav-links">
-      <li><a href="/#diensten">Diensten</a></li>
+      <li class="has-dd"><a href="/diensten">Diensten <span class="caret">▾</span></a>
+        <div class="dd"><ul><li><a href="/diensten/spoedvervoer-rolstoeltaxi">Spoedvervoer</a></li><li><a href="/diensten/rolstoelvervoer">Rolstoelvervoer</a></li><li><a href="/diensten/ziekenhuisvervoer">Ziekenhuisvervoer</a></li><li><a href="/diensten/elektrische-rolstoelvervoer">Elektrische rolstoel</a></li><li><a href="/diensten/rolstoelbus">Rolstoelbus</a></li><li><a href="/diensten/schipholvervoer">Schipholvervoer</a></li><li><a href="/diensten/evenementvervoer">Evenementvervoer</a></li><li><a href="/diensten/uitvaartvervoer">Uitvaartvervoer</a></li><li class="dd-all"><a href="/diensten">Alle diensten</a></li></ul></div></li>
+      <li class="has-dd"><a href="/locaties">Locaties <span class="caret">▾</span></a>
+        <div class="dd dd-wide"><ul><li><a href="/rolstoeltaxi-amsterdam">Amsterdam</a></li><li><a href="/rolstoeltaxi-schiphol">Schiphol</a></li><li><a href="/rolstoeltaxi-amstelveen">Amstelveen</a></li><li><a href="/rolstoeltaxi-haarlem">Haarlem</a></li><li><a href="/rolstoeltaxi-hoofddorp">Hoofddorp</a></li><li><a href="/rolstoeltaxi-zaandam">Zaandam</a></li><li><a href="/rolstoeltaxi-leiden">Leiden</a></li><li><a href="/rolstoeltaxi-den-haag">Den Haag</a></li><li><a href="/rolstoeltaxi-rotterdam">Rotterdam</a></li><li><a href="/rolstoeltaxi-utrecht">Utrecht</a></li><li><a href="/rolstoeltaxi-alkmaar">Alkmaar</a></li><li><a href="/rolstoeltaxi-zandvoort">Zandvoort</a></li><li class="dd-all"><a href="/locaties">Alle 27 locaties</a></li></ul></div></li>
       <li><a href="/diensten/spoedvervoer-rolstoeltaxi" class="nav-spoed"><span class="nav-spoed-dot"></span>Spoed nu</a></li>
       <li><a href="/tarieven">Tarieven</a></li>
       <li><a href="/over-ons">Over ons</a></li>
-      <li><a href="/veelgestelde-vragen">FAQ</a></li>
       <li><a href="tel:+31628761078" class="btn btn-nav">Bel direct</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false">☰</button>
@@ -591,16 +668,17 @@ footer .foot-logo{height:32px;width:auto;margin-bottom:14px;display:block}
 
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigatiemenu">
   <button class="mobile-close" id="mobileClose" aria-label="Menu sluiten">✕</button>
-  <a href="/#diensten">Diensten</a>
+  <a href="/diensten">Diensten</a>
+  <a href="/locaties">Locaties</a>
   <a href="/diensten/spoedvervoer-rolstoeltaxi" class="nav-spoed"><span class="nav-spoed-dot"></span>Spoed nu</a>
   <a href="/tarieven">Tarieven</a>
   <a href="/over-ons">Over ons</a>
-  <a href="/veelgestelde-vragen">FAQ</a>
+  <a href="/contact">Contact</a>
   <a href="tel:+31628761078" class="btn">Bel direct</a>
 </div>
 
 <!-- PAGE HERO -->
-<header class="page-hero has-photo" style="background-image:url('../img/scootmobiel-laadklep.jpg')">
+<header class="page-hero has-photo" style="background-image:url('/img/scootmobiel-laadklep.jpg');background-position:center">
   <div class="wrap">
     <div class="hero-box reveal">
       <div class="breadcrumb reveal" role="navigation" aria-label="Kruimelpad">
@@ -608,7 +686,7 @@ footer .foot-logo{height:32px;width:auto;margin-bottom:14px;display:block}
   <a href="/#diensten">Diensten</a><span class="crumb-sep">/</span>
   <span aria-current="page">Rolstoelvervoer</span>
 </div>
-      <span class="eyebrow">Rolstoelvervoer · In Nederland</span>
+      <span class="eyebrow">Rolstoelvervoer · Nederland</span>
       <h1>Rolstoelvervoer, ook gepland</h1>
       <p class="lead">Niet elke rit is spoed, en dat hoeft ook niet. Rolstoeltaxi Spoed plant graag vooraf een vaste of eenmalige rit voor dagbesteding, familiebezoek of een afspraak, met dezelfde zorgvuldige aanpak als bij een spoedrit.</p>
       <div class="hero-cta">
@@ -643,8 +721,22 @@ footer .foot-logo{height:32px;width:auto;margin-bottom:14px;display:block}
   </div>
 </section>
 
-<!-- WAT U KRIJGT -->
+<!-- UITGEBREID -->
 <section>
+  <div class="wrap">
+    <div class="split" style="align-items:start;margin-top:0">
+      <div class="long reveal">
+        <h2>Voor welke ritten wordt rolstoelvervoer gebruikt?</h2><p>Het bereik is breed. Klanten laten zich vervoeren naar dagbesteding en werk, naar familie en vrienden, naar de kapper, de fysiotherapeut of de huisarts, en naar het theater of een restaurant. Sommige ritten zijn eenmalig, andere komen elke week terug op dezelfde dag en hetzelfde tijdstip.</p><p>Bij een terugkerende rit plannen we de heenrit en de terugrit samen in. U krijgt een bevestiging met de tijden en de prijs, zodat u weet waar u aan toe bent. Wijzigt er iets in uw agenda, dan past u dat aan met een telefoontje.</p><h2>Deur tot deur, niet alleen tot de stoep</h2><p>Veel mensen hebben hulp nodig op het stuk tussen de voordeur en de bus. Onze chauffeurs helpen daarbij: over een drempel, door een gang of langs een stoep. Ze halen u op waar u woont en brengen u tot de ingang van uw bestemming, en op verzoek erbinnen.</p><p>Een begeleider of familielid rijdt gewoon mee in de bus. Voor een terugrit na een afspraak, bijvoorbeeld bij een specialist, stemmen we vooraf af hoe lang de afspraak duurt, zodat u niet onnodig hoeft te wachten.</p><h2>Waarom een vaste vervoerder prettig is</h2><p>Wie regelmatig dezelfde rit maakt, wil zekerheid: een bus die er is, een chauffeur die het traject kent en duidelijke afspraken over tijden. Dat is precies wat we bij vaste ritten proberen te bieden. Daarnaast weet u dat u bij een onverwachte situatie ook bij dezelfde partij terechtkunt voor een spoedrit.</p>
+      </div>
+      <div class="reveal reveal-d1" style="display:grid;gap:18px">
+        <figure class="photo-card landscape"><img src="/img/scootmobiel-laadklep.jpg" alt="Scootmobiel op de elektrische laadklep van de rolstoelbus" width="1000" height="750" loading="lazy"></figure><figure class="photo-card landscape"><img src="/img/rolstoelbus-zijkant.jpg" alt="Rolstoelbus, zijaanzicht" width="1000" height="750" loading="lazy"></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAT U KRIJGT -->
+<section class="band-2">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Wat u krijgt</span>
@@ -676,7 +768,7 @@ footer .foot-logo{height:32px;width:auto;margin-bottom:14px;display:block}
 </section>
 
 <!-- PRIJS -->
-<section class="band-2" style="padding:64px 0">
+<section style="padding:64px 0">
   <div class="wrap">
     <div class="price-box reveal">
       <div>
@@ -715,16 +807,28 @@ footer .foot-logo{height:32px;width:auto;margin-bottom:14px;display:block}
   </div>
 </section>
 
-<!-- FOTO'S -->
-<section style="padding-top:0">
+<!-- BESCHIKBAAR IN -->
+<section>
   <div class="wrap">
-    <div class="projects" style="grid-template-columns:repeat(2,1fr)">
-      <div class="project" style="pointer-events:none">
-        <img class="ph-img" src="../img/scootmobiel-laadklep.jpg" alt="Scootmobiel op de elektrische laadklep van de rolstoelbus" loading="lazy" width="1000" height="667">
-      </div>
-      <div class="project" style="pointer-events:none">
-        <img class="ph-img" src="../img/rolstoelbus-zijkant.jpg" alt="Rolstoelbus, zijaanzicht" loading="lazy" width="1000" height="667">
-      </div>
+    <div class="section-head reveal">
+      <span class="eyebrow">Locaties</span>
+      <h2>Rolstoelvervoer <span class="serif-i">in de buurt</span></h2>
+      <p>We rijden in Nederland. Dit zijn de plaatsen waar we het vaakst komen.</p>
+    </div>
+    <div class="area-list reveal">
+      <a href="/rolstoeltaxi-amsterdam">Amsterdam</a>
+      <a href="/rolstoeltaxi-schiphol">Schiphol</a>
+      <a href="/rolstoeltaxi-amstelveen">Amstelveen</a>
+      <a href="/rolstoeltaxi-haarlem">Haarlem</a>
+      <a href="/rolstoeltaxi-hoofddorp">Hoofddorp</a>
+      <a href="/rolstoeltaxi-zaandam">Zaandam</a>
+      <a href="/rolstoeltaxi-leiden">Leiden</a>
+      <a href="/rolstoeltaxi-den-haag">Den Haag</a>
+      <a href="/rolstoeltaxi-rotterdam">Rotterdam</a>
+      <a href="/rolstoeltaxi-utrecht">Utrecht</a>
+      <a href="/rolstoeltaxi-alkmaar">Alkmaar</a>
+      <a href="/rolstoeltaxi-zandvoort">Zandvoort</a>
+      <a href="/locaties"><b>Alle locaties</b></a>
     </div>
   </div>
 </section>
@@ -737,11 +841,14 @@ footer .foot-logo{height:32px;width:auto;margin-bottom:14px;display:block}
       <h2>Gerelateerde <span class="serif-i">diensten</span></h2>
     </div>
     <div class="related-grid">
-      <a href="/diensten/spoedvervoer-rolstoeltaxi" class="related-card reveal">
-        <span>Spoedvervoer</span><span class="arrow">→</span>
+      <a href="/diensten/ziekenhuisvervoer" class="related-card reveal">
+        <span>Ziekenhuisvervoer</span><span class="arrow">→</span>
       </a>
-      <a href="/diensten/luchthavenvervoer-spoed" class="related-card reveal">
-        <span>Luchthavenvervoer</span><span class="arrow">→</span>
+      <a href="/diensten/elektrische-rolstoelvervoer" class="related-card reveal">
+        <span>Elektrische rolstoel</span><span class="arrow">→</span>
+      </a>
+      <a href="/diensten/rolstoelbus" class="related-card reveal">
+        <span>Rolstoelbus</span><span class="arrow">→</span>
       </a>
     </div>
   </div>
@@ -762,6 +869,14 @@ footer .foot-logo{height:32px;width:auto;margin-bottom:14px;display:block}
       <div class="faq-item reveal">
         <button class="faq-q" aria-expanded="false">Kan er ook een scootmobiel mee?</button>
         <div class="faq-a"><p>Ja, de laadklep is geschikt voor scootmobielen. Geef dit door bij het boeken, dan houden we daar rekening mee.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Wordt de rit vergoed?</button>
+        <div class="faq-a"><p>Dat verschilt per situatie. Vraag het na bij uw zorgverzekeraar, gemeente of zorginstelling. Wij verstrekken desgevraagd een factuur.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Kan ik een geplande rit nog wijzigen?</button>
+        <div class="faq-a"><p>Ja, bel ons zodra uw planning verandert. We denken mee over een nieuw tijdstip.</p></div>
       </div>
     </div>
   </div>
@@ -785,27 +900,38 @@ footer .foot-logo{height:32px;width:auto;margin-bottom:14px;display:block}
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="foot-logo-row"><span class="logo-icon"><img src="../img/logo-icoon.png" alt="" width="20" height="20"></span><span class="logo-text">Rolstoeltaxi<b>Spoed</b></span></div>
+        <div class="foot-logo-row"><span class="logo-icon"><img src="/img/logo-icoon.png" alt="" width="20" height="20" aria-hidden="true"></span><span class="logo-text">Rolstoeltaxi<b>Spoed</b></span></div>
         <p>De spoedtak van Rolstoeltaxi Holland: rolstoelvervoer in Nederland, 24 uur per dag bereikbaar voor ritten die niet kunnen wachten.</p>
       </div>
       <div>
         <h4>Diensten</h4>
         <ul>
           <li><a href="/diensten/spoedvervoer-rolstoeltaxi">Spoedvervoer</a></li>
-          <li><a href="/diensten/spoed-ziekenhuisvervoer">Ziekenhuisvervoer</a></li>
           <li><a href="/diensten/rolstoelvervoer">Rolstoelvervoer</a></li>
-          <li><a href="/diensten/luchthavenvervoer-spoed">Luchthavenvervoer</a></li>
+          <li><a href="/diensten/ziekenhuisvervoer">Ziekenhuisvervoer</a></li>
+          <li><a href="/diensten/elektrische-rolstoelvervoer">Elektrische rolstoel</a></li>
+          <li><a href="/diensten/rolstoelbus">Rolstoelbus</a></li>
+          <li><a href="/diensten/schipholvervoer">Schipholvervoer</a></li>
+          <li><a href="/diensten/evenementvervoer">Evenementvervoer</a></li>
+          <li><a href="/diensten/uitvaartvervoer">Uitvaartvervoer</a></li>
         </ul>
       </div>
       <div>
-        <h4>Regio's</h4>
+        <h4>Locaties</h4>
         <ul class="foot-areas">
-          <li><a href="/contact#formulier">Amsterdam</a></li>
-          <li><a href="/contact#formulier">Rotterdam</a></li>
-          <li><a href="/contact#formulier">Den Haag</a></li>
-          <li><a href="/contact#formulier">Utrecht</a></li>
-          <li><a href="/contact#formulier">Amersfoort</a></li>
-          <li><a href="/contact#formulier">Hilversum</a></li>
+          <li><a href="/rolstoeltaxi-amsterdam">Amsterdam</a></li>
+          <li><a href="/rolstoeltaxi-schiphol">Schiphol</a></li>
+          <li><a href="/rolstoeltaxi-amstelveen">Amstelveen</a></li>
+          <li><a href="/rolstoeltaxi-haarlem">Haarlem</a></li>
+          <li><a href="/rolstoeltaxi-hoofddorp">Hoofddorp</a></li>
+          <li><a href="/rolstoeltaxi-zaandam">Zaandam</a></li>
+          <li><a href="/rolstoeltaxi-leiden">Leiden</a></li>
+          <li><a href="/rolstoeltaxi-den-haag">Den Haag</a></li>
+          <li><a href="/rolstoeltaxi-rotterdam">Rotterdam</a></li>
+          <li><a href="/rolstoeltaxi-utrecht">Utrecht</a></li>
+          <li><a href="/rolstoeltaxi-alkmaar">Alkmaar</a></li>
+          <li><a href="/rolstoeltaxi-zandvoort">Zandvoort</a></li>
+          <li><a href="/locaties"><b>Alle locaties</b></a></li>
         </ul>
       </div>
       <div>
@@ -816,6 +942,8 @@ footer .foot-logo{height:32px;width:auto;margin-bottom:14px;display:block}
           <li>Onderdeel van Rolstoeltaxi Holland</li>
           <li style="margin-top:10px"><a href="/over-ons">Over ons</a></li>
           <li><a href="/contact">Direct reserveren</a></li>
+          <li><a href="/tarieven">Tarieven</a></li>
+          <li><a href="/veelgestelde-vragen">Veelgestelde vragen</a></li>
           <li><a href="/privacyverklaring">Privacyverklaring</a></li>
         </ul>
       </div>

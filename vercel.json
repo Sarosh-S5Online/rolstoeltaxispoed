@@ -2,5 +2,17 @@
   "buildCommand": "node build-site.js",
   "outputDirectory": ".",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/diensten/spoed-ziekenhuisvervoer",
+      "destination": "/diensten/ziekenhuisvervoer",
+      "permanent": true
+    },
+    {
+      "source": "/diensten/luchthavenvervoer-spoed",
+      "destination": "/diensten/schipholvervoer",
+      "permanent": true
+    }
+  ]
 }

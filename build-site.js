@@ -13,186 +13,16 @@ const SITE = {
   email: 'info@rolstoeltaxispoed.nl',
 };
 
-const REGIOS = ['Amsterdam', 'Rotterdam', 'Den Haag', 'Utrecht', 'Amersfoort', 'Hilversum'];
-
-const SERVICES = [
-  {
-    slug: 'spoedvervoer-rolstoeltaxi',
-    icon: 'bolt',
-    related: ['spoed-ziekenhuisvervoer', 'luchthavenvervoer-spoed'],
-    nav: 'Spoedvervoer',
-    h1: 'Rolstoeltaxi spoedvervoer',
-    eyebrow: 'Spoed · In Nederland',
-    metaTitle: 'Rolstoeltaxi spoedvervoer | Rolstoeltaxi Spoed — 24/7 direct beschikbaar',
-    metaDescription: 'Acuut rolstoelvervoer nodig? Rolstoeltaxi Spoed rukt 24/7 uit met een volledig uitgeruste rolstoelbus en een chauffeur die direct kan helpen, in Nederland.',
-    lead: 'Sommige ritten kunt u niet twee dagen van tevoren plannen. Rolstoeltaxi Spoed is de spoedtak van Rolstoeltaxi Holland: één telefoontje en er wordt direct een rolstoelbus voor u ingepland, waar in Nederland u ook bent.',
-    about: {
-      title: 'Wanneer heeft u spoedvervoer nodig?',
-      paragraphs: [
-        'Een spoedopname, een onverwacht ontslag uit het ziekenhuis, een afspraak die opeens naar vandaag is verplaatst, of simpelweg een reguliere vervoerder die niet kan komen: er zijn genoeg situaties waarin rolstoelvervoer ineens niet meer "volgende week" is, maar "nu".',
-        'Rolstoeltaxi Spoed is opgezet voor precies dat moment. Dezelfde ervaren chauffeurs en dezelfde volledig uitgeruste rolstoelbussen als Rolstoeltaxi Holland, maar dan ingericht op snel schakelen in plaats van dagen vooruit plannen.',
-      ],
-      signals: [
-        'U heeft vervoer nodig binnen enkele uren, niet volgende week',
-        'De vaste vervoerder kan niet op tijd komen',
-        'Een ziekenhuis, revalidatiecentrum of zorginstelling vraagt om snel vertrek',
-      ],
-    },
-    deliverables: [
-      { t: 'Direct een bus onderweg', d: 'Na uw telefoontje plannen we meteen de dichtstbijzijnde beschikbare rolstoelbus in.' },
-      { t: 'Volledig uitgeruste rolstoelbus', d: 'Elektrische laadklep, vaste bevestigingspunten en ruimte voor rolstoel én begeleider.' },
-      { t: 'Chauffeur met zorgervaring', d: 'Rustige, professionele hulp bij in- en uitstappen, ook onder tijdsdruk.' },
-      { t: 'Actief in Nederland', d: 'Ook ritten buiten de eigen regio zijn mogelijk.' },
-    ],
-    priceText: 'Spoedtarief, altijd genoemd voordat u boekt',
-    priceNote: 'Bij spoed geldt een toeslag ten opzichte van vooraf geplande ritten. U hoort de prijs aan de telefoon, voordat we vertrekken. Zie ook onze pagina over tarieven.',
-    steps: [
-      { t: 'Bel de spoedlijn', d: 'U belt of appt, wij vragen kort naar de situatie en de locatie.' },
-      { t: 'Bus wordt direct ingepland', d: 'We zoeken de dichtstbijzijnde beschikbare rolstoelbus en geven een reële aankomsttijd door.' },
-      { t: 'Veilig en rustig vervoerd', d: 'De chauffeur helpt bij het in- en uitstappen en zet de rolstoel veilig vast.' },
-    ],
-    images: [
-      { src: 'spoedrit-amsterdam-centraal.jpg', alt: 'Rolstoelbus met uitgeklapte laadklep bij Amsterdam Centraal' },
-      { src: 'instappen-rolstoelbus.jpg', alt: 'Rolstoelbus met geopende achterdeuren, klaar voor instappen' },
-    ],
-    faqs: [
-      { q: 'Hoe snel kan een rolstoelbus bij mij zijn?', a: 'Dat hangt af van waar u zich bevindt en welke bus het dichtstbij beschikbaar is. Aan de telefoon geven we altijd een realistische inschatting, zodat u weet waar u aan toe bent.' },
-      { q: 'Kan ik ook \'s nachts of in het weekend bellen?', a: 'Ja, Rolstoeltaxi Spoed is 24 uur per dag, 7 dagen per week bereikbaar voor spoedritten.' },
-    ],
-  },
-  {
-    slug: 'spoed-ziekenhuisvervoer',
-    icon: 'medical',
-    related: ['spoedvervoer-rolstoeltaxi', 'rolstoelvervoer'],
-    nav: 'Ziekenhuisvervoer',
-    h1: 'Spoed ziekenhuisvervoer',
-    eyebrow: 'Spoed · Ziekenhuis & zorginstelling',
-    metaTitle: 'Spoed ziekenhuisvervoer rolstoel | Rolstoeltaxi Spoed',
-    metaDescription: 'Onverwacht vervoer nodig van of naar het ziekenhuis? Rolstoeltaxi Spoed haalt u snel en veilig op, met een rolstoelbus en chauffeur die weten wat zorgvervoer vraagt.',
-    lead: 'Een spoedopname, een vervroegd ontslag of een afspraak die net is omgezet: bij ziekenhuisvervoer telt elke minuut. Rolstoeltaxi Spoed haalt u op waar u bent en brengt u rustig en veilig naar waar u moet zijn.',
-    about: {
-      title: 'Vervoer rond het ziekenhuis, ook als het snel moet',
-      paragraphs: [
-        'Ziekenhuizen werken niet altijd volgens planning. Een bed dat vrijkomt, een onderzoek dat naar voren is gehaald, of een ontslag waarbij "vandaag nog" wordt gevraagd: het regulier vervoer is dan vaak al vol geboekt.',
-        'Onze chauffeurs kennen de gang van zaken rond op- en afhalen bij ziekenhuizen en zorginstellingen, en houden rekening met infuuspalen, zuurstof of andere hulpmiddelen die mee moeten.',
-      ],
-      signals: [
-        'U wordt vandaag nog ontslagen en er is nog geen vervoer geregeld',
-        'Een onderzoek of behandeling is naar een ander tijdstip verplaatst',
-        'De vaste vervoerder van de instelling zit vol',
-      ],
-    },
-    deliverables: [
-      { t: 'Ophalen bij de ingang', d: 'We komen tot bij de hoofdingang of een afgesproken punt, ook bij drukte.' },
-      { t: 'Ruimte voor hulpmiddelen', d: 'Plek voor infuuspaal, zuurstof of andere benodigdheden, in overleg vooraf.' },
-      { t: 'Rustige overdracht', d: 'Geen haastwerk: de chauffeur neemt de tijd voor een veilige overstap.' },
-      { t: 'Eén aanspreekpunt', d: 'Familie of verpleging kan rechtstreeks met ons bellen over de planning.' },
-    ],
-    priceText: 'Spoedtarief, altijd genoemd voordat u boekt',
-    priceNote: 'Ook bij ziekenhuisvervoer geldt: u hoort de prijs vooraf aan de telefoon. Bekijk onze tarievenpagina voor de opbouw van de prijs.',
-    steps: [
-      { t: 'Bel met de situatie', d: 'Vertel kort waar u wordt opgehaald en waar naartoe, en of er hulpmiddelen mee moeten.' },
-      { t: 'Wij stemmen af met de afdeling', d: 'Indien nodig nemen we contact op met de verpleging over het beste ophaalmoment.' },
-      { t: 'Veilig vervoerd', d: 'De chauffeur begeleidt u van deur tot deur, rustig en met aandacht.' },
-    ],
-    images: [
-      { src: 'rolstoelbus-torenhof.jpg', alt: 'Rolstoelbus met laadklep bij de ingang van een zorginstelling' },
-      { src: 'rolstoelbus-zorginstelling.jpg', alt: 'Rolstoelbus geparkeerd bij een zorgcentrum' },
-    ],
-    faqs: [
-      { q: 'Nemen jullie contact op met de afdeling of verpleging?', a: 'Als dat nodig is wel. Geef dit gerust door aan de telefoon, dan stemmen we het ophaalmoment af met de zorgverlener.' },
-      { q: 'Kan een infuuspaal of zuurstoffles mee?', a: 'In veel gevallen wel. Meld dit vooraf even, dan houden we daar rekening mee in de bus.' },
-    ],
-  },
-  {
-    slug: 'rolstoelvervoer',
-    icon: 'wheelchair',
-    related: ['spoedvervoer-rolstoeltaxi', 'luchthavenvervoer-spoed'],
-    nav: 'Rolstoelvervoer',
-    h1: 'Rolstoelvervoer, ook gepland',
-    eyebrow: 'Rolstoelvervoer · In Nederland',
-    metaTitle: 'Rolstoelvervoer (gepland) | Rolstoeltaxi Spoed',
-    metaDescription: 'Niet elke rit is spoed. Rolstoeltaxi Spoed verzorgt ook vooraf geplande ritten voor dagbesteding, familiebezoek en afspraken, met dezelfde rolstoelbussen en chauffeurs.',
-    lead: 'Niet elke rit is spoed, en dat hoeft ook niet. Rolstoeltaxi Spoed plant graag vooraf een vaste of eenmalige rit voor dagbesteding, familiebezoek of een afspraak, met dezelfde zorgvuldige aanpak als bij een spoedrit.',
-    about: {
-      title: 'Vaste ritten, net zo goed verzorgd',
-      paragraphs: [
-        'Regelmatig naar dagbesteding, een wekelijks familiebezoek of een terugkerende behandeling: veel rolstoelvervoer is prima vooraf te plannen. Wij denken dan graag mee over een vast schema, zodat u er niet telkens opnieuw over hoeft te bellen.',
-        'Ook een scootmobiel kan mee: onze bussen zijn uitgerust met een elektrische laadklep die zowel een rolstoel als een scootmobiel veilig aan boord brengt.',
-      ],
-      signals: [
-        'U weet de datum en tijd al ruim van tevoren',
-        'Het gaat om een terugkerende rit, bijvoorbeeld wekelijks',
-        'Er moet een scootmobiel mee in plaats van een rolstoel',
-      ],
-    },
-    deliverables: [
-      { t: 'Vaste ritten inplannen', d: 'Wekelijkse of terugkerende afspraken leggen we vast, zodat u er niet telkens naar hoeft te vragen.' },
-      { t: 'Ook scootmobiel vervoer', d: 'De laadklep is geschikt voor zowel rolstoel als scootmobiel.' },
-      { t: 'Begeleider kan mee', d: 'Een familielid of begeleider kan gewoon in de bus meerijden.' },
-      { t: 'Deur-tot-deur service', d: 'We helpen van binnendeur tot binnendeur, niet alleen tot aan de stoep.' },
-    ],
-    priceText: 'Vaste ritprijs, afgesproken voordat u boekt',
-    priceNote: 'Geplande ritten zijn voordeliger dan spoedritten, omdat we de planning ruim van tevoren kunnen inrichten. Bekijk de tarievenpagina voor de opbouw.',
-    steps: [
-      { t: 'Vertel uw wensen', d: 'Bel of app met de gewenste data, tijden en of het om een vaste rit gaat.' },
-      { t: 'Wij plannen in', d: 'U ontvangt een bevestiging met tijdstip en prijs.' },
-      { t: 'Op tijd opgehaald', d: 'De chauffeur staat klaar, met dezelfde zorg als bij een spoedrit.' },
-    ],
-    images: [
-      { src: 'scootmobiel-laadklep.jpg', alt: 'Scootmobiel op de elektrische laadklep van de rolstoelbus' },
-      { src: 'rolstoelbus-zijkant.jpg', alt: 'Rolstoelbus, zijaanzicht' },
-    ],
-    faqs: [
-      { q: 'Kan ik een vaste wekelijkse rit afspreken?', a: 'Ja, dat plannen we graag in als terugkerende afspraak, zodat u er niet iedere keer opnieuw voor hoeft te bellen.' },
-      { q: 'Kan er ook een scootmobiel mee?', a: 'Ja, de laadklep is geschikt voor scootmobielen. Geef dit door bij het boeken, dan houden we daar rekening mee.' },
-    ],
-  },
-  {
-    slug: 'luchthavenvervoer-spoed',
-    icon: 'plane',
-    related: ['spoedvervoer-rolstoeltaxi', 'rolstoelvervoer'],
-    nav: 'Luchthavenvervoer',
-    h1: 'Spoed luchthavenvervoer',
-    eyebrow: 'Spoed · Schiphol & andere luchthavens',
-    metaTitle: 'Spoed luchthavenvervoer rolstoel | Rolstoeltaxi Spoed',
-    metaDescription: 'Vlucht omgeboekt of vervoer naar Schiphol op het laatste moment nodig? Rolstoeltaxi Spoed verzorgt rolstoelvervoer naar en van luchthavens, ook kort van tevoren.',
-    lead: 'Een omgeboekte vlucht, een vroege ochtendvlucht of vervoer dat op het laatste moment alsnog geregeld moet worden: Rolstoeltaxi Spoed brengt en haalt u van Schiphol en andere luchthavens, ook als de tijd kort is.',
-    about: {
-      title: 'Vervoer naar de luchthaven, ook kort van tevoren',
-      paragraphs: [
-        'Vluchten veranderen weleens: een andere aankomsttijd, een omboeking, of een familielid dat toch met u mee wil naar de gate. Dan is er meestal geen tijd meer om dagen vooruit te plannen.',
-        'We houden rekening met bagage, rolstoel of scootmobiel en ruime tijd voor de incheckprocedure, zodat u zonder stress bij de luchthaven aankomt of veilig weer thuis raakt.',
-      ],
-      signals: [
-        'Uw vlucht is omgeboekt of vervroegd',
-        'U heeft pas kort van tevoren vervoer kunnen regelen',
-        'Er is bagage én een rolstoel of scootmobiel om te vervoeren',
-      ],
-    },
-    deliverables: [
-      { t: 'Op tijd voor het inchecken', d: 'We rekenen ruim de tijd voor verkeer en de afhandeling bij de luchthaven.' },
-      { t: 'Plek voor bagage', d: 'Naast de rolstoel of scootmobiel is er ruimte voor koffers.' },
-      { t: 'Ophalen bij aankomst', d: 'Ook voor de terugreis vanaf de luchthaven staan we klaar.' },
-      { t: 'In Nederland', d: 'Vervoer van en naar Schiphol én andere Nederlandse luchthavens.' },
-    ],
-    priceText: 'Ritprijs op basis van afstand tot de luchthaven',
-    priceNote: 'Bij spoedboekingen op het laatste moment geldt de spoedtoeslag. De prijs hoort u altijd vooraf aan de telefoon.',
-    steps: [
-      { t: 'Bel met vlucht en tijd', d: 'Geef door om welke vlucht het gaat en hoe laat u moet inchecken.' },
-      { t: 'Wij plannen de rit terug', d: 'We rekenen terug vanaf de vereiste aankomsttijd bij de luchthaven.' },
-      { t: 'Rustig naar de gate', d: 'De chauffeur helpt met bagage en begeleidt u tot aan de incheckbalie.' },
-    ],
-    images: [
-      { src: 'luchthavenvervoer-bagage.jpg', alt: 'Rolstoelbus met laadklep bij een terminal, reizigers met bagage op de achtergrond' },
-      { src: 'rolstoelbus-rai-amsterdam.jpg', alt: 'Rolstoelbus met uitgeklapte laadklep in Amsterdam' },
-    ],
-    faqs: [
-      { q: 'Kunnen jullie ook heel vroeg in de ochtend rijden?', a: 'Ja, we zijn 24/7 bereikbaar, ook voor vroege ochtendvluchten of late aankomsten.' },
-      { q: 'Rijden jullie alleen naar Schiphol?', a: 'Nee, we verzorgen vervoer naar en van luchthavens door Nederland.' },
-    ],
-  },
+const SERVICES = require('./content/services.js');
+const CITIES = [
+  ...require('./content/cities-amsterdam.js'),
+  ...require('./content/cities-noord.js'),
+  ...require('./content/cities-zuid.js'),
+  ...require('./content/cities-rest.js'),
 ];
+const cityPath = c => c.path || `/rolstoeltaxi-${c.slug}`;
+const cityBySlug = slug => CITIES.find(c => c.slug === slug);
+const TOP_CITIES = ['amsterdam', 'schiphol', 'amstelveen', 'haarlem', 'hoofddorp', 'zaandam', 'leiden', 'den-haag', 'rotterdam', 'utrecht', 'alkmaar', 'zandvoort'];
 
 /* ============================== SHARED SHELL ============================== */
 
@@ -231,7 +61,7 @@ function svgCheck() {
 }
 
 function logoMark(prefix) {
-  return `<span class="logo-icon"><img src="${prefix || ''}img/logo-icoon.png" alt="" width="20" height="20"></span><span class="logo-text">Rolstoeltaxi<b>Spoed</b></span>`;
+  return `<span class="logo-icon"><img src="/img/logo-icoon.png" alt="" width="20" height="20" aria-hidden="true"></span><span class="logo-text">Rolstoeltaxi<b>Spoed</b></span>`;
 }
 
 const ICONS = {
@@ -273,15 +103,19 @@ ${CSS}
 }
 
 function nav(prefix) {
+  const svcLinks = SERVICES.map(s => `<li><a href="/diensten/${s.slug}">${s.nav}</a></li>`).join('');
+  const cityLinks = TOP_CITIES.map(slug => { const c = cityBySlug(slug); return `<li><a href="${cityPath(c)}">${c.name}</a></li>`; }).join('');
   return `<nav id="nav">
   <div class="wrap nav-inner">
     <a href="/" class="logo">${logoMark(prefix)}</a>
     <ul class="nav-links">
-      <li><a href="/#diensten">Diensten</a></li>
+      <li class="has-dd"><a href="/diensten">Diensten <span class="caret">▾</span></a>
+        <div class="dd"><ul>${svcLinks}<li class="dd-all"><a href="/diensten">Alle diensten</a></li></ul></div></li>
+      <li class="has-dd"><a href="/locaties">Locaties <span class="caret">▾</span></a>
+        <div class="dd dd-wide"><ul>${cityLinks}<li class="dd-all"><a href="/locaties">Alle ${CITIES.length} locaties</a></li></ul></div></li>
       <li><a href="/diensten/spoedvervoer-rolstoeltaxi" class="nav-spoed"><span class="nav-spoed-dot"></span>Spoed nu</a></li>
       <li><a href="/tarieven">Tarieven</a></li>
       <li><a href="/over-ons">Over ons</a></li>
-      <li><a href="/veelgestelde-vragen">FAQ</a></li>
       <li><a href="tel:${SITE.phoneTel}" class="btn btn-nav">Bel direct</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false">☰</button>
@@ -290,18 +124,19 @@ function nav(prefix) {
 
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigatiemenu">
   <button class="mobile-close" id="mobileClose" aria-label="Menu sluiten">✕</button>
-  <a href="/#diensten">Diensten</a>
+  <a href="/diensten">Diensten</a>
+  <a href="/locaties">Locaties</a>
   <a href="/diensten/spoedvervoer-rolstoeltaxi" class="nav-spoed"><span class="nav-spoed-dot"></span>Spoed nu</a>
   <a href="/tarieven">Tarieven</a>
   <a href="/over-ons">Over ons</a>
-  <a href="/veelgestelde-vragen">FAQ</a>
+  <a href="/contact">Contact</a>
   <a href="tel:${SITE.phoneTel}" class="btn">Bel direct</a>
 </div>`;
 }
 
 function footer(prefix) {
   const serviceLinks = SERVICES.map(s => `<li><a href="/diensten/${s.slug}">${s.nav}</a></li>`).join('\n          ');
-  const regioLinks = REGIOS.map(r => `<li><a href="/contact#formulier">${r}</a></li>`).join('\n          ');
+  const cityLinks = TOP_CITIES.map(slug => { const c = cityBySlug(slug); return `<li><a href="${cityPath(c)}">${c.name}</a></li>`; }).join('\n          ');
   return `<footer>
   <div class="wrap">
     <div class="foot-grid">
@@ -316,9 +151,10 @@ function footer(prefix) {
         </ul>
       </div>
       <div>
-        <h4>Regio's</h4>
+        <h4>Locaties</h4>
         <ul class="foot-areas">
-          ${regioLinks}
+          ${cityLinks}
+          <li><a href="/locaties"><b>Alle locaties</b></a></li>
         </ul>
       </div>
       <div>
@@ -329,6 +165,8 @@ function footer(prefix) {
           <li>Onderdeel van ${SITE.parentBrand}</li>
           <li style="margin-top:10px"><a href="/over-ons">Over ons</a></li>
           <li><a href="/contact">Direct reserveren</a></li>
+          <li><a href="/tarieven">Tarieven</a></li>
+          <li><a href="/veelgestelde-vragen">Veelgestelde vragen</a></li>
           <li><a href="/privacyverklaring">Privacyverklaring</a></li>
         </ul>
       </div>
@@ -513,7 +351,7 @@ ${breadcrumbLd([
 function buildServiceBody(svc) {
   const p = '../';
   return `<!-- PAGE HERO -->
-<header class="page-hero has-photo" style="background-image:url('${p}img/${svc.images[0].src}')">
+<header class="page-hero has-photo" style="background-image:url('/img/${svc.hero || svc.images[0].src}');background-position:${svc.heroPosition || 'center'}">
   <div class="wrap">
     <div class="hero-box reveal">
       ${breadcrumbNav([{ label: 'Home', href: `/` }, { label: 'Diensten', href: `/#diensten` }, { label: svc.nav }])}
@@ -549,8 +387,22 @@ function buildServiceBody(svc) {
   </div>
 </section>
 
-<!-- WAT U KRIJGT -->
+<!-- UITGEBREID -->
 <section>
+  <div class="wrap">
+    <div class="split" style="align-items:start;margin-top:0">
+      <div class="long reveal">
+        ${(svc.sections || []).map(sec => `<h2>${sec.title}</h2>${sec.paragraphs.map(par => `<p>${par}</p>`).join('')}`).join('')}
+      </div>
+      <div class="reveal reveal-d1" style="display:grid;gap:18px">
+        ${svc.images.map(img => `<figure class="photo-card landscape"><img src="/img/${img.src}" alt="${img.alt}" width="1000" height="750" loading="lazy"></figure>`).join('')}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAT U KRIJGT -->
+<section class="band-2">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Wat u krijgt</span>
@@ -567,7 +419,7 @@ function buildServiceBody(svc) {
 </section>
 
 <!-- PRIJS -->
-<section class="band-2" style="padding:64px 0">
+<section style="padding:64px 0">
   <div class="wrap">
     <div class="price-box reveal">
       <div>
@@ -596,13 +448,17 @@ function buildServiceBody(svc) {
   </div>
 </section>
 
-<!-- FOTO'S -->
-<section style="padding-top:0">
+<!-- BESCHIKBAAR IN -->
+<section>
   <div class="wrap">
-    <div class="projects" style="grid-template-columns:repeat(2,1fr)">
-      ${svc.images.map(img => `<div class="project" style="pointer-events:none">
-        <img class="ph-img" src="${p}img/${img.src}" alt="${img.alt}" loading="lazy" width="1000" height="667">
-      </div>`).join('\n      ')}
+    <div class="section-head reveal">
+      <span class="eyebrow">Locaties</span>
+      <h2>${svc.nav} <span class="serif-i">in de buurt</span></h2>
+      <p>We rijden in Nederland. Dit zijn de plaatsen waar we het vaakst komen.</p>
+    </div>
+    <div class="area-list reveal">
+      ${TOP_CITIES.map(slug => { const c = cityBySlug(slug); return `<a href="${cityPath(c)}">${c.name}</a>`; }).join('\n      ')}
+      <a href="/locaties"><b>Alle locaties</b></a>
     </div>
   </div>
 </section>
@@ -656,6 +512,318 @@ function buildServiceBody(svc) {
 </section>`;
 }
 
+/* ============================== LOCATION PAGES ============================== */
+
+function cityLd(c) {
+  const url = `${SITE.domain}${cityPath(c)}`;
+  return `<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TaxiService",
+  "name": "${SITE.name}",
+  "serviceType": ${JSON.stringify(c.isService ? c.name : `Rolstoeltaxi ${c.name}`)},
+  "telephone": "${SITE.phoneTel}",
+  "areaServed": ${c.isService ? '"Amsterdam"' : JSON.stringify({ '@type': 'City', name: c.name })},
+  "url": "${url}"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    ${c.faqs.map(f => `{"@type":"Question","name":${JSON.stringify(f.q)},"acceptedAnswer":{"@type":"Answer","text":${JSON.stringify(f.a)}}}`).join(',\n    ')}
+  ]
+}
+</script>
+${breadcrumbLd([
+  { label: 'Home', url: `${SITE.domain}/` },
+  { label: 'Locaties', url: `${SITE.domain}/locaties` },
+  { label: c.name },
+])}`;
+}
+
+function buildCityBody(c) {
+  const loc = c.in || `in ${c.name}`;
+  const introHead = c.isService ? `${c.name}, <span class="serif-i">zo geregeld</span>`
+    : c.distant ? `Ritten naar en vanuit <span class="serif-i">${c.name}</span>`
+    : `Rolstoelvervoer <span class="serif-i">${loc}</span>`;
+  const h1 = c.isService ? `${c.name} <span class="serif-i">met spoedservice</span>` : `Rolstoeltaxi ${c.name} <span class="serif-i">met spoedservice</span>`;
+  const eyebrow = c.isService ? 'Ziekenhuisvervoer · Amsterdam' : `Rolstoeltaxi · ${c.name}`;
+  const nearby = c.nearby.map(cityBySlug).filter(Boolean);
+  const photoClass = c.portrait ? 'portrait' : 'landscape';
+  const photo2 = c.photo2 || (c.region === 'Amsterdam en omgeving' ? { src: 'spoedrit-amsterdam-centraal.jpg', alt: 'Rolstoelbus met uitgeklapte laadklep in de stad' } : { src: 'rolstoelbus-zijkant.jpg', alt: 'Rolstoelbus, zijaanzicht, met ruime zijruiten' });
+  return `<!-- PAGE HERO -->
+<header class="page-hero has-photo" style="background-image:url('/img/${c.photo.src}');background-position:${c.photo.pos || 'center'}">
+  <div class="wrap">
+    <div class="hero-box reveal">
+      ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Locaties', href: '/locaties' }, { label: c.name }])}
+      <span class="eyebrow">${eyebrow}</span>
+      <h1>${h1}</h1>
+      <div class="proof"><span><b>24/7</b> bereikbaar</span><span><b>10+</b> jaar ervaring</span><span><b>5000+</b> ritten</span></div>
+      <div class="hero-cta">
+        <a href="tel:${SITE.phoneTel}" class="btn btn-yellow" data-cta="primary">Bel direct: ${SITE.phoneDisplay}</a>
+        <a href="/contact" class="btn btn-ghost">Of plan online</a>
+      </div>
+      <p class="lead">${c.lead}</p>
+    </div>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">${c.isService ? 'Ziekenhuisvervoer' : 'Rolstoelvervoer'}</span>
+      <h2>${introHead}</h2>
+    </div>
+    <div class="split">
+      <div class="reveal">
+        ${c.intro.map(par => `<p>${par}</p>`).join('\n        ')}
+        <p><a href="/diensten/spoedvervoer-rolstoeltaxi" style="color:var(--accent);font-weight:700">Meer over spoedvervoer →</a></p>
+      </div>
+      <figure class="photo-card ${photoClass} reveal reveal-d1">
+        <img src="/img/${c.photo.src}" alt="${c.photo.alt}" width="${c.portrait ? 900 : 1000}" height="${c.portrait ? 1200 : 750}" loading="lazy" style="object-position:${c.photo.pos || 'center'}">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- PLEKKEN -->
+<section class="band-2">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">${c.isService ? 'Waarmee wij helpen' : 'Plekken en wijken'}</span>
+      <h2>${c.isService ? 'Van afspraak tot <span class="serif-i">ontslag</span>' : `Waar wij u ophalen en <span class="serif-i">afzetten</span>`}</h2>
+    </div>
+    <div class="grid-3">
+      ${c.plekken.map((pl, i) => `<div class="spot reveal reveal-d${i % 3}"><h3>${pl.t}</h3><p>${pl.d}</p></div>`).join('\n      ')}
+    </div>
+  </div>
+</section>
+
+<!-- RITTEN -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Veelgevraagde ritten</span>
+      <h2>${c.isService ? 'Ritten die wij <span class="serif-i">vaak rijden</span>' : c.distant ? `Vanaf en naar <span class="serif-i">${c.name}</span>` : `Ritten <span class="serif-i">${loc}</span>`}</h2>
+    </div>
+    <ul class="trip-list">
+      ${c.ritten.map((r, i) => `<li class="reveal reveal-d${i % 2}"><span class="ar">→</span><div><b>${r.t}</b><span>${r.d}</span></div></li>`).join('\n      ')}
+    </ul>
+  </div>
+</section>
+
+<!-- SPOED -->
+<section class="spoed-band night band-line" style="position:relative;overflow:hidden">
+  <canvas class="particles"></canvas>
+  <div class="wrap" style="position:relative;z-index:1">
+    <span class="eyebrow reveal">Spoed</span>
+    <h2 class="reveal reveal-d1">Spoed ${c.isService ? 'ziekenhuisvervoer' : loc}? <span class="serif-i">Bel direct.</span></h2>
+    <p class="reveal reveal-d2">${c.spoed}</p>
+    <div class="reveal reveal-d3"><a href="tel:${SITE.phoneTel}" class="btn btn-yellow">Bel ${SITE.phoneDisplay}</a></div>
+  </div>
+</section>
+
+<!-- BEREIKBAARHEID -->
+<section>
+  <div class="wrap">
+    <div class="split">
+      <figure class="photo-card landscape reveal">
+        <img src="/img/${photo2.src}" alt="${photo2.alt}" width="1000" height="750" loading="lazy">
+      </figure>
+      <div class="reveal reveal-d1">
+        <span class="eyebrow">Ophalen en bereikbaarheid</span>
+        <h2 style="font-size:clamp(26px,3.4vw,38px);margin-bottom:18px">${c.isService ? 'Bij de juiste ingang' : `Zo werkt het ${loc}`}</h2>
+        <p>${c.bereik}</p>
+        <p>Onze bussen hebben een elektrische laadklep en vaste bevestigingspunten. Een begeleider of familielid rijdt gewoon mee.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIENSTEN -->
+<section class="band-2">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Diensten</span>
+      <h2>Onze diensten <span class="serif-i">${c.isService ? 'in Amsterdam' : loc}</span></h2>
+      <p>Alle diensten van Rolstoeltaxi Spoed zijn ${c.isService ? 'in Amsterdam' : c.distant ? `voor ritten naar en vanuit ${c.name}` : loc} beschikbaar.</p>
+    </div>
+    <div class="grid-4">
+      ${SERVICES.map((sv, i) => `<a href="/diensten/${sv.slug}" class="card reveal reveal-d${i % 4}"><h3>${sv.nav}</h3><p>${truncate(sv.lead, 80)}</p></a>`).join('\n      ')}
+    </div>
+  </div>
+</section>
+
+<!-- STAPPEN -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Zo werkt het</span>
+      <h2>In drie stappen <span class="serif-i">geregeld</span></h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="big">1.</div><h3>Bel of app ons</h3><p>Vertel waar u wordt opgehaald, waar u naartoe moet en of er hulpmiddelen mee gaan.</p></div>
+      <div class="step reveal reveal-d1"><div class="big">2.</div><h3>Wij plannen de bus in</h3><p>U hoort direct de aankomsttijd en de prijs, voordat we vertrekken.</p></div>
+      <div class="step reveal reveal-d2"><div class="big">3.</div><h3>Veilig vervoerd</h3><p>De chauffeur helpt bij het in- en uitstappen en zet de rolstoel vast.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="band-2">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Veelgestelde vragen</span>
+      <h2>Vragen over ${c.isService ? 'ziekenhuisvervoer in Amsterdam' : `rolstoeltaxi <span class="serif-i">${c.name}</span>`}</h2>
+    </div>
+    <div class="faq-list">
+      ${c.faqs.map(f => `<div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">${f.q}</button>
+        <div class="faq-a"><p>${f.a}</p></div>
+      </div>`).join('\n      ')}
+    </div>
+  </div>
+</section>
+
+<!-- IN DE BUURT -->
+<section style="padding:64px 0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Ook actief in de buurt</span>
+      <h2>Rolstoeltaxi <span class="serif-i">in de omgeving</span></h2>
+    </div>
+    <div class="area-list reveal">
+      ${nearby.map(n => `<a href="${cityPath(n)}">${n.name}</a>`).join('\n      ')}
+      <a href="/locaties"><b>Alle locaties</b></a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="cta-final night">
+  <canvas class="particles"></canvas>
+  <div class="wrap">
+    <span class="eyebrow reveal">Direct geholpen worden</span>
+    <h2 class="reveal reveal-d1">${c.isService ? 'Ziekenhuisvervoer' : `Rolstoeltaxi ${c.name}`}? <span class="serif-i">Bel gerust.</span></h2>
+    <p class="reveal reveal-d2">Bel direct voor spoed, of plan online een rit voor later. U hoort de prijs vooraf.</p>
+    <div class="reveal reveal-d3">
+      <a href="tel:${SITE.phoneTel}" class="btn btn-yellow">Bel ${SITE.phoneDisplay}</a>
+    </div>
+    <p class="cta-sub reveal reveal-d3">Of <a href="/contact" style="color:var(--accent-2)">plan online een rit</a> · ook per <a href="https://wa.me/${SITE.whatsapp}" style="color:var(--accent-2)">WhatsApp</a></p>
+  </div>
+</section>`;
+}
+
+/* ============================== HUB PAGES ============================== */
+
+function buildDienstenHub() {
+  return `<header class="page-hero has-photo" style="background-image:url('/img/amsterdam-gracht-laadklep.jpg');background-position:center 60%">
+  <div class="wrap">
+    <div class="hero-box reveal">
+      ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Diensten' }])}
+      <span class="eyebrow">Diensten</span>
+      <h1>Alle diensten van <span class="serif-i">Rolstoeltaxi Spoed</span></h1>
+      <div class="proof"><span><b>24/7</b> bereikbaar</span><span><b>10+</b> jaar ervaring</span><span><b>${SERVICES.length}</b> diensten</span></div>
+      <div class="hero-cta">
+        <a href="tel:${SITE.phoneTel}" class="btn btn-yellow" data-cta="primary">Bel direct: ${SITE.phoneDisplay}</a>
+        <a href="/contact" class="btn btn-ghost">Of plan online</a>
+      </div>
+      <p class="lead">Van spoedvervoer tot uitvaartvervoer: één telefoonnummer, dezelfde bussen en dezelfde chauffeurs voor elke rit.</p>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Kies uw dienst</span>
+      <h2>Rolstoelvervoer voor <span class="serif-i">elke gelegenheid</span></h2>
+      <p>Alle ritten worden gereden met een rolstoelbus met elektrische laadklep en een ervaren chauffeur. Kies de dienst die het best bij uw rit past, of bel en wij denken mee.</p>
+    </div>
+    <div class="grid-4">
+      ${SERVICES.map((s, i) => `<a href="/diensten/${s.slug}" class="card reveal reveal-d${i % 4}">
+        <span class="icon-badge${s.icon === 'wheelchair' ? ' is-logo' : ''}">${s.icon === 'wheelchair' ? '<img src="/img/logo-icoon.png" alt="" width="26" height="17" aria-hidden="true">' : ICONS[s.icon]}</span>
+        <h3>${s.h1}</h3>
+        <p>${truncate(s.lead, 110)}</p>
+      </a>`).join('\n      ')}
+    </div>
+  </div>
+</section>
+
+<section class="band-2">
+  <div class="wrap long reveal">
+    <h2>Eén partij voor spoed en gepland vervoer</h2>
+    <p>Rolstoeltaxi Spoed is de spoedtak van Rolstoeltaxi Holland. Dat betekent dat u voor elke situatie bij dezelfde partij terechtkunt: een spoedrit op het laatste moment, een vaste rit naar dagbesteding, een vlucht vanaf Schiphol of een afscheid dat u wilt bijwonen. De bus, de chauffeur en de manier van werken zijn steeds hetzelfde: rustig, zorgvuldig en met de prijs vooraf.</p>
+    <p>Wilt u weten in welke plaatsen we rijden? Bekijk dan de <a href="/locaties" style="color:var(--accent)">overzichtspagina met alle locaties</a>, of lees eerst de <a href="/tarieven" style="color:var(--accent)">tarievenpagina</a> voor de opbouw van de prijs.</p>
+  </div>
+</section>
+
+<section id="contact" class="cta-final night">
+  <canvas class="particles"></canvas>
+  <div class="wrap">
+    <span class="eyebrow reveal">Direct geholpen worden</span>
+    <h2 class="reveal reveal-d1">Niet zeker welke dienst? <span class="serif-i">Bel gerust.</span></h2>
+    <p class="reveal reveal-d2">We denken graag met u mee en noemen de prijs vooraf.</p>
+    <div class="reveal reveal-d3"><a href="tel:${SITE.phoneTel}" class="btn btn-yellow">Bel ${SITE.phoneDisplay}</a></div>
+    <p class="cta-sub reveal reveal-d3">Of <a href="/contact" style="color:var(--accent-2)">plan online een rit</a></p>
+  </div>
+</section>`;
+}
+
+const REGION_ORDER = [
+  ['Amsterdam en omgeving', 'Amsterdam, Schiphol en de plaatsen rondom de hoofdstad.'],
+  ['Kennemerland en Noord-Holland', 'Van de kust bij Zandvoort tot Alkmaar en de Zaanstreek.'],
+  ['Zuid-Holland en Utrecht', 'De grote steden in het westen en midden van het land.'],
+  ['Rest van Nederland', 'Ritten naar en vanuit de rest van Nederland.'],
+];
+
+function buildLocatiesHub() {
+  return `<header class="page-hero has-photo" style="background-image:url('/img/amsterdam-molen-gooyer.jpg');background-position:center 45%">
+  <div class="wrap">
+    <div class="hero-box reveal">
+      ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Locaties' }])}
+      <span class="eyebrow">Locaties</span>
+      <h1>Rolstoeltaxi in <span class="serif-i">${CITIES.length} locaties</span></h1>
+      <div class="proof"><span><b>24/7</b> bereikbaar</span><span><b>10+</b> jaar ervaring</span><span><b>5000+</b> ritten</span></div>
+      <div class="hero-cta">
+        <a href="tel:${SITE.phoneTel}" class="btn btn-yellow" data-cta="primary">Bel direct: ${SITE.phoneDisplay}</a>
+        <a href="/contact" class="btn btn-ghost">Of plan online</a>
+      </div>
+      <p class="lead">Kies uw plaats en zie waar we u ophalen, welke ritten we vaak rijden en hoe u spoed regelt. Staat uw plaats er niet bij? Bel gerust, we bespreken de mogelijkheden.</p>
+    </div>
+  </div>
+</header>
+
+<section style="padding-top:60px">
+  <div class="wrap">
+    ${REGION_ORDER.map(([region, blurb]) => `<div class="hub-group">
+      <h2 class="reveal">${region}</h2>
+      <p class="reveal">${blurb}</p>
+      <div class="grid-4">
+        ${CITIES.filter(c => c.region === region).map((c, i) => `<a href="${cityPath(c)}" class="card reveal reveal-d${i % 4}">
+          <h3>${c.name}</h3>
+          <p>${truncate(c.lead, 100)}</p>
+        </a>`).join('\n        ')}
+      </div>
+    </div>`).join('\n    ')}
+  </div>
+</section>
+
+<section id="contact" class="cta-final night">
+  <canvas class="particles"></canvas>
+  <div class="wrap">
+    <span class="eyebrow reveal">Direct geholpen worden</span>
+    <h2 class="reveal reveal-d1">Uw plaats niet gevonden? <span class="serif-i">Bel gerust.</span></h2>
+    <p class="reveal reveal-d2">We rijden in Nederland en bespreken graag de mogelijkheden voor uw rit. Bekijk ook onze <a href="/diensten" style="color:var(--accent-2)">diensten</a>.</p>
+    <div class="reveal reveal-d3"><a href="tel:${SITE.phoneTel}" class="btn btn-yellow">Bel ${SITE.phoneDisplay}</a></div>
+    <p class="cta-sub reveal reveal-d3">Of <a href="/contact" style="color:var(--accent-2)">plan online een rit</a></p>
+  </div>
+</section>`;
+}
+
 /* ============================== HOME PAGE ============================== */
 
 function homeLd() {
@@ -687,7 +855,7 @@ function homeLd() {
 
 function buildHomeBody() {
   return `<!-- HERO -->
-<header class="hero night" style="background-image:url('img/spoedrit-amsterdam-centraal.jpg')">
+<header class="hero night" style="background-image:url('/img/amsterdam-gracht-laadklep.jpg');background-position:center 55%">
   <canvas class="particles"></canvas>
   <div class="wrap">
     <div class="hero-box reveal">
@@ -784,7 +952,7 @@ function buildHomeBody() {
     </div>
     <div class="grid-4">
       ${SERVICES.map((s, i) => `<a href="/diensten/${s.slug}" class="card reveal reveal-d${i}">
-        <span class="icon-badge${s.icon === 'wheelchair' ? ' is-logo' : ''}">${s.icon === 'wheelchair' ? '<img src="img/logo-icoon.png" alt="">' : ICONS[s.icon]}</span>
+        <span class="icon-badge${s.icon === 'wheelchair' ? ' is-logo' : ''}">${s.icon === 'wheelchair' ? '<img src="/img/logo-icoon.png" alt="" width="26" height="17" aria-hidden="true">' : ICONS[s.icon]}</span>
         <h3>${s.h1}</h3>
         <p>${truncate(s.lead, 90)}</p>
       </a>`).join('\n      ')}
@@ -845,35 +1013,20 @@ function buildHomeBody() {
   </div>
 </section>
 
-<!-- RECENTE RITTEN -->
+<!-- ONZE BUSSEN -->
 <section id="ritten" style="padding-top:0">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Onderweg</span>
       <h2>Onze bussen <span class="serif-i">in actie</span></h2>
+      <p>Echte ritten, echte plekken: van de Amsterdamse grachten tot een landgoed in de buurt.</p>
     </div>
-    <div class="projects">
-      <a href="/diensten/spoedvervoer-rolstoeltaxi" class="project p1 reveal">
-        <img class="ph-img" src="img/spoedrit-amsterdam-centraal.jpg" alt="Rolstoelbus met laadklep bij Amsterdam Centraal" loading="lazy" width="1000" height="1250">
-        <div class="project-info">
-          <span class="tag">Spoedvervoer · Amsterdam</span>
-          <h3>Laadklep uitgeklapt, klaar voor vertrek</h3>
-        </div>
-      </a>
-      <a href="/diensten/spoed-ziekenhuisvervoer" class="project p2 reveal reveal-d1">
-        <img class="ph-img" src="img/rolstoelbus-torenhof.jpg" alt="Rolstoelbus bij een zorginstelling" loading="lazy" width="1000" height="667">
-        <div class="project-info">
-          <span class="tag">Ziekenhuis &amp; zorg · regio</span>
-          <h3>Ophalen bij de ingang van de instelling</h3>
-        </div>
-      </a>
-      <a href="/diensten/luchthavenvervoer-spoed" class="project p3 reveal reveal-d2">
-        <img class="ph-img" src="img/luchthavenvervoer-bagage.jpg" alt="Rolstoelbus bij een terminal met reizigers en bagage" loading="lazy" width="1000" height="667">
-        <div class="project-info">
-          <span class="tag">Luchthavenvervoer</span>
-          <h3>Op tijd bij de terminal, met bagage</h3>
-        </div>
-      </a>
+    <div class="gallery">
+      <figure class="photo-card tall reveal"><img src="/img/interieur-rolstoelbus.jpg" alt="Interieur van de rolstoelbus met rolstoelplaats en laadklep" width="960" height="1280" loading="lazy"></figure>
+      <figure class="photo-card reveal reveal-d1"><img src="/img/amsterdam-molen-gooyer.jpg" alt="Rolstoelbus met geopende deuren bij een molen in Amsterdam" width="1280" height="960" loading="lazy"></figure>
+      <figure class="photo-card reveal reveal-d2"><img src="/img/rolstoelbus-baksteen-laadklep.jpg" alt="Rolstoelbus met laadklep voor een gebouw van rode baksteen" width="1280" height="960" loading="lazy"></figure>
+      <figure class="photo-card reveal reveal-d1"><img src="/img/rolstoelbus-laadklep-hoogbouw.jpg" alt="Rolstoelbus met uitgeklapte laadklep, hoogbouw op de achtergrond" width="1280" height="960" loading="lazy"></figure>
+      <figure class="photo-card reveal reveal-d2"><img src="/img/rolstoelbus-landgoed-poort.jpg" alt="Rolstoelbus bij een landgoedpoort met rode baksteen" width="1280" height="960" loading="lazy"></figure>
     </div>
   </div>
 </section>
@@ -884,10 +1037,11 @@ function buildHomeBody() {
     <div class="section-head reveal">
       <span class="eyebrow">Werkgebied</span>
       <h2>Wij rijden <span class="serif-i">in Nederland</span></h2>
-      <p>Met extra veel ritten in en rond de grote steden. Staat uw plaats er niet bij? Bel gerust, we rijden landelijk.</p>
+      <p>Met extra veel ritten in en rond de grote steden. Staat uw plaats er niet bij? Bel gerust, dan bespreken we de mogelijkheden.</p>
     </div>
     <div class="area-list reveal">
-      ${REGIOS.map(r => `<a href="/contact#formulier">${r}</a>`).join('\n      ')}
+      ${CITIES.filter(c => !c.isService).map(c => `<a href="${cityPath(c)}">${c.name}</a>`).join('\n      ')}
+      <a href="/locaties"><b>Alle locaties</b></a>
     </div>
   </div>
 </section>
@@ -897,7 +1051,7 @@ function buildHomeBody() {
   <div class="wrap">
     <div class="about-grid">
       <div class="about-photo reveal" style="background:none;padding:0">
-        <img src="img/rolstoelbus-zijkant.jpg" alt="Rolstoelbus van Rolstoeltaxi Spoed" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
+        <img src="/img/rolstoelbus-zijkant.jpg" alt="Rolstoelbus van Rolstoeltaxi Spoed, zijaanzicht" width="1600" height="1200" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
       </div>
       <div class="about-copy">
         <span class="eyebrow reveal">Wie zijn wij</span>
@@ -1082,6 +1236,9 @@ function buildContactBody() {
         <div class="aside-card reveal reveal-d3">
           <p class="aside-alt">Liever appen?<br><a href="https://wa.me/${SITE.whatsapp}">${ICONS.whatsapp} WhatsApp ons</a></p>
         </div>
+        <div class="aside-card reveal reveal-d3">
+          <p class="aside-alt">Eerst meer weten?<br><a href="/diensten">Bekijk onze diensten</a><br><a href="/locaties">Bekijk alle locaties</a></p>
+        </div>
       </aside>
 
     </div>
@@ -1108,7 +1265,7 @@ function buildOverOnsBody() {
   <div class="wrap">
     <div class="about-grid">
       <div class="about-photo reveal" style="background:none;padding:0">
-        <img src="img/rolstoelbus-zijkant.jpg" alt="Rolstoelbus van Rolstoeltaxi Spoed" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
+        <img src="/img/rolstoelbus-zijkant.jpg" alt="Rolstoelbus van Rolstoeltaxi Spoed, zijaanzicht" width="1600" height="1200" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
       </div>
       <div class="about-copy">
         <span class="eyebrow reveal">Het verhaal</span>
@@ -1132,7 +1289,8 @@ function buildOverOnsBody() {
       <h2>Wij rijden <span class="serif-i">in Nederland</span></h2>
     </div>
     <div class="area-list reveal">
-      ${REGIOS.map(r => `<a href="/contact#formulier">${r}</a>`).join('\n      ')}
+      ${TOP_CITIES.map(slug => { const c = cityBySlug(slug); return `<a href="${cityPath(c)}">${c.name}</a>`; }).join('\n      ')}
+      <a href="/locaties"><b>Alle locaties</b></a>
     </div>
   </div>
 </section>
@@ -1343,6 +1501,9 @@ function buildPrivacyBody() {
     <h2>Uw rechten</h2>
     <p>U heeft het recht om uw gegevens in te zien, te corrigeren of te laten verwijderen. Neem hiervoor contact op via <a href="mailto:${SITE.email}" style="color:var(--accent)">${SITE.email}</a>.</p>
 
+    <h2>Vragen over uw rit?</h2>
+    <p>Voor vragen over vervoer, tarieven of vergoeding kunt u terecht op onze <a href="/veelgestelde-vragen" style="color:var(--accent)">pagina met veelgestelde vragen</a> of via het <a href="/contact" style="color:var(--accent)">contactformulier</a>.</p>
+
     <h2>Cookies</h2>
     <p>Deze website gebruikt alleen technisch noodzakelijke functionaliteit. Zodra er analytische of marketingcookies worden toegevoegd, wordt deze verklaring aangevuld en vragen wij waar nodig om uw toestemming.</p>
   </div>
@@ -1361,8 +1522,14 @@ function buildBedanktBody() {
       <a href="tel:${SITE.phoneTel}" class="btn">Bel ${SITE.phoneDisplay}</a>
       <a href="/" class="btn btn-ghost">Terug naar de homepage</a>
     </div>
+    <p class="cta-sub reveal reveal-d3" style="margin-top:18px">Ondertussen: bekijk onze <a href="/diensten" style="color:var(--accent)">diensten</a> of de <a href="/locaties" style="color:var(--accent)">locaties</a> waar we rijden.</p>
   </div>
 </header>`;
+}
+
+function withBrand(t) {
+  const full = `${t} | ${SITE.name}`;
+  return full.length <= 68 ? full : t;
 }
 
 /* ============================== WRITE FILES ============================== */
@@ -1370,7 +1537,7 @@ function buildBedanktBody() {
 fs.mkdirSync(path.join(ROOT, 'diensten'), { recursive: true });
 
 const homeHtml = page({
-  title: 'Rolstoeltaxi Spoed | Rolstoelvervoer in Nederland — bel direct',
+  title: 'Rolstoeltaxi Spoed | Rolstoelvervoer in Nederland, bel direct',
   description: 'Acuut rolstoelvervoer nodig in Nederland? Rolstoeltaxi Spoed rukt 24/7 uit met een volledig uitgeruste rolstoelbus. Niet mailen, gewoon direct bellen.',
   canonicalPath: '',
   prefix: '',
@@ -1381,7 +1548,7 @@ fs.writeFileSync(path.join(ROOT, 'index.html'), homeHtml);
 
 for (const svc of SERVICES) {
   const html = page({
-    title: svc.metaTitle,
+    title: withBrand(svc.metaTitle),
     description: svc.metaDescription,
     canonicalPath: `diensten/${svc.slug}`,
     prefix: '../',
@@ -1392,9 +1559,53 @@ for (const svc of SERVICES) {
   fs.writeFileSync(path.join(ROOT, 'diensten', `${svc.slug}.html`), html);
 }
 
+// remove stale generated pages from earlier structures
+for (const old of ['spoed-ziekenhuisvervoer', 'luchthavenvervoer-spoed']) {
+  try { fs.unlinkSync(path.join(ROOT, 'diensten', `${old}.html`)); } catch (e) { /* not present */ }
+}
+for (const f of fs.readdirSync(ROOT)) {
+  if (/^rolstoeltaxi-.*\.html$/.test(f)) fs.unlinkSync(path.join(ROOT, f));
+}
+
+for (const c of CITIES) {
+  const file = c.path ? c.path.slice(1) : `rolstoeltaxi-${c.slug}`;
+  const html = page({
+    title: c.isService ? `${c.name}: rolstoelvervoer met spoedservice` : `Rolstoeltaxi ${c.name}: spoedvervoer 24/7`,
+    description: c.metaDescription,
+    canonicalPath: file,
+    prefix: '',
+    extraLd: cityLd(c),
+    bodyHtml: buildCityBody(c),
+    useScrollThreshold: true,
+  });
+  fs.writeFileSync(path.join(ROOT, `${file}.html`), html);
+}
+
+fs.writeFileSync(path.join(ROOT, 'diensten.html'), page({
+  title: 'Diensten: rolstoelvervoer en spoedvervoer | Rolstoeltaxi Spoed',
+  description: 'Alle diensten van Rolstoeltaxi Spoed: spoedvervoer, rolstoelvervoer, ziekenhuisvervoer, Schipholvervoer, evenementvervoer en meer. 24/7 bereikbaar, bel direct.',
+  canonicalPath: 'diensten',
+  prefix: '',
+  extraLd: breadcrumbLd([{ label: 'Home', url: `${SITE.domain}/` }, { label: 'Diensten' }]),
+  bodyHtml: buildDienstenHub(),
+  useScrollThreshold: true,
+  skipFaq: true,
+}));
+
+fs.writeFileSync(path.join(ROOT, 'locaties.html'), page({
+  title: `Locaties: rolstoeltaxi in ${CITIES.length} plaatsen | Rolstoeltaxi Spoed`,
+  description: 'Rolstoeltaxi Spoed rijdt in Amsterdam, Schiphol, Haarlem, Leiden, Utrecht, Rotterdam en meer. Kies uw plaats en bel direct voor spoedvervoer met rolstoelbus.',
+  canonicalPath: 'locaties',
+  prefix: '',
+  extraLd: breadcrumbLd([{ label: 'Home', url: `${SITE.domain}/` }, { label: 'Locaties' }]),
+  bodyHtml: buildLocatiesHub(),
+  useScrollThreshold: true,
+  skipFaq: true,
+}));
+
 fs.writeFileSync(path.join(ROOT, 'contact.html'), page({
   title: 'Direct reserveren | Rolstoeltaxi Spoed',
-  description: 'Plan online een rit met Rolstoeltaxi Spoed, of bel direct bij spoed. 24/7 bereikbaar in Nederland.',
+  description: 'Plan online een rit met Rolstoeltaxi Spoed, of bel direct bij spoed. 24/7 bereikbaar in Nederland, met rolstoelbus, elektrische laadklep en prijs vooraf.',
   canonicalPath: 'contact',
   prefix: '',
   extraLd: contactLd(),
@@ -1404,7 +1615,7 @@ fs.writeFileSync(path.join(ROOT, 'contact.html'), page({
 }));
 
 fs.writeFileSync(path.join(ROOT, 'over-ons.html'), page({
-  title: 'Over ons | Rolstoeltaxi Spoed — spoedtak van Rolstoeltaxi Holland',
+  title: 'Over ons | Rolstoeltaxi Spoed, spoedtak van Rolstoeltaxi Holland',
   description: 'Maak kennis met Rolstoeltaxi Spoed: de spoedtak van Rolstoeltaxi Holland. Dezelfde ervaren chauffeurs, ingericht op snel schakelen bij spoed.',
   canonicalPath: 'over-ons',
   prefix: '',
@@ -1416,7 +1627,7 @@ fs.writeFileSync(path.join(ROOT, 'over-ons.html'), page({
 
 fs.writeFileSync(path.join(ROOT, 'tarieven.html'), page({
   title: 'Tarieven | Rolstoeltaxi Spoed',
-  description: 'Hoe is de prijs van een rit bij Rolstoeltaxi Spoed opgebouwd? Transparant en altijd vooraf genoemd, ook bij spoed.',
+  description: 'Hoe is de prijs van een rit bij Rolstoeltaxi Spoed opgebouwd? Transparant en altijd vooraf genoemd, ook bij spoed. Bel voor een prijs op maat.',
   canonicalPath: 'tarieven',
   prefix: '',
   extraLd: '',
@@ -1427,7 +1638,7 @@ fs.writeFileSync(path.join(ROOT, 'tarieven.html'), page({
 
 fs.writeFileSync(path.join(ROOT, 'veelgestelde-vragen.html'), page({
   title: 'Veelgestelde vragen | Rolstoeltaxi Spoed',
-  description: 'Antwoord op de meest gestelde vragen over spoedvervoer, tarieven, vergoeding en reserveren bij Rolstoeltaxi Spoed.',
+  description: 'Antwoord op de meest gestelde vragen over spoedvervoer, tarieven, vergoeding en reserveren bij Rolstoeltaxi Spoed. Staat uw vraag er niet bij? Bel gerust.',
   canonicalPath: 'veelgestelde-vragen',
   prefix: '',
   extraLd: faqLd(),
@@ -1437,7 +1648,7 @@ fs.writeFileSync(path.join(ROOT, 'veelgestelde-vragen.html'), page({
 
 fs.writeFileSync(path.join(ROOT, 'privacyverklaring.html'), page({
   title: 'Privacyverklaring | Rolstoeltaxi Spoed',
-  description: 'Lees hoe Rolstoeltaxi Spoed omgaat met uw persoonsgegevens.',
+  description: 'Lees hoe Rolstoeltaxi Spoed omgaat met uw persoonsgegevens: welke gegevens we verwerken, waarom, hoe lang we ze bewaren en welke rechten u heeft.',
   canonicalPath: 'privacyverklaring',
   prefix: '',
   extraLd: '',
@@ -1447,7 +1658,7 @@ fs.writeFileSync(path.join(ROOT, 'privacyverklaring.html'), page({
 
 fs.writeFileSync(path.join(ROOT, 'bedankt.html'), page({
   title: 'Bedankt voor uw aanvraag | Rolstoeltaxi Spoed',
-  description: 'Uw aanvraag is ontvangen. Rolstoeltaxi Spoed neemt zo snel mogelijk contact met u op.',
+  description: 'Uw aanvraag is ontvangen. Rolstoeltaxi Spoed neemt zo snel mogelijk contact met u op om de rit en de prijs te bevestigen. Heeft u haast? Bel gerust direct.',
   canonicalPath: 'bedankt',
   prefix: '',
   extraLd: '',
@@ -1458,10 +1669,11 @@ fs.writeFileSync(path.join(ROOT, 'bedankt.html'), page({
 
 /* ============================== SITEMAP & ROBOTS ============================== */
 
-const staticPages = ['', 'over-ons', 'tarieven', 'contact', 'veelgestelde-vragen', 'privacyverklaring'];
+const staticPages = ['', 'diensten', 'locaties', 'over-ons', 'tarieven', 'contact', 'veelgestelde-vragen', 'privacyverklaring'];
 const urls = [
   ...staticPages.map(p => `${SITE.domain}/${p}`),
   ...SERVICES.map(s => `${SITE.domain}/diensten/${s.slug}`),
+  ...CITIES.map(c => `${SITE.domain}${cityPath(c)}`),
 ];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -1477,8 +1689,8 @@ Sitemap: ${SITE.domain}/sitemap.xml
 `;
 fs.writeFileSync(path.join(ROOT, 'robots.txt'), robots);
 
-const totalPages = staticPages.length + SERVICES.length + 1 /* bedankt */;
-console.log(`Generated ${SERVICES.length} service pages.`);
+const totalPages = staticPages.length + SERVICES.length + CITIES.length + 1 /* bedankt */;
+console.log(`Generated ${SERVICES.length} service pages and ${CITIES.length} location pages.`);
 console.log(`Total HTML pages: ${totalPages} (${staticPages.length} vaste pagina's, ${SERVICES.length} diensten, 1 bedankt-pagina)`);
 console.log(`sitemap.xml: ${urls.length} URLs (bedankt.html excluded on purpose)`);
 
