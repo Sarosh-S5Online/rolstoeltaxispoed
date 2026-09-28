@@ -621,6 +621,58 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
 .page-hero.has-photo .hero-box p.lead{margin-bottom:0;font-size:17px}
 .page-hero.has-photo .hero-box .hero-cta{margin-bottom:22px}
 
+/* ---------- CTA dock (altijd zichtbaar) ---------- */
+.cta-dock{position:fixed;right:22px;bottom:22px;z-index:150;display:flex;gap:10px;align-items:stretch}
+.cta-dock a{display:flex;align-items:center;gap:10px;text-decoration:none;border-radius:var(--radius-sm);font-weight:800;box-shadow:0 12px 30px rgba(7,17,33,.28);transition:transform .2s ease,filter .2s ease}
+.cta-dock a:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.dock-call{background:linear-gradient(135deg,var(--yellow),var(--yellow-deep));color:var(--yellow-ink);padding:11px 20px}
+.dock-call svg{flex-shrink:0}
+.dock-call span{display:flex;flex-direction:column;line-height:1.15}
+.dock-call small{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.8}
+.dock-call b{font-size:16px;font-weight:800}
+.dock-wa{background:#1fa855;color:#fff;width:52px;justify-content:center}
+.dock-wa svg{width:24px;height:24px}
+.dock-book{background:linear-gradient(135deg,var(--accent-2),var(--accent-deep));color:#fff;padding:0 20px;font-size:15px}
+@media(max-width:900px){
+  .cta-dock{left:0;right:0;bottom:0;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(247,249,252,.94);backdrop-filter:blur(14px);border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(15,26,46,.1)}
+  .cta-dock a{box-shadow:none;min-height:50px}
+  .dock-call{flex:1.5;justify-content:center;padding:8px 12px}
+  .dock-book{flex:1;justify-content:center;padding:0 12px}
+  .dock-wa{width:50px;flex:none}
+  body{padding-bottom:76px}
+}
+@media(max-width:380px){.dock-call small{display:none}.dock-call b{font-size:15px}}
+
+/* ---------- boekingsformulier ---------- */
+.fs{border:0;padding:0;margin:0 0 30px}
+.fs legend{display:flex;align-items:center;gap:12px;font-family:'Poppins',sans-serif;font-weight:700;font-size:19px;margin-bottom:18px;padding:0}
+.fs-n{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--accent-2),var(--accent-deep));color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:14px}
+.lbl{display:block;font-size:14px;font-weight:700;margin-bottom:8px;letter-spacing:.02em}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.seg{grid-template-columns:1fr}}
+.seg-opt{position:relative;cursor:pointer}
+.seg-opt input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg-opt span{display:block;border:1.5px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px;background:var(--bg);transition:border-color .2s,background .2s,box-shadow .2s}
+.seg-opt b{display:block;font-size:15.5px}
+.seg-opt small{color:var(--ink-dim);font-size:13px}
+.seg-opt input:checked+span{border-color:var(--accent);background:#eaf2fd;box-shadow:0 0 0 3px rgba(21,95,176,.12)}
+.seg-opt input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.check{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--ink);cursor:pointer;margin:6px 0 16px}
+.check input{width:20px;height:20px;margin-top:2px;flex-shrink:0;accent-color:var(--accent)}
+.check.consent{color:var(--ink-dim);font-size:14px;margin:0 0 20px}
+.check a{color:var(--accent);font-weight:600}
+.form-note a{color:var(--accent);font-weight:700}
+.was-validated .field input:invalid,.was-validated .field select:invalid,.was-validated .field textarea:invalid{border-color:#d64545;box-shadow:0 0 0 3px rgba(214,69,69,.12)}
+.was-validated .check input:invalid{outline:2px solid #d64545}
+.form-error{margin-top:14px;padding:12px 14px;border-radius:var(--radius-sm);background:#fdecec;color:#9b1c1c;font-size:14.5px}
+.form-success{text-align:center;padding:24px 8px}
+.form-success[hidden],.form-error[hidden],[hidden]{display:none!important}
+.ok-badge{width:64px;height:64px;border-radius:14px;margin:0 auto 18px;background:linear-gradient(135deg,#25b866,#128a4a);color:#fff;display:flex;align-items:center;justify-content:center}
+.ok-badge svg{width:30px;height:30px}
+.form-success h3{font-size:26px;margin-bottom:12px}
+.form-success p{color:var(--ink-dim);margin:0 auto 16px;max-width:46ch}
+.demo-note{font-size:13px;background:#fff6e0;border:1px solid #f0d28a;color:#6b4a00!important;border-radius:var(--radius-sm);padding:10px 14px}
+
 </style>
 </head>
 <body>
@@ -662,7 +714,10 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
 </div>
     <span class="eyebrow reveal">Direct reserveren</span>
     <h1 class="reveal reveal-d1">Plan uw <span class="serif-i">rit</span></h1>
-    <p class="lead reveal reveal-d2">Bij spoed belt u ons liever direct. Voor een geplande rit vult u hieronder het formulier in, dan nemen we snel contact op.</p>
+    <p class="lead reveal reveal-d2">Bij spoed belt u ons liever direct. Voor een geplande rit vult u hieronder het formulier in, dan nemen we snel contact op om de rit en de prijs te bevestigen.</p>
+    <div class="hero-cta reveal reveal-d3">
+      <a href="tel:+31628761078" class="btn btn-yellow" data-cta="primary">Spoed? Bel 06 2876 1078</a>
+    </div>
   </div>
 </header>
 
@@ -673,37 +728,34 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
 
       <!-- FORM -->
       <div class="form-card reveal">
-        <form id="bookingForm" action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="VUL-HIER-UW-WEB3FORMS-ACCESS-KEY-IN">
-          <input type="hidden" name="subject" value="Nieuwe ritaanvraag via rolstoeltaxispoed.nl">
-          <input type="hidden" name="redirect" value="https://rolstoeltaxispoed.nl/bedankt">
-          <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off">
-          <div class="form-row">
-            <div class="field">
-              <label for="naam">Naam</label>
-              <input type="text" id="naam" name="naam" placeholder="Uw naam" required autocomplete="name">
+        <form id="bookingForm" novalidate>
+          <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <fieldset class="fs">
+            <legend><span class="fs-n">1</span> Uw gegevens</legend>
+            <div class="form-row">
+              <div class="field">
+                <label for="naam">Naam</label>
+                <input type="text" id="naam" name="Naam" placeholder="Voor- en achternaam" required autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="telefoon">Telefoonnummer</label>
+                <input type="tel" id="telefoon" name="Telefoon" placeholder="06 12345678" required autocomplete="tel" inputmode="tel">
+              </div>
             </div>
             <div class="field">
-              <label for="telefoon">Telefoonnummer</label>
-              <input type="tel" id="telefoon" name="telefoon" placeholder="06 12345678" required autocomplete="tel">
+              <label for="email">E-mailadres <span class="opt">(voor de bevestiging, optioneel)</span></label>
+              <input type="email" id="email" name="E-mail" placeholder="naam@voorbeeld.nl" autocomplete="email">
             </div>
-          </div>
-          <div class="form-row">
-            <div class="field">
-              <label for="ophaal">Ophaaladres</label>
-              <input type="text" id="ophaal" name="ophaal" placeholder="Straat, plaats" required autocomplete="address-level2">
-            </div>
-            <div class="field">
-              <label for="bestemming">Bestemming</label>
-              <input type="text" id="bestemming" name="bestemming" placeholder="Waar naartoe?" required>
-            </div>
-          </div>
-          <div class="form-row">
+          </fieldset>
+
+          <fieldset class="fs">
+            <legend><span class="fs-n">2</span> De rit</legend>
             <div class="field">
               <label for="type">Soort rit</label>
-              <select id="type" name="type" required>
+              <select id="type" name="Soort rit" required>
                 <option value="" disabled selected>Maak een keuze</option>
-                <option>Spoed, zo snel mogelijk</option>
+                <option>Spoedrit, zo snel mogelijk</option>
                 <option>Spoedvervoer</option>
                 <option>Rolstoelvervoer</option>
                 <option>Ziekenhuisvervoer</option>
@@ -715,18 +767,84 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
                 <option>Iets anders</option>
               </select>
             </div>
-            <div class="field">
-              <label for="email">E-mailadres <span class="opt">(optioneel)</span></label>
-              <input type="email" id="email" name="email" placeholder="naam@voorbeeld.nl" autocomplete="email">
+            <div class="form-row">
+              <div class="field">
+                <label for="ophaal">Ophaaladres</label>
+                <input type="text" id="ophaal" name="Ophaaladres" placeholder="Straat, huisnummer, plaats" required autocomplete="street-address">
+              </div>
+              <div class="field">
+                <label for="bestemming">Bestemming</label>
+                <input type="text" id="bestemming" name="Bestemming" placeholder="Adres of instelling, plaats" required>
+              </div>
             </div>
-          </div>
-          <div class="field">
-            <label for="bericht">Vertel kort wat er speelt <span class="opt">(optioneel)</span></label>
-            <textarea id="bericht" name="bericht" placeholder="Bijv. rolstoel of scootmobiel, begeleider mee, gewenst tijdstip."></textarea>
-          </div>
-          <button type="submit" class="btn btn-full">Aanvraag versturen</button>
-          <p class="form-note">Bij spoed reageren we zo snel mogelijk. Uw gegevens gebruiken we alleen om contact met u op te nemen, nooit voor iets anders.</p>
+
+            <div class="field">
+              <span class="lbl">Wanneer moet de rit plaatsvinden?</span>
+              <div class="seg" role="radiogroup" aria-label="Wanneer">
+                <label class="seg-opt"><input type="radio" name="Moment" value="Zo snel mogelijk (spoed)" checked><span><b>Zo snel mogelijk</b><small>Spoed, direct inplannen</small></span></label>
+                <label class="seg-opt"><input type="radio" name="Moment" value="Op een afgesproken moment"><span><b>Op een afgesproken moment</b><small>Kies datum en tijd</small></span></label>
+              </div>
+            </div>
+            <div class="form-row when" id="whenRow" hidden>
+              <div class="field">
+                <label for="datum">Datum</label>
+                <input type="date" id="datum" name="Datum">
+              </div>
+              <div class="field">
+                <label for="tijd">Ophaaltijd</label>
+                <input type="time" id="tijd" name="Ophaaltijd">
+              </div>
+            </div>
+
+            <label class="check"><input type="checkbox" id="terugrit" name="Terugrit gewenst" value="Ja"><span>Ik wil ook een <b>terugrit</b> inplannen</span></label>
+            <div class="field" id="terugRow" hidden>
+              <label for="terugtijd">Gewenste tijd terugrit <span class="opt">(bij benadering)</span></label>
+              <input type="text" id="terugtijd" name="Tijd terugrit" placeholder="Bijv. 15:30, of na de afspraak">
+            </div>
+          </fieldset>
+
+          <fieldset class="fs">
+            <legend><span class="fs-n">3</span> Reiziger en hulpmiddel</legend>
+            <div class="form-row">
+              <div class="field">
+                <label for="hulpmiddel">Hulpmiddel</label>
+                <select id="hulpmiddel" name="Hulpmiddel" required>
+                  <option value="" disabled selected>Maak een keuze</option>
+                  <option>Handbewogen rolstoel</option>
+                  <option>Elektrische rolstoel</option>
+                  <option>Scootmobiel</option>
+                  <option>Opvouwbare rolstoel</option>
+                  <option>Geen, alleen een begeleider</option>
+                  <option>Weet ik niet zeker</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="personen">Aantal reizigers</label>
+                <select id="personen" name="Aantal reizigers">
+                  <option>1</option><option>2</option><option>3</option><option>4</option><option>5 of meer</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="bericht">Opmerking <span class="opt">(optioneel)</span></label>
+              <textarea id="bericht" name="Opmerking" placeholder="Bijv. bagage, infuus of zuurstof, trap of drempel bij de deur, contactpersoon."></textarea>
+            </div>
+          </fieldset>
+
+          <label class="check consent"><input type="checkbox" id="akkoord" required><span>Ik ga akkoord met de <a href="/privacyverklaring" target="_blank" rel="noopener">privacyverklaring</a>. Mijn gegevens worden alleen gebruikt om contact op te nemen over deze rit.</span></label>
+
+          <button type="submit" class="btn btn-yellow btn-full" id="submitBtn">Aanvraag versturen</button>
+          <p class="form-note">Bij spoed reageren we zo snel mogelijk. Heeft u haast? Bel liever direct: <a href="tel:+31628761078">06 2876 1078</a>.</p>
+          <p class="form-error" id="formError" role="alert" hidden></p>
         </form>
+
+        <div class="form-success" id="formSuccess" role="status" hidden>
+          <div class="ok-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <h3>Bedankt, uw aanvraag is <span class="serif-i">ontvangen</span></h3>
+          <p>We nemen zo snel mogelijk contact met u op om de rit en de prijs te bevestigen. Heeft u haast, bel dan direct:</p>
+          <p><a class="btn btn-yellow" href="tel:+31628761078">Bel 06 2876 1078</a></p>
+          <p class="demo-note" id="demoNote" hidden>Demo-modus: er is nog geen e-mailadres gekoppeld aan dit formulier, dus deze aanvraag is niet echt verstuurd.</p>
+        </div>
       </div>
 
       <!-- SIDEBAR -->
@@ -734,7 +852,7 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
         <div class="aside-card reveal reveal-d1">
           <h3>Hoe het <span class="serif-i">werkt</span></h3>
           <ul class="mini-steps">
-            <li><span class="n">1.</span><div><b>U vult het formulier in</b><span>Duurt nog geen minuut.</span></div></li>
+            <li><span class="n">1.</span><div><b>U vult het formulier in</b><span>Duurt nog geen twee minuten.</span></div></li>
             <li><span class="n">2.</span><div><b>Wij bevestigen de rit</b><span>Inclusief prijs, voordat u definitief boekt.</span></div></li>
             <li><span class="n">3.</span><div><b>Veilig vervoerd</b><span>De chauffeur staat op tijd klaar.</span></div></li>
           </ul>
@@ -753,6 +871,81 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
     </div>
   </div>
 </section>
+
+<script>
+(function () {
+  var KEY = "";
+  var form = document.getElementById('bookingForm');
+  if (!form) return;
+  var whenRow = document.getElementById('whenRow');
+  var datum = document.getElementById('datum');
+  var tijd = document.getElementById('tijd');
+  var terug = document.getElementById('terugrit');
+  var terugRow = document.getElementById('terugRow');
+  var btn = document.getElementById('submitBtn');
+  var err = document.getElementById('formError');
+  var today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+  datum.min = today.toISOString().slice(0, 10);
+
+  function syncWhen() {
+    var planned = form.querySelector('input[name="Moment"]:checked').value.indexOf('afgesproken') > -1;
+    whenRow.hidden = !planned;
+    datum.required = planned; tijd.required = planned;
+    if (!planned) { datum.value = ''; tijd.value = ''; }
+  }
+  form.querySelectorAll('input[name="Moment"]').forEach(function (r) { r.addEventListener('change', syncWhen); });
+  terug.addEventListener('change', function () { terugRow.hidden = !terug.checked; });
+  syncWhen();
+
+  var q = new URLSearchParams(location.search);
+  if (q.get('rit') === 'spoed') document.getElementById('type').selectedIndex = 1;
+
+  function showError(msg) { err.textContent = msg; err.hidden = false; }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    err.hidden = true;
+    if (form.botcheck.checked) return;
+    if (!form.checkValidity()) {
+      form.classList.add('was-validated');
+      form.reportValidity();
+      return;
+    }
+    var data = {};
+    new FormData(form).forEach(function (v, k) { if (k !== 'botcheck' && v !== '') data[k] = v; });
+    var payload = Object.assign({
+      access_key: KEY,
+      subject: 'Nieuwe ritaanvraag: ' + (data['Soort rit'] || 'rit') + ' (' + (data['Moment'] || '') + ')',
+      from_name: 'Rolstoeltaxi Spoed website'
+    }, data);
+    if (data['E-mail']) payload.replyto = data['E-mail'];
+    btn.disabled = true; var label = btn.textContent; btn.textContent = 'Bezig met versturen...';
+
+    function done(demo) {
+      form.hidden = true;
+      var s = document.getElementById('formSuccess');
+      s.hidden = false;
+      document.getElementById('demoNote').hidden = !demo;
+      s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    if (!KEY) {
+      setTimeout(function () { console.info('Demo: aanvraag niet verstuurd', data); done(true); }, 700);
+      return;
+    }
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (r) { return r.json(); }).then(function (j) {
+      if (j && j.success) done(false); else throw new Error((j && j.message) || 'fout');
+    }).catch(function () {
+      btn.disabled = false; btn.textContent = label;
+      showError('Versturen is niet gelukt. Probeer het opnieuw of bel direct naar 06 2876 1078.');
+    });
+  });
+})();
+</script>
 
 <footer>
   <div class="wrap">
@@ -808,12 +1001,15 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
     </div>
     <div class="foot-bottom">
       <span>© 2026 Rolstoeltaxi Spoed</span>
-      <span>Website door <a href="https://s5onlinemarketing.com" style="color:var(--accent)">S5Online Marketing</a></span>
     </div>
   </div>
 </footer>
 
-
+<div class="cta-dock" id="ctaDock">
+  <a href="tel:+31628761078" class="dock-call" data-cta="dock"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3h3l2 5-2.5 1.5a11 11 0 005 5L14 12l5 2v3a2 2 0 01-2.2 2A17 17 0 013 5.2 2 2 0 015 3z"/></svg><span><small>Bel direct</small><b>06 2876 1078</b></span></a>
+  <a href="https://wa.me/31628761078" class="dock-wa" aria-label="WhatsApp ons"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.8 14.2c-.2.6-1.3 1.2-1.9 1.3-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-5-4.3-5.1-4.5-.2-.2-1.2-1.6-1.2-3.1s.8-2.2 1.1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.2.1.3 0 .5-.1.2-.1.3-.3.5-.1.2-.3.4-.4.5-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.5 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.8.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
+  
+</div>
 
 <script>
 // nav scroll state
@@ -837,7 +1033,6 @@ burger.addEventListener('click', () => toggleMenu(true));
 closeBtn.addEventListener('click', () => toggleMenu(false));
 menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
 let menuOpen = false;
-
 
 // scroll reveals
 const io = new IntersectionObserver(entries => {

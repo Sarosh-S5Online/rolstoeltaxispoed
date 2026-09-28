@@ -10,6 +10,7 @@ const SITE = {
   phoneDisplay: '06 2876 1078',
   phoneTel: '+31628761078',
   whatsapp: '31628761078',
+  web3formsKey: '', // vul hier de Web3Forms access key in om e-mail te koppelen
   email: 'info@rolstoeltaxispoed.nl',
 };
 
@@ -173,15 +174,16 @@ function footer(prefix) {
     </div>
     <div class="foot-bottom">
       <span>© 2026 ${SITE.name}</span>
-      <span>Website door <a href="https://s5onlinemarketing.com" style="color:var(--accent)">S5Online Marketing</a></span>
     </div>
   </div>
 </footer>`;
 }
 
-function stickyCta(label) {
-  return `<div class="sticky-cta" id="stickyCta" aria-hidden="true">
-  <a href="tel:${SITE.phoneTel}" class="btn">${label || `Bel direct: ${SITE.phoneDisplay}`}</a>
+function stickyCta({ hideBook } = {}) {
+  return `<div class="cta-dock" id="ctaDock">
+  <a href="tel:${SITE.phoneTel}" class="dock-call" data-cta="dock">${ICONS.phoneCall}<span><small>Bel direct</small><b>${SITE.phoneDisplay}</b></span></a>
+  <a href="https://wa.me/${SITE.whatsapp}" class="dock-wa" aria-label="WhatsApp ons">${ICONS.whatsapp}</a>
+  ${hideBook ? '' : '<a href="/contact#formulier" class="dock-book">Reserveren</a>'}
 </div>`;
 }
 
@@ -219,32 +221,6 @@ document.querySelectorAll('.faq-item').forEach(item => {
     a.style.maxHeight = open ? a.scrollHeight + 'px' : '0';
   });
 });`}
-${skipSticky ? '' : useScrollThreshold ? `
-// sticky mobile cta (subpage): show after 600px scroll, hide near final CTA
-const stickyCta = document.getElementById('stickyCta');
-const ctaSection = document.getElementById('contact');
-let nearEnd = false;
-const updateSticky = () => {
-  const show = scrollY > 300 && !nearEnd && !menuOpen;
-  stickyCta.classList.toggle('show', show);
-  stickyCta.setAttribute('aria-hidden', !show);
-};
-addEventListener('scroll', updateSticky, {passive:true});
-if (ctaSection) new IntersectionObserver(([e]) => { nearEnd = e.isIntersecting; updateSticky(); }, {threshold:.1}).observe(ctaSection);
-` : `
-// sticky mobile cta (home): show once the hero is scrolled past
-const stickyCta = document.getElementById('stickyCta');
-const heroEl = document.querySelector('.hero');
-const ctaSection = document.getElementById('contact');
-let pastHero = false, nearEnd = false;
-const updateSticky = () => {
-  const show = pastHero && !nearEnd && !menuOpen;
-  stickyCta.classList.toggle('show', show);
-  stickyCta.setAttribute('aria-hidden', !show);
-};
-if (heroEl) new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; updateSticky(); }, {threshold:0}).observe(heroEl);
-if (ctaSection) new IntersectionObserver(([e]) => { nearEnd = e.isIntersecting; updateSticky(); }, {threshold:.1}).observe(ctaSection);
-`}
 // scroll reveals
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -311,7 +287,7 @@ ${bodyHtml}
 
 ${footer(prefix)}
 
-${skipSticky ? '' : stickyCta(stickyLabel)}
+${stickyCta({ hideBook: canonicalPath === 'contact' })}
 
 ${scripts({ skipSticky, skipFaq, useScrollThreshold })}
 </body>
@@ -1160,7 +1136,10 @@ function buildContactBody() {
     ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Contact' }])}
     <span class="eyebrow reveal">Direct reserveren</span>
     <h1 class="reveal reveal-d1">Plan uw <span class="serif-i">rit</span></h1>
-    <p class="lead reveal reveal-d2">Bij spoed belt u ons liever direct. Voor een geplande rit vult u hieronder het formulier in, dan nemen we snel contact op.</p>
+    <p class="lead reveal reveal-d2">Bij spoed belt u ons liever direct. Voor een geplande rit vult u hieronder het formulier in, dan nemen we snel contact op om de rit en de prijs te bevestigen.</p>
+    <div class="hero-cta reveal reveal-d3">
+      <a href="tel:${SITE.phoneTel}" class="btn btn-yellow" data-cta="primary">Spoed? Bel ${SITE.phoneDisplay}</a>
+    </div>
   </div>
 </header>
 
@@ -1171,53 +1150,116 @@ function buildContactBody() {
 
       <!-- FORM -->
       <div class="form-card reveal">
-        <form id="bookingForm" action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="VUL-HIER-UW-WEB3FORMS-ACCESS-KEY-IN">
-          <input type="hidden" name="subject" value="Nieuwe ritaanvraag via rolstoeltaxispoed.nl">
-          <input type="hidden" name="redirect" value="https://rolstoeltaxispoed.nl/bedankt">
-          <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off">
-          <div class="form-row">
-            <div class="field">
-              <label for="naam">Naam</label>
-              <input type="text" id="naam" name="naam" placeholder="Uw naam" required autocomplete="name">
+        <form id="bookingForm" novalidate>
+          <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <fieldset class="fs">
+            <legend><span class="fs-n">1</span> Uw gegevens</legend>
+            <div class="form-row">
+              <div class="field">
+                <label for="naam">Naam</label>
+                <input type="text" id="naam" name="Naam" placeholder="Voor- en achternaam" required autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="telefoon">Telefoonnummer</label>
+                <input type="tel" id="telefoon" name="Telefoon" placeholder="06 12345678" required autocomplete="tel" inputmode="tel">
+              </div>
             </div>
             <div class="field">
-              <label for="telefoon">Telefoonnummer</label>
-              <input type="tel" id="telefoon" name="telefoon" placeholder="06 12345678" required autocomplete="tel">
+              <label for="email">E-mailadres <span class="opt">(voor de bevestiging, optioneel)</span></label>
+              <input type="email" id="email" name="E-mail" placeholder="naam@voorbeeld.nl" autocomplete="email">
             </div>
-          </div>
-          <div class="form-row">
-            <div class="field">
-              <label for="ophaal">Ophaaladres</label>
-              <input type="text" id="ophaal" name="ophaal" placeholder="Straat, plaats" required autocomplete="address-level2">
-            </div>
-            <div class="field">
-              <label for="bestemming">Bestemming</label>
-              <input type="text" id="bestemming" name="bestemming" placeholder="Waar naartoe?" required>
-            </div>
-          </div>
-          <div class="form-row">
+          </fieldset>
+
+          <fieldset class="fs">
+            <legend><span class="fs-n">2</span> De rit</legend>
             <div class="field">
               <label for="type">Soort rit</label>
-              <select id="type" name="type" required>
+              <select id="type" name="Soort rit" required>
                 <option value="" disabled selected>Maak een keuze</option>
-                <option>Spoed, zo snel mogelijk</option>
+                <option>Spoedrit, zo snel mogelijk</option>
                 ${SERVICES.map(s => `<option>${s.nav}</option>`).join('\n                ')}
                 <option>Iets anders</option>
               </select>
             </div>
-            <div class="field">
-              <label for="email">E-mailadres <span class="opt">(optioneel)</span></label>
-              <input type="email" id="email" name="email" placeholder="naam@voorbeeld.nl" autocomplete="email">
+            <div class="form-row">
+              <div class="field">
+                <label for="ophaal">Ophaaladres</label>
+                <input type="text" id="ophaal" name="Ophaaladres" placeholder="Straat, huisnummer, plaats" required autocomplete="street-address">
+              </div>
+              <div class="field">
+                <label for="bestemming">Bestemming</label>
+                <input type="text" id="bestemming" name="Bestemming" placeholder="Adres of instelling, plaats" required>
+              </div>
             </div>
-          </div>
-          <div class="field">
-            <label for="bericht">Vertel kort wat er speelt <span class="opt">(optioneel)</span></label>
-            <textarea id="bericht" name="bericht" placeholder="Bijv. rolstoel of scootmobiel, begeleider mee, gewenst tijdstip."></textarea>
-          </div>
-          <button type="submit" class="btn btn-full">Aanvraag versturen</button>
-          <p class="form-note">Bij spoed reageren we zo snel mogelijk. Uw gegevens gebruiken we alleen om contact met u op te nemen, nooit voor iets anders.</p>
+
+            <div class="field">
+              <span class="lbl">Wanneer moet de rit plaatsvinden?</span>
+              <div class="seg" role="radiogroup" aria-label="Wanneer">
+                <label class="seg-opt"><input type="radio" name="Moment" value="Zo snel mogelijk (spoed)" checked><span><b>Zo snel mogelijk</b><small>Spoed, direct inplannen</small></span></label>
+                <label class="seg-opt"><input type="radio" name="Moment" value="Op een afgesproken moment"><span><b>Op een afgesproken moment</b><small>Kies datum en tijd</small></span></label>
+              </div>
+            </div>
+            <div class="form-row when" id="whenRow" hidden>
+              <div class="field">
+                <label for="datum">Datum</label>
+                <input type="date" id="datum" name="Datum">
+              </div>
+              <div class="field">
+                <label for="tijd">Ophaaltijd</label>
+                <input type="time" id="tijd" name="Ophaaltijd">
+              </div>
+            </div>
+
+            <label class="check"><input type="checkbox" id="terugrit" name="Terugrit gewenst" value="Ja"><span>Ik wil ook een <b>terugrit</b> inplannen</span></label>
+            <div class="field" id="terugRow" hidden>
+              <label for="terugtijd">Gewenste tijd terugrit <span class="opt">(bij benadering)</span></label>
+              <input type="text" id="terugtijd" name="Tijd terugrit" placeholder="Bijv. 15:30, of na de afspraak">
+            </div>
+          </fieldset>
+
+          <fieldset class="fs">
+            <legend><span class="fs-n">3</span> Reiziger en hulpmiddel</legend>
+            <div class="form-row">
+              <div class="field">
+                <label for="hulpmiddel">Hulpmiddel</label>
+                <select id="hulpmiddel" name="Hulpmiddel" required>
+                  <option value="" disabled selected>Maak een keuze</option>
+                  <option>Handbewogen rolstoel</option>
+                  <option>Elektrische rolstoel</option>
+                  <option>Scootmobiel</option>
+                  <option>Opvouwbare rolstoel</option>
+                  <option>Geen, alleen een begeleider</option>
+                  <option>Weet ik niet zeker</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="personen">Aantal reizigers</label>
+                <select id="personen" name="Aantal reizigers">
+                  <option>1</option><option>2</option><option>3</option><option>4</option><option>5 of meer</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="bericht">Opmerking <span class="opt">(optioneel)</span></label>
+              <textarea id="bericht" name="Opmerking" placeholder="Bijv. bagage, infuus of zuurstof, trap of drempel bij de deur, contactpersoon."></textarea>
+            </div>
+          </fieldset>
+
+          <label class="check consent"><input type="checkbox" id="akkoord" required><span>Ik ga akkoord met de <a href="/privacyverklaring" target="_blank" rel="noopener">privacyverklaring</a>. Mijn gegevens worden alleen gebruikt om contact op te nemen over deze rit.</span></label>
+
+          <button type="submit" class="btn btn-yellow btn-full" id="submitBtn">Aanvraag versturen</button>
+          <p class="form-note">Bij spoed reageren we zo snel mogelijk. Heeft u haast? Bel liever direct: <a href="tel:${SITE.phoneTel}">${SITE.phoneDisplay}</a>.</p>
+          <p class="form-error" id="formError" role="alert" hidden></p>
         </form>
+
+        <div class="form-success" id="formSuccess" role="status" hidden>
+          <div class="ok-badge">${svgCheck()}</div>
+          <h3>Bedankt, uw aanvraag is <span class="serif-i">ontvangen</span></h3>
+          <p>We nemen zo snel mogelijk contact met u op om de rit en de prijs te bevestigen. Heeft u haast, bel dan direct:</p>
+          <p><a class="btn btn-yellow" href="tel:${SITE.phoneTel}">Bel ${SITE.phoneDisplay}</a></p>
+          <p class="demo-note" id="demoNote" hidden>Demo-modus: er is nog geen e-mailadres gekoppeld aan dit formulier, dus deze aanvraag is niet echt verstuurd.</p>
+        </div>
       </div>
 
       <!-- SIDEBAR -->
@@ -1225,7 +1267,7 @@ function buildContactBody() {
         <div class="aside-card reveal reveal-d1">
           <h3>Hoe het <span class="serif-i">werkt</span></h3>
           <ul class="mini-steps">
-            <li><span class="n">1.</span><div><b>U vult het formulier in</b><span>Duurt nog geen minuut.</span></div></li>
+            <li><span class="n">1.</span><div><b>U vult het formulier in</b><span>Duurt nog geen twee minuten.</span></div></li>
             <li><span class="n">2.</span><div><b>Wij bevestigen de rit</b><span>Inclusief prijs, voordat u definitief boekt.</span></div></li>
             <li><span class="n">3.</span><div><b>Veilig vervoerd</b><span>De chauffeur staat op tijd klaar.</span></div></li>
           </ul>
@@ -1243,7 +1285,82 @@ function buildContactBody() {
 
     </div>
   </div>
-</section>`;
+</section>
+
+<script>
+(function () {
+  var KEY = ${JSON.stringify(SITE.web3formsKey || '')};
+  var form = document.getElementById('bookingForm');
+  if (!form) return;
+  var whenRow = document.getElementById('whenRow');
+  var datum = document.getElementById('datum');
+  var tijd = document.getElementById('tijd');
+  var terug = document.getElementById('terugrit');
+  var terugRow = document.getElementById('terugRow');
+  var btn = document.getElementById('submitBtn');
+  var err = document.getElementById('formError');
+  var today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+  datum.min = today.toISOString().slice(0, 10);
+
+  function syncWhen() {
+    var planned = form.querySelector('input[name="Moment"]:checked').value.indexOf('afgesproken') > -1;
+    whenRow.hidden = !planned;
+    datum.required = planned; tijd.required = planned;
+    if (!planned) { datum.value = ''; tijd.value = ''; }
+  }
+  form.querySelectorAll('input[name="Moment"]').forEach(function (r) { r.addEventListener('change', syncWhen); });
+  terug.addEventListener('change', function () { terugRow.hidden = !terug.checked; });
+  syncWhen();
+
+  var q = new URLSearchParams(location.search);
+  if (q.get('rit') === 'spoed') document.getElementById('type').selectedIndex = 1;
+
+  function showError(msg) { err.textContent = msg; err.hidden = false; }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    err.hidden = true;
+    if (form.botcheck.checked) return;
+    if (!form.checkValidity()) {
+      form.classList.add('was-validated');
+      form.reportValidity();
+      return;
+    }
+    var data = {};
+    new FormData(form).forEach(function (v, k) { if (k !== 'botcheck' && v !== '') data[k] = v; });
+    var payload = Object.assign({
+      access_key: KEY,
+      subject: 'Nieuwe ritaanvraag: ' + (data['Soort rit'] || 'rit') + ' (' + (data['Moment'] || '') + ')',
+      from_name: 'Rolstoeltaxi Spoed website'
+    }, data);
+    if (data['E-mail']) payload.replyto = data['E-mail'];
+    btn.disabled = true; var label = btn.textContent; btn.textContent = 'Bezig met versturen...';
+
+    function done(demo) {
+      form.hidden = true;
+      var s = document.getElementById('formSuccess');
+      s.hidden = false;
+      document.getElementById('demoNote').hidden = !demo;
+      s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    if (!KEY) {
+      setTimeout(function () { console.info('Demo: aanvraag niet verstuurd', data); done(true); }, 700);
+      return;
+    }
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (r) { return r.json(); }).then(function (j) {
+      if (j && j.success) done(false); else throw new Error((j && j.message) || 'fout');
+    }).catch(function () {
+      btn.disabled = false; btn.textContent = label;
+      showError('Versturen is niet gelukt. Probeer het opnieuw of bel direct naar ${SITE.phoneDisplay}.');
+    });
+  });
+})();
+</script>`;
 }
 
 /* ============================== OVER ONS PAGE ============================== */
