@@ -1337,11 +1337,7 @@ function buildContactBody() {
     btn.disabled = true; var label = btn.textContent; btn.textContent = 'Bezig met versturen...';
 
     function done(demo) {
-      form.hidden = true;
-      var s = document.getElementById('formSuccess');
-      s.hidden = false;
-      document.getElementById('demoNote').hidden = !demo;
-      s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      location.href = '/bedankt' + (demo ? '?demo=1' : '');
     }
 
     if (!KEY) {
@@ -1639,6 +1635,8 @@ function buildBedanktBody() {
       <a href="tel:${SITE.phoneTel}" class="btn">Bel ${SITE.phoneDisplay}</a>
       <a href="/" class="btn btn-ghost">Terug naar de homepage</a>
     </div>
+    <p class="demo-note" id="demoNote" hidden style="max-width:52ch;margin:18px auto 0">Demo-modus: er is nog geen e-mailadres gekoppeld aan het formulier, dus deze aanvraag is niet echt verstuurd.</p>
+    <script>if (location.search.indexOf('demo=1') > -1) document.getElementById('demoNote').hidden = false;</script>
     <p class="cta-sub reveal reveal-d3" style="margin-top:18px">Ondertussen: bekijk onze <a href="/diensten" style="color:var(--accent)">diensten</a> of de <a href="/locaties" style="color:var(--accent)">locaties</a> waar we rijden.</p>
   </div>
 </header>`;
@@ -1778,7 +1776,7 @@ fs.writeFileSync(path.join(ROOT, 'bedankt.html'), page({
   description: 'Uw aanvraag is ontvangen. Rolstoeltaxi Spoed neemt zo snel mogelijk contact met u op om de rit en de prijs te bevestigen. Heeft u haast? Bel gerust direct.',
   canonicalPath: 'bedankt',
   prefix: '',
-  extraLd: '',
+  extraLd: '<meta name="robots" content="noindex, follow">',
   bodyHtml: buildBedanktBody(),
   skipSticky: true,
   skipFaq: true,

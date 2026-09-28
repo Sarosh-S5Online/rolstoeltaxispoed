@@ -922,11 +922,7 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
     btn.disabled = true; var label = btn.textContent; btn.textContent = 'Bezig met versturen...';
 
     function done(demo) {
-      form.hidden = true;
-      var s = document.getElementById('formSuccess');
-      s.hidden = false;
-      document.getElementById('demoNote').hidden = !demo;
-      s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      location.href = '/bedankt' + (demo ? '?demo=1' : '');
     }
 
     if (!KEY) {

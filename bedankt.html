@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <!-- GTM: paste container snippet here -->
-
+<meta name="robots" content="noindex, follow">
 <style>
 :root{
   --bg:#f7f9fc;
@@ -706,6 +706,8 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
       <a href="tel:+31628761078" class="btn">Bel 06 2876 1078</a>
       <a href="/" class="btn btn-ghost">Terug naar de homepage</a>
     </div>
+    <p class="demo-note" id="demoNote" hidden style="max-width:52ch;margin:18px auto 0">Demo-modus: er is nog geen e-mailadres gekoppeld aan het formulier, dus deze aanvraag is niet echt verstuurd.</p>
+    <script>if (location.search.indexOf('demo=1') > -1) document.getElementById('demoNote').hidden = false;</script>
     <p class="cta-sub reveal reveal-d3" style="margin-top:18px">Ondertussen: bekijk onze <a href="/diensten" style="color:var(--accent)">diensten</a> of de <a href="/locaties" style="color:var(--accent)">locaties</a> waar we rijden.</p>
   </div>
 </header>
