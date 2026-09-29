@@ -1587,14 +1587,14 @@ function buildTarievenBody() {
     </div>
     <div class="about-info-grid">
       <div class="reveal reveal-d1">
-        <p>Sommige zorgverzekeraars, de gemeente (bijvoorbeeld via Wmo-vervoer) of een zorginstelling vergoeden geheel of gedeeltelijk rolstoelvervoer. Of en hoeveel dat is, verschilt per situatie en per verzekeraar.</p>
+        <p>Sommige zorgverzekeraars vergoeden rolstoelvervoer geheel of gedeeltelijk vanuit de basis- of aanvullende verzekering, meestal bij medische noodzaak. Ook via een persoonsgebonden budget (pgb) vanuit de Wmo kunt u zelf een vervoerder kiezen, zoals Rolstoeltaxi Spoed. Het gewone, collectieve Wmo-vervoer (de regiotaxi) is een apart systeem waar u niet vrij een eigen vervoerder bij kiest.</p>
         <p>Neem voor de zekerheid vooraf contact op met uw zorgverzekeraar, gemeente of zorginstelling om na te vragen wat in uw geval vergoed wordt. Wij verstrekken desgevraagd een factuur die u zelf kunt indienen.</p>
       </div>
       <div class="signals-card reveal reveal-d2">
         <h4>Handig om na te vragen</h4>
         <ul class="signals-list">
           <li>Of rolstoelvervoer onder uw aanvullende zorgverzekering valt</li>
-          <li>Of u in aanmerking komt voor Wmo-vervoer via de gemeente</li>
+          <li>Of u met een pgb vanuit de Wmo zelf een vervoerder mag kiezen</li>
           <li>Of uw zorginstelling vervoer vergoedt of zelf regelt</li>
         </ul>
       </div>
@@ -1627,7 +1627,7 @@ const FAQS_FULL = [
   { q: 'Kan mijn begeleider mee in de bus?', a: 'Ja, een familielid of begeleider kan gewoon meerijden. Geef dit door bij het boeken, dan houden we daar rekening mee.' },
   { q: 'Betaal ik voor een begeleider of voor wachttijd?', a: 'Nee. Een begeleider die meereist en de wachttijd tijdens uw afspraak of plechtigheid brengen we niet in rekening.' },
   { q: 'Wat kost een spoedrit?', a: 'De prijs is afhankelijk van afstand en tijdstip, en bij spoed geldt een toeslag ten opzichte van vooraf geplande ritten. U hoort de prijs altijd vooraf aan de telefoon. Bekijk ook onze tarievenpagina.' },
-  { q: 'Vergoedt mijn zorgverzekeraar of gemeente de rit?', a: 'Dat verschilt per situatie. Vraag dit vooraf na bij uw zorgverzekeraar, gemeente (Wmo-vervoer) of zorginstelling. Wij verstrekken desgevraagd een factuur die u zelf kunt indienen.' },
+  { q: 'Vergoedt mijn zorgverzekeraar of gemeente de rit?', a: 'Dat verschilt per situatie. Uw zorgverzekeraar vergoedt soms rolstoelvervoer bij medische noodzaak. Heeft u een pgb vanuit de Wmo, dan kunt u daarmee zelf een vervoerder kiezen. Het gewone collectieve Wmo-vervoer (de regiotaxi) is een ander systeem. Vraag dit vooraf na bij uw zorgverzekeraar, gemeente of zorginstelling. Wij verstrekken desgevraagd een factuur die u zelf kunt indienen.' },
   { q: 'Kan er ook een scootmobiel mee in plaats van een rolstoel?', a: 'Ja, de elektrische laadklep is geschikt voor zowel een rolstoel als een scootmobiel.' },
   { q: 'In welke regio\'s rijdt Rolstoeltaxi Spoed?', a: 'We rijden in Nederland, met extra veel ritten in en rond Amsterdam, Rotterdam, Den Haag, Utrecht, Amersfoort en Hilversum. Staat uw plaats er niet bij? Bel gerust, we bespreken de mogelijkheden.' },
   { q: 'Hoe reserveer ik een rit?', a: 'Bij spoed belt of appt u ons het liefst direct. Voor een geplande rit kunt u ook het contactformulier invullen, dan nemen we snel contact op om de rit en de prijs te bevestigen.' },
