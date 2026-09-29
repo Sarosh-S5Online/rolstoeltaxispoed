@@ -78,7 +78,15 @@ const ICONS = {
   van: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 16V8a2 2 0 012-2h8l4 4h2a2 2 0 012 2v4"/><path d="M3 16h18"/><circle cx="7.5" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/></svg>`,
   calendarCheck: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8.5 15l2 2 4-4"/></svg>`,
   whatsapp: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.8 14.2c-.2.6-1.3 1.2-1.9 1.3-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-5-4.3-5.1-4.5-.2-.2-1.2-1.6-1.2-3.1s.8-2.2 1.1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.2.1.3 0 .5-.1.2-.1.3-.3.5-.1.2-.3.4-.4.5-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.5 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.8.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>`,
+  play: `<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`,
 };
+
+function videoEmbed(videoId, title) {
+  return `<div class="video-embed" data-video-id="${videoId}" role="button" tabindex="0" aria-label="Video afspelen: ${title}">
+  <img src="https://i.ytimg.com/vi/${videoId}/hqdefault.jpg" alt="${title}" loading="lazy">
+  <span class="play-btn" aria-hidden="true">${ICONS.play}</span>
+</div>`;
+}
 
 function head({ title, description, canonicalPath, prefix, extraLd }) {
   return `<head>
@@ -243,6 +251,16 @@ document.querySelectorAll('.faq-item').forEach(item => {
     a.style.maxHeight = open ? a.scrollHeight + 'px' : '0';
   });
 });`}
+// video embeds (laden pas na klik, geen YouTube-cookies vooraf)
+document.querySelectorAll('.video-embed').forEach(el => {
+  function load() {
+    const id = el.dataset.videoId;
+    el.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0" title="' + el.getAttribute('aria-label') + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+  }
+  el.addEventListener('click', load);
+  el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); load(); } });
+});
+
 // scroll reveals
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -409,13 +427,15 @@ ${svc.instapSteps ? `<!-- INSTAPPROCEDURE -->
       <h2>Zo gaat het <span class="serif-i">instappen</span></h2>
       <p>Stap voor stap, altijd op dezelfde manier, zodat de rolstoel en de gordel goed vastzitten voordat we wegrijden.</p>
     </div>
-    <div class="steps-stack">
-      ${svc.instapSteps.map((s, i) => `<div class="step-row reveal reveal-d${i % 4}">
-        <div class="big">0${i + 1}</div>
-        <div><h3>${s}</h3></div>
-      </div>`).join('\n      ')}
+    <div class="split" style="margin-top:8px;align-items:start">
+      <div class="steps-stack">
+        ${svc.instapSteps.map((s, i) => `<div class="step-row reveal reveal-d${i % 4}">
+          <div class="big">0${i + 1}</div>
+          <div><h3>${s}</h3></div>
+        </div>`).join('\n        ')}
+      </div>
+      <div class="reveal reveal-d1">${videoEmbed('FZnAOHJuVqk', 'Instructiefilm: rolstoel vastzetten in de rolstoelbus')}</div>
     </div>
-    <p class="reveal" style="margin-top:28px;color:var(--ink-dim);font-size:14.5px">Binnenkort staat hier een korte instructievideo die dit laat zien.</p>
   </div>
 </section>` : ''}
 
@@ -960,6 +980,7 @@ function buildHomeBody() {
       <div class="reveal reveal-d1 instap-photos">
         <figure class="photo-card landscape"><img src="/img/instapklep-schiphol.jpg" alt="Rolstoelbus met uitgeklapte laadklep, klaar om in te stappen" width="1000" height="750" loading="lazy"></figure>
         <figure class="photo-card landscape"><img src="/img/rolstoel-vastgezet-bus.jpg" alt="Rolstoel veilig vastgezet in de rolstoelbus" width="1000" height="750" loading="lazy"></figure>
+        <div style="grid-column:1/-1">${videoEmbed('FZnAOHJuVqk', 'Instructiefilm: rolstoel vastzetten in de rolstoelbus')}</div>
       </div>
     </div>
   </div>
@@ -1702,7 +1723,7 @@ function buildPrivacyBody() {
     <p>Voor vragen over vervoer, tarieven of vergoeding kunt u terecht op onze <a href="/veelgestelde-vragen" style="color:var(--accent)">pagina met veelgestelde vragen</a> of via het <a href="/contact" style="color:var(--accent)">contactformulier</a>.</p>
 
     <h2>Cookies</h2>
-    <p>Deze website gebruikt alleen technisch noodzakelijke functionaliteit. Zodra er analytische of marketingcookies worden toegevoegd, wordt deze verklaring aangevuld en vragen wij waar nodig om uw toestemming.</p>
+    <p>Deze website plaatst zelf alleen technisch noodzakelijke functionaliteit. Op enkele pagina's staat een instructievideo van YouTube. Deze wordt pas geladen als u zelf op de afspeelknop klikt; vanaf dat moment kan YouTube cookies plaatsen volgens hun eigen privacybeleid. Zodra er analytische of marketingcookies worden toegevoegd, wordt deze verklaring aangevuld en vragen wij waar nodig om uw toestemming.</p>
   </div>
 </section>`;
 }
