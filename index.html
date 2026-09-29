@@ -695,13 +695,16 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
 .form-success p{color:var(--ink-dim);margin:0 auto 16px;max-width:46ch}
 .demo-note{font-size:13px;background:#fff6e0;border:1px solid #f0d28a;color:#6b4a00!important;border-radius:var(--radius-sm);padding:10px 14px}
 
-/* ---------- subtle sway (een paar iconen, niet overal) ---------- */
-@keyframes sway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
-.icon-sway{display:inline-flex;transform-origin:50% 85%;animation:sway 3.6s ease-in-out infinite}
-.icon-sway.d1{animation-delay:.5s}
-.icon-sway.d2{animation-delay:1s}
-.icon-sway.d3{animation-delay:1.5s}
-@media(prefers-reduced-motion:reduce){.icon-sway{animation:none}}
+/* ---------- hoe stapt u in (compact, ook op mobiel) ---------- */
+.instap-section{padding:64px 0}
+.instap-steps{gap:11px}
+.instap-steps .n{font-size:16px;min-width:20px}
+.instap-steps b{font-size:15px;font-weight:600}
+.instap-photos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:640px){
+  .instap-section{padding:44px 0}
+  .instap-section .split{gap:26px}
+}
 
 /* ---------- cookiemelding ---------- */
 .cookie-banner{
@@ -799,6 +802,32 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
   <div class="wrap">
     <span class="lbl"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3h3l2 5-2.5 1.5a11 11 0 005 5L14 12l5 2v3a2 2 0 01-2.2 2A17 17 0 013 5.2 2 2 0 015 3z"/></svg> Bel nu, direct een chauffeur inplannen:</span>
     <a href="tel:+31628761078" class="num">06 2876 1078</a>
+  </div>
+</section>
+
+<!-- HOE STAPT U IN -->
+<section class="instap-section">
+  <div class="wrap">
+    <div class="split" style="align-items:center">
+      <div class="reveal">
+        <span class="eyebrow">Veiligheid</span>
+        <h2>Hoe stapt u <span class="serif-i">in?</span></h2>
+        <p style="color:var(--ink-dim);margin:12px 0 18px;max-width:44ch">Altijd dezelfde stappen, rustig en op uw tempo, tot alles vastzit.</p>
+        <ul class="mini-steps instap-steps">
+          <li><span class="n">1.</span><div><b>Rolstoel de bus in rijden</b></div></li>
+          <li><span class="n">2.</span><div><b>Rolstoel op de juiste positie plaatsen</b></div></li>
+          <li><span class="n">3.</span><div><b>Vier spanbanden aan de rolstoel bevestigen</b></div></li>
+          <li><span class="n">4.</span><div><b>Spanbanden aan de vloer vastmaken en aantrekken</b></div></li>
+          <li><span class="n">5.</span><div><b>Veiligheidsgordel om de passagier</b></div></li>
+          <li><span class="n">6.</span><div><b>Eindcontrole van rolstoel en gordel</b></div></li>
+          <li><span class="n">7.</span><div><b>Klaar voor vertrek</b></div></li>
+        </ul>
+      </div>
+      <div class="reveal reveal-d1 instap-photos">
+        <figure class="photo-card landscape"><img src="/img/instapklep-schiphol.jpg" alt="Rolstoelbus met uitgeklapte laadklep, klaar om in te stappen" width="1000" height="750" loading="lazy"></figure>
+        <figure class="photo-card landscape"><img src="/img/rolstoel-vastgezet-bus.jpg" alt="Rolstoel veilig vastgezet in de rolstoelbus" width="1000" height="750" loading="lazy"></figure>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -900,19 +929,19 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
     </div>
     <div class="icon-list">
       <div class="icon-list-item reveal">
-        <span class="icon-badge-solid icon-sway"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3h3l2 5-2.5 1.5a11 11 0 005 5L14 12l5 2v3a2 2 0 01-2.2 2A17 17 0 013 5.2 2 2 0 015 3z"/></svg></span>
+        <span class="icon-badge-solid"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3h3l2 5-2.5 1.5a11 11 0 005 5L14 12l5 2v3a2 2 0 01-2.2 2A17 17 0 013 5.2 2 2 0 015 3z"/></svg></span>
         <div><h3>Direct telefonisch contact</h3><p>Geen keuzemenu of callcenter: u spreekt meteen iemand die de rit kan inplannen.</p></div>
       </div>
       <div class="icon-list-item reveal reveal-d1">
-        <span class="icon-badge-solid icon-sway d1"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+        <span class="icon-badge-solid"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
         <div><h3>24/7 bereikbaar</h3><p>Spoed houdt geen rekening met kantooruren, en wij dus ook niet.</p></div>
       </div>
       <div class="icon-list-item reveal reveal-d2">
-        <span class="icon-badge-solid icon-sway d2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.6 1.5L18 3l.6 3.4L21 9l-1.5 2.6L21 15l-2.4 2.6L18 21l-3.4-.5L12 22l-2.6-1.5L6 21l-.6-3.4L3 15l1.5-2.6L3 9l2.4-2.6L6 3l3.4.5L12 2z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <span class="icon-badge-solid"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.6 1.5L18 3l.6 3.4L21 9l-1.5 2.6L21 15l-2.4 2.6L18 21l-3.4-.5L12 22l-2.6-1.5L6 21l-.6-3.4L3 15l1.5-2.6L3 9l2.4-2.6L6 3l3.4.5L12 2z"/><path d="M9 12l2 2 4-4"/></svg></span>
         <div><h3>10+ jaar ervaring in rolstoelvervoer</h3><p>Via Rolstoeltaxi Holland bouwen we voort op ruime ervaring in veilig zorgvervoer.</p></div>
       </div>
       <div class="icon-list-item reveal reveal-d3">
-        <span class="icon-badge-solid icon-sway d3"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.6 7-12a7 7 0 10-14 0c0 5.4 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+        <span class="icon-badge-solid"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.6 7-12a7 7 0 10-14 0c0 5.4 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
         <div><h3>Actief in Nederland</h3><p>Van Amsterdam tot Rotterdam en daarbuiten: ook ritten buiten de eigen regio zijn mogelijk.</p></div>
       </div>
     </div>

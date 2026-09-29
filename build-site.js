@@ -939,6 +939,32 @@ function buildHomeBody() {
   </div>
 </section>
 
+<!-- HOE STAPT U IN -->
+<section class="instap-section">
+  <div class="wrap">
+    <div class="split" style="align-items:center">
+      <div class="reveal">
+        <span class="eyebrow">Veiligheid</span>
+        <h2>Hoe stapt u <span class="serif-i">in?</span></h2>
+        <p style="color:var(--ink-dim);margin:12px 0 18px;max-width:44ch">Altijd dezelfde stappen, rustig en op uw tempo, tot alles vastzit.</p>
+        <ul class="mini-steps instap-steps">
+          <li><span class="n">1.</span><div><b>Rolstoel de bus in rijden</b></div></li>
+          <li><span class="n">2.</span><div><b>Rolstoel op de juiste positie plaatsen</b></div></li>
+          <li><span class="n">3.</span><div><b>Vier spanbanden aan de rolstoel bevestigen</b></div></li>
+          <li><span class="n">4.</span><div><b>Spanbanden aan de vloer vastmaken en aantrekken</b></div></li>
+          <li><span class="n">5.</span><div><b>Veiligheidsgordel om de passagier</b></div></li>
+          <li><span class="n">6.</span><div><b>Eindcontrole van rolstoel en gordel</b></div></li>
+          <li><span class="n">7.</span><div><b>Klaar voor vertrek</b></div></li>
+        </ul>
+      </div>
+      <div class="reveal reveal-d1 instap-photos">
+        <figure class="photo-card landscape"><img src="/img/instapklep-schiphol.jpg" alt="Rolstoelbus met uitgeklapte laadklep, klaar om in te stappen" width="1000" height="750" loading="lazy"></figure>
+        <figure class="photo-card landscape"><img src="/img/rolstoel-vastgezet-bus.jpg" alt="Rolstoel veilig vastgezet in de rolstoelbus" width="1000" height="750" loading="lazy"></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- HERKENBAAR (pain points) -->
 <section>
   <div class="wrap">
@@ -1002,19 +1028,19 @@ function buildHomeBody() {
     </div>
     <div class="icon-list">
       <div class="icon-list-item reveal">
-        <span class="icon-badge-solid icon-sway">${ICONS.phoneCall}</span>
+        <span class="icon-badge-solid">${ICONS.phoneCall}</span>
         <div><h3>Direct telefonisch contact</h3><p>Geen keuzemenu of callcenter: u spreekt meteen iemand die de rit kan inplannen.</p></div>
       </div>
       <div class="icon-list-item reveal reveal-d1">
-        <span class="icon-badge-solid icon-sway d1">${ICONS.clock}</span>
+        <span class="icon-badge-solid">${ICONS.clock}</span>
         <div><h3>24/7 bereikbaar</h3><p>Spoed houdt geen rekening met kantooruren, en wij dus ook niet.</p></div>
       </div>
       <div class="icon-list-item reveal reveal-d2">
-        <span class="icon-badge-solid icon-sway d2">${ICONS.badge}</span>
+        <span class="icon-badge-solid">${ICONS.badge}</span>
         <div><h3>10+ jaar ervaring in rolstoelvervoer</h3><p>Via ${SITE.parentBrand} bouwen we voort op ruime ervaring in veilig zorgvervoer.</p></div>
       </div>
       <div class="icon-list-item reveal reveal-d3">
-        <span class="icon-badge-solid icon-sway d3">${ICONS.mapPin}</span>
+        <span class="icon-badge-solid">${ICONS.mapPin}</span>
         <div><h3>Actief in Nederland</h3><p>Van Amsterdam tot Rotterdam en daarbuiten: ook ritten buiten de eigen regio zijn mogelijk.</p></div>
       </div>
     </div>

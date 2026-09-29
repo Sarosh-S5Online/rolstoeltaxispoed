@@ -683,13 +683,16 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
 .form-success p{color:var(--ink-dim);margin:0 auto 16px;max-width:46ch}
 .demo-note{font-size:13px;background:#fff6e0;border:1px solid #f0d28a;color:#6b4a00!important;border-radius:var(--radius-sm);padding:10px 14px}
 
-/* ---------- subtle sway (een paar iconen, niet overal) ---------- */
-@keyframes sway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
-.icon-sway{display:inline-flex;transform-origin:50% 85%;animation:sway 3.6s ease-in-out infinite}
-.icon-sway.d1{animation-delay:.5s}
-.icon-sway.d2{animation-delay:1s}
-.icon-sway.d3{animation-delay:1.5s}
-@media(prefers-reduced-motion:reduce){.icon-sway{animation:none}}
+/* ---------- hoe stapt u in (compact, ook op mobiel) ---------- */
+.instap-section{padding:64px 0}
+.instap-steps{gap:11px}
+.instap-steps .n{font-size:16px;min-width:20px}
+.instap-steps b{font-size:15px;font-weight:600}
+.instap-photos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:640px){
+  .instap-section{padding:44px 0}
+  .instap-section .split{gap:26px}
+}
 
 /* ---------- cookiemelding ---------- */
 .cookie-banner{
