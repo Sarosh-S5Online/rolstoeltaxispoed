@@ -137,6 +137,15 @@ module.exports = [
       { q: 'Kan ik een geplande rit nog wijzigen?', a: 'Ja, bel ons zodra uw planning verandert. We denken mee over een nieuw tijdstip.' },
     ],
     related: ['ziekenhuisvervoer', 'elektrische-rolstoelvervoer', 'rolstoelbus'],
+    instapSteps: [
+      'De rolstoel rijdt de bus in via de elektrische laadklep',
+      'De rolstoel komt op de juiste positie te staan',
+      'Vier spanbanden worden aan de rolstoel bevestigd',
+      'De spanbanden worden aan de vloer vastgemaakt en aangetrokken',
+      'De veiligheidsgordel gaat om de reiziger',
+      'Eindcontrole: rolstoel en gordel worden nagelopen',
+      'Klaar voor vertrek',
+    ],
   },
 
   {
@@ -179,15 +188,16 @@ module.exports = [
       {
         title: 'Rustig aankomen bij de juiste ingang',
         paragraphs: [
-          'Ziekenhuizen zijn groot en hebben meerdere ingangen. We vragen vooraf naar de juiste afdeling of ingang, en brengen u zo dicht mogelijk bij de plek waar u moet zijn. Het in- en uitstappen gebeurt op uw tempo, met de elektrische laadklep die ook bij een zware rolstoel veilig werkt.',
+          'Ziekenhuizen zijn groot en hebben meerdere ingangen. We vragen vooraf naar de juiste afdeling of ingang, en brengen u zo dicht mogelijk bij de plek waar u moet zijn. Op verzoek halen we u ook op de afdeling zelf op, in plaats van bij de hoofdingang. Het in- en uitstappen gebeurt op uw tempo, met de elektrische laadklep die ook bij een zware rolstoel veilig werkt.',
+          'Bij thuiskomst stopt de service niet bij de voordeur: op verzoek brengen we u ook naar binnen. Een begeleider die meereist en de wachttijd tijdens een afspraak zijn kosteloos.',
         ],
       },
     ],
     deliverables: [
-      { t: 'Ophalen bij de ingang', d: 'We komen tot bij de hoofdingang of een afgesproken punt, ook bij drukte.' },
+      { t: 'Ophalen op de afdeling', d: 'Op verzoek halen we u op bij de afdeling, niet alleen bij de hoofdingang.' },
       { t: 'Ruimte voor hulpmiddelen', d: 'Plek voor infuuspaal, zuurstof of andere benodigdheden, in overleg vooraf.' },
-      { t: 'Rustige overdracht', d: 'Geen haastwerk: de chauffeur neemt de tijd voor een veilige overstap.' },
-      { t: 'Eén aanspreekpunt', d: 'Familie of verpleging kan rechtstreeks met ons bellen over de planning.' },
+      { t: 'Thuis naar binnen', d: 'Op verzoek brengen we u ook weer naar binnen bij thuiskomst.' },
+      { t: 'Begeleiding en wachten gratis', d: 'Een begeleider mee en wachttijd tijdens uw afspraak brengen we niet in rekening.' },
     ],
     priceText: 'Prijs vooraf genoemd, ook bij spoed',
     priceNote: 'Ook bij ziekenhuisvervoer geldt: u hoort de prijs vooraf aan de telefoon. Bekijk onze tarievenpagina voor de opbouw van de prijs.',
@@ -521,7 +531,7 @@ module.exports = [
       {
         title: 'Wachten en terugbrengen',
         paragraphs: [
-          'Bij een uitvaart is vooraf lastig te zeggen hoe lang het duurt: de plechtigheid, het condoleren, misschien een samenkomst daarna. We bespreken van tevoren de opties. Wilt u dat de bus wacht, dan spreken we een vaste tijd af. Wilt u liever later worden opgehaald, dan bellen wij of u ons op het moment dat u klaar bent.',
+          'Bij een uitvaart is vooraf lastig te zeggen hoe lang het duurt: de plechtigheid, het condoleren, misschien een samenkomst daarna. We bespreken van tevoren de opties. Wilt u dat de bus wacht, dan spreken we een vaste tijd af. Wilt u liever later worden opgehaald, dan bellen wij of u ons op het moment dat u klaar bent. De wachttijd brengen we niet in rekening.',
         ],
       },
       {
@@ -533,12 +543,12 @@ module.exports = [
     ],
     deliverables: [
       { t: 'Ruim op tijd aanwezig', d: 'We rekenen terug vanaf het tijdstip van aanvang.' },
-      { t: 'Wachten mogelijk', d: 'Op verzoek wacht de bus tot het einde van de plechtigheid.' },
+      { t: 'Wachten is gratis', d: 'Op verzoek wacht de bus tot het einde van de plechtigheid, zonder wachtkosten.' },
       { t: 'Rustige chauffeur', d: 'Zorgvuldig en terughoudend, met oog voor de gelegenheid.' },
       { t: 'Terugbrengen', d: 'Naar huis, of naar de plek van de samenkomst.' },
     ],
     priceText: 'Prijs op maat, vooraf afgesproken',
-    priceNote: 'De prijs hangt af van afstand en wachttijd. We noemen die vooraf, zodat u zich daar op de dag zelf niet mee bezig hoeft te houden.',
+    priceNote: 'De prijs hangt af van de afstand. Wachttijd tijdens de plechtigheid is gratis. We noemen de prijs vooraf, zodat u zich daar op de dag zelf niet mee bezig hoeft te houden.',
     steps: [
       { t: 'Bel ons met de gegevens', d: 'Locatie en tijd van de uitvaart, en waar u wordt opgehaald.' },
       { t: 'Wij plannen ruim in', d: 'We bevestigen ophaaltijd, wachttijd en prijs.' },
@@ -549,7 +559,7 @@ module.exports = [
       { src: 'rolstoelbus-voorkant-baksteen.jpg', alt: 'Rolstoelbus voor een gebouw van rode baksteen' },
     ],
     faqs: [
-      { q: 'Kan de bus wachten tot de uitvaart is afgelopen?', a: 'Ja, dat kan. We spreken vooraf een wachttijd af, of u belt ons zodra u klaar bent.' },
+      { q: 'Kan de bus wachten tot de uitvaart is afgelopen?', a: 'Ja, dat kan, en de wachttijd is gratis. We spreken vooraf een wachttijd af, of u belt ons zodra u klaar bent.' },
       { q: 'Vervoeren jullie ook meerdere familieleden?', a: 'Ja, bel met het aantal reizigers en rolstoelen, dan bespreken we de opties.' },
       { q: 'Kan ik op korte termijn een rit regelen?', a: 'Ja, ook kort van tevoren is mogelijk. Bel de spoedlijn voor de beschikbaarheid.' },
       { q: 'Vervoeren jullie ook de overledene?', a: 'Nee, wij verzorgen vervoer voor levende reizigers in een rolstoel. Voor het vervoer van de overledene neemt u contact op met uw uitvaartverzorger.' },

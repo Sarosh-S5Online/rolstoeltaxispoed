@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rolstoeltaxi Uithoorn: spoedvervoer 24/7</title>
+<title>Rolstoeltaxi Uithoorn in de buurt: spoedvervoer 24/7</title>
 <meta name="description" content="Rolstoeltaxi Uithoorn: rolstoelvervoer aan de Amstel, naar Amstelveen, Amsterdam en Schiphol. Elektrische laadklep en 24/7 spoedservice. Bel direct.">
 <link rel="canonical" href="https://rolstoeltaxispoed.nl/rolstoeltaxi-uithoorn">
-<meta property="og:title" content="Rolstoeltaxi Uithoorn: spoedvervoer 24/7">
+<meta property="og:title" content="Rolstoeltaxi Uithoorn in de buurt: spoedvervoer 24/7">
 <meta property="og:description" content="Rolstoeltaxi Uithoorn: rolstoelvervoer aan de Amstel, naar Amstelveen, Amsterdam en Schiphol. Elektrische laadklep en 24/7 spoedservice. Bel direct.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="nl_NL">
@@ -22,8 +22,15 @@
   "name": "Rolstoeltaxi Spoed",
   "serviceType": "Rolstoeltaxi Uithoorn",
   "telephone": "+31628761078",
+  "image": "https://rolstoeltaxispoed.nl/img/logo-icoon.png",
   "areaServed": {"@type":"City","name":"Uithoorn"},
-  "url": "https://rolstoeltaxispoed.nl/rolstoeltaxi-uithoorn"
+  "url": "https://rolstoeltaxispoed.nl/rolstoeltaxi-uithoorn",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "00:00",
+    "closes": "23:59"
+  }
 }
 </script>
 <script type="application/ld+json">
@@ -55,7 +62,7 @@
   --bg-2:#eef2fb;
   --bg-3:#e3eaf9;
   --ink:#0f1a2e;
-  --ink-dim:#5b6b85;
+  --ink-dim:#48546b;
   --accent:#155fb0;
   --accent-2:#2f7fd6;
   --accent-deep:#0b3f7a;
@@ -75,7 +82,7 @@ body{
   background:var(--bg);
   color:var(--ink);
   font-family:'Poppins',system-ui,sans-serif;
-  font-size:18px;
+  font-size:19px;
   line-height:1.65;
   overflow-x:hidden;
 }
@@ -203,8 +210,8 @@ canvas.particles{position:absolute;inset:0;z-index:0;pointer-events:none}
   border:1px solid rgba(238,243,251,.14);border-radius:var(--radius);padding:44px 42px;max-width:660px;
 }
 @media(max-width:600px){.hero-box{padding:28px 22px}}
-.hero h1{font-size:clamp(34px,5.4vw,58px);max-width:15ch;margin-bottom:22px}
-.hero p.lead{font-size:clamp(16px,1.5vw,19px);color:var(--ink-dim);max-width:52ch;margin-bottom:28px}
+.hero h1{font-size:clamp(36px,5.4vw,58px);max-width:15ch;margin-bottom:22px}
+.hero p.lead{font-size:clamp(18px,1.6vw,21px);color:#dbe4f4;max-width:52ch;margin-bottom:28px}
 .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:26px}
 .trust{display:flex;flex-wrap:wrap;gap:18px;color:var(--ink-dim);font-size:14px}
 .trust-item{display:flex;align-items:center;gap:8px}
@@ -280,7 +287,7 @@ canvas.particles{position:absolute;inset:0;z-index:0;pointer-events:none}
 }
 @media(max-width:600px){.page-hero.has-photo .hero-box{padding:26px 20px}}
 .page-hero.has-photo h1,.page-hero.has-photo p.lead{color:#eef3fb}
-.page-hero.has-photo p.lead{color:#c8d6ee}
+.page-hero.has-photo p.lead{color:#dbe4f4}
 .page-hero.has-photo .eyebrow{color:var(--yellow)}
 .page-hero.has-photo .breadcrumb a{color:#c8d6ee}
 .page-hero.has-photo .breadcrumb [aria-current]{color:#fff}
@@ -698,6 +705,28 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
 .form-success p{color:var(--ink-dim);margin:0 auto 16px;max-width:46ch}
 .demo-note{font-size:13px;background:#fff6e0;border:1px solid #f0d28a;color:#6b4a00!important;border-radius:var(--radius-sm);padding:10px 14px}
 
+/* ---------- subtle sway (een paar iconen, niet overal) ---------- */
+@keyframes sway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+.icon-sway{display:inline-flex;transform-origin:50% 85%;animation:sway 3.6s ease-in-out infinite}
+.icon-sway.d1{animation-delay:.5s}
+.icon-sway.d2{animation-delay:1s}
+.icon-sway.d3{animation-delay:1.5s}
+@media(prefers-reduced-motion:reduce){.icon-sway{animation:none}}
+
+/* ---------- cookiemelding ---------- */
+.cookie-banner{
+  position:fixed;left:20px;bottom:20px;z-index:160;max-width:400px;
+  background:#0d1c34;color:#eef3fb;border:1px solid rgba(238,243,251,.16);border-radius:var(--radius);
+  padding:20px 22px;box-shadow:0 20px 50px rgba(0,0,0,.35);
+  display:none;flex-direction:column;gap:14px;
+}
+.cookie-banner.show{display:flex}
+.cookie-banner p{font-size:13.5px;color:#c8d6ee;line-height:1.55;margin:0}
+.cookie-banner a{color:var(--yellow);font-weight:600}
+.cookie-banner .cb-actions{display:flex;gap:10px;flex-wrap:wrap}
+.cookie-banner .btn{padding:9px 18px;font-size:14px;box-shadow:none}
+@media(max-width:900px){.cookie-banner{left:12px;right:12px;bottom:calc(76px + 12px);max-width:none}}
+
 </style>
 </head>
 <body>
@@ -993,6 +1022,26 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
   <a href="https://wa.me/31628761078" class="dock-wa" aria-label="WhatsApp ons"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.8 14.2c-.2.6-1.3 1.2-1.9 1.3-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-5-4.3-5.1-4.5-.2-.2-1.2-1.6-1.2-3.1s.8-2.2 1.1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.2.1.3 0 .5-.1.2-.1.3-.3.5-.1.2-.3.4-.4.5-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.5 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.8.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
   <a href="/contact#formulier" class="dock-book">Reserveren</a>
 </div>
+
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Cookiemelding">
+  <p>Deze website gebruikt alleen functionele cookies om goed te werken. Meer weten? Lees onze <a href="/privacyverklaring">privacyverklaring</a>.</p>
+  <div class="cb-actions"><button type="button" class="btn btn-yellow" id="cookieAccept">Akkoord</button></div>
+</div>
+<script>
+(function () {
+  var KEY = 'rtsCookieOk';
+  var banner = document.getElementById('cookieBanner');
+  var btn = document.getElementById('cookieAccept');
+  if (!banner || !btn) return;
+  var seen = false;
+  try { seen = !!localStorage.getItem(KEY); } catch (e) {}
+  if (!seen) setTimeout(function () { banner.classList.add('show'); }, 800);
+  btn.addEventListener('click', function () {
+    banner.classList.remove('show');
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  });
+})();
+</script>
 
 <script>
 // nav scroll state

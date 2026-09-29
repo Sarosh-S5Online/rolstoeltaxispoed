@@ -187,6 +187,28 @@ function stickyCta({ hideBook } = {}) {
 </div>`;
 }
 
+function cookieBanner() {
+  return `<div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Cookiemelding">
+  <p>Deze website gebruikt alleen functionele cookies om goed te werken. Meer weten? Lees onze <a href="/privacyverklaring">privacyverklaring</a>.</p>
+  <div class="cb-actions"><button type="button" class="btn btn-yellow" id="cookieAccept">Akkoord</button></div>
+</div>
+<script>
+(function () {
+  var KEY = 'rtsCookieOk';
+  var banner = document.getElementById('cookieBanner');
+  var btn = document.getElementById('cookieAccept');
+  if (!banner || !btn) return;
+  var seen = false;
+  try { seen = !!localStorage.getItem(KEY); } catch (e) {}
+  if (!seen) setTimeout(function () { banner.classList.add('show'); }, 800);
+  btn.addEventListener('click', function () {
+    banner.classList.remove('show');
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  });
+})();
+</script>`;
+}
+
 function scripts({ skipSticky, skipFaq, useScrollThreshold } = {}) {
   return `<script>
 // nav scroll state
@@ -289,6 +311,8 @@ ${footer(prefix)}
 
 ${stickyCta({ hideBook: canonicalPath === 'contact' })}
 
+${cookieBanner()}
+
 ${scripts({ skipSticky, skipFaq, useScrollThreshold })}
 </body>
 </html>
@@ -376,6 +400,24 @@ function buildServiceBody(svc) {
     </div>
   </div>
 </section>
+
+${svc.instapSteps ? `<!-- INSTAPPROCEDURE -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Veiligheid</span>
+      <h2>Zo gaat het <span class="serif-i">instappen</span></h2>
+      <p>Stap voor stap, altijd op dezelfde manier, zodat de rolstoel en de gordel goed vastzitten voordat we wegrijden.</p>
+    </div>
+    <div class="steps-stack">
+      ${svc.instapSteps.map((s, i) => `<div class="step-row reveal reveal-d${i % 4}">
+        <div class="big">0${i + 1}</div>
+        <div><h3>${s}</h3></div>
+      </div>`).join('\n      ')}
+    </div>
+    <p class="reveal" style="margin-top:28px;color:var(--ink-dim);font-size:14.5px">Binnenkort staat hier een korte instructievideo die dit laat zien.</p>
+  </div>
+</section>` : ''}
 
 <!-- WAT U KRIJGT -->
 <section class="band-2">
@@ -499,8 +541,15 @@ function cityLd(c) {
   "name": "${SITE.name}",
   "serviceType": ${JSON.stringify(c.isService ? c.name : `Rolstoeltaxi ${c.name}`)},
   "telephone": "${SITE.phoneTel}",
+  "image": "${SITE.domain}/img/logo-icoon.png",
   "areaServed": ${c.isService ? '"Amsterdam"' : JSON.stringify({ '@type': 'City', name: c.name })},
-  "url": "${url}"
+  "url": "${url}",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "00:00",
+    "closes": "23:59"
+  }
 }
 </script>
 <script type="application/ld+json">
@@ -696,7 +745,7 @@ function buildCityBody(c) {
 /* ============================== HUB PAGES ============================== */
 
 function buildDienstenHub() {
-  return `<header class="page-hero has-photo" style="background-image:url('/img/amsterdam-gracht-laadklep.jpg');background-position:center 60%">
+  return `<header class="page-hero has-photo" style="background-image:url('/img/rolstoelbus-torenhof.jpg');background-position:center 60%">
   <div class="wrap">
     <div class="hero-box reveal">
       ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Diensten' }])}
@@ -757,7 +806,7 @@ const REGION_ORDER = [
 ];
 
 function buildLocatiesHub() {
-  return `<header class="page-hero has-photo" style="background-image:url('/img/amsterdam-molen-gooyer.jpg');background-position:center 45%">
+  return `<header class="page-hero has-photo" style="background-image:url('/img/rolstoelbus-rai-amsterdam.jpg');background-position:center 45%">
   <div class="wrap">
     <div class="hero-box reveal">
       ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Locaties' }])}
@@ -812,7 +861,14 @@ function homeLd() {
   "url": "${SITE.domain}/",
   "telephone": "${SITE.phoneTel}",
   "email": "${SITE.email}",
-  "areaServed": "Nederland"
+  "image": "${SITE.domain}/img/logo-icoon.png",
+  "areaServed": "Nederland",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "00:00",
+    "closes": "23:59"
+  }
 }
 </script>
 <script type="application/ld+json">
@@ -831,13 +887,13 @@ function homeLd() {
 
 function buildHomeBody() {
   return `<!-- HERO -->
-<header class="hero night" style="background-image:url('/img/amsterdam-gracht-laadklep.jpg');background-position:center 55%">
+<header class="hero night" style="background-image:url('/img/spoedrit-amsterdam-centraal.jpg');background-position:center 55%">
   <canvas class="particles"></canvas>
   <div class="wrap">
     <div class="hero-box reveal">
       <span class="live-badge"><span class="live-dot"></span>24/7 spoedlijn bereikbaar</span>
-      <h1 class="reveal-d1" style="margin-top:16px">Spoed rolstoelvervoer wacht niet. <span class="serif-i">Wij ook niet.</span></h1>
-      <p class="lead reveal-d2">Rolstoeltaxi Spoed is de spoedtak van Rolstoeltaxi Holland: één telefoontje en er staat een volledig uitgeruste rolstoelbus voor u klaar, in Nederland. Voor spoed, ziekenhuisvervoer, luchthavenritten en gewoon geplande ritten.</p>
+      <h1 class="reveal-d1" style="margin-top:16px">Spoed rolstoelvervoer? <span class="serif-i">Wij komen nu.</span></h1>
+      <p class="lead reveal-d2">Eén telefoontje en er staat een rolstoelbus voor u klaar. Snel, veilig en rustig, in Nederland.</p>
       <div class="phone-badge reveal-d2">
         ${ICONS.phoneCall}
         <span><span class="lbl">Direct even bellen</span><a href="tel:${SITE.phoneTel}">${SITE.phoneDisplay}</a></span>
@@ -946,19 +1002,19 @@ function buildHomeBody() {
     </div>
     <div class="icon-list">
       <div class="icon-list-item reveal">
-        <span class="icon-badge-solid">${ICONS.phoneCall}</span>
+        <span class="icon-badge-solid icon-sway">${ICONS.phoneCall}</span>
         <div><h3>Direct telefonisch contact</h3><p>Geen keuzemenu of callcenter: u spreekt meteen iemand die de rit kan inplannen.</p></div>
       </div>
       <div class="icon-list-item reveal reveal-d1">
-        <span class="icon-badge-solid">${ICONS.clock}</span>
+        <span class="icon-badge-solid icon-sway d1">${ICONS.clock}</span>
         <div><h3>24/7 bereikbaar</h3><p>Spoed houdt geen rekening met kantooruren, en wij dus ook niet.</p></div>
       </div>
       <div class="icon-list-item reveal reveal-d2">
-        <span class="icon-badge-solid">${ICONS.badge}</span>
+        <span class="icon-badge-solid icon-sway d2">${ICONS.badge}</span>
         <div><h3>10+ jaar ervaring in rolstoelvervoer</h3><p>Via ${SITE.parentBrand} bouwen we voort op ruime ervaring in veilig zorgvervoer.</p></div>
       </div>
       <div class="icon-list-item reveal reveal-d3">
-        <span class="icon-badge-solid">${ICONS.mapPin}</span>
+        <span class="icon-badge-solid icon-sway d3">${ICONS.mapPin}</span>
         <div><h3>Actief in Nederland</h3><p>Van Amsterdam tot Rotterdam en daarbuiten: ook ritten buiten de eigen regio zijn mogelijk.</p></div>
       </div>
     </div>
@@ -1460,6 +1516,7 @@ function buildTarievenBody() {
         <p>Weet u de datum al ruim van tevoren? Dan is dat vaak voordeliger dan een spoedrit.</p>
       </div>
     </div>
+    <p class="reveal" style="margin-top:26px;color:var(--ink-dim);max-width:70ch">Een begeleider die meereist en de wachttijd tijdens een afspraak of plechtigheid brengen we niet in rekening: dat zit bij ons gratis bij de rit in.</p>
   </div>
 </section>
 
@@ -1521,6 +1578,7 @@ const FAQS_FULL = [
   { q: 'Is Rolstoeltaxi Spoed hetzelfde bedrijf als Rolstoeltaxi Holland?', a: 'Rolstoeltaxi Spoed is de spoedtak van Rolstoeltaxi Holland: dezelfde ervaren chauffeurs en dezelfde rolstoelbussen, speciaal ingericht op snel schakelen bij spoed.' },
   { q: 'Rijden jullie ook \'s nachts en in het weekend?', a: 'Ja, we zijn 24 uur per dag, 7 dagen per week bereikbaar voor spoedritten, ook \'s nachts en in het weekend.' },
   { q: 'Kan mijn begeleider mee in de bus?', a: 'Ja, een familielid of begeleider kan gewoon meerijden. Geef dit door bij het boeken, dan houden we daar rekening mee.' },
+  { q: 'Betaal ik voor een begeleider of voor wachttijd?', a: 'Nee. Een begeleider die meereist en de wachttijd tijdens uw afspraak of plechtigheid brengen we niet in rekening.' },
   { q: 'Wat kost een spoedrit?', a: 'De prijs is afhankelijk van afstand en tijdstip, en bij spoed geldt een toeslag ten opzichte van vooraf geplande ritten. U hoort de prijs altijd vooraf aan de telefoon. Bekijk ook onze tarievenpagina.' },
   { q: 'Vergoedt mijn zorgverzekeraar of gemeente de rit?', a: 'Dat verschilt per situatie. Vraag dit vooraf na bij uw zorgverzekeraar, gemeente (Wmo-vervoer) of zorginstelling. Wij verstrekken desgevraagd een factuur die u zelf kunt indienen.' },
   { q: 'Kan er ook een scootmobiel mee in plaats van een rolstoel?', a: 'Ja, de elektrische laadklep is geschikt voor zowel een rolstoel als een scootmobiel.' },
@@ -1685,7 +1743,7 @@ for (const f of fs.readdirSync(ROOT)) {
 for (const c of CITIES) {
   const file = c.path ? c.path.slice(1) : `rolstoeltaxi-${c.slug}`;
   const html = page({
-    title: c.isService ? `${c.name}: rolstoelvervoer met spoedservice` : `Rolstoeltaxi ${c.name}: spoedvervoer 24/7`,
+    title: c.isService ? `${c.name}: rolstoelvervoer met spoedservice` : `Rolstoeltaxi ${c.name} in de buurt: spoedvervoer 24/7`,
     description: c.metaDescription,
     canonicalPath: file,
     prefix: '',
