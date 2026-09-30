@@ -34,6 +34,37 @@ module.exports = [
       { q: 'Kan ik een vaste rit afspreken?', a: 'Ja, bijvoorbeeld voor werk, studie of dagbesteding.' },
       { q: 'Kunnen jullie \'s nachts rijden?', a: 'Ja, we zijn 24/7 bereikbaar.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Leiden: wheelchair transport to the city centre, the university and care facilities, from Amsterdam and the Haarlemmermeer. Ramp, 24/7 emergency service. Call now.',
+      lead: 'Leiden is a university town with canals, bridges and a lot of history. For a wheelchair ride that means: a beautiful setting, but not equally accessible everywhere.',
+      intro: [
+        "Leiden's city centre has many bridges, narrow streets and cyclists. A large vehicle can't always reach the centre, and cobblestones and curbs are difficult for someone in a wheelchair. We agree beforehand where you'll be picked up, so the ramp can be safely deployed.",
+        'Leiden lies between the Randstad and the coast. Many rides go to Den Haag, Hoofddorp and Amsterdam, but also to the bulb-growing region and the coast. We schedule both single rides and fixed schedules.',
+      ],
+      plekken: [
+        { t: 'Leiden Centraal station', d: 'A major hub. We arrange the last stretch from the station to your destination.' },
+        { t: 'Hortus botanicus and Rapenburg', d: "The oldest botanical garden in the Netherlands and the town's best-known canal." },
+        { t: 'Burcht van Leiden', d: 'A historic monument in the centre. We drop you off as close as possible.' },
+        { t: 'Pieterskerk and the Pieterskerkhof', d: 'One of the best-known spots in the city centre.' },
+        { t: 'Naturalis', d: 'The natural history museum, easily accessible. We arrange the outbound and return trip.' },
+        { t: 'Bio Science Park', d: 'The university and research park. For work and study we schedule a fixed plan.' },
+      ],
+      ritten: [
+        { t: 'Leiden to Den Haag', d: 'To the south, for appointments or family visits.' },
+        { t: 'Leiden to Schiphol', d: 'For flights, with luggage and plenty of time.' },
+        { t: 'Leiden to Amsterdam', d: 'A day in the city or an appointment.' },
+        { t: 'Leiden to the bulb-growing region', d: 'For a day at the flower fields, in season.' },
+        { t: 'Within Leiden', d: 'From home to day care, the GP or an appointment.' },
+      ],
+      spoed: "In Leiden, an emergency ride can be needed for a discharge or an unexpected appointment. Call the emergency line with your address and destination, and we'll give you the arrival time and price.",
+      bereik: "Leiden's centre has many bridges and narrow streets. Our drivers choose the right route and agree on a pickup point beforehand. Outside the centre the vehicle usually drives right up to the door.",
+      faqs: [
+        { q: 'Can the vehicle come into the Leiden city centre?', a: 'Often right up to near the destination. On narrow streets we agree on a pickup point beforehand.' },
+        { q: 'Do you also drive to the coast?', a: 'Yes, to Katwijk, Noordwijk and the rest of the Rijnstreek.' },
+        { q: 'Can I arrange a regular ride?', a: 'Yes, for example for work, study or day care.' },
+        { q: 'Can you drive at night?', a: 'Yes, we are reachable 24/7.' },
+      ],
+    },
   },
 
   {
@@ -71,6 +102,37 @@ module.exports = [
       { q: 'Rijden jullie ook naar Rotterdam?', a: 'Ja, van Den Haag naar Rotterdam en terug.' },
       { q: 'Kan ik een vaste rit afspreken?', a: 'Ja, bijvoorbeeld voor dagbesteding of een terugkerende behandeling.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Den Haag: wheelchair transport to the centre, Scheveningen and care facilities, from Amsterdam and the region. Electric ramp, 24/7 emergency service. Call now.',
+      lead: 'Den Haag is the city of the Binnenhof, the Peace Palace and Scheveningen. For a wheelchair ride that means: many visitors, many appointments and lots of government business.',
+      intro: [
+        'Den Haag is the seat of government and of international courts. That attracts visitors, and it makes the city centre busy. For a wheelchair ride that means: planning ahead, choosing a good drop-off spot, and taking secured zones into account.',
+        'There is also Scheveningen on the coast, the beach, the pier and the Kurhaus. We drive you there and back, and on busy days help you find a suitable spot.',
+      ],
+      plekken: [
+        { t: 'Binnenhof and Plein', d: 'The political heart of the Netherlands. Restrictions apply around the Binnenhof, so we agree on a drop-off spot beforehand.' },
+        { t: 'Peace Palace', d: "One of the city's best-known buildings, easily accessible." },
+        { t: 'Scheveningen and the pier', d: 'Beach, boulevard and the Kurhaus. For a day by the sea we pick you up.' },
+        { t: 'Madurodam', d: 'An outing for families. We arrange the outbound and return trip.' },
+        { t: 'Den Haag Centraal and Hollands Spoor', d: "The two main stations. We arrange the last stretch when public transport isn't an option." },
+        { t: 'Mauritshuis', d: 'The museum next to the Binnenhof. We drop you off as close as possible to the entrance.' },
+      ],
+      ritten: [
+        { t: 'Den Haag to Amsterdam', d: 'For appointments, family visits or a day in the city.' },
+        { t: 'Den Haag to Schiphol', d: 'For flights, with luggage.' },
+        { t: 'Den Haag to Rotterdam', d: 'City to city, via the A13.' },
+        { t: 'Den Haag to Leiden', d: 'To the north, for care or family.' },
+        { t: 'Within Den Haag', d: 'From home to day care or the GP.' },
+      ],
+      spoed: "In Den Haag, an emergency ride can be needed for a discharge or an unexpected appointment. Call the emergency line with your address and destination, and we'll give you the arrival time and price.",
+      bereik: "Den Haag's city centre has secured zones and a lot of one-way traffic. We agree on a pickup point beforehand where the ramp can be safely deployed.",
+      faqs: [
+        { q: 'Do you also drive to Scheveningen?', a: 'Yes, for a day by the sea we pick you up and bring you back.' },
+        { q: 'Can you take me to Schiphol?', a: "Yes, let us know your flight details, and we'll calculate backwards from the check-in deadline." },
+        { q: 'Do you also drive to Rotterdam?', a: 'Yes, from Den Haag to Rotterdam and back.' },
+        { q: 'Can I arrange a regular ride?', a: 'Yes, for example for day care or a recurring treatment.' },
+      ],
+    },
   },
 
   {
@@ -108,6 +170,37 @@ module.exports = [
       { q: 'Kunnen jullie mij naar Schiphol brengen?', a: 'Ja, geef uw vluchtgegevens door, dan rekenen we terug vanaf de incheckdeadline.' },
       { q: 'Kan ik een vaste rit afspreken?', a: 'Ja, bijvoorbeeld voor dagbesteding of een terugkerende behandeling.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Rotterdam: wheelchair transport to the Markthal, Ahoy, De Kuip and care facilities, from Amsterdam and the region. Ramp, 24/7 emergency service. Call now.',
+      lead: 'Rotterdam is the port city with the Erasmusbrug, the Markthal and Ahoy. For a wheelchair ride that means: wide streets, plenty of sights and plenty of events.',
+      intro: [
+        "After the war, Rotterdam built a new centre, with wide streets and plenty of flat stretches. That's pleasant for a wheelchair, but the distances are large and the city gets busy during events.",
+        'We drive to Rotterdam from Amsterdam and the region, and within the city. For an emergency ride you call directly, for an event we schedule the outbound and return trip.',
+      ],
+      plekken: [
+        { t: 'Rotterdam Centraal', d: 'The main station. We arrange the last stretch to your destination.' },
+        { t: 'Markthal and Blaak', d: 'The famous indoor market and the area around it. We drop you off as close as possible to the entrance.' },
+        { t: 'Erasmusbrug and Kop van Zuid', d: "The city's iconic view, with the Wilhelminapier and Hotel New York." },
+        { t: 'Ahoy and De Kuip', d: 'For concerts and matches. We arrange the outbound and return trip together.' },
+        { t: 'Kunsthal and the Museumpark', d: 'Museums in the centre, easily accessible.' },
+        { t: 'Euromast and the Park', d: 'An outing with a view over the harbour.' },
+      ],
+      ritten: [
+        { t: 'Rotterdam to Den Haag', d: 'Via the A13, for appointments or family visits.' },
+        { t: 'Rotterdam to Amsterdam', d: 'City to city, for an appointment or a day out.' },
+        { t: 'Rotterdam to Schiphol', d: 'For flights, with luggage.' },
+        { t: 'Rotterdam to Utrecht', d: 'To the centre of the country.' },
+        { t: 'Within Rotterdam', d: 'From home to day care or an appointment.' },
+      ],
+      spoed: "In Rotterdam, an emergency ride can be needed for a discharge or an unexpected appointment. Call the emergency line with your address and destination, and we'll give you the arrival time and price.",
+      bereik: 'Rotterdam has wide streets, but also tram rails and plenty of construction work. We agree on a pickup point beforehand where the ramp can be safely deployed.',
+      faqs: [
+        { q: 'Can you take me to Ahoy or De Kuip?', a: 'Yes, we schedule the outbound and return trip together.' },
+        { q: 'Do you also drive to Den Haag from Rotterdam?', a: 'Yes, from Rotterdam to Den Haag and back.' },
+        { q: 'Can you take me to Schiphol?', a: "Yes, let us know your flight details, and we'll calculate backwards from the check-in deadline." },
+        { q: 'Can I arrange a regular ride?', a: 'Yes, for example for day care or a recurring treatment.' },
+      ],
+    },
   },
 
   {
@@ -145,5 +238,36 @@ module.exports = [
       { q: 'Kunnen jullie mij naar Schiphol brengen?', a: 'Ja, geef uw vluchtgegevens door, dan rekenen we terug vanaf de incheckdeadline.' },
       { q: 'Kan ik een vaste rit afspreken?', a: 'Ja, bijvoorbeeld voor dagbesteding of een terugkerende behandeling.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Utrecht: wheelchair transport to the Dom Tower, the station, the Jaarbeurs and care facilities, from Amsterdam. Electric ramp, 24/7 emergency service. Call now.',
+      lead: 'Utrecht lies right in the middle of the country, with the Dom Tower, the Oudegracht and the largest station in the Netherlands. For a wheelchair ride that means: plenty of traffic, plenty of visitors and plenty of convenience.',
+      intro: [
+        "Utrecht is a hub. Many travellers arrive via the station and continue their journey from there. The centre is car-free, with the Oudegracht and the wharves around it, which isn't always convenient for a large vehicle.",
+        'We drive to Utrecht from Amsterdam and the region, and within the city. For an emergency ride you call directly, for a regular ride we schedule it.',
+      ],
+      plekken: [
+        { t: 'Utrecht Centraal and Hoog Catharijne', d: 'The largest station in the Netherlands. We arrange the last stretch to your destination.' },
+        { t: 'Dom Tower and Domplein', d: "The symbol of the city. We drop you off as close as possible to the square." },
+        { t: 'Oudegracht and the wharves', d: 'Quiet streets along the water, for an outing.' },
+        { t: 'Jaarbeurs', d: 'The trade fair and conference centre next to the station. For events we arrange the outbound and return trip.' },
+        { t: 'Museum quarter and Rietveld Schröder House', d: 'Museums and architecture, easily accessible.' },
+        { t: 'Utrecht Science Park', d: 'The university and research park. For work and study we schedule a fixed plan.' },
+      ],
+      ritten: [
+        { t: 'Utrecht to Amsterdam', d: 'City to city, for appointments or family.' },
+        { t: 'Utrecht to Schiphol', d: 'For flights, with luggage.' },
+        { t: 'Utrecht to Rotterdam', d: 'To the south, for an appointment or a day out.' },
+        { t: 'Utrecht to Den Haag', d: 'To the seat of government.' },
+        { t: 'Within Utrecht', d: 'From home to day care or an appointment.' },
+      ],
+      spoed: "In Utrecht, an emergency ride can be needed for a discharge or an unexpected appointment. Call the emergency line with your address and destination, and we'll give you the arrival time and price.",
+      bereik: "Utrecht's city centre is partly car-free and has a lot of cyclists. We agree on a pickup point beforehand where the ramp can be safely deployed.",
+      faqs: [
+        { q: 'Can you take me to the Jaarbeurs?', a: 'Yes, we schedule the outbound and return trip together.' },
+        { q: 'Do you also drive from Amsterdam to Utrecht?', a: 'Yes, that is a frequently requested ride for appointments and family visits.' },
+        { q: 'Can you take me to Schiphol?', a: "Yes, let us know your flight details, and we'll calculate backwards from the check-in deadline." },
+        { q: 'Can I arrange a regular ride?', a: 'Yes, for example for day care or a recurring treatment.' },
+      ],
+    },
   },
 ];

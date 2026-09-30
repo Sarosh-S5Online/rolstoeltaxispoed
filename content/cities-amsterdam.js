@@ -35,6 +35,37 @@ module.exports = [
       { q: 'Kan ik na een concert direct worden opgehaald?', a: 'Ja, we plannen de terugrit vooraf in en bellen vlak voor het einde om het ophaalmoment te bevestigen.' },
       { q: 'Kan een elektrische rolstoel mee?', a: 'Ja, de laadklep is geschikt voor elektrische rolstoelen en scootmobielen. Geef het model door bij het boeken.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Amsterdam with emergency service: a wheelchair-accessible vehicle with an electric ramp for the city, the canals and the rest of the Netherlands. 24/7 available, call now.',
+      lead: 'Amsterdam is beautiful, but not always easy for a wheelchair: cobblestones, tram rails, narrow bridges and car-free streets. Rolstoeltaxi Spoed knows the city and picks you up right at your front door.',
+      intro: [
+        "In Amsterdam, a wheelchair-accessible ride is rarely a simple trip from A to B. The city centre has one-way streets, closed-off streets and areas where a large vehicle can't just stop. Our drivers know how to get you close to the door without rolling you over cobblestones.",
+        "Whether it's an appointment in Zuid, an outing to the Museumplein, a family visit in Noord, or an emergency ride in the middle of the night: you call one number and a vehicle is scheduled. For regular rides, for example to day care in the city, we set up a fixed schedule.",
+      ],
+      plekken: [
+        { t: 'Amsterdam Centraal', d: "The busiest station in the city. We agree on the entrance that's most accessible for you, and help with the luggage." },
+        { t: 'Museumplein and Vondelpark', d: 'The Rijksmuseum, Van Gogh Museum and Stedelijk are close together. We drop you off as close as possible to the entrance.' },
+        { t: 'Jordaan and the canal ring', d: 'Narrow streets and bridges with a height restriction. We plan the route and pickup point with you beforehand.' },
+        { t: 'Amsterdam RAI and Zuid', d: 'It gets busy around trade fairs and conferences. For events we agree on a fixed drop-off spot and pickup time.' },
+        { t: 'Johan Cruijff ArenA and Ziggo Dome', d: 'For concerts and matches in Zuidoost. Outbound and return are scheduled together.' },
+        { t: 'Amsterdam Noord and Sloterdijk', d: 'Across the IJ, to Noord or Sloterdijk, without you having to arrange the ferry or the transfer yourself.' },
+      ],
+      ritten: [
+        { t: 'To and from Schiphol', d: 'From Amsterdam to the departure hall and back, with luggage and on time for check-in.' },
+        { t: 'Amsterdam to Haarlem', d: 'For appointments, family visits or a day at the coast via Haarlem.' },
+        { t: 'Amsterdam to Utrecht', d: 'A frequently requested ride towards the centre of the country, for work, care or family.' },
+        { t: 'Within the ring', d: 'Short rides between neighbourhoods, for example from home to day care or an outpatient clinic.' },
+        { t: 'Night rides', d: "After a concert, a late shift or an unexpected situation: reachable at night too." },
+      ],
+      spoed: "An emergency ride in Amsterdam often starts with care: a discharge that can happen sooner than planned, a nurse who urgently needs transport, an appointment moved to today. We give a realistic arrival time on the first phone call. Traffic and crowds in the city play a role in that, and we're simply honest about it.",
+      bereik: "In the city centre a vehicle can't always stop exactly where you'd like. That's why we agree where you'll be picked up: at the front door where possible, and otherwise at a spot nearby where the ramp can be safely deployed. Outside the ring it's easier: the vehicle usually drives right up to the door.",
+      faqs: [
+        { q: 'Can you get a vehicle into the Amsterdam city centre?', a: 'In most cases, yes, right up to near the destination. On car-free streets we agree on a pickup point beforehand where the ramp can be safely deployed.' },
+        { q: 'Do you also drive at night in Amsterdam?', a: 'Yes, we are reachable 24 hours a day for emergency rides, including on weekends.' },
+        { q: 'Can I be picked up right after a concert?', a: 'Yes, we schedule the return ride in advance and call shortly before the end to confirm the pickup time.' },
+        { q: 'Can an electric wheelchair come along?', a: 'Yes, the ramp is suitable for electric wheelchairs and mobility scooters. Let us know the model when booking.' },
+      ],
+    },
   },
 
   {
@@ -72,6 +103,37 @@ module.exports = [
       { q: 'Is een vaste wekelijkse rit mogelijk?', a: 'Ja, een terugkerende rit kunnen we op vaste dagen en tijden inplannen.' },
       { q: 'Werkt u ook op zondag?', a: 'Ja, we zijn 24/7 bereikbaar en rijden ook in het weekend.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Amstelveen with emergency service. Wheelchair transport for the Stadshart, the neighbourhoods and Schiphol, 24/7 available. Call now for a vehicle with a ramp.',
+      lead: 'Amstelveen lies between Amsterdam, the Amsterdamse Bos and Schiphol. For a wheelchair ride that means: many short trips, plenty of care nearby, and quick access to the motorway.',
+      intro: [
+        'Amstelveen is a spaciously laid-out town with wide streets, plenty of greenery and a large Stadshart. That makes pickups easy in themselves, but the neighbourhoods are spread out and many residents regularly need to get to Amsterdam, to Schiphol, or to nearby care facilities.',
+        'Rolstoeltaxi Spoed drives both short rides within Amstelveen and longer rides to the rest of the country from the region. Call for an emergency ride, or schedule a regular ride, for example for day care or a weekly appointment.',
+      ],
+      plekken: [
+        { t: 'Stadshart Amstelveen', d: "Shops, restaurants and the town hall. There's room to drop off, and we agree on the most accessible entrance." },
+        { t: 'Amsterdamse Bos', d: 'For a walk or a day out with a mobility scooter. We pick you up and drop you off at the entrance you want.' },
+        { t: 'Cobra Museum', d: 'The museum of modern art is easily accessible. We arrange the outbound and return trip in one go.' },
+        { t: 'Bovenkerk and Randwijck', d: 'Residential areas with many seniors. Pickup at the front door, with help over thresholds.' },
+        { t: 'Westwijk and Kostverloren', d: 'Here too we pick you up where you live, and take you to appointments or day care.' },
+        { t: 'Amstelveen Centrum station', d: 'Connects to the tram and metro lines towards Amsterdam. We arrange the ride when public transport is not an option.' },
+      ],
+      ritten: [
+        { t: 'Amstelveen to Amsterdam Zuid', d: 'For appointments and meetings in Zuid, or to transfer to the train.' },
+        { t: 'Amstelveen to Schiphol', d: 'A short ride to the departure hall, with plenty of time to check in.' },
+        { t: 'Amstelveen to Haarlem', d: 'For family visits or treatment on the other side of the region.' },
+        { t: 'Within Amstelveen', d: 'From home to day care, the hairdresser or the GP, and back again.' },
+        { t: 'Amstelveen to Utrecht', d: 'A regular recurring ride is possible too, for example for a weekly treatment.' },
+      ],
+      spoed: "In Amstelveen, emergencies often stem from a situation at home: a fall, a sudden deterioration, or a hospital discharge that happens sooner than planned. Because Amstelveen is close to Amsterdam and Schiphol, our vehicles can usually reach you quickly. We give the exact time on the first phone call.",
+      bereik: 'Most streets in Amstelveen are wide enough for our vehicle. At apartment buildings with a shared entrance, we agree where the ramp can be deployed. For seniors who need help at the door, the driver helps as far as the hallway.',
+      faqs: [
+        { q: 'Do you also drive to Schiphol from Amstelveen?', a: 'Yes, that is a frequently requested ride. We take luggage into account and allow plenty of time to check in.' },
+        { q: 'Can you pick me up at home if I live in an apartment?', a: 'Yes, the driver helps at the door and, if needed, as far as the lift. Let us know when booking whether there are stairs or thresholds.' },
+        { q: 'Is a regular weekly ride possible?', a: 'Yes, we can schedule a recurring ride on fixed days and times.' },
+        { q: 'Do you also work on Sundays?', a: 'Yes, we are reachable 24/7 and drive on weekends too.' },
+      ],
+    },
   },
 
   {
@@ -110,6 +172,37 @@ module.exports = [
       { q: 'Regelen jullie ook assistance op Schiphol?', a: 'Assistance wordt doorgaans via de luchtvaartmaatschappij geregeld. Wij brengen u tot bij de juiste ingang en helpen met de bagage.' },
       { q: 'Kunnen jullie \'s nachts rijden?', a: 'Ja, we zijn 24/7 bereikbaar, ook voor vroege ochtendvluchten en late aankomsten.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Schiphol: wheelchair transport to and from the airport, even at short notice. With luggage, an electric ramp and 24/7 emergency service. Call now.',
+      lead: 'Flying with a wheelchair starts with a reliable ride to the airport. Rolstoeltaxi Spoed takes you and your luggage to Schiphol and picks you up again, even in case of delays and at early or late hours.',
+      intro: [
+        "Schiphol is large and busy, and the road there often is too. For a traveller in a wheelchair, there's also a fixed time to consider: the desk, checking in luggage, and assistance. A ride that goes wrong at the last minute can cost you the whole trip.",
+        "We take you right to the departure hall and help with the luggage. For the return journey we agree where we'll wait for you, and in case of delay we track the arrival time. You don't have to improvise with taxis or public transport.",
+      ],
+      plekken: [
+        { t: 'Departure hall', d: 'We drop you off as close as possible to the entrance and help with the luggage as far as the desk or the assistance point.' },
+        { t: 'Arrivals hall', d: 'After landing we wait at the agreed spot. Let us know your flight number, and we\'ll track the arrival.' },
+        { t: 'Schiphol Plaza', d: "The central square with shops and the station. It's busy, so we agree on a quieter pickup point beforehand." },
+        { t: 'Schiphol Airport station', d: 'For travellers arriving by train who need to continue by vehicle. We arrange the connection.' },
+        { t: 'Hotels around the airport', d: 'Staying overnight before or after your flight? We pick you up at the hotel and take you to the terminal.' },
+        { t: 'Schiphol-Oost and Schiphol-Rijk', d: 'Offices and businesses around the airport. For employees and business travellers in a wheelchair.' },
+      ],
+      ritten: [
+        { t: 'Amsterdam to Schiphol', d: 'The most requested ride, with room for suitcases and a wheelchair or mobility scooter.' },
+        { t: 'Haarlem to Schiphol', d: 'From Kennemerland to the airport, often for early morning flights.' },
+        { t: 'Hoofddorp to Schiphol', d: 'A short ride for travellers from the Haarlemmermeer.' },
+        { t: 'Schiphol to home', d: 'After a long flight, a fixed, familiar ride home is welcome, even in case of delay.' },
+        { t: 'Schiphol to a care facility', d: 'Straight from the arrivals hall to a nursing home or rehabilitation centre.' },
+      ],
+      spoed: "A missed connection, a rebooked flight, or a family member joining at the last minute: at Schiphol, emergencies are more the rule than the exception. Call the emergency line with your flight details, and we'll calculate backwards from the time you need to be there and name the price right away.",
+      bereik: "Schiphol is reachable day and night, and so are we. On arrivals we track the flight time, so we're not too early or too late. Assistance for travellers with a disability is usually arranged through the airline; we take you right to the correct entrance and desk.",
+      faqs: [
+        { q: 'Can my luggage come along next to my wheelchair?', a: "Yes, there is room for suitcases and hand luggage. Let us know how much you're bringing when booking." },
+        { q: 'What if my flight is delayed?', a: "Let us know your flight number, and we'll track the arrival and adjust the pickup time accordingly." },
+        { q: 'Do you also arrange assistance at Schiphol?', a: 'Assistance is usually arranged through the airline. We take you right to the correct entrance and help with the luggage.' },
+        { q: 'Can you drive at night?', a: 'Yes, we are reachable 24/7, including for early morning flights and late arrivals.' },
+      ],
+    },
   },
 
   {
@@ -147,6 +240,37 @@ module.exports = [
       { q: 'Kan ik naar Schiphol gebracht worden?', a: 'Ja, dat is een korte rit vanuit Hoofddorp. Geef uw vluchtgegevens door, dan rekenen we terug vanaf de incheckdeadline.' },
       { q: 'Hoe boek ik op korte termijn?', a: 'Bel de spoedlijn. U hoort direct de aankomsttijd en de prijs.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Hoofddorp: wheelchair transport in the Haarlemmermeer, to and from Schiphol, Haarlem and Amsterdam. 24/7 emergency service, with an electric ramp. Call now.',
+      lead: 'Hoofddorp lies right in the middle of the Haarlemmermeer, between Schiphol, Haarlem and Leiden. A central spot, and therefore a place where fast transport can be needed.',
+      intro: [
+        "The Haarlemmermeer is a polder with many residential areas, business parks and care facilities. Public transport is good there, but not always practical when you use a wheelchair and need to get from A to B in a hurry.",
+        'We pick you up in Hoofddorp and the surrounding towns. For an emergency ride you call directly, for a regular ride we schedule it. Our vehicles come from the region, which keeps the travel time to Hoofddorp short.',
+      ],
+      plekken: [
+        { t: 'Hoofddorp centre and the Raadhuisplein', d: 'Shopping area, town hall and station close together. Pickup happens at an accessible spot.' },
+        { t: 'Hoofddorp station', d: 'Connects to the train towards Amsterdam and Leiden. We arrange the last stretch.' },
+        { t: 'Toolenburg and Floriande', d: 'Large residential areas with many apartments. We help at the door and in the lift.' },
+        { t: 'Beukenhorst', d: 'Businesses and offices. For work rides we can set up a fixed schedule.' },
+        { t: 'Care facilities in the Haarlemmermeer', d: 'For residents who need to get to the hospital, day care or family.' },
+        { t: 'Nieuw-Vennep and Badhoevedorp', d: 'We pick up in the surrounding towns too, with no surcharge for the short distance.' },
+      ],
+      ritten: [
+        { t: 'Hoofddorp to Schiphol', d: 'A short ride, often for an early flight or for work at the airport.' },
+        { t: 'Hoofddorp to Haarlem', d: 'For appointments, shopping or family visits in Haarlem.' },
+        { t: 'Hoofddorp to Leiden', d: 'From the polder to the university town, for care or an outing.' },
+        { t: 'Hoofddorp to Amsterdam', d: 'To the city for an appointment, a museum or family.' },
+        { t: 'Within the Haarlemmermeer', d: 'From home to day care or an appointment, within the polder itself.' },
+      ],
+      spoed: "Because of its location near Schiphol and the motorway, we can reach Hoofddorp quickly. Call the emergency line with your address and destination, and we'll give you the arrival time and price on the first phone call.",
+      bereik: 'Hoofddorp is easy to navigate, with wide roads and plenty of parking space. The vehicle can drive right up to the door in most neighbourhoods. If you live in an apartment, the driver helps as far as the lift.',
+      faqs: [
+        { q: 'Do you also drive to other towns in the Haarlemmermeer?', a: 'Yes, we also pick up in Nieuw-Vennep, Badhoevedorp and the surrounding towns.' },
+        { q: 'Can I arrange a regular ride to work?', a: "Yes, we're happy to schedule a recurring ride on fixed days and times." },
+        { q: 'Can I be taken to Schiphol?', a: "Yes, that's a short ride from Hoofddorp. Let us know your flight details, and we'll calculate backwards from the check-in deadline." },
+        { q: 'How do I book at short notice?', a: "Call the emergency line. You'll hear the arrival time and the price right away." },
+      ],
+    },
   },
 
   {
@@ -184,6 +308,37 @@ module.exports = [
       { q: 'Kan ik een rit naar Schiphol boeken?', a: 'Ja, dat is een korte rit. Geef uw vluchtgegevens door, dan rekenen we terug vanaf de incheckdeadline.' },
       { q: 'Kunnen jullie \'s nachts rijden?', a: 'Ja, we zijn 24 uur per dag bereikbaar.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Aalsmeer: wheelchair transport in the flower town, to and from Schiphol, Amstelveen and Amsterdam. Electric ramp, 24/7 emergency service. Call now.',
+      lead: 'Aalsmeer is known for its flowers and the Westeinderplassen lakes. For wheelchair users it is mainly a town where transport to the wider region can be tricky to arrange.',
+      intro: [
+        "Aalsmeer lies by the water, between Amstelveen, Hoofddorp and Uithoorn. There is no train station, so anyone without a car depends on the bus. For someone in a wheelchair, that's often a detour.",
+        'Rolstoeltaxi Spoed drives directly: from your front door to your destination, with an electric ramp and a driver who helps. Also for a regular ride to day care or a treatment.',
+      ],
+      plekken: [
+        { t: 'Centre and Dorpsstraat', d: 'Shops, restaurants and the town hall. We agree on an accessible drop-off spot.' },
+        { t: 'Royal FloraHolland', d: 'The large flower auction attracts visitors and employees. For work or a visit we arrange the outbound and return trip.' },
+        { t: 'Westeinderplassen', d: 'For a day by the water. We take you to the harbour or the viewpoint of your choice.' },
+        { t: 'Kudelstaart', d: 'The village south of Aalsmeer, where we also regularly pick up.' },
+        { t: 'Historische Tuin Aalsmeer', d: 'A quiet spot for an outing. We arrange the outbound and return ride.' },
+        { t: 'Care facilities', d: 'For residents who need to get to hospital, day care or family in the region.' },
+      ],
+      ritten: [
+        { t: 'Aalsmeer to Schiphol', d: 'Straight to the departure hall, no transfer.' },
+        { t: 'Aalsmeer to Amstelveen', d: 'For care, shopping or family in Amstelveen.' },
+        { t: 'Aalsmeer to Amsterdam', d: 'To the capital for an appointment or a day out.' },
+        { t: 'Aalsmeer to Leiden', d: 'The other direction, towards the university town.' },
+        { t: 'Within Aalsmeer and Kudelstaart', d: 'Short rides from home to day care or the GP.' },
+      ],
+      spoed: "Because Aalsmeer has no station, an emergency ride is often the only fast option. Call the emergency line, and we'll give you the arrival time and price on the first phone call. We work day and night.",
+      bereik: 'The roads around the water are sometimes narrow, with dikes and bridges. Our drivers know the area and choose a route that fits your vehicle and destination. For an address on a narrow road, we agree on a pickup point beforehand.',
+      faqs: [
+        { q: 'Is there a station in Aalsmeer?', a: 'No, Aalsmeer has no train station. That is why transport by wheelchair-accessible vehicle is the most convenient option for many residents.' },
+        { q: 'Do you also drive to Kudelstaart?', a: 'Yes, we pick up in Kudelstaart too, and the surrounding towns.' },
+        { q: 'Can I book a ride to Schiphol?', a: "Yes, that's a short ride. Let us know your flight details, and we'll calculate backwards from the check-in deadline." },
+        { q: 'Can you drive at night?', a: 'Yes, we are reachable 24 hours a day.' },
+      ],
+    },
   },
 
   {
@@ -221,6 +376,37 @@ module.exports = [
       { q: 'Kunnen jullie ook naar Schiphol rijden?', a: 'Ja, rechtstreeks, met ruimte voor bagage naast de rolstoel.' },
       { q: 'Kan ik een vaste rit afspreken?', a: 'Ja, bijvoorbeeld voor een wekelijkse behandeling of dagbesteding.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Uithoorn: wheelchair transport by the Amstel, to Amstelveen, Amsterdam and Schiphol. Electric ramp and 24/7 emergency service. Call now.',
+      lead: 'Uithoorn lies on the Amstel, on the edge of North Holland and Utrecht. A pleasant town to live in, but public transport to the city is limited.',
+      intro: [
+        "Uithoorn lies on the south side of the Amstel region. Anyone who wants to get to Amsterdam or Schiphol without a car has to take the bus. That costs time and transfers, and with a wheelchair or mobility scooter that's often a hassle.",
+        'Rolstoeltaxi Spoed picks you up in Uithoorn and De Kwakel and drives on to your destination. For an emergency you call directly, for a regular ride we schedule it.',
+      ],
+      plekken: [
+        { t: 'Amstelplein and the centre', d: 'Shops and restaurants along the Amstel. We drop you off at an accessible spot.' },
+        { t: 'Uithoorn bus station', d: "The hub for the bus. We arrange the ride when the bus isn't an option." },
+        { t: 'De Kwakel', d: 'The village to the north, where we also regularly pick up.' },
+        { t: 'Zijdelwaard', d: 'A neighbourhood with many apartments, where the driver helps as far as the lift.' },
+        { t: 'The Amstel', d: 'The river attracts walkers and cyclists. For an outing by the water, we pick you up.' },
+        { t: 'Care facilities in the region', d: 'For residents who need to get to the hospital or day care.' },
+      ],
+      ritten: [
+        { t: 'Uithoorn to Amstelveen', d: 'For appointments and care in the Stadshart or in Amstelveen-Zuid.' },
+        { t: 'Uithoorn to Amsterdam', d: 'To the capital for an appointment or a family visit.' },
+        { t: 'Uithoorn to Schiphol', d: 'Straight to the airport, no transfer.' },
+        { t: 'Uithoorn to Leiden', d: 'The other direction, to the university town.' },
+        { t: 'Within Uithoorn', d: 'From home to day care or the GP, and back.' },
+      ],
+      spoed: "In Uithoorn, an emergency ride is often the fastest solution when no suitable public transport is available. Call the emergency line with your address and destination, and we'll give you the arrival time and price.",
+      bereik: 'The roads along the Amstel are narrow and there are many bridges. Our drivers know the area. If there is any doubt about how accessible your address is, we agree on a pickup point beforehand.',
+      faqs: [
+        { q: 'Do you also pick up in De Kwakel?', a: 'Yes, De Kwakel and the surrounding towns too.' },
+        { q: 'Is there good public transport in Uithoorn?', a: 'Only by bus. For wheelchair users, a wheelchair-accessible vehicle is often more practical.' },
+        { q: 'Can you also drive to Schiphol?', a: 'Yes, straight there, with room for luggage next to the wheelchair.' },
+        { q: 'Can I arrange a regular ride?', a: 'Yes, for example for a weekly treatment or day care.' },
+      ],
+    },
   },
 
   {
@@ -258,6 +444,37 @@ module.exports = [
       { q: 'Kan ik een vaste rit afspreken?', a: 'Ja, bijvoorbeeld voor dagbesteding of een terugkerende behandeling.' },
       { q: 'Rijden jullie ook op zondag?', a: 'Ja, we zijn 24/7 bereikbaar.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Diemen: wheelchair transport on the east side of Amsterdam, to Zuidoost, the city centre and Schiphol. Electric ramp and 24/7 emergency service. Call now.',
+      lead: 'Diemen borders Amsterdam and lies close to Zuidoost and the A1. For a wheelchair ride that means: quick access to the city, and quick access to the motorway.',
+      intro: [
+        "Diemen is a compact municipality, connected to the centre of Amsterdam and the rest of the country. Yet not everyone has a car, and not every bus stop is accessible for a wheelchair or mobility scooter.",
+        'We pick you up in Diemen and drive you to appointments, family or an outing. A regular ride is possible, and for an emergency you call directly.',
+      ],
+      plekken: [
+        { t: 'Stations in Diemen', d: 'Connects to public transport towards Amsterdam. We arrange the last stretch if needed.' },
+        { t: 'Diemerbos', d: 'A large forest on the edge of town, for a walk or a day out.' },
+        { t: 'Diemen shopping centre', d: 'Shops and facilities. We agree on an accessible drop-off spot.' },
+        { t: 'Diemen-Zuid', d: 'A residential area with many apartments, where the driver helps as far as the lift.' },
+        { t: 'Amsterdam Zuidoost', d: 'Right next to Diemen: the Johan Cruijff ArenA and the Ziggo Dome are just minutes away.' },
+        { t: 'Care facilities in the region', d: 'For residents who need treatment or day care in Amsterdam.' },
+      ],
+      ritten: [
+        { t: 'Diemen to Amsterdam city centre', d: 'For appointments, shopping or family visits.' },
+        { t: 'Diemen to Amsterdam Zuidoost', d: 'To the ArenA, the Ziggo Dome or a nearby appointment.' },
+        { t: 'Diemen to Schiphol', d: 'Straight to the departure hall via the A9.' },
+        { t: 'Diemen to Amstelveen', d: 'From east to south, without transfers.' },
+        { t: 'Within Diemen', d: 'From home to day care or the GP.' },
+      ],
+      spoed: "Diemen is close to the centre of Amsterdam, so our vehicles usually reach it quickly. Call the emergency line with your address and destination, and we'll give you the arrival time and price.",
+      bereik: 'Most streets in Diemen are wide enough for our vehicle. In residential areas with many apartments, we agree where the ramp can be deployed. The driver helps as far as the hallway.',
+      faqs: [
+        { q: 'Do you also drive to Zuidoost?', a: 'Yes, to the Johan Cruijff ArenA, the Ziggo Dome and other spots in Zuidoost.' },
+        { q: 'Can I be picked up right after a concert?', a: 'Yes, we schedule the return ride in advance and call shortly before the end.' },
+        { q: 'Can I arrange a regular ride?', a: 'Yes, for example for day care or a recurring treatment.' },
+        { q: 'Do you also drive on Sundays?', a: 'Yes, we are reachable 24/7.' },
+      ],
+    },
   },
 
   {
@@ -295,6 +512,37 @@ module.exports = [
       { q: 'Is er goed openbaar vervoer in Ouderkerk?', a: 'Beperkt. Voor rolstoelgebruikers is een rolstoelbus vaak praktischer.' },
       { q: 'Kan ik een vaste rit afspreken?', a: 'Ja, bijvoorbeeld voor een wekelijkse afspraak of dagbesteding.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Ouderkerk aan de Amstel: wheelchair transport in the village on the river, to Amsterdam, Amstelveen and Schiphol. 24/7 emergency service. Call now.',
+      lead: 'Ouderkerk aan de Amstel is a village on the river, close to Amsterdam. Lovely to live in, but transport is limited and the roads are narrow.',
+      intro: [
+        "Ouderkerk lies along the Amstel, with a dike lined with terraces, old houses and narrow bridges. It's beautiful, but sometimes a challenge for a large vehicle, and public transport doesn't run as frequently as in the city.",
+        'Our drivers know the dike and the surrounding roads. We pick you up as close as possible to your door, and take you to Amsterdam, Amstelveen or further.',
+      ],
+      plekken: [
+        { t: 'Amsteldijk and the centre', d: 'Terraces, shops and old houses. We agree on a pickup point where the vehicle can safely stop.' },
+        { t: 'Beth Haim', d: 'The historic Jewish cemetery on the Amstel. For a visit we arrange a calm outbound and return ride.' },
+        { t: 'Ouderkerkerplas and the river', d: 'For a walk or a day out by the water.' },
+        { t: 'Johan Cruijff ArenA', d: 'A short distance away, for concerts and matches.' },
+        { t: 'Residential areas beyond the dike', d: 'Here too we pick up at the front door, with help over thresholds.' },
+        { t: 'Care facilities in the region', d: 'For residents who need treatment or day care.' },
+      ],
+      ritten: [
+        { t: 'Ouderkerk to Amsterdam', d: 'To the capital for an appointment, a museum or a family visit.' },
+        { t: 'Ouderkerk to Amstelveen', d: 'For care, shopping or family in the Stadshart.' },
+        { t: 'Ouderkerk to Schiphol', d: 'Straight to the airport.' },
+        { t: 'Ouderkerk to Uithoorn', d: 'Along the Amstel to the south.' },
+        { t: 'Within Ouderkerk', d: 'From home to the GP or day care, and back.' },
+      ],
+      spoed: "Because Ouderkerk is small and public transport is limited, an emergency ride is often the fastest solution. Call the emergency line, and we'll give you the arrival time and price on the first phone call.",
+      bereik: 'The dike is narrow and one-way in places. We agree beforehand where you will be picked up: at the door where the road allows it, otherwise at a spot nearby where the ramp can be safely deployed.',
+      faqs: [
+        { q: 'Can the vehicle drive along the dike in Ouderkerk?', a: 'In most cases, yes. If in doubt, we agree on a nearby pickup point beforehand.' },
+        { q: 'Do you also drive to the Johan Cruijff ArenA?', a: 'Yes, for concerts and matches we schedule the outbound and return trip.' },
+        { q: 'Is there good public transport in Ouderkerk?', a: 'Limited. For wheelchair users, a wheelchair-accessible vehicle is often more practical.' },
+        { q: 'Can I arrange a regular ride?', a: 'Yes, for example for a weekly appointment or day care.' },
+      ],
+    },
   },
 
   {
@@ -334,5 +582,37 @@ module.exports = [
       { q: 'Kan ik een terugrit boeken?', a: 'Ja, we plannen heen en terug samen in en stemmen af hoe lang uw afspraak ongeveer duurt.' },
       { q: 'Wordt de rit vergoed?', a: 'Dat verschilt per situatie. Vraag het na bij uw zorgverzekeraar of gemeente. Wij verstrekken desgevraagd een factuur.' },
     ],
+    en: {
+      name: 'Hospital Transport Amsterdam',
+      metaDescription: 'Hospital transport in Amsterdam for wheelchair users: to an appointment, admission or discharge, emergencies too. Rolstoeltaxi Spoed drives 24/7. Call now.',
+      lead: 'To an appointment, admission or discharge in Amsterdam with a wheelchair: we pick you up where you are and take you calmly and safely to the right entrance.',
+      intro: [
+        "Amsterdam has several academic and general hospitals, outpatient clinics and rehabilitation centres. For a traveller in a wheelchair, it isn't always clear which entrance is accessible, where the vehicle may stop, and how long the appointment will take.",
+        "We coordinate that in advance. You tell us the department and the time, and we arrange the rest: the pickup moment, the right entrance, and the return ride if you'd like.",
+      ],
+      plekken: [
+        { t: 'Outpatient appointments', d: 'An appointment with a specialist, with a fixed pickup time and a return ride if needed.' },
+        { t: 'Day admission and treatment', d: 'For a day admission, dialysis or radiotherapy we schedule a fixed schedule.' },
+        { t: 'Emergency discharge', d: 'If a discharge can happen sooner than planned, call the emergency line and a vehicle is scheduled right away.' },
+        { t: 'Transfer between facilities', d: 'From hospital to rehabilitation centre or nursing home, with the necessary equipment.' },
+        { t: 'Pickup at the right entrance', d: 'We ask beforehand about the department or entrance, so you are dropped off close by.' },
+        { t: 'Contact with nursing staff', d: 'If needed, we call the department to coordinate the pickup time.' },
+      ],
+      ritten: [
+        { t: 'Home to the hospital', d: 'The classic ride to an appointment or admission.' },
+        { t: 'Hospital to home', d: 'After a discharge or treatment, calmly and without rushing.' },
+        { t: 'Hospital to rehabilitation centre', d: 'Transfer with equipment.' },
+        { t: 'Regular treatment rides', d: 'On fixed days and times, for example for dialysis or therapy.' },
+        { t: 'Emergency rides', d: 'Urgently to or from a hospital, 24/7.' },
+      ],
+      spoed: "An emergency discharge or an urgent appointment can't wait. Call the emergency line with the department, the time and the address, and we'll give you the arrival time and price right away. The call is kept short, so as little time as possible is lost.",
+      bereik: 'Hospitals often have multiple entrances and a limited drop-off spot. We agree in advance where the vehicle can stop, and the driver helps with boarding and getting off. For patients with an IV or oxygen, we discuss the options beforehand.',
+      faqs: [
+        { q: 'Do you drive to all hospitals in Amsterdam?', a: 'Yes, to hospitals, outpatient clinics and rehabilitation centres in Amsterdam and the surrounding area.' },
+        { q: 'Can an IV pole or oxygen come along?', a: "In many cases, yes. Let us know beforehand, and we'll take it into account." },
+        { q: 'Can I book a return ride?', a: 'Yes, we schedule the outbound and return trip together and agree on roughly how long your appointment will take.' },
+        { q: 'Is the ride reimbursed?', a: 'That varies per situation. Check with your health insurer or municipality. We provide an invoice on request.' },
+      ],
+    },
   },
 ];

@@ -126,8 +126,8 @@ ${CSS}
 function nav(prefix, locale = 'nl', altHref = '/') {
   const en = locale === 'en';
   const base = en ? '/en' : '';
-  const svcLinks = SERVICES.map(s => `<li><a href="${base}/diensten/${s.slug}">${s.nav}</a></li>`).join('');
-  const cityLinks = TOP_CITIES.map(slug => { const c = cityBySlug(slug); return `<li><a href="${base}${cityPath(c)}">${c.name}</a></li>`; }).join('');
+  const svcLinks = SERVICES.map(s => `<li><a href="${base}/diensten/${s.slug}">${(en ? s.en : s).nav}</a></li>`).join('');
+  const cityLinks = TOP_CITIES.map(slug => { const c = cityBySlug(slug); return `<li><a href="${base}${cityPath(c)}">${en ? (c.en.name || c.name) : c.name}</a></li>`; }).join('');
   const t = {
     diensten: en ? 'Services' : 'Diensten',
     locaties: en ? 'Locations' : 'Locaties',
@@ -177,8 +177,8 @@ function nav(prefix, locale = 'nl', altHref = '/') {
 function footer(prefix, locale = 'nl') {
   const en = locale === 'en';
   const base = en ? '/en' : '';
-  const serviceLinks = SERVICES.map(s => `<li><a href="${base}/diensten/${s.slug}">${s.nav}</a></li>`).join('\n          ');
-  const cityLinks = TOP_CITIES.map(slug => { const c = cityBySlug(slug); return `<li><a href="${base}${cityPath(c)}">${c.name}</a></li>`; }).join('\n          ');
+  const serviceLinks = SERVICES.map(s => `<li><a href="${base}/diensten/${s.slug}">${(en ? s.en : s).nav}</a></li>`).join('\n          ');
+  const cityLinks = TOP_CITIES.map(slug => { const c = cityBySlug(slug); return `<li><a href="${base}${cityPath(c)}">${en ? (c.en.name || c.name) : c.name}</a></li>`; }).join('\n          ');
   const t = en ? {
     tagline: `The emergency branch of ${SITE.parentBrand}: wheelchair transport in the Netherlands, reachable 24 hours a day for rides that can't wait.`,
     diensten: 'Services', locaties: 'Locations', alleLocaties: 'All locations', contact: 'Contact',
@@ -392,15 +392,18 @@ ${scripts({ skipSticky, skipFaq, useScrollThreshold })}
 
 /* ============================== SERVICE PAGE BODY ============================== */
 
-function serviceLd(svc) {
+function serviceLd(svc, locale = 'nl') {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
+  const d = en ? svc.en : svc;
   return `<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Service",
-  "serviceType": "${svc.h1}",
+  "serviceType": "${d.h1}",
   "provider": { "@type": "TaxiService", "name": "${SITE.name}", "telephone": "${SITE.phoneTel}" },
-  "areaServed": "Nederland",
-  "url": "${SITE.domain}/diensten/${svc.slug}"
+  "areaServed": "${en ? 'Netherlands' : 'Nederland'}",
+  "url": "${SITE.domain}${base}/diensten/${svc.slug}"
 }
 </script>
 <script type="application/ld+json">
@@ -408,30 +411,32 @@ function serviceLd(svc) {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    ${svc.faqs.map(f => `{"@type":"Question","name":${JSON.stringify(f.q)},"acceptedAnswer":{"@type":"Answer","text":${JSON.stringify(f.a)}}}`).join(',\n    ')}
+    ${d.faqs.map(f => `{"@type":"Question","name":${JSON.stringify(f.q)},"acceptedAnswer":{"@type":"Answer","text":${JSON.stringify(f.a)}}}`).join(',\n    ')}
   ]
 }
 </script>
 ${breadcrumbLd([
-  { label: 'Home', url: `${SITE.domain}/` },
-  { label: 'Diensten', url: `${SITE.domain}/#diensten` },
-  { label: svc.nav },
+  { label: 'Home', url: `${SITE.domain}${base}/` },
+  { label: en ? 'Services' : 'Diensten', url: `${SITE.domain}${base}/#diensten` },
+  { label: d.nav },
 ])}`;
 }
 
-function buildServiceBody(svc) {
-  const p = '../';
+function buildServiceBody(svc, locale = 'nl') {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
+  const d = en ? svc.en : svc;
   return `<!-- PAGE HERO -->
 <header class="page-hero has-photo" style="background-image:url('/img/${svc.hero || svc.images[0].src}');background-position:${svc.heroPosition || 'center'}">
   <div class="wrap">
     <div class="hero-box reveal">
-      ${breadcrumbNav([{ label: 'Home', href: `/` }, { label: 'Diensten', href: `/#diensten` }, { label: svc.nav }])}
-      <span class="eyebrow">${svc.eyebrow}</span>
-      <h1>${svc.h1}</h1>
-      <p class="lead">${svc.lead}</p>
+      ${breadcrumbNav([{ label: 'Home', href: `${base}/` }, { label: en ? 'Services' : 'Diensten', href: `${base}/#diensten` }, { label: d.nav }])}
+      <span class="eyebrow">${d.eyebrow}</span>
+      <h1>${d.h1}</h1>
+      <p class="lead">${d.lead}</p>
       <div class="hero-cta">
-        <a href="tel:${SITE.phoneTel}" class="btn btn-yellow">Bel direct: ${SITE.phoneDisplay}</a>
-        <a href="/contact" class="btn btn-ghost">Of plan online</a>
+        <a href="tel:${SITE.phoneTel}" class="btn btn-yellow">${en ? 'Call now' : 'Bel direct'}: ${SITE.phoneDisplay}</a>
+        <a href="${base}/contact" class="btn btn-ghost">${en ? 'Or book online' : 'Of plan online'}</a>
       </div>
     </div>
   </div>
@@ -441,17 +446,17 @@ function buildServiceBody(svc) {
 <section class="band-2">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Achtergrond</span>
-      <h2>${svc.about.title}</h2>
+      <span class="eyebrow">${en ? 'Background' : 'Achtergrond'}</span>
+      <h2>${d.about.title}</h2>
     </div>
     <div class="about-info-grid">
       <div class="reveal reveal-d1">
-        ${svc.about.paragraphs.map(par => `<p>${par}</p>`).join('\n        ')}
+        ${d.about.paragraphs.map(par => `<p>${par}</p>`).join('\n        ')}
       </div>
       <div class="signals-card reveal reveal-d2">
-        <h4>Herkent u dit?</h4>
+        <h4>${en ? 'Sound familiar?' : 'Herkent u dit?'}</h4>
         <ul class="signals-list">
-          ${svc.about.signals.map(s => `<li>${s}</li>`).join('\n          ')}
+          ${d.about.signals.map(s => `<li>${s}</li>`).join('\n          ')}
         </ul>
       </div>
     </div>
@@ -463,31 +468,31 @@ function buildServiceBody(svc) {
   <div class="wrap">
     <div class="split" style="align-items:start;margin-top:0">
       <div class="long reveal">
-        ${(svc.sections || []).map(sec => `<h2>${sec.title}</h2>${sec.paragraphs.map(par => `<p>${par}</p>`).join('')}`).join('')}
+        ${(d.sections || []).map(sec => `<h2>${sec.title}</h2>${sec.paragraphs.map(par => `<p>${par}</p>`).join('')}`).join('')}
       </div>
       <div class="reveal reveal-d1" style="display:grid;gap:18px">
-        ${svc.images.map(img => `<figure class="photo-card landscape"><img src="/img/${img.src}" alt="${img.alt}" width="1000" height="750" loading="lazy"></figure>`).join('')}
+        ${svc.images.map(img => `<figure class="photo-card landscape"><img src="/img/${img.src}" alt="${en ? (img.altEn || img.alt) : img.alt}" width="1000" height="750" loading="lazy"></figure>`).join('')}
       </div>
     </div>
   </div>
 </section>
 
-${svc.instapSteps ? `<!-- INSTAPPROCEDURE -->
+${d.instapSteps ? `<!-- INSTAPPROCEDURE -->
 <section>
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Veiligheid</span>
-      <h2>Zo gaat het <span class="serif-i">instappen</span></h2>
-      <p>Stap voor stap, altijd op dezelfde manier, zodat de rolstoel en de gordel goed vastzitten voordat we wegrijden.</p>
+      <span class="eyebrow">${en ? 'Safety' : 'Veiligheid'}</span>
+      <h2>${en ? 'How boarding' : 'Zo gaat het'} <span class="serif-i">${en ? 'works' : 'instappen'}</span></h2>
+      <p>${en ? 'Step by step, always the same way, so the wheelchair and belt are secure before we drive off.' : 'Stap voor stap, altijd op dezelfde manier, zodat de rolstoel en de gordel goed vastzitten voordat we wegrijden.'}</p>
     </div>
     <div class="split" style="margin-top:8px;align-items:start">
       <div class="steps-stack">
-        ${svc.instapSteps.map((s, i) => `<div class="step-row reveal reveal-d${i % 4}">
+        ${d.instapSteps.map((s, i) => `<div class="step-row reveal reveal-d${i % 4}">
           <div class="big">0${i + 1}</div>
           <div><h3>${s}</h3></div>
         </div>`).join('\n        ')}
       </div>
-      <div class="reveal reveal-d1">${videoEmbed('FZnAOHJuVqk', 'Instructiefilm: rolstoel vastzetten in de rolstoelbus')}</div>
+      <div class="reveal reveal-d1">${videoEmbed('FZnAOHJuVqk', en ? 'Instruction film: securing a wheelchair in the vehicle' : 'Instructiefilm: rolstoel vastzetten in de rolstoelbus')}</div>
     </div>
   </div>
 </section>` : ''}
@@ -496,14 +501,14 @@ ${svc.instapSteps ? `<!-- INSTAPPROCEDURE -->
 <section class="band-2">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Wat u krijgt</span>
-      <h2>Duidelijk <span class="serif-i">geregeld</span></h2>
+      <span class="eyebrow">${en ? 'What you get' : 'Wat u krijgt'}</span>
+      <h2>${en ? 'Clearly' : 'Duidelijk'} <span class="serif-i">${en ? 'arranged' : 'geregeld'}</span></h2>
     </div>
     <div class="grid-4">
-      ${svc.deliverables.map((d, i) => `<div class="card reveal reveal-d${i % 4}">
+      ${d.deliverables.map((it, i) => `<div class="card reveal reveal-d${i % 4}">
         <span class="num">0${i + 1}</span>
-        <h3>${d.t}</h3>
-        <p>${d.d}</p>
+        <h3>${it.t}</h3>
+        <p>${it.d}</p>
       </div>`).join('\n      ')}
     </div>
   </div>
@@ -514,10 +519,10 @@ ${svc.instapSteps ? `<!-- INSTAPPROCEDURE -->
   <div class="wrap">
     <div class="price-box reveal">
       <div>
-        <span class="eyebrow">Prijsindicatie</span>
-        <h3>${svc.priceText}</h3>
+        <span class="eyebrow">${en ? 'Price indication' : 'Prijsindicatie'}</span>
+        <h3>${d.priceText}</h3>
       </div>
-      <p>${svc.priceNote}</p>
+      <p>${d.priceNote}</p>
     </div>
   </div>
 </section>
@@ -526,11 +531,11 @@ ${svc.instapSteps ? `<!-- INSTAPPROCEDURE -->
 <section>
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Werkwijze</span>
-      <h2>Zo pakken we <span class="serif-i">het aan</span></h2>
+      <span class="eyebrow">${en ? 'How it works' : 'Werkwijze'}</span>
+      <h2>${en ? "Here's how" : 'Zo pakken we'} <span class="serif-i">${en ? 'we handle it' : 'het aan'}</span></h2>
     </div>
     <div class="steps">
-      ${svc.steps.map((s, i) => `<div class="step reveal reveal-d${i}">
+      ${d.steps.map((s, i) => `<div class="step reveal reveal-d${i}">
         <div class="big">${i + 1}.</div>
         <h3>${s.t}</h3>
         <p>${s.d}</p>
@@ -543,13 +548,13 @@ ${svc.instapSteps ? `<!-- INSTAPPROCEDURE -->
 <section>
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Locaties</span>
-      <h2>${svc.nav} <span class="serif-i">in de buurt</span></h2>
-      <p>We rijden in Nederland. Dit zijn de plaatsen waar we het vaakst komen.</p>
+      <span class="eyebrow">${en ? 'Locations' : 'Locaties'}</span>
+      <h2>${d.nav} <span class="serif-i">${en ? 'near you' : 'in de buurt'}</span></h2>
+      <p>${en ? "We drive throughout the Netherlands. These are the places we visit most often." : 'We rijden in Nederland. Dit zijn de plaatsen waar we het vaakst komen.'}</p>
     </div>
     <div class="area-list reveal">
-      ${TOP_CITIES.map(slug => { const c = cityBySlug(slug); return `<a href="${cityPath(c)}">${c.name}</a>`; }).join('\n      ')}
-      <a href="/locaties"><b>Alle locaties</b></a>
+      ${TOP_CITIES.map(slug => { const c = cityBySlug(slug); return `<a href="${base}${cityPath(c)}">${c.name}</a>`; }).join('\n      ')}
+      <a href="${base}/locaties"><b>${en ? 'All locations' : 'Alle locaties'}</b></a>
     </div>
   </div>
 </section>
@@ -558,14 +563,15 @@ ${svc.instapSteps ? `<!-- INSTAPPROCEDURE -->
 <section class="band-2">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Ook interessant</span>
-      <h2>Gerelateerde <span class="serif-i">diensten</span></h2>
+      <span class="eyebrow">${en ? 'Also useful' : 'Ook interessant'}</span>
+      <h2>${en ? 'Related' : 'Gerelateerde'} <span class="serif-i">${en ? 'services' : 'diensten'}</span></h2>
     </div>
     <div class="related-grid">
       ${svc.related.map(slug => {
         const rel = SERVICES.find(s => s.slug === slug);
-        return `<a href="/diensten/${rel.slug}" class="related-card reveal">
-        <span>${rel.nav}</span><span class="arrow">→</span>
+        const relD = en ? rel.en : rel;
+        return `<a href="${base}/diensten/${rel.slug}" class="related-card reveal">
+        <span>${relD.nav}</span><span class="arrow">→</span>
       </a>`;
       }).join('\n      ')}
     </div>
@@ -576,11 +582,11 @@ ${svc.instapSteps ? `<!-- INSTAPPROCEDURE -->
 <section id="faq">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Veelgestelde vragen</span>
-      <h2>Goed om te <span class="serif-i">weten</span></h2>
+      <span class="eyebrow">${en ? 'Frequently asked questions' : 'Veelgestelde vragen'}</span>
+      <h2>${en ? 'Good to' : 'Goed om te'} <span class="serif-i">${en ? 'know' : 'weten'}</span></h2>
     </div>
     <div class="faq-list">
-      ${svc.faqs.map(f => `<div class="faq-item reveal">
+      ${d.faqs.map(f => `<div class="faq-item reveal">
         <button class="faq-q" aria-expanded="false">${f.q}</button>
         <div class="faq-a"><p>${f.a}</p></div>
       </div>`).join('\n      ')}
@@ -592,27 +598,31 @@ ${svc.instapSteps ? `<!-- INSTAPPROCEDURE -->
 <section id="contact" class="cta-final night">
   <canvas class="particles"></canvas>
   <div class="wrap">
-    <span class="eyebrow reveal">Direct geholpen worden</span>
-    <h2 class="reveal reveal-d1">${svc.h1}? <span class="serif-i">Bel gerust.</span></h2>
-    <p class="reveal reveal-d2">Bel direct voor spoed, of plan online een rit voor later.</p>
+    <span class="eyebrow reveal">${en ? 'Get help right away' : 'Direct geholpen worden'}</span>
+    <h2 class="reveal reveal-d1">${d.h1}? <span class="serif-i">${en ? 'Feel free to call.' : 'Bel gerust.'}</span></h2>
+    <p class="reveal reveal-d2">${en ? "Call now for an emergency, or book a ride online for later." : 'Bel direct voor spoed, of plan online een rit voor later.'}</p>
     <div class="reveal reveal-d3">
-      <a href="tel:${SITE.phoneTel}" class="btn">Bel ${SITE.phoneDisplay}</a>
+      <a href="tel:${SITE.phoneTel}" class="btn">${en ? 'Call' : 'Bel'} ${SITE.phoneDisplay}</a>
     </div>
-    <p class="cta-sub reveal reveal-d3">Of <a href="/contact" style="color:var(--accent)">plan online een rit</a> · ook per WhatsApp bereikbaar</p>
+    <p class="cta-sub reveal reveal-d3">${en ? 'Or' : 'Of'} <a href="${base}/contact" style="color:var(--accent)">${en ? 'book a ride online' : 'plan online een rit'}</a> · ${en ? 'also reachable via WhatsApp' : 'ook per WhatsApp bereikbaar'}</p>
   </div>
 </section>`;
 }
 
 /* ============================== LOCATION PAGES ============================== */
 
-function cityLd(c) {
-  const url = `${SITE.domain}${cityPath(c)}`;
+function cityLd(c, locale = 'nl') {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
+  const d = en ? c.en : c;
+  const url = `${SITE.domain}${base}${cityPath(c)}`;
+  const name = en ? (c.en.name || c.name) : c.name;
   return `<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "TaxiService",
   "name": "${SITE.name}",
-  "serviceType": ${JSON.stringify(c.isService ? c.name : `Rolstoeltaxi ${c.name}`)},
+  "serviceType": ${JSON.stringify(c.isService ? name : `${en ? 'Wheelchair taxi' : 'Rolstoeltaxi'} ${name}`)},
   "telephone": "${SITE.phoneTel}",
   "image": "${SITE.domain}/img/logo-icoon.png",
   "areaServed": ${c.isService ? '"Amsterdam"' : JSON.stringify({ '@type': 'City', name: c.name })},
@@ -630,40 +640,44 @@ function cityLd(c) {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    ${c.faqs.map(f => `{"@type":"Question","name":${JSON.stringify(f.q)},"acceptedAnswer":{"@type":"Answer","text":${JSON.stringify(f.a)}}}`).join(',\n    ')}
+    ${d.faqs.map(f => `{"@type":"Question","name":${JSON.stringify(f.q)},"acceptedAnswer":{"@type":"Answer","text":${JSON.stringify(f.a)}}}`).join(',\n    ')}
   ]
 }
 </script>
 ${breadcrumbLd([
-  { label: 'Home', url: `${SITE.domain}/` },
-  { label: 'Locaties', url: `${SITE.domain}/locaties` },
-  { label: c.name },
+  { label: 'Home', url: `${SITE.domain}${base}/` },
+  { label: en ? 'Locations' : 'Locaties', url: `${SITE.domain}${base}/locaties` },
+  { label: name },
 ])}`;
 }
 
-function buildCityBody(c) {
-  const loc = c.in || `in ${c.name}`;
-  const introHead = c.isService ? `${c.name}, <span class="serif-i">zo geregeld</span>`
-    : c.distant ? `Ritten naar en vanuit <span class="serif-i">${c.name}</span>`
-    : `Rolstoelvervoer <span class="serif-i">${loc}</span>`;
-  const h1 = c.isService ? `${c.name} <span class="serif-i">met spoedservice</span>` : `Rolstoeltaxi ${c.name} <span class="serif-i">met spoedservice</span>`;
-  const eyebrow = c.isService ? 'Ziekenhuisvervoer · Amsterdam' : `Rolstoeltaxi · ${c.name}`;
+function buildCityBody(c, locale = 'nl') {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
+  const d = en ? c.en : c;
+  const name = en ? (c.en.name || c.name) : c.name;
+  const loc = en ? `in ${name}` : (c.in || `in ${c.name}`);
+  const introHead = c.isService ? `${name}, <span class="serif-i">${en ? 'arranged simply' : 'zo geregeld'}</span>`
+    : c.distant ? `${en ? 'Rides to and from' : 'Ritten naar en vanuit'} <span class="serif-i">${name}</span>`
+    : `${en ? 'Wheelchair transport' : 'Rolstoelvervoer'} <span class="serif-i">${loc}</span>`;
+  const h1 = c.isService ? `${name} <span class="serif-i">${en ? 'with emergency service' : 'met spoedservice'}</span>` : `${en ? 'Wheelchair taxi' : 'Rolstoeltaxi'} ${name} <span class="serif-i">${en ? 'with emergency service' : 'met spoedservice'}</span>`;
+  const eyebrow = c.isService ? `${en ? 'Hospital transport' : 'Ziekenhuisvervoer'} · Amsterdam` : `${en ? 'Wheelchair taxi' : 'Rolstoeltaxi'} · ${name}`;
   const nearby = c.nearby.map(cityBySlug).filter(Boolean);
   const photoClass = c.portrait ? 'portrait' : 'landscape';
-  const photo2 = c.photo2 || (c.region === 'Amsterdam en omgeving' ? { src: 'spoedrit-amsterdam-centraal.jpg', alt: 'Rolstoelbus met uitgeklapte laadklep in de stad' } : { src: 'rolstoelbus-zijkant.jpg', alt: 'Rolstoelbus, zijaanzicht, met ruime zijruiten' });
+  const photo2 = c.photo2 || (c.region === 'Amsterdam en omgeving' ? { src: 'spoedrit-amsterdam-centraal.jpg', alt: 'Rolstoelbus met uitgeklapte laadklep in de stad', altEn: 'Wheelchair-accessible vehicle with the ramp deployed in the city' } : { src: 'rolstoelbus-zijkant.jpg', alt: 'Rolstoelbus, zijaanzicht, met ruime zijruiten', altEn: 'Wheelchair-accessible vehicle, side view, with large windows' });
   return `<!-- PAGE HERO -->
 <header class="page-hero has-photo" style="background-image:url('/img/${c.photo.src}');background-position:${c.photo.pos || 'center'}">
   <div class="wrap">
     <div class="hero-box reveal">
-      ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Locaties', href: '/locaties' }, { label: c.name }])}
+      ${breadcrumbNav([{ label: 'Home', href: `${base}/` }, { label: en ? 'Locations' : 'Locaties', href: `${base}/locaties` }, { label: name }])}
       <span class="eyebrow">${eyebrow}</span>
       <h1>${h1}</h1>
-      <div class="proof"><span><b>24/7</b> bereikbaar</span><span><b>10+</b> jaar ervaring</span><span><b>5000+</b> ritten</span></div>
+      <div class="proof"><span><b>24/7</b> ${en ? 'available' : 'bereikbaar'}</span><span><b>10+</b> ${en ? 'years experience' : 'jaar ervaring'}</span><span><b>5000+</b> ${en ? 'rides' : 'ritten'}</span></div>
       <div class="hero-cta">
-        <a href="tel:${SITE.phoneTel}" class="btn btn-yellow" data-cta="primary">Bel direct: ${SITE.phoneDisplay}</a>
-        <a href="/contact" class="btn btn-ghost">Of plan online</a>
+        <a href="tel:${SITE.phoneTel}" class="btn btn-yellow" data-cta="primary">${en ? 'Call now' : 'Bel direct'}: ${SITE.phoneDisplay}</a>
+        <a href="${base}/contact" class="btn btn-ghost">${en ? 'Or book online' : 'Of plan online'}</a>
       </div>
-      <p class="lead">${c.lead}</p>
+      <p class="lead">${d.lead}</p>
     </div>
   </div>
 </header>
@@ -672,16 +686,16 @@ function buildCityBody(c) {
 <section>
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">${c.isService ? 'Ziekenhuisvervoer' : 'Rolstoelvervoer'}</span>
+      <span class="eyebrow">${c.isService ? (en ? 'Hospital transport' : 'Ziekenhuisvervoer') : (en ? 'Wheelchair transport' : 'Rolstoelvervoer')}</span>
       <h2>${introHead}</h2>
     </div>
     <div class="split">
       <div class="reveal">
-        ${c.intro.map(par => `<p>${par}</p>`).join('\n        ')}
-        <p><a href="/diensten/spoedvervoer-rolstoeltaxi" style="color:var(--accent);font-weight:700">Meer over spoedvervoer →</a></p>
+        ${d.intro.map(par => `<p>${par}</p>`).join('\n        ')}
+        <p><a href="${base}/diensten/spoedvervoer-rolstoeltaxi" style="color:var(--accent);font-weight:700">${en ? 'More about emergency transport →' : 'Meer over spoedvervoer →'}</a></p>
       </div>
       <figure class="photo-card ${photoClass} reveal reveal-d1">
-        <img src="/img/${c.photo.src}" alt="${c.photo.alt}" width="${c.portrait ? 900 : 1000}" height="${c.portrait ? 1200 : 750}" loading="lazy" style="object-position:${c.photo.pos || 'center'}">
+        <img src="/img/${c.photo.src}" alt="${en ? (c.photo.altEn || c.photo.alt) : c.photo.alt}" width="${c.portrait ? 900 : 1000}" height="${c.portrait ? 1200 : 750}" loading="lazy" style="object-position:${c.photo.pos || 'center'}">
       </figure>
     </div>
   </div>
@@ -691,11 +705,11 @@ function buildCityBody(c) {
 <section class="band-2">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">${c.isService ? 'Waarmee wij helpen' : 'Plekken en wijken'}</span>
-      <h2>${c.isService ? 'Van afspraak tot <span class="serif-i">ontslag</span>' : `Waar wij u ophalen en <span class="serif-i">afzetten</span>`}</h2>
+      <span class="eyebrow">${c.isService ? (en ? 'How we help' : 'Waarmee wij helpen') : (en ? 'Places and neighbourhoods' : 'Plekken en wijken')}</span>
+      <h2>${c.isService ? `${en ? 'From appointment to' : 'Van afspraak tot'} <span class="serif-i">${en ? 'discharge' : 'ontslag'}</span>` : `${en ? 'Where we pick you up and' : 'Waar wij u ophalen en'} <span class="serif-i">${en ? 'drop you off' : 'afzetten'}</span>`}</h2>
     </div>
     <div class="grid-3">
-      ${c.plekken.map((pl, i) => `<div class="spot reveal reveal-d${i % 3}"><h3>${pl.t}</h3><p>${pl.d}</p></div>`).join('\n      ')}
+      ${d.plekken.map((pl, i) => `<div class="spot reveal reveal-d${i % 3}"><h3>${pl.t}</h3><p>${pl.d}</p></div>`).join('\n      ')}
     </div>
   </div>
 </section>
@@ -704,11 +718,11 @@ function buildCityBody(c) {
 <section>
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Veelgevraagde ritten</span>
-      <h2>${c.isService ? 'Ritten die wij <span class="serif-i">vaak rijden</span>' : c.distant ? `Vanaf en naar <span class="serif-i">${c.name}</span>` : `Ritten <span class="serif-i">${loc}</span>`}</h2>
+      <span class="eyebrow">${en ? 'Frequently requested rides' : 'Veelgevraagde ritten'}</span>
+      <h2>${c.isService ? `${en ? 'Rides we drive' : 'Ritten die wij'} <span class="serif-i">${en ? 'often' : 'vaak rijden'}</span>` : c.distant ? `${en ? 'To and from' : 'Vanaf en naar'} <span class="serif-i">${name}</span>` : `${en ? 'Rides' : 'Ritten'} <span class="serif-i">${loc}</span>`}</h2>
     </div>
     <ul class="trip-list">
-      ${c.ritten.map((r, i) => `<li class="reveal reveal-d${i % 2}"><span class="ar">→</span><div><b>${r.t}</b><span>${r.d}</span></div></li>`).join('\n      ')}
+      ${d.ritten.map((r, i) => `<li class="reveal reveal-d${i % 2}"><span class="ar">→</span><div><b>${r.t}</b><span>${r.d}</span></div></li>`).join('\n      ')}
     </ul>
   </div>
 </section>
@@ -717,10 +731,10 @@ function buildCityBody(c) {
 <section class="spoed-band night band-line" style="position:relative;overflow:hidden">
   <canvas class="particles"></canvas>
   <div class="wrap" style="position:relative;z-index:1">
-    <span class="eyebrow reveal">Spoed</span>
-    <h2 class="reveal reveal-d1">Spoed ${c.isService ? 'ziekenhuisvervoer' : loc}? <span class="serif-i">Bel direct.</span></h2>
-    <p class="reveal reveal-d2">${c.spoed}</p>
-    <div class="reveal reveal-d3"><a href="tel:${SITE.phoneTel}" class="btn btn-yellow">Bel ${SITE.phoneDisplay}</a></div>
+    <span class="eyebrow reveal">${en ? 'Emergency' : 'Spoed'}</span>
+    <h2 class="reveal reveal-d1">${en ? 'Emergency' : 'Spoed'} ${c.isService ? (en ? 'hospital transport' : 'ziekenhuisvervoer') : loc}? <span class="serif-i">${en ? 'Call now.' : 'Bel direct.'}</span></h2>
+    <p class="reveal reveal-d2">${d.spoed}</p>
+    <div class="reveal reveal-d3"><a href="tel:${SITE.phoneTel}" class="btn btn-yellow">${en ? 'Call' : 'Bel'} ${SITE.phoneDisplay}</a></div>
   </div>
 </section>
 
@@ -729,13 +743,13 @@ function buildCityBody(c) {
   <div class="wrap">
     <div class="split">
       <figure class="photo-card landscape reveal">
-        <img src="/img/${photo2.src}" alt="${photo2.alt}" width="1000" height="750" loading="lazy">
+        <img src="/img/${photo2.src}" alt="${en ? (photo2.altEn || photo2.alt) : photo2.alt}" width="1000" height="750" loading="lazy">
       </figure>
       <div class="reveal reveal-d1">
-        <span class="eyebrow">Ophalen en bereikbaarheid</span>
-        <h2 style="font-size:clamp(26px,3.4vw,38px);margin-bottom:18px">${c.isService ? 'Bij de juiste ingang' : `Zo werkt het ${loc}`}</h2>
-        <p>${c.bereik}</p>
-        <p>Onze bussen hebben een elektrische laadklep en vaste bevestigingspunten. Een begeleider of familielid rijdt gewoon mee.</p>
+        <span class="eyebrow">${en ? 'Pickup and accessibility' : 'Ophalen en bereikbaarheid'}</span>
+        <h2 style="font-size:clamp(26px,3.4vw,38px);margin-bottom:18px">${c.isService ? (en ? 'At the right entrance' : 'Bij de juiste ingang') : `${en ? 'How it works' : 'Zo werkt het'} ${loc}`}</h2>
+        <p>${d.bereik}</p>
+        <p>${en ? 'Our vehicles have an electric ramp and fixed anchor points. A companion or family member is welcome to ride along.' : 'Onze bussen hebben een elektrische laadklep en vaste bevestigingspunten. Een begeleider of familielid rijdt gewoon mee.'}</p>
       </div>
     </div>
   </div>
@@ -745,12 +759,12 @@ function buildCityBody(c) {
 <section class="band-2">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Diensten</span>
-      <h2>Onze diensten <span class="serif-i">${c.isService ? 'in Amsterdam' : loc}</span></h2>
-      <p>Alle diensten van Rolstoeltaxi Spoed zijn ${c.isService ? 'in Amsterdam' : c.distant ? `voor ritten naar en vanuit ${c.name}` : loc} beschikbaar.</p>
+      <span class="eyebrow">${en ? 'Services' : 'Diensten'}</span>
+      <h2>${en ? 'Our services' : 'Onze diensten'} <span class="serif-i">${c.isService ? 'in Amsterdam' : loc}</span></h2>
+      <p>${en ? `All ${SITE.name} services are available ${c.isService ? 'in Amsterdam' : c.distant ? `for rides to and from ${name}` : loc}.` : `Alle diensten van Rolstoeltaxi Spoed zijn ${c.isService ? 'in Amsterdam' : c.distant ? `voor ritten naar en vanuit ${c.name}` : loc} beschikbaar.`}</p>
     </div>
     <div class="grid-4">
-      ${SERVICES.map((sv, i) => `<a href="/diensten/${sv.slug}" class="card reveal reveal-d${i % 4}"><h3>${sv.nav}</h3><p>${truncate(sv.lead, 80)}</p></a>`).join('\n      ')}
+      ${SERVICES.map((sv, i) => { const svd = en ? sv.en : sv; return `<a href="${base}/diensten/${sv.slug}" class="card reveal reveal-d${i % 4}"><h3>${svd.nav}</h3><p>${truncate(svd.lead, 80)}</p></a>`; }).join('\n      ')}
     </div>
   </div>
 </section>
@@ -759,13 +773,16 @@ function buildCityBody(c) {
 <section>
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Zo werkt het</span>
-      <h2>In drie stappen <span class="serif-i">geregeld</span></h2>
+      <span class="eyebrow">${en ? 'How it works' : 'Zo werkt het'}</span>
+      <h2>${en ? 'Arranged in' : 'In'} ${en ? '' : 'drie stappen '}<span class="serif-i">${en ? 'three steps' : 'geregeld'}</span></h2>
     </div>
     <div class="steps">
-      <div class="step reveal"><div class="big">1.</div><h3>Bel of app ons</h3><p>Vertel waar u wordt opgehaald, waar u naartoe moet en of er hulpmiddelen mee gaan.</p></div>
+      ${en ? `<div class="step reveal"><div class="big">1.</div><h3>Call or message us</h3><p>Tell us where to pick you up, where you're going, and whether any equipment is coming along.</p></div>
+      <div class="step reveal reveal-d1"><div class="big">2.</div><h3>We schedule the vehicle</h3><p>You'll hear the arrival time and the price right away, before we set off.</p></div>
+      <div class="step reveal reveal-d2"><div class="big">3.</div><h3>Safely transported</h3><p>The driver helps with boarding and getting off, and secures the wheelchair.</p></div>`
+      : `<div class="step reveal"><div class="big">1.</div><h3>Bel of app ons</h3><p>Vertel waar u wordt opgehaald, waar u naartoe moet en of er hulpmiddelen mee gaan.</p></div>
       <div class="step reveal reveal-d1"><div class="big">2.</div><h3>Wij plannen de bus in</h3><p>U hoort direct de aankomsttijd en de prijs, voordat we vertrekken.</p></div>
-      <div class="step reveal reveal-d2"><div class="big">3.</div><h3>Veilig vervoerd</h3><p>De chauffeur helpt bij het in- en uitstappen en zet de rolstoel vast.</p></div>
+      <div class="step reveal reveal-d2"><div class="big">3.</div><h3>Veilig vervoerd</h3><p>De chauffeur helpt bij het in- en uitstappen en zet de rolstoel vast.</p></div>`}
     </div>
   </div>
 </section>
@@ -774,11 +791,11 @@ function buildCityBody(c) {
 <section id="faq" class="band-2">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Veelgestelde vragen</span>
-      <h2>Vragen over ${c.isService ? 'ziekenhuisvervoer in Amsterdam' : `rolstoeltaxi <span class="serif-i">${c.name}</span>`}</h2>
+      <span class="eyebrow">${en ? 'Frequently asked questions' : 'Veelgestelde vragen'}</span>
+      <h2>${en ? 'Questions about' : 'Vragen over'} ${c.isService ? (en ? 'hospital transport in Amsterdam' : 'ziekenhuisvervoer in Amsterdam') : `${en ? 'wheelchair taxi' : 'rolstoeltaxi'} <span class="serif-i">${name}</span>`}</h2>
     </div>
     <div class="faq-list">
-      ${c.faqs.map(f => `<div class="faq-item reveal">
+      ${d.faqs.map(f => `<div class="faq-item reveal">
         <button class="faq-q" aria-expanded="false">${f.q}</button>
         <div class="faq-a"><p>${f.a}</p></div>
       </div>`).join('\n      ')}
@@ -790,12 +807,12 @@ function buildCityBody(c) {
 <section style="padding:64px 0">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Ook actief in de buurt</span>
-      <h2>Rolstoeltaxi <span class="serif-i">in de omgeving</span></h2>
+      <span class="eyebrow">${en ? 'Also active nearby' : 'Ook actief in de buurt'}</span>
+      <h2>${en ? 'Wheelchair taxi' : 'Rolstoeltaxi'} <span class="serif-i">${en ? 'in the area' : 'in de omgeving'}</span></h2>
     </div>
     <div class="area-list reveal">
-      ${nearby.map(n => `<a href="${cityPath(n)}">${n.name}</a>`).join('\n      ')}
-      <a href="/locaties"><b>Alle locaties</b></a>
+      ${nearby.map(n => `<a href="${base}${cityPath(n)}">${n.name}</a>`).join('\n      ')}
+      <a href="${base}/locaties"><b>${en ? 'All locations' : 'Alle locaties'}</b></a>
     </div>
   </div>
 </section>
@@ -804,32 +821,34 @@ function buildCityBody(c) {
 <section id="contact" class="cta-final night">
   <canvas class="particles"></canvas>
   <div class="wrap">
-    <span class="eyebrow reveal">Direct geholpen worden</span>
-    <h2 class="reveal reveal-d1">${c.isService ? 'Ziekenhuisvervoer' : `Rolstoeltaxi ${c.name}`}? <span class="serif-i">Bel gerust.</span></h2>
-    <p class="reveal reveal-d2">Bel direct voor spoed, of plan online een rit voor later. U hoort de prijs vooraf.</p>
+    <span class="eyebrow reveal">${en ? 'Get help right away' : 'Direct geholpen worden'}</span>
+    <h2 class="reveal reveal-d1">${c.isService ? (en ? 'Hospital transport' : 'Ziekenhuisvervoer') : `${en ? 'Wheelchair taxi' : 'Rolstoeltaxi'} ${name}`}? <span class="serif-i">${en ? 'Feel free to call.' : 'Bel gerust.'}</span></h2>
+    <p class="reveal reveal-d2">${en ? "Call now for an emergency, or book a ride online for later. You'll hear the price beforehand." : 'Bel direct voor spoed, of plan online een rit voor later. U hoort de prijs vooraf.'}</p>
     <div class="reveal reveal-d3">
-      <a href="tel:${SITE.phoneTel}" class="btn btn-yellow">Bel ${SITE.phoneDisplay}</a>
+      <a href="tel:${SITE.phoneTel}" class="btn btn-yellow">${en ? 'Call' : 'Bel'} ${SITE.phoneDisplay}</a>
     </div>
-    <p class="cta-sub reveal reveal-d3">Of <a href="/contact" style="color:var(--accent-2)">plan online een rit</a> · ook per <a href="https://wa.me/${SITE.whatsapp}" style="color:var(--accent-2)">WhatsApp</a></p>
+    <p class="cta-sub reveal reveal-d3">${en ? 'Or' : 'Of'} <a href="${base}/contact" style="color:var(--accent-2)">${en ? 'book a ride online' : 'plan online een rit'}</a> · ${en ? 'also via' : 'ook per'} <a href="https://wa.me/${SITE.whatsapp}" style="color:var(--accent-2)">WhatsApp</a></p>
   </div>
 </section>`;
 }
 
 /* ============================== HUB PAGES ============================== */
 
-function buildDienstenHub() {
+function buildDienstenHub(locale = 'nl') {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
   return `<header class="page-hero has-photo" style="background-image:url('/img/rolstoelbus-torenhof.jpg');background-position:center 60%">
   <div class="wrap">
     <div class="hero-box reveal">
-      ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Diensten' }])}
-      <span class="eyebrow">Diensten</span>
-      <h1>Alle diensten van <span class="serif-i">Rolstoeltaxi Spoed</span></h1>
-      <div class="proof"><span><b>24/7</b> bereikbaar</span><span><b>10+</b> jaar ervaring</span><span><b>${SERVICES.length}</b> diensten</span></div>
+      ${breadcrumbNav([{ label: 'Home', href: `${base}/` }, { label: en ? 'Services' : 'Diensten' }])}
+      <span class="eyebrow">${en ? 'Services' : 'Diensten'}</span>
+      <h1>${en ? 'All services from' : 'Alle diensten van'} <span class="serif-i">${SITE.name}</span></h1>
+      <div class="proof"><span><b>24/7</b> ${en ? 'available' : 'bereikbaar'}</span><span><b>10+</b> ${en ? 'years experience' : 'jaar ervaring'}</span><span><b>${SERVICES.length}</b> ${en ? 'services' : 'diensten'}</span></div>
       <div class="hero-cta">
-        <a href="tel:${SITE.phoneTel}" class="btn btn-yellow" data-cta="primary">Bel direct: ${SITE.phoneDisplay}</a>
-        <a href="/contact" class="btn btn-ghost">Of plan online</a>
+        <a href="tel:${SITE.phoneTel}" class="btn btn-yellow" data-cta="primary">${en ? 'Call now' : 'Bel direct'}: ${SITE.phoneDisplay}</a>
+        <a href="${base}/contact" class="btn btn-ghost">${en ? 'Or book online' : 'Of plan online'}</a>
       </div>
-      <p class="lead">Van spoedvervoer tot uitvaartvervoer: één telefoonnummer, dezelfde bussen en dezelfde chauffeurs voor elke rit.</p>
+      <p class="lead">${en ? 'From emergency transport to funeral transport: one phone number, the same vehicles and the same drivers for every ride.' : 'Van spoedvervoer tot uitvaartvervoer: één telefoonnummer, dezelfde bussen en dezelfde chauffeurs voor elke rit.'}</p>
     </div>
   </div>
 </header>
@@ -837,36 +856,36 @@ function buildDienstenHub() {
 <section>
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Kies uw dienst</span>
-      <h2>Rolstoelvervoer voor <span class="serif-i">elke gelegenheid</span></h2>
-      <p>Alle ritten worden gereden met een rolstoelbus met elektrische laadklep en een ervaren chauffeur. Kies de dienst die het best bij uw rit past, of bel en wij denken mee.</p>
+      <span class="eyebrow">${en ? 'Choose your service' : 'Kies uw dienst'}</span>
+      <h2>${en ? 'Wheelchair transport for' : 'Rolstoelvervoer voor'} <span class="serif-i">${en ? 'every occasion' : 'elke gelegenheid'}</span></h2>
+      <p>${en ? 'Every ride is driven with a wheelchair-accessible vehicle with an electric ramp and an experienced driver. Choose the service that best fits your ride, or call and we\'ll think it through with you.' : 'Alle ritten worden gereden met een rolstoelbus met elektrische laadklep en een ervaren chauffeur. Kies de dienst die het best bij uw rit past, of bel en wij denken mee.'}</p>
     </div>
     <div class="grid-4">
-      ${SERVICES.map((s, i) => `<a href="/diensten/${s.slug}" class="card reveal reveal-d${i % 4}">
+      ${SERVICES.map((s, i) => { const d = en ? s.en : s; return `<a href="${base}/diensten/${s.slug}" class="card reveal reveal-d${i % 4}">
         <span class="icon-badge${s.icon === 'wheelchair' ? ' is-logo' : ''}">${s.icon === 'wheelchair' ? '<img src="/img/logo-icoon.png" alt="" width="26" height="17" aria-hidden="true">' : ICONS[s.icon]}</span>
-        <h3>${s.h1}</h3>
-        <p>${truncate(s.lead, 110)}</p>
-      </a>`).join('\n      ')}
+        <h3>${d.h1}</h3>
+        <p>${truncate(d.lead, 110)}</p>
+      </a>`; }).join('\n      ')}
     </div>
   </div>
 </section>
 
 <section class="band-2">
   <div class="wrap long reveal">
-    <h2>Eén partij voor spoed en gepland vervoer</h2>
-    <p>Rolstoeltaxi Spoed is de spoedtak van Rolstoeltaxi Holland. Dat betekent dat u voor elke situatie bij dezelfde partij terechtkunt: een spoedrit op het laatste moment, een vaste rit naar dagbesteding, een vlucht vanaf Schiphol of een afscheid dat u wilt bijwonen. De bus, de chauffeur en de manier van werken zijn steeds hetzelfde: rustig, zorgvuldig en met de prijs vooraf.</p>
-    <p>Wilt u weten in welke plaatsen we rijden? Bekijk dan de <a href="/locaties" style="color:var(--accent)">overzichtspagina met alle locaties</a>, of lees eerst de <a href="/tarieven" style="color:var(--accent)">tarievenpagina</a> voor de opbouw van de prijs.</p>
+    <h2>${en ? 'One partner for emergency and planned transport' : 'Eén partij voor spoed en gepland vervoer'}</h2>
+    <p>${en ? `${SITE.name} is the emergency branch of ${SITE.parentBrand}. That means you can turn to the same partner for every situation: a last-minute emergency ride, a regular ride to day care, a flight from Schiphol, or a farewell you want to attend. The vehicle, the driver and the way of working are always the same: calm, careful, with the price agreed beforehand.` : 'Rolstoeltaxi Spoed is de spoedtak van Rolstoeltaxi Holland. Dat betekent dat u voor elke situatie bij dezelfde partij terechtkunt: een spoedrit op het laatste moment, een vaste rit naar dagbesteding, een vlucht vanaf Schiphol of een afscheid dat u wilt bijwonen. De bus, de chauffeur en de manier van werken zijn steeds hetzelfde: rustig, zorgvuldig en met de prijs vooraf.'}</p>
+    <p>${en ? `Want to know where we drive? Take a look at the ` : 'Wilt u weten in welke plaatsen we rijden? Bekijk dan de '}<a href="${base}/locaties" style="color:var(--accent)">${en ? 'overview page with all locations' : 'overzichtspagina met alle locaties'}</a>${en ? `, or read the ` : ', of lees eerst de '}<a href="${base}/tarieven" style="color:var(--accent)">${en ? 'rates page' : 'tarievenpagina'}</a>${en ? ' first for how the price is built up.' : ' voor de opbouw van de prijs.'}</p>
   </div>
 </section>
 
 <section id="contact" class="cta-final night">
   <canvas class="particles"></canvas>
   <div class="wrap">
-    <span class="eyebrow reveal">Direct geholpen worden</span>
-    <h2 class="reveal reveal-d1">Niet zeker welke dienst? <span class="serif-i">Bel gerust.</span></h2>
-    <p class="reveal reveal-d2">We denken graag met u mee en noemen de prijs vooraf.</p>
-    <div class="reveal reveal-d3"><a href="tel:${SITE.phoneTel}" class="btn btn-yellow">Bel ${SITE.phoneDisplay}</a></div>
-    <p class="cta-sub reveal reveal-d3">Of <a href="/contact" style="color:var(--accent-2)">plan online een rit</a></p>
+    <span class="eyebrow reveal">${en ? 'Get help right away' : 'Direct geholpen worden'}</span>
+    <h2 class="reveal reveal-d1">${en ? 'Not sure which service?' : 'Niet zeker welke dienst?'} <span class="serif-i">${en ? 'Feel free to call.' : 'Bel gerust.'}</span></h2>
+    <p class="reveal reveal-d2">${en ? "We're happy to think it through with you and name the price beforehand." : 'We denken graag met u mee en noemen de prijs vooraf.'}</p>
+    <div class="reveal reveal-d3"><a href="tel:${SITE.phoneTel}" class="btn btn-yellow">${en ? 'Call' : 'Bel'} ${SITE.phoneDisplay}</a></div>
+    <p class="cta-sub reveal reveal-d3">${en ? 'Or' : 'Of'} <a href="${base}/contact" style="color:var(--accent-2)">${en ? 'book a ride online' : 'plan online een rit'}</a></p>
   </div>
 </section>`;
 }
@@ -877,34 +896,43 @@ const REGION_ORDER = [
   ['Zuid-Holland en Utrecht', 'De grote steden in het westen en midden van het land.'],
   ['Rest van Nederland', 'Ritten naar en vanuit de rest van Nederland.'],
 ];
+const REGION_ORDER_EN = [
+  'Amsterdam and surroundings, and the towns around the capital.',
+  'Kennemerland and North Holland: from the coast at Zandvoort to Alkmaar and the Zaan region.',
+  'South Holland and Utrecht: the major cities in the west and centre of the country.',
+  'Rides to and from the rest of the Netherlands.',
+];
+const REGION_LABELS_EN = ['Amsterdam and surroundings', 'Kennemerland and North Holland', 'South Holland and Utrecht', 'Rest of the Netherlands'];
 
-function buildLocatiesHub() {
+function buildLocatiesHub(locale = 'nl') {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
   return `<header class="page-hero has-photo" style="background-image:url('/img/rolstoelbus-rai-amsterdam.jpg');background-position:center 45%">
   <div class="wrap">
     <div class="hero-box reveal">
-      ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Locaties' }])}
-      <span class="eyebrow">Locaties</span>
-      <h1>Rolstoeltaxi in <span class="serif-i">${CITIES.length} locaties</span></h1>
-      <div class="proof"><span><b>24/7</b> bereikbaar</span><span><b>10+</b> jaar ervaring</span><span><b>5000+</b> ritten</span></div>
+      ${breadcrumbNav([{ label: 'Home', href: `${base}/` }, { label: en ? 'Locations' : 'Locaties' }])}
+      <span class="eyebrow">${en ? 'Locations' : 'Locaties'}</span>
+      <h1>${en ? 'Wheelchair taxi in' : 'Rolstoeltaxi in'} <span class="serif-i">${CITIES.length} ${en ? 'locations' : 'locaties'}</span></h1>
+      <div class="proof"><span><b>24/7</b> ${en ? 'available' : 'bereikbaar'}</span><span><b>10+</b> ${en ? 'years experience' : 'jaar ervaring'}</span><span><b>5000+</b> ${en ? 'rides' : 'ritten'}</span></div>
       <div class="hero-cta">
-        <a href="tel:${SITE.phoneTel}" class="btn btn-yellow" data-cta="primary">Bel direct: ${SITE.phoneDisplay}</a>
-        <a href="/contact" class="btn btn-ghost">Of plan online</a>
+        <a href="tel:${SITE.phoneTel}" class="btn btn-yellow" data-cta="primary">${en ? 'Call now' : 'Bel direct'}: ${SITE.phoneDisplay}</a>
+        <a href="${base}/contact" class="btn btn-ghost">${en ? 'Or book online' : 'Of plan online'}</a>
       </div>
-      <p class="lead">Kies uw plaats en zie waar we u ophalen, welke ritten we vaak rijden en hoe u spoed regelt. Staat uw plaats er niet bij? Bel gerust, we bespreken de mogelijkheden.</p>
+      <p class="lead">${en ? "Choose your town and see where we pick you up, which rides we drive most often and how to arrange an emergency ride. Not on the list? Call us, we're happy to discuss the options." : 'Kies uw plaats en zie waar we u ophalen, welke ritten we vaak rijden en hoe u spoed regelt. Staat uw plaats er niet bij? Bel gerust, we bespreken de mogelijkheden.'}</p>
     </div>
   </div>
 </header>
 
 <section style="padding-top:60px">
   <div class="wrap">
-    ${REGION_ORDER.map(([region, blurb]) => `<div class="hub-group">
-      <h2 class="reveal">${region}</h2>
-      <p class="reveal">${blurb}</p>
+    ${REGION_ORDER.map(([region, blurb], ri) => `<div class="hub-group">
+      <h2 class="reveal">${en ? REGION_LABELS_EN[ri] : region}</h2>
+      <p class="reveal">${en ? REGION_ORDER_EN[ri] : blurb}</p>
       <div class="grid-4">
-        ${CITIES.filter(c => c.region === region).map((c, i) => `<a href="${cityPath(c)}" class="card reveal reveal-d${i % 4}">
-          <h3>${c.name}</h3>
-          <p>${truncate(c.lead, 100)}</p>
-        </a>`).join('\n        ')}
+        ${CITIES.filter(c => c.region === region).map((c, i) => { const cd = en ? c.en : c; const cname = en ? (c.en.name || c.name) : c.name; return `<a href="${base}${cityPath(c)}" class="card reveal reveal-d${i % 4}">
+          <h3>${cname}</h3>
+          <p>${truncate(cd.lead, 100)}</p>
+        </a>`; }).join('\n        ')}
       </div>
     </div>`).join('\n    ')}
   </div>
@@ -913,29 +941,31 @@ function buildLocatiesHub() {
 <section id="contact" class="cta-final night">
   <canvas class="particles"></canvas>
   <div class="wrap">
-    <span class="eyebrow reveal">Direct geholpen worden</span>
-    <h2 class="reveal reveal-d1">Uw plaats niet gevonden? <span class="serif-i">Bel gerust.</span></h2>
-    <p class="reveal reveal-d2">We rijden in Nederland en bespreken graag de mogelijkheden voor uw rit. Bekijk ook onze <a href="/diensten" style="color:var(--accent-2)">diensten</a>.</p>
-    <div class="reveal reveal-d3"><a href="tel:${SITE.phoneTel}" class="btn btn-yellow">Bel ${SITE.phoneDisplay}</a></div>
-    <p class="cta-sub reveal reveal-d3">Of <a href="/contact" style="color:var(--accent-2)">plan online een rit</a></p>
+    <span class="eyebrow reveal">${en ? 'Get help right away' : 'Direct geholpen worden'}</span>
+    <h2 class="reveal reveal-d1">${en ? "Can't find your town?" : 'Uw plaats niet gevonden?'} <span class="serif-i">${en ? 'Feel free to call.' : 'Bel gerust.'}</span></h2>
+    <p class="reveal reveal-d2">${en ? "We drive throughout the Netherlands and are happy to discuss the options for your ride. Also take a look at our " : 'We rijden in Nederland en bespreken graag de mogelijkheden voor uw rit. Bekijk ook onze '}<a href="${base}/diensten" style="color:var(--accent-2)">${en ? 'services' : 'diensten'}</a>.</p>
+    <div class="reveal reveal-d3"><a href="tel:${SITE.phoneTel}" class="btn btn-yellow">${en ? 'Call' : 'Bel'} ${SITE.phoneDisplay}</a></div>
+    <p class="cta-sub reveal reveal-d3">${en ? 'Or' : 'Of'} <a href="${base}/contact" style="color:var(--accent-2)">${en ? 'book a ride online' : 'plan online een rit'}</a></p>
   </div>
 </section>`;
 }
 
 /* ============================== HOME PAGE ============================== */
 
-function homeLd() {
+function homeLd(locale = 'nl') {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
   return `<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "TaxiService",
   "name": "${SITE.name}",
-  "description": "Spoedtak van ${SITE.parentBrand}: rolstoelvervoer in Nederland, 24 uur per dag bereikbaar voor spoedritten, ziekenhuisvervoer en luchthavenvervoer.",
-  "url": "${SITE.domain}/",
+  "description": "${en ? `Emergency branch of ${SITE.parentBrand}: wheelchair transport in the Netherlands, reachable 24 hours a day for emergency rides, hospital transport and airport transport.` : `Spoedtak van ${SITE.parentBrand}: rolstoelvervoer in Nederland, 24 uur per dag bereikbaar voor spoedritten, ziekenhuisvervoer en luchthavenvervoer.`}",
+  "url": "${SITE.domain}${base}/",
   "telephone": "${SITE.phoneTel}",
   "email": "${SITE.email}",
   "image": "${SITE.domain}/img/logo-icoon.png",
-  "areaServed": "Nederland",
+  "areaServed": "${en ? 'Netherlands' : 'Nederland'}",
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
@@ -949,35 +979,41 @@ function homeLd() {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type":"Question","name":"Wat is het verschil tussen Rolstoeltaxi Spoed en regulier rolstoelvervoer?","acceptedAnswer":{"@type":"Answer","text":"Rolstoeltaxi Spoed is gericht op ritten die niet vooraf gepland konden worden: een spoedopname, een last-minute afspraak of vervoer dat vandaag nog geregeld moet zijn. Voor vooraf geplande, terugkerende ritten kunt u ons ook gewoon bellen."}},
+    ${en ? `{"@type":"Question","name":"What is the difference between ${SITE.name} and regular wheelchair transport?","acceptedAnswer":{"@type":"Answer","text":"${SITE.name} focuses on rides that couldn't be planned in advance: an emergency admission, a last-minute appointment, or transport that needs to be arranged today. For pre-planned, recurring rides you can just call us as well."}},
+    {"@type":"Question","name":"Is ${SITE.name} the same company as ${SITE.parentBrand}?","acceptedAnswer":{"@type":"Answer","text":"${SITE.name} is the emergency branch of ${SITE.parentBrand}: the same experienced drivers and the same wheelchair-accessible vehicles, specially set up to switch quickly."}},
+    {"@type":"Question","name":"Do you also drive at night and on weekends?","acceptedAnswer":{"@type":"Answer","text":"Yes, we are reachable 24 hours a day, 7 days a week for emergency rides."}},
+    {"@type":"Question","name":"In which regions does ${SITE.name} operate?","acceptedAnswer":{"@type":"Answer","text":"We drive throughout the Netherlands, with extra rides in and around Amsterdam, Rotterdam, The Hague, Utrecht, Amersfoort and Hilversum."}}`
+    : `{"@type":"Question","name":"Wat is het verschil tussen Rolstoeltaxi Spoed en regulier rolstoelvervoer?","acceptedAnswer":{"@type":"Answer","text":"Rolstoeltaxi Spoed is gericht op ritten die niet vooraf gepland konden worden: een spoedopname, een last-minute afspraak of vervoer dat vandaag nog geregeld moet zijn. Voor vooraf geplande, terugkerende ritten kunt u ons ook gewoon bellen."}},
     {"@type":"Question","name":"Is Rolstoeltaxi Spoed hetzelfde bedrijf als Rolstoeltaxi Holland?","acceptedAnswer":{"@type":"Answer","text":"Rolstoeltaxi Spoed is de spoedtak van Rolstoeltaxi Holland: dezelfde ervaren chauffeurs en dezelfde rolstoelbussen, speciaal ingericht op snel schakelen."}},
     {"@type":"Question","name":"Rijden jullie ook 's nachts en in het weekend?","acceptedAnswer":{"@type":"Answer","text":"Ja, we zijn 24 uur per dag, 7 dagen per week bereikbaar voor spoedritten."}},
-    {"@type":"Question","name":"In welke regio's rijdt Rolstoeltaxi Spoed?","acceptedAnswer":{"@type":"Answer","text":"We rijden in Nederland, met extra veel ritten in en rond Amsterdam, Rotterdam, Den Haag, Utrecht, Amersfoort en Hilversum."}}
+    {"@type":"Question","name":"In welke regio's rijdt Rolstoeltaxi Spoed?","acceptedAnswer":{"@type":"Answer","text":"We rijden in Nederland, met extra veel ritten in en rond Amsterdam, Rotterdam, Den Haag, Utrecht, Amersfoort en Hilversum."}}`}
   ]
 }
 </script>`;
 }
 
-function buildHomeBody() {
+function buildHomeBody(locale = 'nl') {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
   return `<!-- HERO -->
 <header class="hero night" id="homeHero" style="background-image:url('/img/spoedrit-amsterdam-centraal.jpg');background-position:center 55%">
   <canvas class="particles"></canvas>
   <div class="wrap">
     <div class="hero-box reveal">
-      <span class="live-badge"><span class="live-dot"></span>24/7 spoedlijn bereikbaar</span>
-      <h1 class="reveal-d1" style="margin-top:16px">Spoed rolstoelvervoer? <span class="serif-i">Wij komen nu.</span></h1>
-      <p class="lead reveal-d2">Eén telefoontje en er staat een rolstoelbus voor u klaar. Snel, veilig en rustig, in Nederland.</p>
+      <span class="live-badge"><span class="live-dot"></span>${en ? '24/7 emergency line available' : '24/7 spoedlijn bereikbaar'}</span>
+      <h1 class="reveal-d1" style="margin-top:16px">${en ? 'Emergency wheelchair transport?' : 'Spoed rolstoelvervoer?'} <span class="serif-i">${en ? 'We come now.' : 'Wij komen nu.'}</span></h1>
+      <p class="lead reveal-d2">${en ? "One phone call and a wheelchair-accessible vehicle is ready for you. Fast, safe and calm, throughout the Netherlands." : 'Eén telefoontje en er staat een rolstoelbus voor u klaar. Snel, veilig en rustig, in Nederland.'}</p>
       <div class="phone-badge reveal-d2">
         ${ICONS.phoneCall}
-        <span><span class="lbl">Direct even bellen</span><a href="tel:${SITE.phoneTel}">${SITE.phoneDisplay}</a></span>
+        <span><span class="lbl">${en ? 'Call now' : 'Direct even bellen'}</span><a href="tel:${SITE.phoneTel}">${SITE.phoneDisplay}</a></span>
       </div>
       <div class="hero-cta reveal-d3">
-        <a href="/contact" class="btn btn-ghost">Of plan online</a>
+        <a href="${base}/contact" class="btn btn-ghost">${en ? 'Or book online' : 'Of plan online'}</a>
       </div>
       <div class="trust reveal-d3">
-        <span class="trust-item">${svgCheck()}<b>24/7</b> bereikbaar</span>
-        <span class="trust-item">${svgCheck()}Actief <b>in Nederland</b></span>
-        <span class="trust-item">${svgCheck()}Onderdeel van <b>${SITE.parentBrand}</b></span>
+        <span class="trust-item">${svgCheck()}<b>24/7</b> ${en ? 'available' : 'bereikbaar'}</span>
+        <span class="trust-item">${svgCheck()}${en ? 'Active' : 'Actief'} <b>${en ? 'in the Netherlands' : 'in Nederland'}</b></span>
+        <span class="trust-item">${svgCheck()}${en ? 'Part of' : 'Onderdeel van'} <b>${SITE.parentBrand}</b></span>
       </div>
     </div>
   </div>
@@ -987,10 +1023,10 @@ function buildHomeBody() {
 <section class="stat-band" style="padding:0">
   <div class="wrap" style="padding:0">
     <div class="stat-row reveal">
-      <div class="stat-col"><div class="num">24/7</div><h3>Bereikbaar</h3><p>Ook 's nachts en in het weekend voor spoedritten.</p></div>
-      <div class="stat-col"><div class="num">10+</div><h3>Jaar ervaring</h3><p>Via ${SITE.parentBrand}, specialist in rolstoelvervoer.</p></div>
-      <div class="stat-col"><div class="num">5000+</div><h3>Uitgevoerde ritten</h3><p>Onder de vlag van ${SITE.parentBrand}.</p></div>
-      <div class="stat-col"><div class="num">NL</div><h3>Actief in Nederland</h3><p>Ook ritten buiten de eigen regio.</p></div>
+      <div class="stat-col"><div class="num">24/7</div><h3>${en ? 'Available' : 'Bereikbaar'}</h3><p>${en ? 'Also at night and on weekends for emergency rides.' : "Ook 's nachts en in het weekend voor spoedritten."}</p></div>
+      <div class="stat-col"><div class="num">10+</div><h3>${en ? 'Years experience' : 'Jaar ervaring'}</h3><p>${en ? `Via ${SITE.parentBrand}, specialist in wheelchair transport.` : `Via ${SITE.parentBrand}, specialist in rolstoelvervoer.`}</p></div>
+      <div class="stat-col"><div class="num">5000+</div><h3>${en ? 'Rides completed' : 'Uitgevoerde ritten'}</h3><p>${en ? `Under the ${SITE.parentBrand} flag.` : `Onder de vlag van ${SITE.parentBrand}.`}</p></div>
+      <div class="stat-col"><div class="num">NL</div><h3>${en ? 'Active in the Netherlands' : 'Actief in Nederland'}</h3><p>${en ? 'Rides outside our own region are possible too.' : 'Ook ritten buiten de eigen regio.'}</p></div>
     </div>
   </div>
 </section>
@@ -998,16 +1034,18 @@ function buildHomeBody() {
 <!-- MARQUEE -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>Spoedvervoer</span><span>Ziekenhuisvervoer</span><span>Rolstoelvervoer</span><span>Luchthavenvervoer</span><span>Scootmobiel vervoer</span><span>Bel direct</span><span>24/7 bereikbaar</span>
-    <span>Spoedvervoer</span><span>Ziekenhuisvervoer</span><span>Rolstoelvervoer</span><span>Luchthavenvervoer</span><span>Scootmobiel vervoer</span><span>Bel direct</span><span>24/7 bereikbaar</span>
+    ${en ? `<span>Emergency transport</span><span>Hospital transport</span><span>Wheelchair transport</span><span>Airport transport</span><span>Mobility scooter transport</span><span>Call now</span><span>24/7 available</span>
+    <span>Emergency transport</span><span>Hospital transport</span><span>Wheelchair transport</span><span>Airport transport</span><span>Mobility scooter transport</span><span>Call now</span><span>24/7 available</span>`
+    : `<span>Spoedvervoer</span><span>Ziekenhuisvervoer</span><span>Rolstoelvervoer</span><span>Luchthavenvervoer</span><span>Scootmobiel vervoer</span><span>Bel direct</span><span>24/7 bereikbaar</span>
+    <span>Spoedvervoer</span><span>Ziekenhuisvervoer</span><span>Rolstoelvervoer</span><span>Luchthavenvervoer</span><span>Scootmobiel vervoer</span><span>Bel direct</span><span>24/7 bereikbaar</span>`}
   </div>
 </div>
 
 <!-- CALL BANNER -->
 <section class="call-banner">
   <div class="wrap">
-    <span class="lbl">${ICONS.phoneCall} Bel nu, direct een chauffeur inplannen:</span>
-    <div class="call-banner-video">${videoEmbed('FZnAOHJuVqk', 'Instructiefilm: rolstoel vastzetten in de rolstoelbus')}</div>
+    <span class="lbl">${ICONS.phoneCall} ${en ? 'Call now, schedule a driver right away:' : 'Bel nu, direct een chauffeur inplannen:'}</span>
+    <div class="call-banner-video">${videoEmbed('FZnAOHJuVqk', en ? 'Instruction film: securing a wheelchair in the vehicle' : 'Instructiefilm: rolstoel vastzetten in de rolstoelbus')}</div>
     <a href="tel:${SITE.phoneTel}" class="num">${SITE.phoneDisplay}</a>
   </div>
 </section>
@@ -1017,23 +1055,30 @@ function buildHomeBody() {
   <div class="wrap">
     <div class="split" style="align-items:center">
       <div class="reveal">
-        <span class="eyebrow">Veiligheid</span>
-        <h2>Hoe stapt u <span class="serif-i">in?</span></h2>
-        <p style="color:var(--ink-dim);margin:12px 0 18px;max-width:44ch">Altijd dezelfde stappen, rustig en op uw tempo, tot alles vastzit.</p>
+        <span class="eyebrow">${en ? 'Safety' : 'Veiligheid'}</span>
+        <h2>${en ? 'How does boarding' : 'Hoe stapt u'} <span class="serif-i">${en ? 'work?' : 'in?'}</span></h2>
+        <p style="color:var(--ink-dim);margin:12px 0 18px;max-width:44ch">${en ? "Always the same steps, calm and at your own pace, until everything is secure." : 'Altijd dezelfde stappen, rustig en op uw tempo, tot alles vastzit.'}</p>
         <ul class="mini-steps instap-steps">
-          <li><span class="n">1.</span><div><b>Rolstoel de bus in rijden</b></div></li>
+          ${en ? `<li><span class="n">1.</span><div><b>Wheelchair drives into the vehicle</b></div></li>
+          <li><span class="n">2.</span><div><b>Wheelchair placed in the correct position</b></div></li>
+          <li><span class="n">3.</span><div><b>Four straps attached to the wheelchair</b></div></li>
+          <li><span class="n">4.</span><div><b>Straps secured and tightened to the floor</b></div></li>
+          <li><span class="n">5.</span><div><b>Seatbelt fastened around the passenger</b></div></li>
+          <li><span class="n">6.</span><div><b>Final check of wheelchair and belt</b></div></li>
+          <li><span class="n">7.</span><div><b>Ready to depart</b></div></li>`
+          : `<li><span class="n">1.</span><div><b>Rolstoel de bus in rijden</b></div></li>
           <li><span class="n">2.</span><div><b>Rolstoel op de juiste positie plaatsen</b></div></li>
           <li><span class="n">3.</span><div><b>Vier spanbanden aan de rolstoel bevestigen</b></div></li>
           <li><span class="n">4.</span><div><b>Spanbanden aan de vloer vastmaken en aantrekken</b></div></li>
           <li><span class="n">5.</span><div><b>Veiligheidsgordel om de passagier</b></div></li>
           <li><span class="n">6.</span><div><b>Eindcontrole van rolstoel en gordel</b></div></li>
-          <li><span class="n">7.</span><div><b>Klaar voor vertrek</b></div></li>
+          <li><span class="n">7.</span><div><b>Klaar voor vertrek</b></div></li>`}
         </ul>
       </div>
       <div class="reveal reveal-d1 instap-photos">
-        <figure class="photo-card landscape"><img src="/img/instapklep-schiphol.jpg" alt="Rolstoelbus met uitgeklapte laadklep, klaar om in te stappen" width="1000" height="750" loading="lazy"></figure>
-        <figure class="photo-card landscape"><img src="/img/rolstoel-vastgezet-bus.jpg" alt="Rolstoel veilig vastgezet in de rolstoelbus" width="1000" height="750" loading="lazy"></figure>
-        <div style="grid-column:1/-1">${videoEmbed('FZnAOHJuVqk', 'Instructiefilm: rolstoel vastzetten in de rolstoelbus')}</div>
+        <figure class="photo-card landscape"><img src="/img/instapklep-schiphol.jpg" alt="${en ? 'Wheelchair-accessible vehicle with the ramp deployed, ready for boarding' : 'Rolstoelbus met uitgeklapte laadklep, klaar om in te stappen'}" width="1000" height="750" loading="lazy"></figure>
+        <figure class="photo-card landscape"><img src="/img/rolstoel-vastgezet-bus.jpg" alt="${en ? 'Wheelchair securely fastened inside the vehicle' : 'Rolstoel veilig vastgezet in de rolstoelbus'}" width="1000" height="750" loading="lazy"></figure>
+        <div style="grid-column:1/-1">${videoEmbed('FZnAOHJuVqk', en ? 'Instruction film: securing a wheelchair in the vehicle' : 'Instructiefilm: rolstoel vastzetten in de rolstoelbus')}</div>
       </div>
     </div>
   </div>
@@ -1043,11 +1088,27 @@ function buildHomeBody() {
 <section>
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Herkenbaar?</span>
-      <h2>U wilt gewoon dat er <span class="serif-i">nu</span> een bus komt</h2>
+      <span class="eyebrow">${en ? 'Sound familiar?' : 'Herkenbaar?'}</span>
+      <h2>${en ? 'You just want a vehicle' : 'U wilt gewoon dat er'} <span class="serif-i">${en ? 'right now' : 'nu'}</span>${en ? '' : ' een bus komt'}</h2>
     </div>
     <div class="pain-list">
-      <div class="pain-item reveal">
+      ${en ? `<div class="pain-item reveal">
+        <div class="pain-emoji">😰</div>
+        <div><h3>Discharged today, no transport arranged</h3><p>The hospital calls to say you can go home today, but the regular carrier can't come for three days.</p></div>
+      </div>
+      <div class="pain-item reveal reveal-d1">
+        <div class="pain-emoji">📞</div>
+        <div><h3>The regular wheelchair taxi is fully booked</h3><p>You call your usual carrier, but they can't make it on time. Meanwhile the clock keeps ticking.</p></div>
+      </div>
+      <div class="pain-item reveal reveal-d2">
+        <div class="pain-emoji">✈️</div>
+        <div><h3>Flight rebooked, transport has to shift too</h3><p>A changed departure time also means a different time for the ride to the airport.</p></div>
+      </div>
+      <div class="pain-item reveal reveal-d3">
+        <div class="pain-emoji">🌙</div>
+        <div><h3>Of course it happens in the evening or on a weekend</h3><p>Emergencies don't care about office hours. Neither do we.</p></div>
+      </div>`
+      : `<div class="pain-item reveal">
         <div class="pain-emoji">😰</div>
         <div><h3>Vandaag ontslagen, geen vervoer geregeld</h3><p>Het ziekenhuis belt dat u vandaag nog naar huis mag, maar de vaste vervoerder kan pas over drie dagen.</p></div>
       </div>
@@ -1062,7 +1123,7 @@ function buildHomeBody() {
       <div class="pain-item reveal reveal-d3">
         <div class="pain-emoji">🌙</div>
         <div><h3>Het gebeurt natuurlijk 's avonds of in het weekend</h3><p>Spoed houdt geen rekening met kantooruren. Wij ook niet.</p></div>
-      </div>
+      </div>`}
     </div>
   </div>
 </section>
@@ -1070,7 +1131,7 @@ function buildHomeBody() {
 <!-- STATEMENT BAND -->
 <section class="statement night band-line">
   <div class="wrap">
-    <p class="big reveal">De meeste vervoerders willen dat u minstens een dag vooruit plant. <span class="serif-i">Wij zijn er juist voor het moment dat dat niet kan.</span></p>
+    <p class="big reveal">${en ? 'Most carriers want you to plan at least a day ahead.' : 'De meeste vervoerders willen dat u minstens een dag vooruit plant.'} <span class="serif-i">${en ? "We're here for exactly the moment that isn't possible." : 'Wij zijn er juist voor het moment dat dat niet kan.'}</span></p>
   </div>
 </section>
 
@@ -1078,16 +1139,16 @@ function buildHomeBody() {
 <section id="diensten" class="band-2">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Diensten</span>
-      <h2>Rolstoelvervoer, <span class="serif-i">spoed en gepland</span></h2>
-      <p>Van een acute ziekenhuisrit tot een vaste wekelijkse afspraak: Rolstoeltaxi Spoed regelt het, met dezelfde bussen en chauffeurs.</p>
+      <span class="eyebrow">${en ? 'Services' : 'Diensten'}</span>
+      <h2>${en ? 'Wheelchair transport,' : 'Rolstoelvervoer,'} <span class="serif-i">${en ? 'emergency and planned' : 'spoed en gepland'}</span></h2>
+      <p>${en ? `From an urgent hospital ride to a regular weekly appointment: ${SITE.name} arranges it, with the same vehicles and drivers.` : 'Van een acute ziekenhuisrit tot een vaste wekelijkse afspraak: Rolstoeltaxi Spoed regelt het, met dezelfde bussen en chauffeurs.'}</p>
     </div>
     <div class="grid-4">
-      ${SERVICES.map((s, i) => `<a href="/diensten/${s.slug}" class="card reveal reveal-d${i}">
+      ${SERVICES.map((s, i) => { const d = en ? s.en : s; return `<a href="${base}/diensten/${s.slug}" class="card reveal reveal-d${i}">
         <span class="icon-badge${s.icon === 'wheelchair' ? ' is-logo' : ''}">${s.icon === 'wheelchair' ? '<img src="/img/logo-icoon.png" alt="" width="26" height="17" aria-hidden="true">' : ICONS[s.icon]}</span>
-        <h3>${s.h1}</h3>
-        <p>${truncate(s.lead, 65)}</p>
-      </a>`).join('\n      ')}
+        <h3>${d.h1}</h3>
+        <p>${truncate(d.lead, 65)}</p>
+      </a>`; }).join('\n      ')}
     </div>
   </div>
 </section>
@@ -1096,26 +1157,26 @@ function buildHomeBody() {
 <section id="waarom-wij">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Waarom wij</span>
-      <h2>Waarom mensen voor <span class="serif-i">Rolstoeltaxi Spoed</span> kiezen</h2>
-      <p>Mooie beloftes maakt iedereen. Dit is wat wij anders doen.</p>
+      <span class="eyebrow">${en ? 'Why us' : 'Waarom wij'}</span>
+      <h2>${en ? 'Why people choose' : 'Waarom mensen voor'} <span class="serif-i">${SITE.name}</span>${en ? '' : ' kiezen'}</h2>
+      <p>${en ? 'Everyone makes nice promises. This is what we do differently.' : 'Mooie beloftes maakt iedereen. Dit is wat wij anders doen.'}</p>
     </div>
     <div class="icon-list">
       <div class="icon-list-item reveal">
         <span class="icon-badge-solid">${ICONS.phoneCall}</span>
-        <div><h3>Direct telefonisch contact</h3><p>Geen keuzemenu of callcenter: u spreekt meteen iemand die de rit kan inplannen.</p></div>
+        <div><h3>${en ? 'Direct phone contact' : 'Direct telefonisch contact'}</h3><p>${en ? "No menu options or call centre: you speak straight away with someone who can schedule the ride." : 'Geen keuzemenu of callcenter: u spreekt meteen iemand die de rit kan inplannen.'}</p></div>
       </div>
       <div class="icon-list-item reveal reveal-d1">
         <span class="icon-badge-solid">${ICONS.clock}</span>
-        <div><h3>24/7 bereikbaar</h3><p>Spoed houdt geen rekening met kantooruren, en wij dus ook niet.</p></div>
+        <div><h3>24/7 ${en ? 'available' : 'bereikbaar'}</h3><p>${en ? "Emergencies don't care about office hours, and neither do we." : 'Spoed houdt geen rekening met kantooruren, en wij dus ook niet.'}</p></div>
       </div>
       <div class="icon-list-item reveal reveal-d2">
         <span class="icon-badge-solid">${ICONS.badge}</span>
-        <div><h3>10+ jaar ervaring in rolstoelvervoer</h3><p>Via ${SITE.parentBrand} bouwen we voort op ruime ervaring in veilig zorgvervoer.</p></div>
+        <div><h3>${en ? '10+ years of experience in wheelchair transport' : '10+ jaar ervaring in rolstoelvervoer'}</h3><p>${en ? `Via ${SITE.parentBrand} we build on extensive experience in safe care transport.` : `Via ${SITE.parentBrand} bouwen we voort op ruime ervaring in veilig zorgvervoer.`}</p></div>
       </div>
       <div class="icon-list-item reveal reveal-d3">
         <span class="icon-badge-solid">${ICONS.mapPin}</span>
-        <div><h3>Actief in Nederland</h3><p>Van Amsterdam tot Rotterdam en daarbuiten: ook ritten buiten de eigen regio zijn mogelijk.</p></div>
+        <div><h3>${en ? 'Active in the Netherlands' : 'Actief in Nederland'}</h3><p>${en ? 'From Amsterdam to Rotterdam and beyond: rides outside our own region are possible too.' : 'Van Amsterdam tot Rotterdam en daarbuiten: ook ritten buiten de eigen regio zijn mogelijk.'}</p></div>
       </div>
     </div>
   </div>
@@ -1125,11 +1186,23 @@ function buildHomeBody() {
 <section id="werkwijze" class="band-2">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Werkwijze</span>
-      <h2>Van telefoontje tot rit, <span class="serif-i">in drie stappen</span></h2>
+      <span class="eyebrow">${en ? 'How it works' : 'Werkwijze'}</span>
+      <h2>${en ? 'From phone call to ride,' : 'Van telefoontje tot rit,'} <span class="serif-i">${en ? 'in three steps' : 'in drie stappen'}</span></h2>
     </div>
     <div class="steps-stack">
-      <div class="step-row reveal">
+      ${en ? `<div class="step-row reveal">
+        <div class="big">01</div>
+        <div><h3>Call or message the emergency line</h3><p>Briefly tell us the situation, the location and where you need to go.</p></div>
+      </div>
+      <div class="step-row reveal reveal-d1">
+        <div class="big">02</div>
+        <div><h3>We schedule a vehicle right away</h3><p>We find the nearest available vehicle and name the price beforehand.</p></div>
+      </div>
+      <div class="step-row reveal reveal-d2">
+        <div class="big">03</div>
+        <div><h3>Safely and calmly transported</h3><p>The driver helps with boarding and getting off, and secures everything safely.</p></div>
+      </div>`
+      : `<div class="step-row reveal">
         <div class="big">01</div>
         <div><h3>Bel of app de spoedlijn</h3><p>Vertel kort de situatie, de locatie en waar u naartoe moet.</p></div>
       </div>
@@ -1140,7 +1213,7 @@ function buildHomeBody() {
       <div class="step-row reveal reveal-d2">
         <div class="big">03</div>
         <div><h3>Veilig en rustig vervoerd</h3><p>De chauffeur helpt bij het in- en uitstappen en zet alles veilig vast.</p></div>
-      </div>
+      </div>`}
     </div>
   </div>
 </section>
@@ -1149,17 +1222,17 @@ function buildHomeBody() {
 <section id="ritten" style="padding-top:0">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Onderweg</span>
-      <h2>Onze bussen <span class="serif-i">in actie</span></h2>
-      <p>Echte ritten, echte plekken: van de Amsterdamse grachten tot een landgoed in de buurt.</p>
+      <span class="eyebrow">${en ? 'On the road' : 'Onderweg'}</span>
+      <h2>${en ? 'Our vehicles' : 'Onze bussen'} <span class="serif-i">${en ? 'in action' : 'in actie'}</span></h2>
+      <p>${en ? "Real rides, real places: from Amsterdam's canals to a nearby estate." : 'Echte ritten, echte plekken: van de Amsterdamse grachten tot een landgoed in de buurt.'}</p>
     </div>
     <div class="gallery">
-      <figure class="photo-card tall reveal"><img src="/img/interieur-rolstoelbus.jpg" alt="Interieur van de rolstoelbus met rolstoelplaats en laadklep" width="960" height="1280" loading="lazy"></figure>
-      <figure class="photo-card reveal reveal-d1"><img src="/img/amsterdam-molen-gooyer.jpg" alt="Rolstoelbus met geopende deuren bij een molen in Amsterdam" width="1280" height="960" loading="lazy"></figure>
-      <figure class="photo-card reveal reveal-d2"><img src="/img/rolstoelbus-baksteen-laadklep.jpg" alt="Rolstoelbus met laadklep voor een gebouw van rode baksteen" width="1280" height="960" loading="lazy"></figure>
-      <figure class="photo-card reveal reveal-d1"><img src="/img/rolstoelbus-laadklep-hoogbouw.jpg" alt="Rolstoelbus met uitgeklapte laadklep, hoogbouw op de achtergrond" width="1280" height="960" loading="lazy"></figure>
-      <figure class="photo-card reveal reveal-d2"><img src="/img/rolstoelbus-landgoed-poort.jpg" alt="Rolstoelbus bij een landgoedpoort met rode baksteen" width="1280" height="960" loading="lazy"></figure>
-      <figure class="photo-card reveal reveal-d1"><img src="/img/amsterdam-gracht-laadklep.jpg" alt="Rolstoelbus met laadklep bij een Amsterdamse gracht" width="1280" height="960" loading="lazy"></figure>
+      <figure class="photo-card tall reveal"><img src="/img/interieur-rolstoelbus.jpg" alt="${en ? 'Interior of the wheelchair-accessible vehicle with wheelchair space and ramp' : 'Interieur van de rolstoelbus met rolstoelplaats en laadklep'}" width="960" height="1280" loading="lazy"></figure>
+      <figure class="photo-card reveal reveal-d1"><img src="/img/amsterdam-molen-gooyer.jpg" alt="${en ? 'Wheelchair-accessible vehicle with open doors by a windmill in Amsterdam' : 'Rolstoelbus met geopende deuren bij een molen in Amsterdam'}" width="1280" height="960" loading="lazy"></figure>
+      <figure class="photo-card reveal reveal-d2"><img src="/img/rolstoelbus-baksteen-laadklep.jpg" alt="${en ? 'Wheelchair-accessible vehicle with ramp in front of a red-brick building' : 'Rolstoelbus met laadklep voor een gebouw van rode baksteen'}" width="1280" height="960" loading="lazy"></figure>
+      <figure class="photo-card reveal reveal-d1"><img src="/img/rolstoelbus-laadklep-hoogbouw.jpg" alt="${en ? 'Wheelchair-accessible vehicle with ramp deployed, high-rise building in the background' : 'Rolstoelbus met uitgeklapte laadklep, hoogbouw op de achtergrond'}" width="1280" height="960" loading="lazy"></figure>
+      <figure class="photo-card reveal reveal-d2"><img src="/img/rolstoelbus-landgoed-poort.jpg" alt="${en ? 'Wheelchair-accessible vehicle at an estate gate of red brick' : 'Rolstoelbus bij een landgoedpoort met rode baksteen'}" width="1280" height="960" loading="lazy"></figure>
+      <figure class="photo-card reveal reveal-d1"><img src="/img/amsterdam-gracht-laadklep.jpg" alt="${en ? 'Wheelchair-accessible vehicle with ramp by an Amsterdam canal' : 'Rolstoelbus met laadklep bij een Amsterdamse gracht'}" width="1280" height="960" loading="lazy"></figure>
     </div>
   </div>
 </section>
@@ -1168,13 +1241,13 @@ function buildHomeBody() {
 <section id="werkgebied" class="band-2">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Werkgebied</span>
-      <h2>Wij rijden <span class="serif-i">in Nederland</span></h2>
-      <p>Met extra veel ritten in en rond de grote steden. Staat uw plaats er niet bij? Bel gerust, dan bespreken we de mogelijkheden.</p>
+      <span class="eyebrow">${en ? 'Service area' : 'Werkgebied'}</span>
+      <h2>${en ? 'We drive' : 'Wij rijden'} <span class="serif-i">${en ? 'throughout the Netherlands' : 'in Nederland'}</span></h2>
+      <p>${en ? "With extra rides in and around the major cities. Not on the list? Call us, we're happy to discuss the options." : 'Met extra veel ritten in en rond de grote steden. Staat uw plaats er niet bij? Bel gerust, dan bespreken we de mogelijkheden.'}</p>
     </div>
     <div class="area-list reveal">
-      ${CITIES.filter(c => !c.isService).map(c => `<a href="${cityPath(c)}">${c.name}</a>`).join('\n      ')}
-      <a href="/locaties"><b>Alle locaties</b></a>
+      ${CITIES.filter(c => !c.isService).map(c => `<a href="${base}${cityPath(c)}">${c.name}</a>`).join('\n      ')}
+      <a href="${base}/locaties"><b>${en ? 'All locations' : 'Alle locaties'}</b></a>
     </div>
   </div>
 </section>
@@ -1184,17 +1257,17 @@ function buildHomeBody() {
   <div class="wrap">
     <div class="about-grid">
       <div class="about-photo reveal" style="background:none;padding:0">
-        <img src="/img/rolstoelbus-zijkant.jpg" alt="Rolstoelbus van Rolstoeltaxi Spoed, zijaanzicht" width="1600" height="1200" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
+        <img src="/img/rolstoelbus-zijkant.jpg" alt="${en ? `${SITE.name} wheelchair-accessible vehicle, side view` : 'Rolstoelbus van Rolstoeltaxi Spoed, zijaanzicht'}" width="1600" height="1200" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
       </div>
       <div class="about-copy">
-        <span class="eyebrow reveal">Wie zijn wij</span>
-        <h2 class="reveal reveal-d1">De spoedtak van <span class="serif-i">${SITE.parentBrand}</span></h2>
-        <p class="reveal reveal-d2">Rolstoeltaxi Spoed is opgezet door ${SITE.parentBrand}, specialist in rolstoelvervoer in Nederland. Dezelfde ervaren chauffeurs en dezelfde volledig uitgeruste rolstoelbussen, maar dan speciaal ingericht op ritten die niet konden wachten.</p>
-        <p class="reveal reveal-d2">Van een acute ziekenhuisrit tot een omgeboekte vlucht: we schakelen snel, zonder in te leveren op veiligheid of comfort.</p>
+        <span class="eyebrow reveal">${en ? 'Who we are' : 'Wie zijn wij'}</span>
+        <h2 class="reveal reveal-d1">${en ? 'The emergency branch of' : 'De spoedtak van'} <span class="serif-i">${SITE.parentBrand}</span></h2>
+        <p class="reveal reveal-d2">${en ? `${SITE.name} was set up by ${SITE.parentBrand}, a specialist in wheelchair transport in the Netherlands. The same experienced drivers and the same fully equipped vehicles, but specially arranged for rides that couldn't wait.` : `Rolstoeltaxi Spoed is opgezet door ${SITE.parentBrand}, specialist in rolstoelvervoer in Nederland. Dezelfde ervaren chauffeurs en dezelfde volledig uitgeruste rolstoelbussen, maar dan speciaal ingericht op ritten die niet konden wachten.`}</p>
+        <p class="reveal reveal-d2">${en ? "From an urgent hospital ride to a rebooked flight: we switch quickly, without giving up on safety or comfort." : 'Van een acute ziekenhuisrit tot een omgeboekte vlucht: we schakelen snel, zonder in te leveren op veiligheid of comfort.'}</p>
         <ul class="usp-list reveal reveal-d3">
-          <li><div><b>10+ jaar ervaring</b><span>Via ${SITE.parentBrand} in veilig en professioneel rolstoelvervoer.</span></div></li>
-          <li><div><b>24/7 bereikbaar</b><span>Spoed houdt geen rekening met kantooruren.</span></div></li>
-          <li><div><b>Actief in Nederland</b><span>Ook ritten buiten de eigen regio zijn mogelijk.</span></div></li>
+          <li><div><b>${en ? '10+ years experience' : '10+ jaar ervaring'}</b><span>${en ? `Via ${SITE.parentBrand} in safe and professional wheelchair transport.` : `Via ${SITE.parentBrand} in veilig en professioneel rolstoelvervoer.`}</span></div></li>
+          <li><div><b>24/7 ${en ? 'available' : 'bereikbaar'}</b><span>${en ? "Emergencies don't care about office hours." : 'Spoed houdt geen rekening met kantooruren.'}</span></div></li>
+          <li><div><b>${en ? 'Active in the Netherlands' : 'Actief in Nederland'}</b><span>${en ? 'Rides outside our own region are possible too.' : 'Ook ritten buiten de eigen regio zijn mogelijk.'}</span></div></li>
         </ul>
       </div>
     </div>
@@ -1205,25 +1278,25 @@ function buildHomeBody() {
 <section id="vertrouwen" class="band-2">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Eerlijk verhaal</span>
-      <h2>Nieuw als <span class="serif-i">spoedmerk</span>, niet nieuw in het vak</h2>
-      <p>Rolstoeltaxi Spoed is een nieuwe naam. De ervaring erachter niet.</p>
+      <span class="eyebrow">${en ? 'Honest story' : 'Eerlijk verhaal'}</span>
+      <h2>${en ? 'New as an' : 'Nieuw als'} <span class="serif-i">${en ? 'emergency brand' : 'spoedmerk'}</span>${en ? ', not new to the trade' : ', niet nieuw in het vak'}</h2>
+      <p>${en ? `${SITE.name} is a new name. The experience behind it isn't.` : 'Rolstoeltaxi Spoed is een nieuwe naam. De ervaring erachter niet.'}</p>
     </div>
     <div class="review-grid">
       <div class="review reveal">
         <span class="icon">${ICONS.badge}</span>
-        <h3>Onderdeel van ${SITE.parentBrand}</h3>
-        <p>Dezelfde chauffeurs, dezelfde rolstoelbussen, dezelfde ervaring. Alleen sneller te bereiken bij spoed.</p>
+        <h3>${en ? 'Part of' : 'Onderdeel van'} ${SITE.parentBrand}</h3>
+        <p>${en ? 'The same drivers, the same vehicles, the same experience. Only faster to reach for emergencies.' : 'Dezelfde chauffeurs, dezelfde rolstoelbussen, dezelfde ervaring. Alleen sneller te bereiken bij spoed.'}</p>
       </div>
       <div class="review reveal reveal-d1">
         <span class="icon">${ICONS.checkCircle}</span>
-        <h3>Prijs altijd vooraf genoemd</h3>
-        <p>Ook bij een spoedrit hoort u de prijs aan de telefoon, voordat we onderweg zijn.</p>
+        <h3>${en ? 'Price always named beforehand' : 'Prijs altijd vooraf genoemd'}</h3>
+        <p>${en ? "Even for an emergency ride, you hear the price on the phone before we set off." : 'Ook bij een spoedrit hoort u de prijs aan de telefoon, voordat we onderweg zijn.'}</p>
       </div>
       <div class="review reveal reveal-d2">
         <span class="icon">${ICONS.mapPin}</span>
-        <h3>Referentie op aanvraag</h3>
-        <p>Liever eerst iemand van ${SITE.parentBrand} spreken die eerder geholpen is? Vraag er gerust naar.</p>
+        <h3>${en ? 'Reference on request' : 'Referentie op aanvraag'}</h3>
+        <p>${en ? `Would you rather first speak to someone at ${SITE.parentBrand} who's been helped before? Feel free to ask.` : `Liever eerst iemand van ${SITE.parentBrand} spreken die eerder geholpen is? Vraag er gerust naar.`}</p>
       </div>
     </div>
   </div>
@@ -1233,11 +1306,27 @@ function buildHomeBody() {
 <section id="faq">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Veelgestelde vragen</span>
-      <h2>Goed om te <span class="serif-i">weten</span></h2>
+      <span class="eyebrow">${en ? 'Frequently asked questions' : 'Veelgestelde vragen'}</span>
+      <h2>${en ? 'Good to' : 'Goed om te'} <span class="serif-i">${en ? 'know' : 'weten'}</span></h2>
     </div>
     <div class="faq-list">
+      ${en ? `<div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">What is the difference between ${SITE.name} and regular wheelchair transport?</button>
+        <div class="faq-a"><p>${SITE.name} focuses on rides that couldn't be planned in advance: an emergency admission, a last-minute appointment, or transport that needs to be arranged today. For pre-planned, recurring rides you can just call us as well.</p></div>
+      </div>
       <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Is ${SITE.name} the same company as ${SITE.parentBrand}?</button>
+        <div class="faq-a"><p>${SITE.name} is the emergency branch of ${SITE.parentBrand}: the same experienced drivers and the same wheelchair-accessible vehicles, specially set up to switch quickly.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Do you also drive at night and on weekends?</button>
+        <div class="faq-a"><p>Yes, we are reachable 24 hours a day, 7 days a week for emergency rides.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">In which regions does ${SITE.name} operate?</button>
+        <div class="faq-a"><p>We drive throughout the Netherlands, with extra rides in and around Amsterdam, Rotterdam, The Hague, Utrecht, Amersfoort and Hilversum. Also see our <a href="${base}/veelgestelde-vragen" style="color:var(--accent)">full FAQ page</a>.</p></div>
+      </div>`
+      : `<div class="faq-item reveal">
         <button class="faq-q" aria-expanded="false">Wat is het verschil tussen Rolstoeltaxi Spoed en regulier rolstoelvervoer?</button>
         <div class="faq-a"><p>Rolstoeltaxi Spoed is gericht op ritten die niet vooraf gepland konden worden: een spoedopname, een last-minute afspraak of vervoer dat vandaag nog geregeld moet zijn. Voor vooraf geplande, terugkerende ritten kunt u ons ook gewoon bellen.</p></div>
       </div>
@@ -1251,8 +1340,8 @@ function buildHomeBody() {
       </div>
       <div class="faq-item reveal">
         <button class="faq-q" aria-expanded="false">In welke regio's rijdt Rolstoeltaxi Spoed?</button>
-        <div class="faq-a"><p>We rijden in Nederland, met extra veel ritten in en rond Amsterdam, Rotterdam, Den Haag, Utrecht, Amersfoort en Hilversum. Bekijk ook onze <a href="/veelgestelde-vragen" style="color:var(--accent)">volledige FAQ-pagina</a>.</p></div>
-      </div>
+        <div class="faq-a"><p>We rijden in Nederland, met extra veel ritten in en rond Amsterdam, Rotterdam, Den Haag, Utrecht, Amersfoort en Hilversum. Bekijk ook onze <a href="${base}/veelgestelde-vragen" style="color:var(--accent)">volledige FAQ-pagina</a>.</p></div>
+      </div>`}
     </div>
   </div>
 </section>
@@ -1261,41 +1350,44 @@ function buildHomeBody() {
 <section id="contact" class="cta-final night">
   <canvas class="particles"></canvas>
   <div class="wrap">
-    <span class="eyebrow reveal">Direct geholpen worden</span>
-    <h2 class="reveal reveal-d1">Spoedvervoer <span class="serif-i">nodig?</span></h2>
-    <p class="reveal reveal-d2">Bel direct voor spoed, of plan online een rit voor later. U weet vooraf waar u aan toe bent.</p>
+    <span class="eyebrow reveal">${en ? 'Get help right away' : 'Direct geholpen worden'}</span>
+    <h2 class="reveal reveal-d1">${en ? 'Need emergency' : 'Spoedvervoer'} <span class="serif-i">${en ? 'transport?' : 'nodig?'}</span></h2>
+    <p class="reveal reveal-d2">${en ? "Call now for an emergency, or book a ride online for later. You'll know where you stand beforehand." : 'Bel direct voor spoed, of plan online een rit voor later. U weet vooraf waar u aan toe bent.'}</p>
     <div class="reveal reveal-d3">
-      <a href="tel:${SITE.phoneTel}" class="btn">Bel ${SITE.phoneDisplay}</a>
+      <a href="tel:${SITE.phoneTel}" class="btn">${en ? 'Call' : 'Bel'} ${SITE.phoneDisplay}</a>
     </div>
-    <p class="cta-sub reveal reveal-d3">Of <a href="/contact" style="color:var(--accent-2)">plan online een rit</a> · ook per <a href="https://wa.me/${SITE.whatsapp}" style="color:var(--accent-2)">WhatsApp</a></p>
+    <p class="cta-sub reveal reveal-d3">${en ? 'Or' : 'Of'} <a href="${base}/contact" style="color:var(--accent-2)">${en ? 'book a ride online' : 'plan online een rit'}</a> · ${en ? 'also via' : 'ook per'} <a href="https://wa.me/${SITE.whatsapp}" style="color:var(--accent-2)">WhatsApp</a></p>
   </div>
 </section>`;
 }
 
 /* ============================== CONTACT / BOOKING PAGE ============================== */
 
-function contactLd() {
+function contactLd(locale = 'nl') {
+  const en = locale === 'en';
   return `<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "TaxiService",
   "name": "${SITE.name}",
   "telephone": "${SITE.phoneTel}",
-  "areaServed": "Nederland"
+  "areaServed": "${en ? 'Netherlands' : 'Nederland'}"
 }
 </script>`;
 }
 
-function buildContactBody() {
+function buildContactBody(locale = 'nl') {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
   return `<!-- PAGE HERO -->
 <header class="page-hero" style="padding-bottom:40px">
   <div class="wrap">
-    ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Contact' }])}
-    <span class="eyebrow reveal">Direct reserveren</span>
-    <h1 class="reveal reveal-d1">Plan uw <span class="serif-i">rit</span></h1>
-    <p class="lead reveal reveal-d2">Bij spoed belt u ons liever direct. Voor een geplande rit vult u hieronder het formulier in, dan nemen we snel contact op om de rit en de prijs te bevestigen.</p>
+    ${breadcrumbNav([{ label: 'Home', href: `${base}/` }, { label: 'Contact' }])}
+    <span class="eyebrow reveal">${en ? 'Book directly' : 'Direct reserveren'}</span>
+    <h1 class="reveal reveal-d1">${en ? 'Plan your' : 'Plan uw'} <span class="serif-i">${en ? 'ride' : 'rit'}</span></h1>
+    <p class="lead reveal reveal-d2">${en ? "For an emergency, it's best to call us directly. For a planned ride, fill in the form below and we'll contact you quickly to confirm the ride and the price." : 'Bij spoed belt u ons liever direct. Voor een geplande rit vult u hieronder het formulier in, dan nemen we snel contact op om de rit en de prijs te bevestigen.'}</p>
     <div class="hero-cta reveal reveal-d3">
-      <a href="tel:${SITE.phoneTel}" class="btn btn-yellow" data-cta="primary">Spoed? Bel ${SITE.phoneDisplay}</a>
+      <a href="tel:${SITE.phoneTel}" class="btn btn-yellow" data-cta="primary">${en ? 'Emergency? Call' : 'Spoed? Bel'} ${SITE.phoneDisplay}</a>
     </div>
   </div>
 </header>
@@ -1311,132 +1403,132 @@ function buildContactBody() {
           <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
 
           <fieldset class="fs">
-            <legend><span class="fs-n">1</span> Uw gegevens</legend>
+            <legend><span class="fs-n">1</span> ${en ? 'Your details' : 'Uw gegevens'}</legend>
             <div class="form-row">
               <div class="field">
-                <label for="naam">Naam</label>
-                <input type="text" id="naam" name="Naam" placeholder="Voor- en achternaam" required autocomplete="name">
+                <label for="naam">${en ? 'Name' : 'Naam'}</label>
+                <input type="text" id="naam" name="Naam" placeholder="${en ? 'First and last name' : 'Voor- en achternaam'}" required autocomplete="name">
               </div>
               <div class="field">
-                <label for="telefoon">Telefoonnummer</label>
+                <label for="telefoon">${en ? 'Phone number' : 'Telefoonnummer'}</label>
                 <input type="tel" id="telefoon" name="Telefoon" placeholder="06 12345678" required autocomplete="tel" inputmode="tel">
               </div>
             </div>
             <div class="field">
-              <label for="email">E-mailadres <span class="opt">(voor de bevestiging, optioneel)</span></label>
-              <input type="email" id="email" name="E-mail" placeholder="naam@voorbeeld.nl" autocomplete="email">
+              <label for="email">${en ? 'Email address' : 'E-mailadres'} <span class="opt">${en ? '(for the confirmation, optional)' : '(voor de bevestiging, optioneel)'}</span></label>
+              <input type="email" id="email" name="E-mail" placeholder="${en ? 'name@example.com' : 'naam@voorbeeld.nl'}" autocomplete="email">
             </div>
           </fieldset>
 
           <fieldset class="fs">
-            <legend><span class="fs-n">2</span> De rit</legend>
+            <legend><span class="fs-n">2</span> ${en ? 'The ride' : 'De rit'}</legend>
             <div class="field">
-              <label for="type">Soort rit</label>
+              <label for="type">${en ? 'Type of ride' : 'Soort rit'}</label>
               <select id="type" name="Soort rit" required>
-                <option value="" disabled selected>Maak een keuze</option>
-                <option>Spoedrit, zo snel mogelijk</option>
-                ${SERVICES.map(s => `<option>${s.nav}</option>`).join('\n                ')}
-                <option>Iets anders</option>
+                <option value="" disabled selected>${en ? 'Make a choice' : 'Maak een keuze'}</option>
+                <option>${en ? 'Emergency ride, as soon as possible' : 'Spoedrit, zo snel mogelijk'}</option>
+                ${SERVICES.map(s => `<option>${(en ? s.en : s).nav}</option>`).join('\n                ')}
+                <option>${en ? 'Something else' : 'Iets anders'}</option>
               </select>
             </div>
             <div class="form-row">
               <div class="field">
-                <label for="ophaal">Ophaaladres</label>
-                <input type="text" id="ophaal" name="Ophaaladres" placeholder="Straat, huisnummer, plaats" required autocomplete="street-address">
+                <label for="ophaal">${en ? 'Pickup address' : 'Ophaaladres'}</label>
+                <input type="text" id="ophaal" name="Ophaaladres" placeholder="${en ? 'Street, number, city' : 'Straat, huisnummer, plaats'}" required autocomplete="street-address">
               </div>
               <div class="field">
-                <label for="bestemming">Bestemming</label>
-                <input type="text" id="bestemming" name="Bestemming" placeholder="Adres of instelling, plaats" required>
+                <label for="bestemming">${en ? 'Destination' : 'Bestemming'}</label>
+                <input type="text" id="bestemming" name="Bestemming" placeholder="${en ? 'Address or facility, city' : 'Adres of instelling, plaats'}" required>
               </div>
             </div>
 
             <div class="field">
-              <span class="lbl">Wanneer moet de rit plaatsvinden?</span>
-              <div class="seg" role="radiogroup" aria-label="Wanneer">
-                <label class="seg-opt"><input type="radio" name="Moment" value="Zo snel mogelijk (spoed)" checked><span><b>Zo snel mogelijk</b><small>Spoed, direct inplannen</small></span></label>
-                <label class="seg-opt"><input type="radio" name="Moment" value="Op een afgesproken moment"><span><b>Op een afgesproken moment</b><small>Kies datum en tijd</small></span></label>
+              <span class="lbl">${en ? 'When does the ride need to take place?' : 'Wanneer moet de rit plaatsvinden?'}</span>
+              <div class="seg" role="radiogroup" aria-label="${en ? 'When' : 'Wanneer'}">
+                <label class="seg-opt"><input type="radio" name="Moment" value="Zo snel mogelijk (spoed)" checked><span><b>${en ? 'As soon as possible' : 'Zo snel mogelijk'}</b><small>${en ? 'Emergency, schedule right away' : 'Spoed, direct inplannen'}</small></span></label>
+                <label class="seg-opt"><input type="radio" name="Moment" value="Op een afgesproken moment"><span><b>${en ? 'At an agreed time' : 'Op een afgesproken moment'}</b><small>${en ? 'Choose date and time' : 'Kies datum en tijd'}</small></span></label>
               </div>
             </div>
             <div class="form-row when" id="whenRow" hidden>
               <div class="field">
-                <label for="datum">Datum</label>
+                <label for="datum">${en ? 'Date' : 'Datum'}</label>
                 <input type="date" id="datum" name="Datum">
               </div>
               <div class="field">
-                <label for="tijd">Ophaaltijd</label>
+                <label for="tijd">${en ? 'Pickup time' : 'Ophaaltijd'}</label>
                 <input type="time" id="tijd" name="Ophaaltijd">
               </div>
             </div>
 
-            <label class="check"><input type="checkbox" id="terugrit" name="Terugrit gewenst" value="Ja"><span>Ik wil ook een <b>terugrit</b> inplannen</span></label>
+            <label class="check"><input type="checkbox" id="terugrit" name="Terugrit gewenst" value="Ja"><span>${en ? 'I also want to schedule a' : 'Ik wil ook een'} <b>${en ? 'return ride' : 'terugrit'}</b>${en ? '' : ' inplannen'}</span></label>
             <div class="field" id="terugRow" hidden>
-              <label for="terugtijd">Gewenste tijd terugrit <span class="opt">(bij benadering)</span></label>
-              <input type="text" id="terugtijd" name="Tijd terugrit" placeholder="Bijv. 15:30, of na de afspraak">
+              <label for="terugtijd">${en ? 'Preferred time for the return ride' : 'Gewenste tijd terugrit'} <span class="opt">${en ? '(approximate)' : '(bij benadering)'}</span></label>
+              <input type="text" id="terugtijd" name="Tijd terugrit" placeholder="${en ? 'E.g. 3:30 PM, or after the appointment' : 'Bijv. 15:30, of na de afspraak'}">
             </div>
           </fieldset>
 
           <fieldset class="fs">
-            <legend><span class="fs-n">3</span> Reiziger en hulpmiddel</legend>
+            <legend><span class="fs-n">3</span> ${en ? 'Passenger and equipment' : 'Reiziger en hulpmiddel'}</legend>
             <div class="form-row">
               <div class="field">
-                <label for="hulpmiddel">Hulpmiddel</label>
+                <label for="hulpmiddel">${en ? 'Mobility equipment' : 'Hulpmiddel'}</label>
                 <select id="hulpmiddel" name="Hulpmiddel" required>
-                  <option value="" disabled selected>Maak een keuze</option>
-                  <option>Handbewogen rolstoel</option>
-                  <option>Elektrische rolstoel</option>
-                  <option>Scootmobiel</option>
-                  <option>Opvouwbare rolstoel</option>
-                  <option>Geen, alleen een begeleider</option>
-                  <option>Weet ik niet zeker</option>
+                  <option value="" disabled selected>${en ? 'Make a choice' : 'Maak een keuze'}</option>
+                  <option>${en ? 'Manual wheelchair' : 'Handbewogen rolstoel'}</option>
+                  <option>${en ? 'Electric wheelchair' : 'Elektrische rolstoel'}</option>
+                  <option>${en ? 'Mobility scooter' : 'Scootmobiel'}</option>
+                  <option>${en ? 'Folding wheelchair' : 'Opvouwbare rolstoel'}</option>
+                  <option>${en ? 'None, just a companion' : 'Geen, alleen een begeleider'}</option>
+                  <option>${en ? 'Not sure' : 'Weet ik niet zeker'}</option>
                 </select>
               </div>
               <div class="field">
-                <label for="personen">Aantal reizigers</label>
+                <label for="personen">${en ? 'Number of passengers' : 'Aantal reizigers'}</label>
                 <select id="personen" name="Aantal reizigers">
-                  <option>1</option><option>2</option><option>3</option><option>4</option><option>5 of meer</option>
+                  <option>1</option><option>2</option><option>3</option><option>4</option><option>${en ? '5 or more' : '5 of meer'}</option>
                 </select>
               </div>
             </div>
             <div class="field">
-              <label for="bericht">Opmerking <span class="opt">(optioneel)</span></label>
-              <textarea id="bericht" name="Opmerking" placeholder="Bijv. bagage, infuus of zuurstof, trap of drempel bij de deur, contactpersoon."></textarea>
+              <label for="bericht">${en ? 'Note' : 'Opmerking'} <span class="opt">${en ? '(optional)' : '(optioneel)'}</span></label>
+              <textarea id="bericht" name="Opmerking" placeholder="${en ? 'E.g. luggage, IV or oxygen, stairs or a step at the door, contact person.' : 'Bijv. bagage, infuus of zuurstof, trap of drempel bij de deur, contactpersoon.'}"></textarea>
             </div>
           </fieldset>
 
-          <label class="check consent"><input type="checkbox" id="akkoord" required><span>Ik ga akkoord met de <a href="/privacyverklaring" target="_blank" rel="noopener">privacyverklaring</a>. Mijn gegevens worden alleen gebruikt om contact op te nemen over deze rit.</span></label>
+          <label class="check consent"><input type="checkbox" id="akkoord" required><span>${en ? 'I agree to the' : 'Ik ga akkoord met de'} <a href="${base}/privacyverklaring" target="_blank" rel="noopener">${en ? 'privacy policy' : 'privacyverklaring'}</a>. ${en ? 'My details are only used to contact me about this ride.' : 'Mijn gegevens worden alleen gebruikt om contact op te nemen over deze rit.'}</span></label>
 
-          <button type="submit" class="btn btn-yellow btn-full" id="submitBtn">Aanvraag versturen</button>
-          <p class="form-note">Bij spoed reageren we zo snel mogelijk. Heeft u haast? Bel liever direct: <a href="tel:${SITE.phoneTel}">${SITE.phoneDisplay}</a>.</p>
+          <button type="submit" class="btn btn-yellow btn-full" id="submitBtn">${en ? 'Send request' : 'Aanvraag versturen'}</button>
+          <p class="form-note">${en ? "For emergencies we respond as fast as possible. In a hurry? It's best to call directly:" : 'Bij spoed reageren we zo snel mogelijk. Heeft u haast? Bel liever direct:'} <a href="tel:${SITE.phoneTel}">${SITE.phoneDisplay}</a>.</p>
           <p class="form-error" id="formError" role="alert" hidden></p>
         </form>
 
         <div class="form-success" id="formSuccess" role="status" hidden>
           <div class="ok-badge">${svgCheck()}</div>
-          <h3>Bedankt, uw aanvraag is <span class="serif-i">ontvangen</span></h3>
-          <p>We nemen zo snel mogelijk contact met u op om de rit en de prijs te bevestigen. Heeft u haast, bel dan direct:</p>
-          <p><a class="btn btn-yellow" href="tel:${SITE.phoneTel}">Bel ${SITE.phoneDisplay}</a></p>
-          <p class="demo-note" id="demoNote" hidden>Demo-modus: er is nog geen e-mailadres gekoppeld aan dit formulier, dus deze aanvraag is niet echt verstuurd.</p>
+          <h3>${en ? 'Thank you, your request has been' : 'Bedankt, uw aanvraag is'} <span class="serif-i">${en ? 'received' : 'ontvangen'}</span></h3>
+          <p>${en ? "We'll contact you as soon as possible to confirm the ride and the price. In a hurry? Call directly:" : 'We nemen zo snel mogelijk contact met u op om de rit en de prijs te bevestigen. Heeft u haast, bel dan direct:'}</p>
+          <p><a class="btn btn-yellow" href="tel:${SITE.phoneTel}">${en ? 'Call' : 'Bel'} ${SITE.phoneDisplay}</a></p>
+          <p class="demo-note" id="demoNote" hidden>${en ? "Demo mode: no email address is linked to this form yet, so this request wasn't actually sent." : 'Demo-modus: er is nog geen e-mailadres gekoppeld aan dit formulier, dus deze aanvraag is niet echt verstuurd.'}</p>
         </div>
       </div>
 
       <!-- SIDEBAR -->
       <aside>
         <div class="aside-card reveal reveal-d1">
-          <h3>Hoe het <span class="serif-i">werkt</span></h3>
+          <h3>${en ? 'How it' : 'Hoe het'} <span class="serif-i">${en ? 'works' : 'werkt'}</span></h3>
           <ul class="mini-steps">
-            <li><span class="n">1.</span><div><b>U vult het formulier in</b><span>Duurt nog geen twee minuten.</span></div></li>
-            <li><span class="n">2.</span><div><b>Wij bevestigen de rit</b><span>Inclusief prijs, voordat u definitief boekt.</span></div></li>
-            <li><span class="n">3.</span><div><b>Veilig vervoerd</b><span>De chauffeur staat op tijd klaar.</span></div></li>
+            <li><span class="n">1.</span><div><b>${en ? 'You fill in the form' : 'U vult het formulier in'}</b><span>${en ? 'Takes less than two minutes.' : 'Duurt nog geen twee minuten.'}</span></div></li>
+            <li><span class="n">2.</span><div><b>${en ? 'We confirm the ride' : 'Wij bevestigen de rit'}</b><span>${en ? 'Including price, before you book for real.' : 'Inclusief prijs, voordat u definitief boekt.'}</span></div></li>
+            <li><span class="n">3.</span><div><b>${en ? 'Safely transported' : 'Veilig vervoerd'}</b><span>${en ? 'The driver is ready on time.' : 'De chauffeur staat op tijd klaar.'}</span></div></li>
           </ul>
         </div>
         <div class="aside-card reveal reveal-d2">
-          <p class="aside-alt">Spoed? Bel liever direct:<br><a href="tel:${SITE.phoneTel}">${SITE.phoneDisplay}</a><br>24/7 bereikbaar in Nederland.</p>
+          <p class="aside-alt">${en ? "Emergency? It's best to call directly:" : 'Spoed? Bel liever direct:'}<br><a href="tel:${SITE.phoneTel}">${SITE.phoneDisplay}</a><br>${en ? '24/7 available throughout the Netherlands.' : '24/7 bereikbaar in Nederland.'}</p>
         </div>
         <div class="aside-card reveal reveal-d3">
-          <p class="aside-alt">Liever appen?<br><a href="https://wa.me/${SITE.whatsapp}">${ICONS.whatsapp} WhatsApp ons</a></p>
+          <p class="aside-alt">${en ? 'Prefer to message?' : 'Liever appen?'}<br><a href="https://wa.me/${SITE.whatsapp}">${ICONS.whatsapp} WhatsApp ${en ? 'us' : 'ons'}</a></p>
         </div>
         <div class="aside-card reveal reveal-d3">
-          <p class="aside-alt">Eerst meer weten?<br><a href="/diensten">Bekijk onze diensten</a><br><a href="/locaties">Bekijk alle locaties</a></p>
+          <p class="aside-alt">${en ? 'Want to know more first?' : 'Eerst meer weten?'}<br><a href="${base}/diensten">${en ? 'View our services' : 'Bekijk onze diensten'}</a><br><a href="${base}/locaties">${en ? 'View all locations' : 'Bekijk alle locaties'}</a></p>
         </div>
       </aside>
 
@@ -1488,17 +1580,17 @@ function buildContactBody() {
     var payload = Object.assign({
       access_key: KEY,
       subject: 'Nieuwe ritaanvraag: ' + (data['Soort rit'] || 'rit') + ' (' + (data['Moment'] || '') + ')',
-      from_name: 'Rolstoeltaxi Spoed website'
+      from_name: '${SITE.name} website'
     }, data);
     if (data['E-mail']) payload.replyto = data['E-mail'];
-    btn.disabled = true; var label = btn.textContent; btn.textContent = 'Bezig met versturen...';
+    btn.disabled = true; var label = btn.textContent; btn.textContent = '${en ? 'Sending...' : 'Bezig met versturen...'}';
 
     function done(demo) {
-      location.href = '/bedankt' + (demo ? '?demo=1' : '');
+      location.href = '${base}/bedankt' + (demo ? '?demo=1' : '');
     }
 
     if (!KEY) {
-      setTimeout(function () { console.info('Demo: aanvraag niet verstuurd', data); done(true); }, 700);
+      setTimeout(function () { console.info('${en ? 'Demo: request not sent' : 'Demo: aanvraag niet verstuurd'}', data); done(true); }, 700);
       return;
     }
     fetch('https://api.web3forms.com/submit', {
@@ -1506,10 +1598,10 @@ function buildContactBody() {
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(payload)
     }).then(function (r) { return r.json(); }).then(function (j) {
-      if (j && j.success) done(false); else throw new Error((j && j.message) || 'fout');
+      if (j && j.success) done(false); else throw new Error((j && j.message) || 'error');
     }).catch(function () {
       btn.disabled = false; btn.textContent = label;
-      showError('Versturen is niet gelukt. Probeer het opnieuw of bel direct naar ${SITE.phoneDisplay}.');
+      showError('${en ? `Sending failed. Please try again or call directly: ${SITE.phoneDisplay}.` : `Versturen is niet gelukt. Probeer het opnieuw of bel direct naar ${SITE.phoneDisplay}.`}');
     });
   });
 })();
@@ -1518,15 +1610,17 @@ function buildContactBody() {
 
 /* ============================== OVER ONS PAGE ============================== */
 
-function buildOverOnsBody() {
+function buildOverOnsBody(locale = 'nl') {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
   return `<!-- PAGE HERO -->
 <header class="page-hero has-photo" style="background-image:url('img/rolstoelbus-voorkant.jpg')">
   <div class="wrap">
     <div class="hero-box reveal">
-      ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Over ons' }])}
-      <span class="eyebrow">Over ons</span>
-      <h1>De spoedtak van <span class="serif-i">${SITE.parentBrand}</span></h1>
-      <p class="lead">Dezelfde ervaring en dezelfde bussen als ${SITE.parentBrand}, speciaal ingericht op ritten die niet konden wachten.</p>
+      ${breadcrumbNav([{ label: 'Home', href: `${base}/` }, { label: en ? 'About us' : 'Over ons' }])}
+      <span class="eyebrow">${en ? 'About us' : 'Over ons'}</span>
+      <h1>${en ? 'The emergency branch of' : 'De spoedtak van'} <span class="serif-i">${SITE.parentBrand}</span></h1>
+      <p class="lead">${en ? `The same experience and the same vehicles as ${SITE.parentBrand}, specially arranged for rides that couldn't wait.` : `Dezelfde ervaring en dezelfde bussen als ${SITE.parentBrand}, speciaal ingericht op ritten die niet konden wachten.`}</p>
     </div>
   </div>
 </header>
@@ -1535,17 +1629,17 @@ function buildOverOnsBody() {
   <div class="wrap">
     <div class="about-grid">
       <div class="about-photo reveal" style="background:none;padding:0">
-        <img src="/img/rolstoelbus-zijkant.jpg" alt="Rolstoelbus van Rolstoeltaxi Spoed, zijaanzicht" width="1600" height="1200" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
+        <img src="/img/rolstoelbus-zijkant.jpg" alt="${en ? `${SITE.name} wheelchair-accessible vehicle, side view` : 'Rolstoelbus van Rolstoeltaxi Spoed, zijaanzicht'}" width="1600" height="1200" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
       </div>
       <div class="about-copy">
-        <span class="eyebrow reveal">Het verhaal</span>
-        <h2 class="reveal reveal-d1">Ontstaan uit een simpele <span class="serif-i">behoefte</span></h2>
-        <p class="reveal reveal-d2">${SITE.parentBrand} vervoert al meer dan 10 jaar mensen in een rolstoel, in Nederland, van ziekenhuisritten tot dagbesteding en privéafspraken. Daarbij merkten we telkens dezelfde vraag: kan er ook vervoer komen als het echt niet meer een paar dagen kan wachten?</p>
-        <p class="reveal reveal-d2">Rolstoeltaxi Spoed is het antwoord daarop: dezelfde chauffeurs, dezelfde volledig uitgeruste rolstoelbussen, maar dan georganiseerd rond snel schakelen in plaats van dagen vooruit plannen.</p>
+        <span class="eyebrow reveal">${en ? 'The story' : 'Het verhaal'}</span>
+        <h2 class="reveal reveal-d1">${en ? 'Born from a simple' : 'Ontstaan uit een simpele'} <span class="serif-i">${en ? 'need' : 'behoefte'}</span></h2>
+        <p class="reveal reveal-d2">${en ? `${SITE.parentBrand} has been transporting people in wheelchairs for more than 10 years, throughout the Netherlands, from hospital rides to day care and private appointments. Along the way, we kept hearing the same question: can transport also come when it really can't wait a few days?` : `${SITE.parentBrand} vervoert al meer dan 10 jaar mensen in een rolstoel, in Nederland, van ziekenhuisritten tot dagbesteding en privéafspraken. Daarbij merkten we telkens dezelfde vraag: kan er ook vervoer komen als het echt niet meer een paar dagen kan wachten?`}</p>
+        <p class="reveal reveal-d2">${en ? `${SITE.name} is the answer: the same drivers, the same fully equipped vehicles, but organised around switching quickly instead of planning days ahead.` : 'Rolstoeltaxi Spoed is het antwoord daarop: dezelfde chauffeurs, dezelfde volledig uitgeruste rolstoelbussen, maar dan georganiseerd rond snel schakelen in plaats van dagen vooruit plannen.'}</p>
         <ul class="usp-list reveal reveal-d3">
-          <li><div><b>Ervaren chauffeurs</b><span>Getraind in zorgvervoer, rustig en respectvol.</span></div></li>
-          <li><div><b>Eigen wagenpark</b><span>Rolstoelbussen met elektrische laadklep, geschikt voor rolstoel én scootmobiel.</span></div></li>
-          <li><div><b>Direct bereikbaar</b><span>Bel en er wordt meteen een rit voor u ingepland.</span></div></li>
+          <li><div><b>${en ? 'Experienced drivers' : 'Ervaren chauffeurs'}</b><span>${en ? 'Trained in care transport, calm and respectful.' : 'Getraind in zorgvervoer, rustig en respectvol.'}</span></div></li>
+          <li><div><b>${en ? 'Own fleet' : 'Eigen wagenpark'}</b><span>${en ? 'Wheelchair-accessible vehicles with an electric ramp, suitable for wheelchairs and mobility scooters.' : 'Rolstoelbussen met elektrische laadklep, geschikt voor rolstoel én scootmobiel.'}</span></div></li>
+          <li><div><b>${en ? 'Directly reachable' : 'Direct bereikbaar'}</b><span>${en ? "Call and a ride is scheduled for you right away." : 'Bel en er wordt meteen een rit voor u ingepland.'}</span></div></li>
         </ul>
       </div>
     </div>
@@ -1555,12 +1649,12 @@ function buildOverOnsBody() {
 <section class="band-2">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Werkgebied</span>
-      <h2>Wij rijden <span class="serif-i">in Nederland</span></h2>
+      <span class="eyebrow">${en ? 'Service area' : 'Werkgebied'}</span>
+      <h2>${en ? 'We drive' : 'Wij rijden'} <span class="serif-i">${en ? 'throughout the Netherlands' : 'in Nederland'}</span></h2>
     </div>
     <div class="area-list reveal">
-      ${TOP_CITIES.map(slug => { const c = cityBySlug(slug); return `<a href="${cityPath(c)}">${c.name}</a>`; }).join('\n      ')}
-      <a href="/locaties"><b>Alle locaties</b></a>
+      ${TOP_CITIES.map(slug => { const c = cityBySlug(slug); return `<a href="${base}${cityPath(c)}">${c.name}</a>`; }).join('\n      ')}
+      <a href="${base}/locaties"><b>${en ? 'All locations' : 'Alle locaties'}</b></a>
     </div>
   </div>
 </section>
@@ -1569,27 +1663,29 @@ function buildOverOnsBody() {
 <section id="contact" class="cta-final night">
   <canvas class="particles"></canvas>
   <div class="wrap">
-    <span class="eyebrow reveal">Maak kennis</span>
-    <h2 class="reveal reveal-d1">Even <span class="serif-i">bellen</span>?</h2>
-    <p class="reveal reveal-d2">Bel direct voor spoed, of plan online een rit voor later.</p>
+    <span class="eyebrow reveal">${en ? 'Get in touch' : 'Maak kennis'}</span>
+    <h2 class="reveal reveal-d1">${en ? 'Give us a' : 'Even'} <span class="serif-i">${en ? 'call?' : 'bellen?'}</span></h2>
+    <p class="reveal reveal-d2">${en ? 'Call now for an emergency, or book a ride online for later.' : 'Bel direct voor spoed, of plan online een rit voor later.'}</p>
     <div class="reveal reveal-d3">
-      <a href="tel:${SITE.phoneTel}" class="btn">Bel ${SITE.phoneDisplay}</a>
+      <a href="tel:${SITE.phoneTel}" class="btn">${en ? 'Call' : 'Bel'} ${SITE.phoneDisplay}</a>
     </div>
-    <p class="cta-sub reveal reveal-d3">Of <a href="/contact" style="color:var(--accent)">plan online een rit</a></p>
+    <p class="cta-sub reveal reveal-d3">${en ? 'Or' : 'Of'} <a href="${base}/contact" style="color:var(--accent)">${en ? 'book a ride online' : 'plan online een rit'}</a></p>
   </div>
 </section>`;
 }
 
 /* ============================== TARIEVEN PAGE ============================== */
 
-function buildTarievenBody() {
+function buildTarievenBody(locale = 'nl') {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
   return `<!-- PAGE HERO -->
 <header class="page-hero" style="padding-bottom:40px">
   <div class="wrap">
-    ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Tarieven' }])}
-    <span class="eyebrow reveal">Transparant</span>
-    <h1 class="reveal reveal-d1">Onze <span class="serif-i">tarieven</span></h1>
-    <p class="lead reveal reveal-d2">Ook bij spoed geldt: u hoort de prijs altijd vooraf aan de telefoon. Geen verrassingen achteraf.</p>
+    ${breadcrumbNav([{ label: 'Home', href: `${base}/` }, { label: en ? 'Rates' : 'Tarieven' }])}
+    <span class="eyebrow reveal">${en ? 'Transparent' : 'Transparant'}</span>
+    <h1 class="reveal reveal-d1">${en ? 'Our' : 'Onze'} <span class="serif-i">${en ? 'rates' : 'tarieven'}</span></h1>
+    <p class="lead reveal reveal-d2">${en ? "Even for an emergency: you always hear the price on the phone beforehand. No surprises afterwards." : 'Ook bij spoed geldt: u hoort de prijs altijd vooraf aan de telefoon. Geen verrassingen achteraf.'}</p>
   </div>
 </header>
 
@@ -1598,26 +1694,26 @@ function buildTarievenBody() {
     <div class="grid-4">
       <div class="card reveal">
         <span class="icon-badge">${ICONS.mapPin}</span>
-        <h3>Afstand &amp; tijdstip</h3>
-        <p>De ritprijs is opgebouwd uit de afstand tot de bestemming en het tijdstip van de rit.</p>
+        <h3>${en ? 'Distance & time' : 'Afstand &amp; tijdstip'}</h3>
+        <p>${en ? 'The price of the ride is based on the distance to the destination and the time of the ride.' : 'De ritprijs is opgebouwd uit de afstand tot de bestemming en het tijdstip van de rit.'}</p>
       </div>
       <div class="card reveal reveal-d1">
         <span class="icon-badge">${ICONS.bolt}</span>
-        <h3>Spoedtoeslag</h3>
-        <p>Voor ritten die op zeer korte termijn worden ingepland geldt een toeslag ten opzichte van vooraf geplande ritten.</p>
+        <h3>${en ? 'Emergency surcharge' : 'Spoedtoeslag'}</h3>
+        <p>${en ? 'A surcharge applies for rides scheduled at very short notice, compared to rides planned in advance.' : 'Voor ritten die op zeer korte termijn worden ingepland geldt een toeslag ten opzichte van vooraf geplande ritten.'}</p>
       </div>
       <div class="card reveal reveal-d2">
         <span class="icon-badge">${ICONS.checkCircle}</span>
-        <h3>Vooraf genoemd</h3>
-        <p>U hoort de prijs aan de telefoon voordat we vertrekken, ook bij spoed.</p>
+        <h3>${en ? 'Named beforehand' : 'Vooraf genoemd'}</h3>
+        <p>${en ? "You hear the price on the phone before we set off, even for an emergency." : 'U hoort de prijs aan de telefoon voordat we vertrekken, ook bij spoed.'}</p>
       </div>
       <div class="card reveal reveal-d3">
         <span class="icon-badge">${ICONS.calendarCheck}</span>
-        <h3>Geplande ritten voordeliger</h3>
-        <p>Weet u de datum al ruim van tevoren? Dan is dat vaak voordeliger dan een spoedrit.</p>
+        <h3>${en ? 'Planned rides are cheaper' : 'Geplande ritten voordeliger'}</h3>
+        <p>${en ? 'Already know the date well in advance? That is often cheaper than an emergency ride.' : 'Weet u de datum al ruim van tevoren? Dan is dat vaak voordeliger dan een spoedrit.'}</p>
       </div>
     </div>
-    <p class="reveal" style="margin-top:26px;color:var(--ink-dim);max-width:70ch">Een begeleider die meereist en de wachttijd tijdens een afspraak of plechtigheid brengen we niet in rekening: dat zit bij ons gratis bij de rit in.</p>
+    <p class="reveal" style="margin-top:26px;color:var(--ink-dim);max-width:70ch">${en ? "A companion who rides along and the waiting time during an appointment or ceremony are never charged: that's included in the ride for free." : 'Een begeleider die meereist en de wachttijd tijdens een afspraak of plechtigheid brengen we niet in rekening: dat zit bij ons gratis bij de rit in.'}</p>
   </div>
 </section>
 
@@ -1625,10 +1721,10 @@ function buildTarievenBody() {
   <div class="wrap">
     <div class="price-box reveal">
       <div>
-        <span class="eyebrow">Vraag naar een prijsopgave</span>
-        <h3>Bel voor een exacte prijs op maat</h3>
+        <span class="eyebrow">${en ? 'Ask for a quote' : 'Vraag naar een prijsopgave'}</span>
+        <h3>${en ? 'Call for an exact price tailored to you' : 'Bel voor een exacte prijs op maat'}</h3>
       </div>
-      <p>Elke rit is anders: afstand, tijdstip, en of het om spoed of een geplande rit gaat. Bel of app ons met de details, dan noemen we direct een reële prijs, voordat u boekt.</p>
+      <p>${en ? "Every ride is different: distance, time, and whether it's an emergency or a planned ride. Call or message us with the details, and we'll name a realistic price right away, before you book." : 'Elke rit is anders: afstand, tijdstip, en of het om spoed of een geplande rit gaat. Bel of app ons met de details, dan noemen we direct een reële prijs, voordat u boekt.'}</p>
     </div>
   </div>
 </section>
@@ -1636,20 +1732,20 @@ function buildTarievenBody() {
 <section>
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Vergoeding</span>
-      <h2>Wordt de rit <span class="serif-i">vergoed</span>?</h2>
+      <span class="eyebrow">${en ? 'Reimbursement' : 'Vergoeding'}</span>
+      <h2>${en ? 'Is the ride' : 'Wordt de rit'} <span class="serif-i">${en ? 'reimbursed?' : 'vergoed?'}</span></h2>
     </div>
     <div class="about-info-grid">
       <div class="reveal reveal-d1">
-        <p>Sommige zorgverzekeraars vergoeden rolstoelvervoer geheel of gedeeltelijk vanuit de basis- of aanvullende verzekering, meestal bij medische noodzaak. Ook via een persoonsgebonden budget (pgb) vanuit de Wmo kunt u zelf een vervoerder kiezen, zoals Rolstoeltaxi Spoed. Het gewone, collectieve Wmo-vervoer (de regiotaxi) is een apart systeem waar u niet vrij een eigen vervoerder bij kiest.</p>
-        <p>Neem voor de zekerheid vooraf contact op met uw zorgverzekeraar, gemeente of zorginstelling om na te vragen wat in uw geval vergoed wordt. Wij verstrekken desgevraagd een factuur die u zelf kunt indienen.</p>
+        <p>${en ? "Some health insurers reimburse wheelchair transport, fully or partly, from the basic or supplementary policy, usually when there's a medical necessity. With a personal budget (pgb) from the Wmo you can also choose your own carrier, such as " + SITE.name + ". The regular, collective Wmo transport (the regional taxi) is a separate system where you can't freely choose your own carrier." : `Sommige zorgverzekeraars vergoeden rolstoelvervoer geheel of gedeeltelijk vanuit de basis- of aanvullende verzekering, meestal bij medische noodzaak. Ook via een persoonsgebonden budget (pgb) vanuit de Wmo kunt u zelf een vervoerder kiezen, zoals Rolstoeltaxi Spoed. Het gewone, collectieve Wmo-vervoer (de regiotaxi) is een apart systeem waar u niet vrij een eigen vervoerder bij kiest.`}</p>
+        <p>${en ? "To be sure, contact your health insurer, municipality or care facility beforehand to ask what is reimbursed in your case. We provide an invoice on request, which you can submit yourself." : 'Neem voor de zekerheid vooraf contact op met uw zorgverzekeraar, gemeente of zorginstelling om na te vragen wat in uw geval vergoed wordt. Wij verstrekken desgevraagd een factuur die u zelf kunt indienen.'}</p>
       </div>
       <div class="signals-card reveal reveal-d2">
-        <h4>Handig om na te vragen</h4>
+        <h4>${en ? 'Worth asking about' : 'Handig om na te vragen'}</h4>
         <ul class="signals-list">
-          <li>Of rolstoelvervoer onder uw aanvullende zorgverzekering valt</li>
-          <li>Of u met een pgb vanuit de Wmo zelf een vervoerder mag kiezen</li>
-          <li>Of uw zorginstelling vervoer vergoedt of zelf regelt</li>
+          <li>${en ? 'Whether wheelchair transport is covered by your supplementary health insurance' : 'Of rolstoelvervoer onder uw aanvullende zorgverzekering valt'}</li>
+          <li>${en ? 'Whether a pgb from the Wmo lets you choose your own carrier' : 'Of u met een pgb vanuit de Wmo zelf een vervoerder mag kiezen'}</li>
+          <li>${en ? 'Whether your care facility reimburses or arranges transport itself' : 'Of uw zorginstelling vervoer vergoedt of zelf regelt'}</li>
         </ul>
       </div>
     </div>
@@ -1660,13 +1756,13 @@ function buildTarievenBody() {
 <section id="contact" class="cta-final night">
   <canvas class="particles"></canvas>
   <div class="wrap">
-    <span class="eyebrow reveal">Prijs op maat</span>
-    <h2 class="reveal reveal-d1">Wat kost uw <span class="serif-i">rit</span>?</h2>
-    <p class="reveal reveal-d2">Bel of app ons, dan hoort u direct een reële prijsindicatie.</p>
+    <span class="eyebrow reveal">${en ? 'Tailored price' : 'Prijs op maat'}</span>
+    <h2 class="reveal reveal-d1">${en ? 'What does your' : 'Wat kost uw'} <span class="serif-i">${en ? 'ride cost?' : 'rit?'}</span></h2>
+    <p class="reveal reveal-d2">${en ? "Call or message us, and you'll hear a realistic price indication right away." : 'Bel of app ons, dan hoort u direct een reële prijsindicatie.'}</p>
     <div class="reveal reveal-d3">
-      <a href="tel:${SITE.phoneTel}" class="btn">Bel ${SITE.phoneDisplay}</a>
+      <a href="tel:${SITE.phoneTel}" class="btn">${en ? 'Call' : 'Bel'} ${SITE.phoneDisplay}</a>
     </div>
-    <p class="cta-sub reveal reveal-d3">Of <a href="/contact" style="color:var(--accent-2)">plan online een rit</a></p>
+    <p class="cta-sub reveal reveal-d3">${en ? 'Or' : 'Of'} <a href="${base}/contact" style="color:var(--accent-2)">${en ? 'book a ride online' : 'plan online een rit'}</a></p>
   </div>
 </section>`;
 }
@@ -1687,33 +1783,51 @@ const FAQS_FULL = [
   { q: 'Hoe reserveer ik een rit?', a: 'Bij spoed belt of appt u ons het liefst direct. Voor een geplande rit kunt u ook het contactformulier invullen, dan nemen we snel contact op om de rit en de prijs te bevestigen.' },
 ];
 
-function faqLd() {
+const FAQS_FULL_EN = [
+  { q: `What is the difference between ${SITE.name} and regular wheelchair transport?`, a: `${SITE.name} focuses on rides that couldn't be planned in advance: an emergency admission, a last-minute appointment, or transport that needs to be arranged today. For pre-planned, recurring rides you can just call us as well, see our wheelchair transport page.` },
+  { q: 'How quickly can a wheelchair-accessible vehicle reach me?', a: 'That depends on where you are and which vehicle is available nearest to you. On the phone we always give a realistic estimate of the arrival time.' },
+  { q: `Is ${SITE.name} the same company as ${SITE.parentBrand}?`, a: `${SITE.name} is the emergency branch of ${SITE.parentBrand}: the same experienced drivers and the same wheelchair-accessible vehicles, specially set up to switch quickly during an emergency.` },
+  { q: 'Do you also drive at night and on weekends?', a: 'Yes, we are reachable 24 hours a day, 7 days a week for emergency rides, including at night and on weekends.' },
+  { q: 'Can my companion come along in the vehicle?', a: 'Yes, a family member or companion can simply ride along. Let us know when booking, and we\'ll take it into account.' },
+  { q: 'Do I pay for a companion or for waiting time?', a: "No. A companion who rides along and the waiting time during your appointment or ceremony are never charged." },
+  { q: 'What does an emergency ride cost?', a: 'The price depends on distance and time, and a surcharge applies for emergencies compared to pre-planned rides. You always hear the price beforehand on the phone. Also see our rates page.' },
+  { q: 'Does my health insurer or municipality reimburse the ride?', a: 'That varies per situation. Your health insurer sometimes reimburses wheelchair transport when medically necessary. With a pgb from the Wmo you can choose your own carrier. The regular collective Wmo transport (the regional taxi) is a different system. Please check this beforehand with your health insurer, municipality or care facility. We provide an invoice on request, which you can submit yourself.' },
+  { q: 'Can a mobility scooter come along instead of a wheelchair?', a: 'Yes, the electric ramp is suitable for both a wheelchair and a mobility scooter.' },
+  { q: `In which regions does ${SITE.name} operate?`, a: "We drive throughout the Netherlands, with extra rides in and around Amsterdam, Rotterdam, The Hague, Utrecht, Amersfoort and Hilversum. Not on the list? Call us, we're happy to discuss the options." },
+  { q: 'How do I book a ride?', a: "For an emergency, it's best to call or message us directly. For a planned ride you can also fill in the contact form, and we'll get in touch quickly to confirm the ride and the price." },
+];
+
+function faqLd(locale = 'nl') {
+  const list = locale === 'en' ? FAQS_FULL_EN : FAQS_FULL;
   return `<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    ${FAQS_FULL.map(f => `{"@type":"Question","name":${JSON.stringify(f.q)},"acceptedAnswer":{"@type":"Answer","text":${JSON.stringify(f.a)}}}`).join(',\n    ')}
+    ${list.map(f => `{"@type":"Question","name":${JSON.stringify(f.q)},"acceptedAnswer":{"@type":"Answer","text":${JSON.stringify(f.a)}}}`).join(',\n    ')}
   ]
 }
 </script>`;
 }
 
-function buildFaqBody() {
+function buildFaqBody(locale = 'nl') {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
+  const list = en ? FAQS_FULL_EN : FAQS_FULL;
   return `<!-- PAGE HERO -->
 <header class="page-hero" style="padding-bottom:20px">
   <div class="wrap">
-    ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Veelgestelde vragen' }])}
-    <span class="eyebrow reveal">Veelgestelde vragen</span>
-    <h1 class="reveal reveal-d1">Alles wat u wilt <span class="serif-i">weten</span></h1>
-    <p class="lead reveal reveal-d2">Staat uw vraag er niet bij? Bel of app ons gerust, we denken graag mee.</p>
+    ${breadcrumbNav([{ label: 'Home', href: `${base}/` }, { label: en ? 'Frequently asked questions' : 'Veelgestelde vragen' }])}
+    <span class="eyebrow reveal">${en ? 'Frequently asked questions' : 'Veelgestelde vragen'}</span>
+    <h1 class="reveal reveal-d1">${en ? 'Everything you want to' : 'Alles wat u wilt'} <span class="serif-i">${en ? 'know' : 'weten'}</span></h1>
+    <p class="lead reveal reveal-d2">${en ? "Don't see your question? Feel free to call or message us, we're happy to help." : 'Staat uw vraag er niet bij? Bel of app ons gerust, we denken graag mee.'}</p>
   </div>
 </header>
 
 <section style="padding-top:0">
   <div class="wrap">
     <div class="faq-list" style="max-width:820px">
-      ${FAQS_FULL.map(f => `<div class="faq-item reveal">
+      ${list.map(f => `<div class="faq-item reveal">
         <button class="faq-q" aria-expanded="false">${f.q}</button>
         <div class="faq-a"><p>${f.a}</p></div>
       </div>`).join('\n      ')}
@@ -1725,33 +1839,62 @@ function buildFaqBody() {
 <section id="contact" class="cta-final night">
   <canvas class="particles"></canvas>
   <div class="wrap">
-    <span class="eyebrow reveal">Nog een vraag?</span>
-    <h2 class="reveal reveal-d1">Bel gerust, <span class="serif-i">we denken mee</span></h2>
-    <p class="reveal reveal-d2">Geen standaardantwoord nodig? Aan de telefoon kijken we naar uw specifieke situatie.</p>
+    <span class="eyebrow reveal">${en ? 'Another question?' : 'Nog een vraag?'}</span>
+    <h2 class="reveal reveal-d1">${en ? 'Feel free to call,' : 'Bel gerust,'} <span class="serif-i">${en ? "we're happy to help" : 'we denken mee'}</span></h2>
+    <p class="reveal reveal-d2">${en ? "Don't need a standard answer? On the phone we look at your specific situation." : 'Geen standaardantwoord nodig? Aan de telefoon kijken we naar uw specifieke situatie.'}</p>
     <div class="reveal reveal-d3">
-      <a href="tel:${SITE.phoneTel}" class="btn">Bel ${SITE.phoneDisplay}</a>
+      <a href="tel:${SITE.phoneTel}" class="btn">${en ? 'Call' : 'Bel'} ${SITE.phoneDisplay}</a>
     </div>
-    <p class="cta-sub reveal reveal-d3">Of <a href="/contact" style="color:var(--accent-2)">plan online een rit</a></p>
+    <p class="cta-sub reveal reveal-d3">${en ? 'Or' : 'Of'} <a href="${base}/contact" style="color:var(--accent-2)">${en ? 'book a ride online' : 'plan online een rit'}</a></p>
   </div>
 </section>`;
 }
 
 /* ============================== PRIVACY PAGE ============================== */
 
-function buildPrivacyBody() {
+function buildPrivacyBody(locale = 'nl') {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
   return `<!-- PAGE HERO -->
 <header class="page-hero" style="padding-bottom:20px">
   <div class="wrap">
-    ${breadcrumbNav([{ label: 'Home', href: '/' }, { label: 'Privacyverklaring' }])}
-    <span class="eyebrow reveal">Juridisch</span>
-    <h1 class="reveal reveal-d1">Privacy<span class="serif-i">verklaring</span></h1>
-    <p class="lead reveal reveal-d2">Laatst bijgewerkt: 2026. ${SITE.name} gaat zorgvuldig om met uw persoonsgegevens.</p>
+    ${breadcrumbNav([{ label: 'Home', href: `${base}/` }, { label: en ? 'Privacy policy' : 'Privacyverklaring' }])}
+    <span class="eyebrow reveal">${en ? 'Legal' : 'Juridisch'}</span>
+    <h1 class="reveal reveal-d1">${en ? 'Privacy' : 'Privacy'}<span class="serif-i">${en ? ' policy' : 'verklaring'}</span></h1>
+    <p class="lead reveal reveal-d2">${en ? `Last updated: 2026. ${SITE.name} handles your personal data with care.` : `Laatst bijgewerkt: 2026. ${SITE.name} gaat zorgvuldig om met uw persoonsgegevens.`}</p>
   </div>
 </header>
 
 <section style="padding-top:20px">
   <div class="wrap prose reveal">
-    <h2>Wie zijn wij</h2>
+    ${en ? `<h2>Who we are</h2>
+    <p>${SITE.name}, part of ${SITE.parentBrand}, is responsible for processing personal data as described in this privacy policy. Questions? Contact us via <a href="mailto:${SITE.email}" style="color:var(--accent)">${SITE.email}</a>.</p>
+
+    <h2>What data we process</h2>
+    <ul>
+      <li>Name, phone number and (if provided) email address</li>
+      <li>Pickup and destination address needed to schedule a ride</li>
+      <li>Messages you send us via the contact form, phone or WhatsApp</li>
+    </ul>
+
+    <h2>Why we process this data</h2>
+    <p>We use your data exclusively to contact you about your request, to schedule a ride, and to carry out and invoice the agreed ride. We never sell your data to third parties.</p>
+
+    <h2>Retention period</h2>
+    <p>We do not keep your data longer than necessary for the purposes for which it was collected, unless a longer retention period is legally required, for example for tax record-keeping obligations.</p>
+
+    <h2>Sharing with third parties</h2>
+    <p>We only share your data with third parties when necessary to carry out our services, such as the party that technically processes our contact form, or when legally required.</p>
+
+    <h2>Your rights</h2>
+    <p>You have the right to view, correct or have your data deleted. Contact us via <a href="mailto:${SITE.email}" style="color:var(--accent)">${SITE.email}</a>.</p>
+
+    <h2>Questions about your ride?</h2>
+    <p>For questions about transport, rates or reimbursement, see our <a href="${base}/veelgestelde-vragen" style="color:var(--accent)">frequently asked questions page</a> or use the <a href="${base}/contact" style="color:var(--accent)">contact form</a>.</p>
+
+    <h2>Cookies</h2>
+    <p>This website itself only places technically necessary functionality. Some pages include an instruction video from YouTube. It only loads once you click the play button yourself; from that moment on, YouTube may place cookies according to its own privacy policy. Should analytics or marketing cookies be added, this policy will be updated and we will ask for your consent where required.</p>`
+    : `<h2>Wie zijn wij</h2>
     <p>${SITE.name}, onderdeel van ${SITE.parentBrand}, is verantwoordelijk voor de verwerking van persoonsgegevens zoals beschreven in deze privacyverklaring. Vragen? Neem contact op via <a href="mailto:${SITE.email}" style="color:var(--accent)">${SITE.email}</a>.</p>
 
     <h2>Welke gegevens verwerken wij</h2>
@@ -1774,29 +1917,31 @@ function buildPrivacyBody() {
     <p>U heeft het recht om uw gegevens in te zien, te corrigeren of te laten verwijderen. Neem hiervoor contact op via <a href="mailto:${SITE.email}" style="color:var(--accent)">${SITE.email}</a>.</p>
 
     <h2>Vragen over uw rit?</h2>
-    <p>Voor vragen over vervoer, tarieven of vergoeding kunt u terecht op onze <a href="/veelgestelde-vragen" style="color:var(--accent)">pagina met veelgestelde vragen</a> of via het <a href="/contact" style="color:var(--accent)">contactformulier</a>.</p>
+    <p>Voor vragen over vervoer, tarieven of vergoeding kunt u terecht op onze <a href="${base}/veelgestelde-vragen" style="color:var(--accent)">pagina met veelgestelde vragen</a> of via het <a href="${base}/contact" style="color:var(--accent)">contactformulier</a>.</p>
 
     <h2>Cookies</h2>
-    <p>Deze website plaatst zelf alleen technisch noodzakelijke functionaliteit. Op enkele pagina's staat een instructievideo van YouTube. Deze wordt pas geladen als u zelf op de afspeelknop klikt; vanaf dat moment kan YouTube cookies plaatsen volgens hun eigen privacybeleid. Zodra er analytische of marketingcookies worden toegevoegd, wordt deze verklaring aangevuld en vragen wij waar nodig om uw toestemming.</p>
+    <p>Deze website plaatst zelf alleen technisch noodzakelijke functionaliteit. Op enkele pagina's staat een instructievideo van YouTube. Deze wordt pas geladen als u zelf op de afspeelknop klikt; vanaf dat moment kan YouTube cookies plaatsen volgens hun eigen privacybeleid. Zodra er analytische of marketingcookies worden toegevoegd, wordt deze verklaring aangevuld en vragen wij waar nodig om uw toestemming.</p>`}
   </div>
 </section>`;
 }
 
 /* ============================== BEDANKT PAGE ============================== */
 
-function buildBedanktBody() {
+function buildBedanktBody(locale = 'nl') {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
   return `<header class="page-hero" style="min-height:60vh;display:flex;align-items:center">
   <div class="wrap" style="text-align:center;max-width:640px">
-    <span class="eyebrow reveal">Aanvraag ontvangen</span>
-    <h1 class="reveal reveal-d1">Bedankt, <span class="serif-i">we nemen contact op</span></h1>
-    <p class="lead reveal reveal-d2" style="margin-left:auto;margin-right:auto">We reageren zo snel mogelijk om de rit en de prijs te bevestigen. Heeft u haast? Bel gerust direct.</p>
+    <span class="eyebrow reveal">${en ? 'Request received' : 'Aanvraag ontvangen'}</span>
+    <h1 class="reveal reveal-d1">${en ? 'Thank you,' : 'Bedankt,'} <span class="serif-i">${en ? "we'll be in touch" : 'we nemen contact op'}</span></h1>
+    <p class="lead reveal reveal-d2" style="margin-left:auto;margin-right:auto">${en ? "We'll respond as soon as possible to confirm the ride and the price. In a hurry? Feel free to call directly." : 'We reageren zo snel mogelijk om de rit en de prijs te bevestigen. Heeft u haast? Bel gerust direct.'}</p>
     <div class="hero-cta reveal reveal-d3" style="justify-content:center">
-      <a href="tel:${SITE.phoneTel}" class="btn">Bel ${SITE.phoneDisplay}</a>
-      <a href="/" class="btn btn-ghost">Terug naar de homepage</a>
+      <a href="tel:${SITE.phoneTel}" class="btn">${en ? 'Call' : 'Bel'} ${SITE.phoneDisplay}</a>
+      <a href="${base}/" class="btn btn-ghost">${en ? 'Back to the homepage' : 'Terug naar de homepage'}</a>
     </div>
-    <p class="demo-note" id="demoNote" hidden style="max-width:52ch;margin:18px auto 0">Demo-modus: er is nog geen e-mailadres gekoppeld aan het formulier, dus deze aanvraag is niet echt verstuurd.</p>
+    <p class="demo-note" id="demoNote" hidden style="max-width:52ch;margin:18px auto 0">${en ? "Demo mode: no email address is linked to the form yet, so this request wasn't actually sent." : 'Demo-modus: er is nog geen e-mailadres gekoppeld aan het formulier, dus deze aanvraag is niet echt verstuurd.'}</p>
     <script>if (location.search.indexOf('demo=1') > -1) document.getElementById('demoNote').hidden = false;</script>
-    <p class="cta-sub reveal reveal-d3" style="margin-top:18px">Ondertussen: bekijk onze <a href="/diensten" style="color:var(--accent)">diensten</a> of de <a href="/locaties" style="color:var(--accent)">locaties</a> waar we rijden.</p>
+    <p class="cta-sub reveal reveal-d3" style="margin-top:18px">${en ? 'In the meantime: take a look at our' : 'Ondertussen: bekijk onze'} <a href="${base}/diensten" style="color:var(--accent)">${en ? 'services' : 'diensten'}</a> ${en ? 'or the' : 'of de'} <a href="${base}/locaties" style="color:var(--accent)">${en ? 'locations we drive to' : 'locaties waar we rijden'}</a>.</p>
   </div>
 </header>`;
 }
@@ -1808,138 +1953,184 @@ function withBrand(t) {
 
 /* ============================== WRITE FILES ============================== */
 
-fs.mkdirSync(path.join(ROOT, 'diensten'), { recursive: true });
+const EN_TITLES = {
+  home: 'Rolstoeltaxi Spoed | Wheelchair transport in the Netherlands, call now',
+  homeDesc: 'Need urgent wheelchair transport in the Netherlands? Rolstoeltaxi Spoed responds 24/7 with a fully equipped wheelchair-accessible vehicle. No emailing, just call directly.',
+  diensten: 'Services: wheelchair transport and emergency transport | Rolstoeltaxi Spoed',
+  dienstenDesc: 'All services from Rolstoeltaxi Spoed: emergency transport, wheelchair transport, hospital transport, Schiphol transport, event transport and more. 24/7 available, call now.',
+  locaties: (n) => `Locations: wheelchair taxi in ${n} places | Rolstoeltaxi Spoed`,
+  locatiesDesc: 'Rolstoeltaxi Spoed drives in Amsterdam, Schiphol, Haarlem, Leiden, Utrecht, Rotterdam and more. Choose your location and call now for emergency wheelchair transport.',
+  contact: 'Book directly | Rolstoeltaxi Spoed',
+  contactDesc: '24/7 available in the Netherlands, with a wheelchair-accessible vehicle, electric ramp and the price named beforehand.',
+  overOns: 'About us | Rolstoeltaxi Spoed, emergency branch of Rolstoeltaxi Holland',
+  overOnsDesc: 'Meet Rolstoeltaxi Spoed: the emergency branch of Rolstoeltaxi Holland. The same experienced drivers, set up to switch quickly during an emergency.',
+  tarieven: 'Rates | Rolstoeltaxi Spoed',
+  tarievenDesc: 'How is the price of a ride with Rolstoeltaxi Spoed built up? Transparent and always named beforehand, even for emergencies. Call for a tailored price.',
+  faq: 'Frequently asked questions | Rolstoeltaxi Spoed',
+  faqDesc: 'Answers to the most common questions about emergency transport, rates, reimbursement and booking with Rolstoeltaxi Spoed. Not on the list? Feel free to call.',
+  privacy: 'Privacy policy | Rolstoeltaxi Spoed',
+  privacyDesc: 'Read how Rolstoeltaxi Spoed handles your personal data: what data we process, why, how long we keep it and what rights you have.',
+  bedankt: 'Thank you for your request | Rolstoeltaxi Spoed',
+  bedanktDesc: "Your request has been received. Rolstoeltaxi Spoed will contact you as soon as possible to confirm the ride and the price. In a hurry? Feel free to call directly.",
+};
 
-const homeHtml = page({
-  title: 'Rolstoeltaxi Spoed | Rolstoelvervoer in Nederland, bel direct',
-  description: 'Acuut rolstoelvervoer nodig in Nederland? Rolstoeltaxi Spoed rukt 24/7 uit met een volledig uitgeruste rolstoelbus. Niet mailen, gewoon direct bellen.',
-  canonicalPath: '',
-  prefix: '',
-  extraLd: homeLd(),
-  bodyHtml: buildHomeBody(),
-});
-fs.writeFileSync(path.join(ROOT, 'index.html'), homeHtml);
+function writeAllPages(locale) {
+  const en = locale === 'en';
+  const root = en ? path.join(ROOT, 'en') : ROOT;
+  const base = en ? '/en' : '';
+  fs.mkdirSync(path.join(root, 'diensten'), { recursive: true });
 
-for (const svc of SERVICES) {
-  const html = page({
-    title: withBrand(svc.metaTitle),
-    description: svc.metaDescription,
-    canonicalPath: `diensten/${svc.slug}`,
-    prefix: '../',
-    extraLd: serviceLd(svc),
-    bodyHtml: buildServiceBody(svc),
-    useScrollThreshold: true,
-  });
-  fs.writeFileSync(path.join(ROOT, 'diensten', `${svc.slug}.html`), html);
-}
-
-// remove stale generated pages from earlier structures
-for (const old of ['spoed-ziekenhuisvervoer', 'luchthavenvervoer-spoed']) {
-  try { fs.unlinkSync(path.join(ROOT, 'diensten', `${old}.html`)); } catch (e) { /* not present */ }
-}
-for (const f of fs.readdirSync(ROOT)) {
-  if (/^rolstoeltaxi-.*\.html$/.test(f)) fs.unlinkSync(path.join(ROOT, f));
-}
-
-for (const c of CITIES) {
-  const file = c.path ? c.path.slice(1) : `rolstoeltaxi-${c.slug}`;
-  const html = page({
-    title: c.isService ? `${c.name}: rolstoelvervoer met spoedservice` : `Rolstoeltaxi ${c.name} in de buurt: spoedvervoer 24/7`,
-    description: c.metaDescription,
-    canonicalPath: file,
+  const homeHtml = page({
+    title: en ? EN_TITLES.home : 'Rolstoeltaxi Spoed | Rolstoelvervoer in Nederland, bel direct',
+    description: en ? EN_TITLES.homeDesc : 'Acuut rolstoelvervoer nodig in Nederland? Rolstoeltaxi Spoed rukt 24/7 uit met een volledig uitgeruste rolstoelbus. Niet mailen, gewoon direct bellen.',
+    canonicalPath: en ? 'en' : '',
     prefix: '',
-    extraLd: cityLd(c),
-    bodyHtml: buildCityBody(c),
-    useScrollThreshold: true,
+    extraLd: homeLd(locale),
+    bodyHtml: buildHomeBody(locale),
+    locale,
   });
-  fs.writeFileSync(path.join(ROOT, `${file}.html`), html);
+  fs.writeFileSync(path.join(root, 'index.html'), homeHtml);
+
+  for (const svc of SERVICES) {
+    const d = en ? svc.en : svc;
+    const html = page({
+      title: withBrand(d.metaTitle),
+      description: d.metaDescription,
+      canonicalPath: en ? `en/diensten/${svc.slug}` : `diensten/${svc.slug}`,
+      prefix: '../',
+      extraLd: serviceLd(svc, locale),
+      bodyHtml: buildServiceBody(svc, locale),
+      useScrollThreshold: true,
+      locale,
+    });
+    fs.writeFileSync(path.join(root, 'diensten', `${svc.slug}.html`), html);
+  }
+
+  if (!en) {
+    // remove stale generated pages from earlier structures
+    for (const old of ['spoed-ziekenhuisvervoer', 'luchthavenvervoer-spoed']) {
+      try { fs.unlinkSync(path.join(root, 'diensten', `${old}.html`)); } catch (e) { /* not present */ }
+    }
+    for (const f of fs.readdirSync(root)) {
+      if (/^rolstoeltaxi-.*\.html$/.test(f)) fs.unlinkSync(path.join(root, f));
+    }
+  }
+
+  for (const c of CITIES) {
+    const file = c.path ? c.path.slice(1) : `rolstoeltaxi-${c.slug}`;
+    const name = en ? (c.en.name || c.name) : c.name;
+    const html = page({
+      title: c.isService
+        ? `${name}: ${en ? 'wheelchair transport with emergency service' : 'rolstoelvervoer met spoedservice'}`
+        : en ? `Wheelchair taxi ${name} near you: emergency transport 24/7` : `Rolstoeltaxi ${name} in de buurt: spoedvervoer 24/7`,
+      description: en ? c.en.metaDescription : c.metaDescription,
+      canonicalPath: en ? `en/${file}` : file,
+      prefix: '',
+      extraLd: cityLd(c, locale),
+      bodyHtml: buildCityBody(c, locale),
+      useScrollThreshold: true,
+      locale,
+    });
+    fs.writeFileSync(path.join(root, `${file}.html`), html);
+  }
+
+  fs.writeFileSync(path.join(root, 'diensten.html'), page({
+    title: en ? EN_TITLES.diensten : 'Diensten: rolstoelvervoer en spoedvervoer | Rolstoeltaxi Spoed',
+    description: en ? EN_TITLES.dienstenDesc : 'Alle diensten van Rolstoeltaxi Spoed: spoedvervoer, rolstoelvervoer, ziekenhuisvervoer, Schipholvervoer, evenementvervoer en meer. 24/7 bereikbaar, bel direct.',
+    canonicalPath: en ? 'en/diensten' : 'diensten',
+    prefix: '',
+    extraLd: breadcrumbLd([{ label: 'Home', url: `${SITE.domain}${base}/` }, { label: en ? 'Services' : 'Diensten' }]),
+    bodyHtml: buildDienstenHub(locale),
+    useScrollThreshold: true,
+    skipFaq: true,
+    locale,
+  }));
+
+  fs.writeFileSync(path.join(root, 'locaties.html'), page({
+    title: en ? EN_TITLES.locaties(CITIES.length) : `Locaties: rolstoeltaxi in ${CITIES.length} plaatsen | Rolstoeltaxi Spoed`,
+    description: en ? EN_TITLES.locatiesDesc : 'Rolstoeltaxi Spoed rijdt in Amsterdam, Schiphol, Haarlem, Leiden, Utrecht, Rotterdam en meer. Kies uw plaats en bel direct voor spoedvervoer met rolstoelbus.',
+    canonicalPath: en ? 'en/locaties' : 'locaties',
+    prefix: '',
+    extraLd: breadcrumbLd([{ label: 'Home', url: `${SITE.domain}${base}/` }, { label: en ? 'Locations' : 'Locaties' }]),
+    bodyHtml: buildLocatiesHub(locale),
+    useScrollThreshold: true,
+    skipFaq: true,
+    locale,
+  }));
+
+  fs.writeFileSync(path.join(root, 'contact.html'), page({
+    title: en ? EN_TITLES.contact : 'Direct reserveren | Rolstoeltaxi Spoed',
+    description: en ? EN_TITLES.contactDesc : 'Plan online een rit met Rolstoeltaxi Spoed, of bel direct bij spoed. 24/7 bereikbaar in Nederland, met rolstoelbus, elektrische laadklep en prijs vooraf.',
+    canonicalPath: en ? 'en/contact' : 'contact',
+    prefix: '',
+    extraLd: contactLd(locale),
+    bodyHtml: buildContactBody(locale),
+    skipSticky: true,
+    skipFaq: true,
+    locale,
+  }));
+
+  fs.writeFileSync(path.join(root, 'over-ons.html'), page({
+    title: en ? EN_TITLES.overOns : 'Over ons | Rolstoeltaxi Spoed, spoedtak van Rolstoeltaxi Holland',
+    description: en ? EN_TITLES.overOnsDesc : 'Maak kennis met Rolstoeltaxi Spoed: de spoedtak van Rolstoeltaxi Holland. Dezelfde ervaren chauffeurs, ingericht op snel schakelen bij spoed.',
+    canonicalPath: en ? 'en/over-ons' : 'over-ons',
+    prefix: '',
+    extraLd: '',
+    bodyHtml: buildOverOnsBody(locale),
+    useScrollThreshold: true,
+    skipFaq: true,
+    locale,
+  }));
+
+  fs.writeFileSync(path.join(root, 'tarieven.html'), page({
+    title: en ? EN_TITLES.tarieven : 'Tarieven | Rolstoeltaxi Spoed',
+    description: en ? EN_TITLES.tarievenDesc : 'Hoe is de prijs van een rit bij Rolstoeltaxi Spoed opgebouwd? Transparant en altijd vooraf genoemd, ook bij spoed. Bel voor een prijs op maat.',
+    canonicalPath: en ? 'en/tarieven' : 'tarieven',
+    prefix: '',
+    extraLd: '',
+    bodyHtml: buildTarievenBody(locale),
+    useScrollThreshold: true,
+    skipFaq: true,
+    locale,
+  }));
+
+  fs.writeFileSync(path.join(root, 'veelgestelde-vragen.html'), page({
+    title: en ? EN_TITLES.faq : 'Veelgestelde vragen | Rolstoeltaxi Spoed',
+    description: en ? EN_TITLES.faqDesc : 'Antwoord op de meest gestelde vragen over spoedvervoer, tarieven, vergoeding en reserveren bij Rolstoeltaxi Spoed. Staat uw vraag er niet bij? Bel gerust.',
+    canonicalPath: en ? 'en/veelgestelde-vragen' : 'veelgestelde-vragen',
+    prefix: '',
+    extraLd: faqLd(locale),
+    bodyHtml: buildFaqBody(locale),
+    useScrollThreshold: true,
+    locale,
+  }));
+
+  fs.writeFileSync(path.join(root, 'privacyverklaring.html'), page({
+    title: en ? EN_TITLES.privacy : 'Privacyverklaring | Rolstoeltaxi Spoed',
+    description: en ? EN_TITLES.privacyDesc : 'Lees hoe Rolstoeltaxi Spoed omgaat met uw persoonsgegevens: welke gegevens we verwerken, waarom, hoe lang we ze bewaren en welke rechten u heeft.',
+    canonicalPath: en ? 'en/privacyverklaring' : 'privacyverklaring',
+    prefix: '',
+    extraLd: '',
+    bodyHtml: buildPrivacyBody(locale),
+    skipFaq: true,
+    locale,
+  }));
+
+  fs.writeFileSync(path.join(root, 'bedankt.html'), page({
+    title: en ? EN_TITLES.bedankt : 'Bedankt voor uw aanvraag | Rolstoeltaxi Spoed',
+    description: en ? EN_TITLES.bedanktDesc : 'Uw aanvraag is ontvangen. Rolstoeltaxi Spoed neemt zo snel mogelijk contact met u op om de rit en de prijs te bevestigen. Heeft u haast? Bel gerust direct.',
+    canonicalPath: en ? 'en/bedankt' : 'bedankt',
+    prefix: '',
+    extraLd: '<meta name="robots" content="noindex, follow">',
+    bodyHtml: buildBedanktBody(locale),
+    skipSticky: true,
+    skipFaq: true,
+    locale,
+  }));
 }
 
-fs.writeFileSync(path.join(ROOT, 'diensten.html'), page({
-  title: 'Diensten: rolstoelvervoer en spoedvervoer | Rolstoeltaxi Spoed',
-  description: 'Alle diensten van Rolstoeltaxi Spoed: spoedvervoer, rolstoelvervoer, ziekenhuisvervoer, Schipholvervoer, evenementvervoer en meer. 24/7 bereikbaar, bel direct.',
-  canonicalPath: 'diensten',
-  prefix: '',
-  extraLd: breadcrumbLd([{ label: 'Home', url: `${SITE.domain}/` }, { label: 'Diensten' }]),
-  bodyHtml: buildDienstenHub(),
-  useScrollThreshold: true,
-  skipFaq: true,
-}));
-
-fs.writeFileSync(path.join(ROOT, 'locaties.html'), page({
-  title: `Locaties: rolstoeltaxi in ${CITIES.length} plaatsen | Rolstoeltaxi Spoed`,
-  description: 'Rolstoeltaxi Spoed rijdt in Amsterdam, Schiphol, Haarlem, Leiden, Utrecht, Rotterdam en meer. Kies uw plaats en bel direct voor spoedvervoer met rolstoelbus.',
-  canonicalPath: 'locaties',
-  prefix: '',
-  extraLd: breadcrumbLd([{ label: 'Home', url: `${SITE.domain}/` }, { label: 'Locaties' }]),
-  bodyHtml: buildLocatiesHub(),
-  useScrollThreshold: true,
-  skipFaq: true,
-}));
-
-fs.writeFileSync(path.join(ROOT, 'contact.html'), page({
-  title: 'Direct reserveren | Rolstoeltaxi Spoed',
-  description: 'Plan online een rit met Rolstoeltaxi Spoed, of bel direct bij spoed. 24/7 bereikbaar in Nederland, met rolstoelbus, elektrische laadklep en prijs vooraf.',
-  canonicalPath: 'contact',
-  prefix: '',
-  extraLd: contactLd(),
-  bodyHtml: buildContactBody(),
-  skipSticky: true,
-  skipFaq: true,
-}));
-
-fs.writeFileSync(path.join(ROOT, 'over-ons.html'), page({
-  title: 'Over ons | Rolstoeltaxi Spoed, spoedtak van Rolstoeltaxi Holland',
-  description: 'Maak kennis met Rolstoeltaxi Spoed: de spoedtak van Rolstoeltaxi Holland. Dezelfde ervaren chauffeurs, ingericht op snel schakelen bij spoed.',
-  canonicalPath: 'over-ons',
-  prefix: '',
-  extraLd: '',
-  bodyHtml: buildOverOnsBody(),
-  useScrollThreshold: true,
-  skipFaq: true,
-}));
-
-fs.writeFileSync(path.join(ROOT, 'tarieven.html'), page({
-  title: 'Tarieven | Rolstoeltaxi Spoed',
-  description: 'Hoe is de prijs van een rit bij Rolstoeltaxi Spoed opgebouwd? Transparant en altijd vooraf genoemd, ook bij spoed. Bel voor een prijs op maat.',
-  canonicalPath: 'tarieven',
-  prefix: '',
-  extraLd: '',
-  bodyHtml: buildTarievenBody(),
-  useScrollThreshold: true,
-  skipFaq: true,
-}));
-
-fs.writeFileSync(path.join(ROOT, 'veelgestelde-vragen.html'), page({
-  title: 'Veelgestelde vragen | Rolstoeltaxi Spoed',
-  description: 'Antwoord op de meest gestelde vragen over spoedvervoer, tarieven, vergoeding en reserveren bij Rolstoeltaxi Spoed. Staat uw vraag er niet bij? Bel gerust.',
-  canonicalPath: 'veelgestelde-vragen',
-  prefix: '',
-  extraLd: faqLd(),
-  bodyHtml: buildFaqBody(),
-  useScrollThreshold: true,
-}));
-
-fs.writeFileSync(path.join(ROOT, 'privacyverklaring.html'), page({
-  title: 'Privacyverklaring | Rolstoeltaxi Spoed',
-  description: 'Lees hoe Rolstoeltaxi Spoed omgaat met uw persoonsgegevens: welke gegevens we verwerken, waarom, hoe lang we ze bewaren en welke rechten u heeft.',
-  canonicalPath: 'privacyverklaring',
-  prefix: '',
-  extraLd: '',
-  bodyHtml: buildPrivacyBody(),
-  skipFaq: true,
-}));
-
-fs.writeFileSync(path.join(ROOT, 'bedankt.html'), page({
-  title: 'Bedankt voor uw aanvraag | Rolstoeltaxi Spoed',
-  description: 'Uw aanvraag is ontvangen. Rolstoeltaxi Spoed neemt zo snel mogelijk contact met u op om de rit en de prijs te bevestigen. Heeft u haast? Bel gerust direct.',
-  canonicalPath: 'bedankt',
-  prefix: '',
-  extraLd: '<meta name="robots" content="noindex, follow">',
-  bodyHtml: buildBedanktBody(),
-  skipSticky: true,
-  skipFaq: true,
-}));
+writeAllPages('nl');
+writeAllPages('en');
 
 /* ============================== SITEMAP & ROBOTS ============================== */
 
@@ -1948,6 +2139,9 @@ const urls = [
   ...staticPages.map(p => `${SITE.domain}/${p}`),
   ...SERVICES.map(s => `${SITE.domain}/diensten/${s.slug}`),
   ...CITIES.map(c => `${SITE.domain}${cityPath(c)}`),
+  ...staticPages.map(p => `${SITE.domain}/en${p ? '/' + p : ''}`),
+  ...SERVICES.map(s => `${SITE.domain}/en/diensten/${s.slug}`),
+  ...CITIES.map(c => `${SITE.domain}/en${cityPath(c)}`),
 ];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -1964,8 +2158,8 @@ Sitemap: ${SITE.domain}/sitemap.xml
 fs.writeFileSync(path.join(ROOT, 'robots.txt'), robots);
 
 const totalPages = staticPages.length + SERVICES.length + CITIES.length + 1 /* bedankt */;
-console.log(`Generated ${SERVICES.length} service pages and ${CITIES.length} location pages.`);
-console.log(`Total HTML pages: ${totalPages} (${staticPages.length} vaste pagina's, ${SERVICES.length} diensten, 1 bedankt-pagina)`);
+console.log(`Generated ${SERVICES.length} service pages and ${CITIES.length} location pages, in NL and EN.`);
+console.log(`Total HTML pages: ${totalPages * 2} (${totalPages} per taal: ${staticPages.length} vaste pagina's, ${SERVICES.length} diensten, ${CITIES.length} locaties, 1 bedankt-pagina)`);
 console.log(`sitemap.xml: ${urls.length} URLs (bedankt.html excluded on purpose)`);
 
 module.exports = { SITE, SERVICES, page, head, nav, footer, stickyCta, scripts, svgCheck };

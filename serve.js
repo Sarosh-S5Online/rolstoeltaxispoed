@@ -39,6 +39,17 @@ http.createServer((req, res) => {
   fs.stat(filePath, (err, stat) => {
     if (!err && stat.isFile()) return serveFile(filePath, res);
 
+    // directory fallback (mirrors Vercel static serving): /en -> en/index.html
+    if (!err && stat.isDirectory()) {
+      const indexPath = path.join(filePath, 'index.html');
+      fs.stat(indexPath, (err3, stat3) => {
+        if (!err3 && stat3.isFile()) return serveFile(indexPath, res);
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('404 Not Found: ' + urlPath);
+      });
+      return;
+    }
+
     // clean-URL fallback (mirrors vercel.json "cleanUrls": true): /tarieven -> tarieven.html
     const htmlPath = `${filePath}.html`;
     fs.stat(htmlPath, (err2, stat2) => {

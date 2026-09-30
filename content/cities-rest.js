@@ -35,6 +35,37 @@ module.exports = [
       { q: 'Wat kost een rit naar Arnhem?', a: 'De prijs hangt af van de afstand en het tijdstip. U hoort de prijs altijd vooraf aan de telefoon.' },
       { q: 'Kan ik ook een terugrit boeken?', a: 'Ja, we plannen heen en terug samen in.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Arnhem: wheelchair transport to and from Arnhem, to the Open Air Museum, Sonsbeek and care facilities. Electric ramp, 24/7 emergency service. Call now.',
+      lead: "Arnhem lies on the Rhine, with Sonsbeek Park, the Open Air Museum and Burgers' Zoo. For a longer ride with a wheelchair, it's good to know you'll be taken there directly.",
+      intro: [
+        'Arnhem is the capital of Gelderland, with plenty of greenery and a hilly landscape. Anyone travelling from Amsterdam or Utrecht to Arnhem covers quite a distance. By train, a wheelchair journey often means a series of transfers; with a wheelchair-accessible vehicle you travel there directly.',
+        'We drive rides to and from Arnhem: for an appointment, a family visit or a day out. For long rides we discuss the travel time and breaks beforehand.',
+      ],
+      plekken: [
+        { t: 'Arnhem Centraal', d: 'The station in the centre. We agree beforehand on the entrance that is most accessible for you.' },
+        { t: 'Netherlands Open Air Museum', d: 'A large open-air museum, suitable for a mobility scooter. We arrange the outbound and return trip.' },
+        { t: "Burgers' Zoo", d: 'A day watching animals. We drop you off at an accessible entrance.' },
+        { t: 'Sonsbeek Park', d: 'A large park in the centre, for a quiet walk.' },
+        { t: 'GelreDome', d: 'The stadium, for matches and concerts. We schedule the outbound and return trip together.' },
+        { t: 'Airborne Museum in Oosterbeek', d: 'Just outside Arnhem, about the Battle of Arnhem. Easily accessible.' },
+      ],
+      ritten: [
+        { t: 'Arnhem to Amsterdam', d: 'A longer ride to the capital, for appointments or family.' },
+        { t: 'Arnhem to Utrecht', d: 'To the centre of the country.' },
+        { t: 'Arnhem to Schiphol', d: 'For flights, with plenty of time.' },
+        { t: 'Arnhem to Nijmegen', d: 'From the Rhine to the Waal, within Gelderland.' },
+        { t: 'Within Arnhem', d: 'From home to day care or an appointment.' },
+      ],
+      spoed: "Emergencies can happen for rides to Arnhem too. Call the emergency line with your address and destination, and we'll give you the arrival time and price. For a long distance, we'll tell you honestly how long the ride will take.",
+      bereik: "For rides to and from Arnhem we agree on the time and pickup point beforehand. For long rides we discuss whether a break is needed, and how you'd like to spend it.",
+      faqs: [
+        { q: 'Do you also drive long rides to Arnhem?', a: 'Yes, we drive throughout the Netherlands. For a long distance we discuss the travel time and breaks beforehand.' },
+        { q: 'Can you take me to the Open Air Museum?', a: 'Yes, there and back at an agreed time.' },
+        { q: 'What does a ride to Arnhem cost?', a: 'The price depends on the distance and time. You always hear the price beforehand on the phone.' },
+        { q: 'Can I also book a return ride?', a: 'Yes, we schedule the outbound and return trip together.' },
+      ],
+    },
   },
 
   {
@@ -73,6 +104,37 @@ module.exports = [
       { q: 'Wat kost een rit naar Nijmegen?', a: 'De prijs hangt af van afstand en tijdstip. U hoort de prijs vooraf aan de telefoon.' },
       { q: 'Kan ik ook een terugrit boeken?', a: 'Ja, we plannen heen en terug samen in.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Nijmegen: wheelchair transport to and from Nijmegen, to the Waalkade, the university and care facilities. Ramp, 24/7 emergency service. Call now.',
+      lead: 'Nijmegen is the oldest city in the Netherlands, on the Waal, with the Valkhof and the Vierdaagse walking event. For a long ride with a wheelchair, you travel there directly.',
+      intro: [
+        'Nijmegen is a lively city with many students, a cosy city centre and the Waalkade. In July the city is gripped by the Vierdaagse, which means closed roads and lots of crowds.',
+        "We drive rides to and from Nijmegen. For a long distance we plan generously, discuss the travel time, and agree on where you'll be picked up.",
+      ],
+      plekken: [
+        { t: 'Nijmegen station', d: 'The hub in the centre. We agree on an accessible entrance beforehand.' },
+        { t: 'Waalkade and the Waalbrug', d: 'The riverside of the city, with terraces and a view.' },
+        { t: 'Valkhof and Museum Het Valkhof', d: 'A historic spot with a museum. Easily accessible.' },
+        { t: 'Grote Markt', d: 'The square in the centre. Streets around the square are car-free.' },
+        { t: 'Goffertpark', d: 'A large park with a stadium, for a match or a walk.' },
+        { t: 'Radboud University', d: 'The university campus. For work and study we schedule a fixed plan.' },
+      ],
+      ritten: [
+        { t: 'Nijmegen to Amsterdam', d: 'A long ride to the capital, for appointments or family.' },
+        { t: 'Nijmegen to Utrecht', d: 'To the centre of the country.' },
+        { t: 'Nijmegen to Eindhoven', d: 'To the south, for work or care.' },
+        { t: 'Nijmegen to Schiphol', d: 'For flights, with plenty of time.' },
+        { t: 'Within Nijmegen', d: 'From home to day care or an appointment.' },
+      ],
+      spoed: "Emergencies can happen for rides to Nijmegen too. Call the emergency line with your address and destination, and we'll give you the arrival time and price.",
+      bereik: "During the Vierdaagse, many roads are closed. If you're travelling then, call well in advance, and we'll discuss the drop-off spot and the route.",
+      faqs: [
+        { q: 'Do you also drive long rides to Nijmegen?', a: 'Yes, we drive throughout the Netherlands. For a long distance we discuss the travel time beforehand.' },
+        { q: 'What if the Vierdaagse is taking place?', a: 'Plan well in advance. Roads are closed and we agree on a drop-off spot and pickup time.' },
+        { q: 'What does a ride to Nijmegen cost?', a: 'The price depends on distance and time. You hear the price beforehand on the phone.' },
+        { q: 'Can I also book a return ride?', a: 'Yes, we schedule the outbound and return trip together.' },
+      ],
+    },
   },
 
   {
@@ -111,6 +173,37 @@ module.exports = [
       { q: 'Wat kost een rit naar Eindhoven?', a: 'De prijs hangt af van afstand en tijdstip. U hoort de prijs vooraf aan de telefoon.' },
       { q: 'Kan ik ook een terugrit boeken?', a: 'Ja, we plannen heen en terug samen in.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Eindhoven: wheelchair transport to and from Eindhoven, to the station, the airport and care facilities. Ramp, 24/7 emergency service. Call now.',
+      lead: 'Eindhoven is the city of Philips, PSV and design. For a long ride with a wheelchair, you travel there directly, with no transfers.',
+      intro: [
+        'Eindhoven is a modern city with a lot of technology, a large hospital and an airport. Anyone travelling from Amsterdam or Utrecht to Eindhoven has quite a ride ahead, and with a wheelchair, a train journey is difficult.',
+        "We drive rides to and from Eindhoven. For a long distance we plan generously, discuss the travel time, and agree on where you'll be picked up.",
+      ],
+      plekken: [
+        { t: 'Eindhoven Centraal', d: 'The station in the centre. We agree on an accessible entrance beforehand.' },
+        { t: 'Philips Stadion', d: "PSV's home ground. For matches we schedule the outbound and return trip together." },
+        { t: 'Strijp-S and the Design Academy', d: "The city's creative district, with plenty of restaurants." },
+        { t: 'Evoluon', d: 'The well-known building that looks like a flying saucer.' },
+        { t: 'Eindhoven Airport', d: 'For flights from Eindhoven. We help with luggage.' },
+        { t: 'High Tech Campus', d: 'The large business park. For work we schedule a fixed plan.' },
+      ],
+      ritten: [
+        { t: 'Eindhoven to Amsterdam', d: 'A long ride to the capital, for appointments or family.' },
+        { t: 'Eindhoven to Utrecht', d: 'To the centre of the country.' },
+        { t: 'Eindhoven to Maastricht', d: 'To the south.' },
+        { t: 'Eindhoven to Schiphol', d: 'For flights from Schiphol.' },
+        { t: 'Within Eindhoven', d: 'From home to day care or an appointment.' },
+      ],
+      spoed: "Emergencies can happen for rides to Eindhoven too. Call the emergency line with your address and destination, and we'll give you the arrival time and price.",
+      bereik: 'Eindhoven is spaciously laid out, with wide roads. Most addresses are easily accessible. In the centre and around the station we agree on a pickup point beforehand.',
+      faqs: [
+        { q: 'Do you also drive long rides to Eindhoven?', a: 'Yes, we drive throughout the Netherlands. For a long distance we discuss the travel time beforehand.' },
+        { q: 'Can you take me to Eindhoven Airport?', a: 'Yes, we take you right to the terminal and help with the luggage.' },
+        { q: 'What does a ride to Eindhoven cost?', a: 'The price depends on distance and time. You hear the price beforehand on the phone.' },
+        { q: 'Can I also book a return ride?', a: 'Yes, we schedule the outbound and return trip together.' },
+      ],
+    },
   },
 
   {
@@ -149,6 +242,37 @@ module.exports = [
       { q: 'Kan ik ook een terugrit boeken?', a: 'Ja, we plannen heen en terug samen in.' },
       { q: 'Kan een begeleider meerijden?', a: 'Ja, een begeleider rijdt gewoon mee in de bus.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Groningen: wheelchair transport to and from Groningen, to the Grote Markt, the Groninger Museum and care facilities. Ramp, 24/7 emergency service. Call now.',
+      lead: 'Groningen is the capital of the north, with the Martini Tower, a lively city centre and many students. For a long ride with a wheelchair, you travel there directly.',
+      intro: [
+        "Groningen is far from Amsterdam, well over two hours' drive or more. By train that means a journey with transfers, and for someone in a wheelchair that's often too much hassle. A wheelchair-accessible vehicle drives straight there, door to door.",
+        'We drive rides to and from Groningen, for care, family or an outing. For long rides we discuss the travel time and breaks beforehand, and plan generously.',
+      ],
+      plekken: [
+        { t: 'Groningen main station', d: 'The station near the centre. We agree on an accessible entrance beforehand.' },
+        { t: 'Grote Markt and Martini Tower', d: 'The heart of the city. Much of the area around the Grote Markt is car-free.' },
+        { t: 'Groninger Museum', d: 'The eye-catching museum near the station. Easily accessible.' },
+        { t: 'Forum Groningen', d: 'The large cultural building on the Grote Markt.' },
+        { t: 'Noorderplantsoen', d: 'A large park near the centre, for a walk.' },
+        { t: 'University and the Zernike campus', d: 'For work and study we schedule a fixed plan.' },
+      ],
+      ritten: [
+        { t: 'Groningen to Amsterdam', d: 'A long ride to the capital, for appointments or family.' },
+        { t: 'Groningen to Zwolle', d: 'To the south, along the A28.' },
+        { t: 'Groningen to Utrecht', d: 'To the centre of the country.' },
+        { t: 'Groningen to Schiphol', d: 'For flights, with plenty of time.' },
+        { t: 'Within Groningen', d: 'From home to day care or an appointment.' },
+      ],
+      spoed: "Emergencies can happen for rides to Groningen too. Call the emergency line with your address and destination, and we'll give you the arrival time and price. For a long distance, we'll tell you honestly how long the ride will take.",
+      bereik: "For long rides we agree on the time and pickup point beforehand, and discuss whether a break is needed. Much of Groningen's city centre is car-free, so we choose a nearby pickup point.",
+      faqs: [
+        { q: 'Do you also drive to Groningen?', a: 'Yes, we drive throughout the Netherlands. For a long distance we discuss the travel time and breaks beforehand.' },
+        { q: 'What does a ride to Groningen cost?', a: 'The price depends on distance and time. You hear the price beforehand on the phone.' },
+        { q: 'Can I also book a return ride?', a: 'Yes, we schedule the outbound and return trip together.' },
+        { q: 'Can a companion ride along?', a: 'Yes, a companion simply rides along in the vehicle.' },
+      ],
+    },
   },
 
   {
@@ -187,6 +311,37 @@ module.exports = [
       { q: 'Wat kost een rit naar Zwolle?', a: 'De prijs hangt af van afstand en tijdstip. U hoort de prijs vooraf aan de telefoon.' },
       { q: 'Kan ik ook een terugrit boeken?', a: 'Ja, we plannen heen en terug samen in.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Zwolle: wheelchair transport to and from Zwolle, to the Sassenpoort, the museum and care facilities. Electric ramp, 24/7 emergency service. Call now.',
+      lead: 'Zwolle is a Hanseatic town with a historic centre, the Sassenpoort and Museum de Fundatie. For a long ride with a wheelchair, you travel there directly.',
+      intro: [
+        'Zwolle lies on the IJssel, on the border of Overijssel and Gelderland. The centre is compact and largely car-free, with many historic buildings. Anyone travelling from Amsterdam to Zwolle has a ride of well over an hour or more.',
+        "We drive rides to and from Zwolle, for care, family or an outing. We plan generously and agree beforehand on where you'll be picked up.",
+      ],
+      plekken: [
+        { t: 'Zwolle station', d: 'An important hub. We agree on an accessible entrance beforehand.' },
+        { t: 'Sassenpoort', d: 'The well-known city gate. Easily accessible.' },
+        { t: 'Museum de Fundatie', d: 'The museum with the striking dome. We arrange the outbound and return trip.' },
+        { t: 'Grote Kerk and the centre', d: 'The historic heart of the city. Largely car-free.' },
+        { t: 'Diezerpoort and the city centre', d: 'Shops and restaurants in the old city centre.' },
+        { t: 'IJsselhallen', d: 'A trade fair and events venue. For events we arrange the outbound and return trip.' },
+      ],
+      ritten: [
+        { t: 'Zwolle to Amsterdam', d: 'A longer ride to the capital, for appointments or family.' },
+        { t: 'Zwolle to Utrecht', d: 'To the centre of the country.' },
+        { t: 'Zwolle to Groningen', d: 'To the north.' },
+        { t: 'Zwolle to Schiphol', d: 'For flights, with plenty of time.' },
+        { t: 'Within Zwolle', d: 'From home to day care or an appointment.' },
+      ],
+      spoed: "Emergencies can happen for rides to Zwolle too. Call the emergency line with your address and destination, and we'll give you the arrival time and price.",
+      bereik: "Zwolle's centre is largely car-free, so we agree on a nearby pickup point beforehand. Outside the centre the vehicle usually drives right up to the door.",
+      faqs: [
+        { q: 'Do you also drive long rides to Zwolle?', a: 'Yes, we drive throughout the Netherlands. For a long distance we discuss the travel time beforehand.' },
+        { q: 'Can you take me to the museum?', a: 'Yes, there and back at an agreed time.' },
+        { q: 'What does a ride to Zwolle cost?', a: 'The price depends on distance and time. You hear the price beforehand on the phone.' },
+        { q: 'Can I also book a return ride?', a: 'Yes, we schedule the outbound and return trip together.' },
+      ],
+    },
   },
 
   {
@@ -225,5 +380,36 @@ module.exports = [
       { q: 'Kan ik ook een terugrit boeken?', a: 'Ja, we plannen heen en terug samen in.' },
       { q: 'Kan een begeleider meerijden?', a: 'Ja, een begeleider rijdt gewoon mee in de bus.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Maastricht: wheelchair transport to and from Maastricht, to the Vrijthof, the station and care facilities. Electric ramp, 24/7 emergency service. Call now.',
+      lead: 'Maastricht lies all the way in the south, on the Maas, with the Vrijthof and the Basilica of Saint Servatius. For a long ride with a wheelchair, you travel there directly.',
+      intro: [
+        "Maastricht is one of the most beautiful cities in the Netherlands, with a cosy city centre, plenty of terraces and the Maas. It lies far from Amsterdam, well over three hours' drive. By train that's a long journey with transfers.",
+        'We drive rides to and from Maastricht, for care, family or an outing. For long rides we plan generously, and discuss the travel time and breaks beforehand.',
+      ],
+      plekken: [
+        { t: 'Maastricht station', d: 'The station by the Maas. We agree on an accessible entrance beforehand.' },
+        { t: 'Vrijthof and the Basilica of Saint Servatius', d: 'The large square in the centre, with terraces and the basilica.' },
+        { t: 'Onze Lieve Vrouweplein', d: 'A cosy square in the centre.' },
+        { t: 'Sint Servaasbrug', d: 'The old bridge over the Maas, between the centre and Wyck.' },
+        { t: 'Bonnefantenmuseum', d: 'The museum on the Maas. We arrange the outbound and return trip.' },
+        { t: 'MECC Maastricht', d: 'The trade fair and conference centre. For events we arrange the outbound and return trip.' },
+      ],
+      ritten: [
+        { t: 'Maastricht to Amsterdam', d: 'A long ride to the capital, for appointments or family.' },
+        { t: 'Maastricht to Eindhoven', d: 'To the north.' },
+        { t: 'Maastricht to Utrecht', d: 'To the centre of the country.' },
+        { t: 'Maastricht to Schiphol', d: 'For flights, with plenty of time.' },
+        { t: 'Within Maastricht', d: 'From home to day care or an appointment.' },
+      ],
+      spoed: "Emergencies can happen for rides to Maastricht too. Call the emergency line with your address and destination, and we'll give you the arrival time and price. For a long distance, we'll tell you honestly how long the ride will take.",
+      bereik: "Maastricht's centre is car-free, with many terraces and cobblestones. We agree on a nearby pickup point beforehand where the ramp can be safely deployed.",
+      faqs: [
+        { q: 'Do you also drive to Maastricht?', a: 'Yes, we drive throughout the Netherlands. For a long distance we discuss the travel time and breaks beforehand.' },
+        { q: 'What does a ride to Maastricht cost?', a: 'The price depends on distance and time. You hear the price beforehand on the phone.' },
+        { q: 'Can I also book a return ride?', a: 'Yes, we schedule the outbound and return trip together.' },
+        { q: 'Can a companion ride along?', a: 'Yes, a companion simply rides along in the vehicle.' },
+      ],
+    },
   },
 ];

@@ -35,6 +35,37 @@ module.exports = [
       { q: 'Kan ik vanuit Haarlem naar Schiphol worden gebracht?', a: 'Ja, ook voor vroege vluchten. Geef uw vluchtgegevens door, dan rekenen we terug vanaf de incheckdeadline.' },
       { q: 'Kan ik een vaste rit afspreken?', a: 'Ja, bijvoorbeeld voor dagbesteding of een terugkerende behandeling.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Haarlem with emergency service: wheelchair transport in the city centre, to Amsterdam, Schiphol and the coast. Electric ramp, 24/7 available. Call now.',
+      lead: "Haarlem has a beautiful city centre full of cobblestones, canals and narrow streets. For a wheelchair ride that's a challenge we know well, from the Grote Markt to the Spaarne.",
+      intro: [
+        "The Grote Markt with the statue of Laurens Janszoon Coster, the Sint-Bavokerk and the town hall: this is the heart of Haarlem, and it's also a spot where our vehicle regularly stands. In the photo on this page you can see it with the ramp deployed on the square, exactly how we work.",
+        "A ride in Haarlem starts with finding the right spot. In the city centre, streets are car-free, some bridges are low, and the cobblestones are unpleasant for a wheelchair. We agree beforehand where we'll pick you up, so you have to cross as few cobblestones as possible.",
+      ],
+      plekken: [
+        { t: 'Grote Markt and Sint-Bavokerk', d: 'The square in the centre. We drop you off as close as possible to the terrace, church or museum you want.' },
+        { t: 'Frans Hals Museum and Teylers Museum', d: 'Two well-known museums, both easily accessible. We arrange the outbound and return trip in one go.' },
+        { t: 'Haarlem station', d: 'Connects to the train. We help with the connection when public transport is not an option.' },
+        { t: 'The Spaarne and Bakenessergracht', d: 'Quiet walking routes along the water. For a day out we pick you up and bring you back.' },
+        { t: 'Haarlemmerhout and Kenaupark', d: 'Two green spots close to the centre, for a walk with a mobility scooter or wheelchair.' },
+        { t: 'Haarlem-Noord and Schalkwijk', d: 'Large residential areas with many seniors. We pick you up at the door and help over thresholds.' },
+      ],
+      ritten: [
+        { t: 'Haarlem to Amsterdam', d: 'For appointments, family visits or a day in the city.' },
+        { t: 'Haarlem to Schiphol', d: 'Early flights are no problem: we are reachable day and night.' },
+        { t: 'Haarlem to Zandvoort', d: 'A day at the beach, with a mobility scooter or wheelchair.' },
+        { t: 'Haarlem to Heemstede', d: 'A short ride for the shops on the Binnenweg or family.' },
+        { t: 'Within Haarlem', d: 'From home to day care, the GP or an appointment in another neighbourhood.' },
+      ],
+      spoed: "In Haarlem, emergencies often stem from a situation at home or in a care facility: a fall, a discharge, or an appointment that's been moved up. Call the emergency line with your address and destination, and we'll give you the arrival time and price on the first phone call.",
+      bereik: "The city centre is partly car-free and has many cobblestones. Outside the centre it's easier: the vehicle usually drives right up to the door. We discuss beforehand where you'll be picked up, so the ramp can be safely deployed.",
+      faqs: [
+        { q: 'Can the vehicle come into the Haarlem city centre?', a: 'Usually right up to near the destination. On car-free streets we agree on a pickup point beforehand where the ramp can be safely deployed.' },
+        { q: 'Do you also drive to the beach at Zandvoort?', a: 'Yes, for a day out we pick you up and bring you back at an agreed time.' },
+        { q: 'Can I be taken from Haarlem to Schiphol?', a: "Yes, for early flights too. Let us know your flight details, and we'll calculate backwards from the check-in deadline." },
+        { q: 'Can I arrange a regular ride?', a: 'Yes, for example for day care or a recurring treatment.' },
+      ],
+    },
   },
 
   {
@@ -72,6 +103,37 @@ module.exports = [
       { q: 'Kan ik een wekelijkse rit naar dagbesteding afspreken?', a: 'Ja, we plannen terugkerende ritten graag in.' },
       { q: 'Rijden jullie ook in het weekend?', a: 'Ja, we zijn 24/7 bereikbaar.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Heemstede: wheelchair transport in Heemstede and Aerdenhout, to Haarlem, Amsterdam and Schiphol. Electric ramp, 24/7 emergency service. Call now.',
+      lead: 'Heemstede lies next to Haarlem, with plenty of greenery and a strong community of seniors. For a wheelchair ride that means: many rides to care, shops and family.',
+      intro: [
+        "Heemstede is a quiet, green town. Many residents are older and live independently or in a care complex. For them, a reliable ride to the GP, the hairdresser or family isn't a luxury but a daily necessity.",
+        'Rolstoeltaxi Spoed drives in Heemstede and Aerdenhout, and to Haarlem, Amsterdam and Schiphol. For an emergency you call directly, for regular rides we set up a schedule.',
+      ],
+      plekken: [
+        { t: "Binnenweg", d: "Heemstede's shopping street. We drop you off as close as possible to your destination." },
+        { t: 'Heemstede-Aerdenhout station', d: 'Connects to the train towards Haarlem and Leiden. We arrange the last stretch.' },
+        { t: 'Groenendaal', d: 'A large park on the edge of Heemstede, for a walk with a mobility scooter or wheelchair.' },
+        { t: 'Heemsteedse Dreef', d: 'One of the most beautiful avenues in the region. For a day out we pick you up.' },
+        { t: 'Residential and care complexes', d: 'Many residents live in a complex. The driver helps as far as the hallway.' },
+        { t: 'Aerdenhout', d: 'The village north of Heemstede, which we also serve.' },
+      ],
+      ritten: [
+        { t: 'Heemstede to Haarlem', d: 'To the centre or an appointment at the hospital in Haarlem.' },
+        { t: 'Heemstede to Amsterdam', d: 'For a family visit, a museum or an appointment.' },
+        { t: 'Heemstede to Schiphol', d: 'Straight to the departure hall.' },
+        { t: 'Heemstede to Zandvoort', d: 'A day at the beach.' },
+        { t: 'Within Heemstede', d: 'From home to day care, the GP or the hairdresser.' },
+      ],
+      spoed: "Because Heemstede is close to Haarlem, our vehicles can usually reach you quickly. Call the emergency line with your address and destination, and we'll give you the arrival time and price.",
+      bereik: 'The streets in Heemstede are spacious and most addresses are easily accessible. At a care complex with its own entrance or driveway, we agree on the best place for the vehicle to stop.',
+      faqs: [
+        { q: 'Do you also drive in Aerdenhout?', a: 'Yes, Aerdenhout is within our service area.' },
+        { q: 'Can you pick me up at a care complex?', a: 'Yes, the driver helps as far as the hallway or lift. Let us know the access details when booking.' },
+        { q: 'Can I arrange a weekly ride to day care?', a: "Yes, we're happy to schedule recurring rides." },
+        { q: 'Do you also drive on weekends?', a: 'Yes, we are reachable 24/7.' },
+      ],
+    },
   },
 
   {
@@ -109,6 +171,37 @@ module.exports = [
       { q: 'Rijden jullie ook \'s avonds terug?', a: 'Ja, we zijn 24/7 bereikbaar. We plannen de terugrit vooraf in.' },
       { q: 'Kunnen jullie mij vanuit Amsterdam naar Zandvoort brengen?', a: 'Ja, dat is een veelgevraagde rit voor een dagje uit.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Zandvoort: wheelchair transport to the beach, the circuit and the village centre, from Haarlem and Amsterdam. Electric ramp, 24/7 available. Call now.',
+      lead: 'Zandvoort means beach, circuit and a coastline that attracts many visitors. For a wheelchair, that means adapting to crowds and closed roads: exactly what you call us for.',
+      intro: [
+        "Zandvoort has a wide beach, a boulevard, and a village centre that gets crowded on summer days. Around race weekends at the circuit, streets are also closed and public transport is overloaded. For someone in a wheelchair, that's a day you don't want to leave to chance.",
+        "We find out beforehand where's best for you to get out and what time we'll pick you up. On busy days we discuss the options well in advance.",
+      ],
+      plekken: [
+        { t: 'Beach and boulevard', d: 'A day by the sea. We drop you off at an accessible beach access point and agree on a pickup time.' },
+        { t: 'Circuit Zandvoort', d: 'For race days. Streets are closed then, so planning ahead is needed.' },
+        { t: 'Zandvoort aan Zee station', d: 'The end of the train line from Haarlem. We arrange the stretch to your destination.' },
+        { t: 'Gasthuisplein and the village centre', d: 'Shops and terraces in the village. We agree on an accessible drop-off spot.' },
+        { t: 'Zuid-Kennemerland National Park', d: 'Dunes and walking trails, for anyone who wants a quiet day out.' },
+        { t: 'Residential areas and care complexes', d: 'We also pick up residents, for appointments and family visits.' },
+      ],
+      ritten: [
+        { t: 'Zandvoort to Haarlem', d: 'For appointments and care in the city centre.' },
+        { t: 'Zandvoort to Amsterdam', d: 'A day in the city, or back home.' },
+        { t: 'Zandvoort to Schiphol', d: 'For flights from Schiphol, with luggage.' },
+        { t: 'Amsterdam to Zandvoort', d: 'A day at the beach, with a wheelchair or mobility scooter.' },
+        { t: 'Within Zandvoort', d: 'Short rides for residents, for example to the GP.' },
+      ],
+      spoed: "Emergencies can happen in Zandvoort too, for example with a discharge or a sudden appointment. Call the emergency line, and we'll give you the arrival time and price. On busy days, streets may be closed and we take that into account.",
+      bereik: "On a sunny day or during an event, Zandvoort is hard to reach. We then plan a fixed drop-off spot and pickup time, so you don't have to improvise.",
+      faqs: [
+        { q: 'Can I go to the beach with a mobility scooter?', a: 'Yes, we drop you off at an accessible access point. For the beach itself you may need an adapted beach wheelchair; ask about that at the beach pavilions.' },
+        { q: 'What if there is an event at the circuit?', a: 'Plan well in advance. Streets are closed and we agree on a fixed drop-off spot and pickup time.' },
+        { q: 'Do you also drive back in the evening?', a: 'Yes, we are reachable 24/7. We schedule the return ride in advance.' },
+        { q: 'Can you take me from Amsterdam to Zandvoort?', a: 'Yes, that is a frequently requested ride for a day out.' },
+      ],
+    },
   },
 
   {
@@ -146,6 +239,37 @@ module.exports = [
       { q: 'Halen jullie ook in IJmuiden zelf op?', a: 'Ja, inwoners van IJmuiden halen we op voor afspraken en familiebezoek.' },
       { q: 'Kunnen jullie \'s nachts rijden?', a: 'Ja, we zijn 24/7 bereikbaar.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi IJmuiden: wheelchair transport to the seaport, the cruise terminal and the beach, from Amsterdam and Haarlem. Luggage, ramp, 24/7 available.',
+      lead: "IJmuiden is a port town on the North Sea, with a cruise terminal, a beach and a lot of industry. For a wheelchair traveller, it's mainly a place where the ride to the quay really matters.",
+      intro: [
+        'The seaport of IJmuiden welcomes cruise ships and ferries every year. Travellers with a wheelchair or mobility scooter need to board or disembark at a fixed time, which calls for a reliable ride with room for luggage.',
+        'Besides the port there is the beach, the town centre and the Velsen-Zuid neighbourhood. We also drive for residents: to appointments, family and day care.',
+      ],
+      plekken: [
+        { t: 'IJmuiden cruise terminal', d: 'For boarding and disembarking. We agree on a fixed time and place, with room for suitcases and a wheelchair.' },
+        { t: 'Seaport and locks', d: 'The industrial heart of IJmuiden. For work or a visit we drive you there.' },
+        { t: 'Beach and Kennemerstrand', d: 'A day by the sea from Amsterdam or Haarlem.' },
+        { t: 'IJmuiden centre', d: 'Shops and facilities. We agree on an accessible drop-off spot.' },
+        { t: 'Velsen-Zuid and Driehuis', d: 'Residential areas where we regularly pick up.' },
+        { t: 'North Sea Canal and the pier', d: 'For a walk along the water with a mobility scooter or wheelchair.' },
+      ],
+      ritten: [
+        { t: 'Amsterdam to IJmuiden', d: 'For a cruise, a day out or an appointment.' },
+        { t: 'IJmuiden to Schiphol', d: 'For travellers flying onward after a cruise.' },
+        { t: 'IJmuiden to Haarlem', d: 'From coast to city.' },
+        { t: 'IJmuiden to Beverwijk', d: 'A short ride along the canal, for example to family or the shops.' },
+        { t: 'Within IJmuiden', d: 'From home to day care or the GP.' },
+      ],
+      spoed: "With a cruise or ferry, timing is everything. A missed connection can cost you the whole trip. Call the emergency line with the ship's departure time, and we'll calculate backwards and name the price right away.",
+      bereik: 'The port is large and the terminal is at a fixed location. We agree beforehand where the vehicle stops and how you get to the gangway. With limited access, the driver helps with the luggage.',
+      faqs: [
+        { q: 'Can I be taken to the cruise terminal?', a: 'Yes, we take you right to the terminal, with room for luggage next to the wheelchair.' },
+        { q: 'Can I travel onward right after the cruise?', a: 'Yes, for example to Schiphol or home. Schedule the ride in advance.' },
+        { q: 'Do you also pick up in IJmuiden itself?', a: 'Yes, we pick up IJmuiden residents for appointments and family visits.' },
+        { q: 'Can you drive at night?', a: 'Yes, we are reachable 24/7.' },
+      ],
+    },
   },
 
   {
@@ -183,6 +307,37 @@ module.exports = [
       { q: 'Kan ik een vaste rit afspreken?', a: 'Ja, bijvoorbeeld voor dagbesteding of een terugkerende behandeling.' },
       { q: 'Werken jullie ook in het weekend?', a: 'Ja, we zijn 24/7 bereikbaar.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Beverwijk: wheelchair transport in Beverwijk and Wijk aan Zee, to the Bazaar, the beach and Haarlem. Electric ramp, 24/7 emergency service. Call now.',
+      lead: 'Beverwijk is known for the Bazaar, but also for Wijk aan Zee, a beach and a strong regional identity. For a wheelchair ride that means: many visitors, lots of crowds, little parking space.',
+      intro: [
+        "In Beverwijk, a ride to the Bazaar on the weekend is an adventure in itself. It gets very busy, and for someone in a wheelchair a distant parking spot isn't practical. We agree beforehand where we'll drop you off, so you're as close as possible to the entrance.",
+        'Wijk aan Zee, with its beach and chess tournament, also falls under Beverwijk. We drive there and back, and on busy days help you find a good spot.',
+      ],
+      plekken: [
+        { t: 'Beverwijk Bazaar', d: 'One of the largest indoor markets in the Netherlands. We drop you off at an accessible entrance.' },
+        { t: 'Beverwijk station', d: 'Connects to the train towards Haarlem and Alkmaar. We arrange the last stretch.' },
+        { t: 'Wijk aan Zee', d: 'The beach and the village, also known for the annual chess tournament.' },
+        { t: 'Breestraat and the centre', d: "Beverwijk's shopping street. We agree on a drop-off spot." },
+        { t: 'Dunes and coast at Wijk aan Zee', d: 'For a walk or a day out, with a mobility scooter or wheelchair.' },
+        { t: 'Neighbourhoods and care complexes', d: 'We pick you up at the door and help over thresholds.' },
+      ],
+      ritten: [
+        { t: 'Beverwijk to Haarlem', d: 'For appointments, care or family visits in Haarlem.' },
+        { t: 'Beverwijk to Amsterdam', d: 'A day in the city or an appointment.' },
+        { t: 'Beverwijk to Alkmaar', d: 'To the north, for example for family or care.' },
+        { t: 'Beverwijk to IJmuiden', d: 'For the seaport or the beach.' },
+        { t: 'Within Beverwijk and Wijk aan Zee', d: 'From home to day care or the GP.' },
+      ],
+      spoed: "In Beverwijk, an emergency ride often stems from a discharge or a sudden appointment. Call the emergency line with your address and destination, and we'll give you the arrival time and price on the first phone call.",
+      bereik: "It gets busy around the Bazaar on market days and weekends. We discuss beforehand where you'll be dropped off and what time we'll pick you up again. Outside busy periods, the vehicle usually drives right up to the door.",
+      faqs: [
+        { q: 'Can you take me to the Bazaar?', a: 'Yes, both ways. We agree on an accessible entrance and pickup time beforehand.' },
+        { q: 'Do you also drive to Wijk aan Zee?', a: 'Yes, to the beach and the village too.' },
+        { q: 'Can I arrange a regular ride?', a: 'Yes, for example for day care or a recurring treatment.' },
+        { q: 'Do you also work on weekends?', a: 'Yes, we are reachable 24/7.' },
+      ],
+    },
   },
 
   {
@@ -220,6 +375,37 @@ module.exports = [
       { q: 'Kan ik naar Schiphol gebracht worden?', a: 'Ja, geef uw vluchtgegevens door, dan rekenen we terug vanaf de incheckdeadline.' },
       { q: 'Kan ik een vaste rit afspreken?', a: 'Ja, bijvoorbeeld voor dagbesteding.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Zaandam: wheelchair transport in Zaanstad, to the Zaanse Schans, Amsterdam and Schiphol. Electric ramp, 24/7 emergency service. Call now.',
+      lead: 'Zaandam is the main town of Zaanstad, on the Zaan river, with well-known sights and plenty of business activity. For a wheelchair ride that means: many rides to care, work and outings.',
+      intro: [
+        'Zaanstad is a collection of old Zaan villages by the water, with Zaandam as its largest town. The Zaanse Schans attracts many visitors, and the Zaans Museum and the Czaar Peterhuisje show why the region is famous.',
+        "For residents in a wheelchair, it's less of a museum and more of an everyday town: to the GP, day care or family. We drive you there, and to Amsterdam and Schiphol too.",
+      ],
+      plekken: [
+        { t: 'Zaanse Schans', d: 'The famous windmills and wooden houses. We drop you off at an accessible entrance.' },
+        { t: 'Zaandam station', d: 'Connects to the train towards Amsterdam. We arrange the last stretch.' },
+        { t: 'Gedempte Gracht and the centre', d: 'Shops and restaurants in the heart of Zaandam. We agree on a drop-off spot.' },
+        { t: 'Zaans Museum and Czaar Peterhuisje', d: 'Two cultural spots nearby. We arrange the outbound and return trip.' },
+        { t: 'Inntel Hotels Amsterdam-Zaandam', d: 'The eye-catching hotel on the Zaan. For overnight stays and events we pick you up.' },
+        { t: 'Neighbourhoods in Zaanstad', d: 'We also serve Zaandijk, Koog aan de Zaan and Krommenie.' },
+      ],
+      ritten: [
+        { t: 'Zaandam to Amsterdam', d: 'For appointments, family visits or a day in the city.' },
+        { t: 'Zaandam to Schiphol', d: 'For flights from Schiphol, with luggage.' },
+        { t: 'Zaandam to Purmerend', d: 'To the other side of the region.' },
+        { t: 'Zaandam to Haarlem', d: 'For care or family in Haarlem.' },
+        { t: 'Within Zaanstad', d: 'From home to day care or the GP.' },
+      ],
+      spoed: "In Zaandam, an emergency ride can be needed for a discharge or an unexpected appointment. Call the emergency line with your address and destination, and we'll give you the arrival time and price.",
+      bereik: 'Zaandam has a lot of water and bridges. Our drivers know the routes and choose the right way through. For an address on a narrow road, we agree on a pickup point beforehand.',
+      faqs: [
+        { q: 'Can you take me to the Zaanse Schans?', a: 'Yes, we drop you off at an accessible entrance and agree on a pickup time.' },
+        { q: 'Do you also drive in Zaandijk and Koog aan de Zaan?', a: 'Yes, all towns in Zaanstad.' },
+        { q: 'Can I be taken to Schiphol?', a: "Yes, let us know your flight details, and we'll calculate backwards from the check-in deadline." },
+        { q: 'Can I arrange a regular ride?', a: 'Yes, for example for day care.' },
+      ],
+    },
   },
 
   {
@@ -257,6 +443,37 @@ module.exports = [
       { q: 'Is een vaste rit mogelijk?', a: 'Ja, bijvoorbeeld voor dagbesteding of een terugkerende behandeling.' },
       { q: 'Werken jullie ook in het weekend?', a: 'Ja, we zijn 24/7 bereikbaar.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Purmerend: wheelchair transport in Purmerend and Waterland, to Amsterdam, Zaandam and Schiphol. Electric ramp, 24/7 emergency service. Call now.',
+      lead: 'Purmerend lies in Waterland, a polder landscape with dikes, ditches and plenty of space. Public transport is good there, but not always practical if you use a wheelchair.',
+      intro: [
+        'Purmerend is one of the largest towns in the region, with a centre on the Koemarkt and large residential areas such as Weidevenne. Around it lie the polders, where the roads are narrow and the distances large.',
+        'We pick you up in Purmerend and the surrounding villages, and take you to Amsterdam, Zaandam or Schiphol. For an emergency you call directly, for regular rides we schedule a plan.',
+      ],
+      plekken: [
+        { t: 'Koemarkt and the centre', d: 'Shops, restaurants and the town hall. We agree on an accessible drop-off spot.' },
+        { t: 'Purmerend bus station', d: "The hub for the bus towards Amsterdam and Zaandam. We arrange the ride when the bus isn't an option." },
+        { t: 'Weidevenne', d: 'A large new-build neighbourhood with many apartments. The driver helps as far as the lift.' },
+        { t: 'De Beemster', d: 'The UNESCO polder landscape north of Purmerend, for a day out.' },
+        { t: 'Overwhere and Gors', d: 'Two neighbourhoods on the east side, where we regularly pick up.' },
+        { t: 'Waterland villages', d: 'Broek in Waterland and Monnickendam are within our service area too.' },
+      ],
+      ritten: [
+        { t: 'Purmerend to Amsterdam', d: 'For appointments, care or family visits.' },
+        { t: 'Purmerend to Zaandam', d: 'From east to west, through Waterland.' },
+        { t: 'Purmerend to Schiphol', d: 'Straight to the airport.' },
+        { t: 'Purmerend to Alkmaar', d: 'To the north, for family or care.' },
+        { t: 'Within Purmerend', d: 'From home to day care or the GP.' },
+      ],
+      spoed: "In Purmerend, an emergency ride can be needed for a discharge or unexpected appointment. Call the emergency line with your address and destination, and we'll give you the arrival time and price.",
+      bereik: 'In Purmerend itself the roads are wide. In the polders they are narrow and sometimes unsuitable for a large vehicle; in that case we agree on a pickup point beforehand.',
+      faqs: [
+        { q: 'Do you also drive in Waterland?', a: 'Yes, in Broek in Waterland, Monnickendam and the surrounding villages too.' },
+        { q: 'Can you take me to Amsterdam?', a: 'Yes, that is a frequently requested ride for appointments and family visits.' },
+        { q: 'Is a regular ride possible?', a: 'Yes, for example for day care or a recurring treatment.' },
+        { q: 'Do you also work on weekends?', a: 'Yes, we are reachable 24/7.' },
+      ],
+    },
   },
 
   {
@@ -294,5 +511,36 @@ module.exports = [
       { q: 'Kunnen jullie mij naar Schiphol brengen?', a: 'Ja, geef uw vluchtgegevens door, dan rekenen we terug vanaf de incheckdeadline.' },
       { q: 'Kan ik een vaste rit afspreken?', a: 'Ja, bijvoorbeeld voor dagbesteding of een terugkerende behandeling.' },
     ],
+    en: {
+      metaDescription: 'Rolstoeltaxi Alkmaar: wheelchair transport to the cheese market, the centre and care facilities, from throughout North Holland. Electric ramp, 24/7 emergency service. Call now.',
+      lead: 'Alkmaar is the town of the cheese market, the canals and the Waagplein. For a wheelchair ride that means: lots of tourism at set times, and a quiet town outside of that.',
+      intro: [
+        "During the season, the cheese market draws many visitors to the Waagplein on Friday mornings. For someone in a wheelchair, it's a beautiful sight, but also a busy spot to reach. We agree beforehand where you'll be dropped off and what time we'll pick you up again.",
+        'Outside of that, Alkmaar is a quiet town with a historic centre, canals and a station. We drive you to and from appointments, care or family, in Alkmaar and the surrounding area.',
+      ],
+      plekken: [
+        { t: 'Waagplein and the cheese market', d: 'The most famous square in Alkmaar. On market days we plan a drop-off spot in advance.' },
+        { t: 'Grote of Sint-Laurenskerk', d: 'The large monument in the centre. We drop you off at the accessible entrance.' },
+        { t: 'Alkmaar station', d: 'Connects to the train. We arrange the last stretch.' },
+        { t: 'Verdronkenoord and the canals', d: 'Quiet streets along the water, for a walk or a day out.' },
+        { t: 'Victoriepark and Alkmaarderhout', d: 'Green spots close to the centre.' },
+        { t: 'Neighbourhoods and care complexes', d: 'We pick you up at the door, and help over thresholds.' },
+      ],
+      ritten: [
+        { t: 'Alkmaar to Amsterdam', d: 'For appointments, family visits or a day in the city.' },
+        { t: 'Alkmaar to Schiphol', d: 'For flights, with luggage.' },
+        { t: 'Alkmaar to Haarlem', d: 'To the south, for care or family.' },
+        { t: 'Alkmaar to Purmerend', d: 'Through North Holland, to the other side of the region.' },
+        { t: 'Within Alkmaar', d: 'From home to day care or the GP.' },
+      ],
+      spoed: "In Alkmaar, an emergency ride can be needed for a discharge or an unexpected appointment. Call the emergency line with your address and destination, and we'll give you the arrival time and price.",
+      bereik: "Alkmaar's centre is partly car-free and has canals. We agree beforehand where you'll be picked up. Outside the centre it's easier: the vehicle usually drives right up to the door.",
+      faqs: [
+        { q: 'Can you take me to the cheese market?', a: 'Yes, both ways. On market days we agree on a drop-off spot and pickup time beforehand.' },
+        { q: 'Can I bring a mobility scooter?', a: 'Yes, the ramp is suitable for mobility scooters. Let us know the model when booking.' },
+        { q: 'Can you take me to Schiphol?', a: "Yes, let us know your flight details, and we'll calculate backwards from the check-in deadline." },
+        { q: 'Can I arrange a regular ride?', a: 'Yes, for example for day care or a recurring treatment.' },
+      ],
+    },
   },
 ];

@@ -1000,7 +1000,7 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(payload)
     }).then(function (r) { return r.json(); }).then(function (j) {
-      if (j && j.success) done(false); else throw new Error((j && j.message) || 'fout');
+      if (j && j.success) done(false); else throw new Error((j && j.message) || 'error');
     }).catch(function () {
       btn.disabled = false; btn.textContent = label;
       showError('Versturen is niet gelukt. Probeer het opnieuw of bel direct naar 06 2876 1078.');
