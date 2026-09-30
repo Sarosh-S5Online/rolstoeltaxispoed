@@ -62,7 +62,7 @@ function svgCheck() {
 }
 
 function logoMark(prefix) {
-  return `<img src="/img/logo-icoon.png" alt="${SITE.name}" width="42" height="40">`;
+  return `<img src="/img/logo-rolstoeltaxi-spoed-nobg.png" alt="${SITE.name}" width="118" height="46">`;
 }
 
 const ICONS = {
