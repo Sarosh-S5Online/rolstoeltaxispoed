@@ -90,6 +90,9 @@ nav.scrolled:has(~ .hero.night) .logo-text{color:var(--ink)}
 @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.7)}}
 @media(prefers-reduced-motion:reduce){.nav-spoed-dot{animation:none}}
 .mobile-menu a.nav-spoed{color:#ff6b63!important;display:flex;align-items:center;gap:10px}
+.lang-switch{display:flex!important;align-items:center;gap:6px;font-weight:700!important;font-size:13px!important;padding:7px 12px;border:1.5px solid var(--line);border-radius:20px;color:var(--ink)!important}
+.lang-switch:hover{border-color:var(--accent);color:var(--accent)!important}
+.mobile-menu a.lang-switch{border:1.5px solid rgba(255,255,255,.25);border-radius:24px;padding:10px 18px;justify-content:center;color:#eef3fb!important}
 .nav-links a.btn{color:#fff}
 .btn{
   display:inline-block;background-color:var(--accent-deep);background-image:linear-gradient(135deg,var(--accent-2),var(--accent-deep));color:#fff;
@@ -540,10 +543,12 @@ nav:has(~ .hero) .nav-links>li>a:not(.btn):not(.nav-spoed):hover,
 nav:has(~ .page-hero.has-photo) .nav-links>li>a:not(.btn):not(.nav-spoed):hover{color:#fff}
 nav:has(~ .hero) .nav-spoed,nav:has(~ .page-hero.has-photo) .nav-spoed{color:#ff8a80!important}
 nav:has(~ .hero) .hamburger,nav:has(~ .page-hero.has-photo) .hamburger{color:#eef3fb;border-color:rgba(238,243,251,.35)}
+nav:has(~ .hero) .lang-switch,nav:has(~ .page-hero.has-photo) .lang-switch{color:#eef3fb!important;border-color:rgba(238,243,251,.35)}
 nav.scrolled:has(~ .hero) .nav-links>li>a:not(.btn):not(.nav-spoed),
 nav.scrolled:has(~ .page-hero.has-photo) .nav-links>li>a:not(.btn):not(.nav-spoed){color:#3d4a63}
 nav.scrolled:has(~ .hero) .nav-spoed,nav.scrolled:has(~ .page-hero.has-photo) .nav-spoed{color:#d64545!important}
 nav.scrolled:has(~ .hero) .hamburger,nav.scrolled:has(~ .page-hero.has-photo) .hamburger{color:var(--ink);border-color:var(--line)}
+nav.scrolled:has(~ .hero) .lang-switch,nav.scrolled:has(~ .page-hero.has-photo) .lang-switch{color:var(--ink)!important;border-color:var(--line)}
 nav:has(~ .page-hero.has-photo) .logo-text{color:#eef3fb}
 nav:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow)}
 nav.scrolled:has(~ .page-hero.has-photo) .logo-text{color:var(--ink)}

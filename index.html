@@ -6,6 +6,9 @@
 <title>Rolstoeltaxi Spoed | Rolstoelvervoer in Nederland, bel direct</title>
 <meta name="description" content="Acuut rolstoelvervoer nodig in Nederland? Rolstoeltaxi Spoed rukt 24/7 uit met een volledig uitgeruste rolstoelbus. Niet mailen, gewoon direct bellen.">
 <link rel="canonical" href="https://rolstoeltaxispoed.nl/">
+<link rel="alternate" hreflang="nl" href="https://rolstoeltaxispoed.nl/">
+<link rel="alternate" hreflang="en" href="https://rolstoeltaxispoed.nl/en">
+<link rel="alternate" hreflang="x-default" href="https://rolstoeltaxispoed.nl/">
 <meta property="og:title" content="Rolstoeltaxi Spoed | Rolstoelvervoer in Nederland, bel direct">
 <meta property="og:description" content="Acuut rolstoelvervoer nodig in Nederland? Rolstoeltaxi Spoed rukt 24/7 uit met een volledig uitgeruste rolstoelbus. Niet mailen, gewoon direct bellen.">
 <meta property="og:type" content="website">
@@ -139,6 +142,9 @@ nav.scrolled:has(~ .hero.night) .logo-text{color:var(--ink)}
 @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.7)}}
 @media(prefers-reduced-motion:reduce){.nav-spoed-dot{animation:none}}
 .mobile-menu a.nav-spoed{color:#ff6b63!important;display:flex;align-items:center;gap:10px}
+.lang-switch{display:flex!important;align-items:center;gap:6px;font-weight:700!important;font-size:13px!important;padding:7px 12px;border:1.5px solid var(--line);border-radius:20px;color:var(--ink)!important}
+.lang-switch:hover{border-color:var(--accent);color:var(--accent)!important}
+.mobile-menu a.lang-switch{border:1.5px solid rgba(255,255,255,.25);border-radius:24px;padding:10px 18px;justify-content:center;color:#eef3fb!important}
 .nav-links a.btn{color:#fff}
 .btn{
   display:inline-block;background-color:var(--accent-deep);background-image:linear-gradient(135deg,var(--accent-2),var(--accent-deep));color:#fff;
@@ -589,10 +595,12 @@ nav:has(~ .hero) .nav-links>li>a:not(.btn):not(.nav-spoed):hover,
 nav:has(~ .page-hero.has-photo) .nav-links>li>a:not(.btn):not(.nav-spoed):hover{color:#fff}
 nav:has(~ .hero) .nav-spoed,nav:has(~ .page-hero.has-photo) .nav-spoed{color:#ff8a80!important}
 nav:has(~ .hero) .hamburger,nav:has(~ .page-hero.has-photo) .hamburger{color:#eef3fb;border-color:rgba(238,243,251,.35)}
+nav:has(~ .hero) .lang-switch,nav:has(~ .page-hero.has-photo) .lang-switch{color:#eef3fb!important;border-color:rgba(238,243,251,.35)}
 nav.scrolled:has(~ .hero) .nav-links>li>a:not(.btn):not(.nav-spoed),
 nav.scrolled:has(~ .page-hero.has-photo) .nav-links>li>a:not(.btn):not(.nav-spoed){color:#3d4a63}
 nav.scrolled:has(~ .hero) .nav-spoed,nav.scrolled:has(~ .page-hero.has-photo) .nav-spoed{color:#d64545!important}
 nav.scrolled:has(~ .hero) .hamburger,nav.scrolled:has(~ .page-hero.has-photo) .hamburger{color:var(--ink);border-color:var(--line)}
+nav.scrolled:has(~ .hero) .lang-switch,nav.scrolled:has(~ .page-hero.has-photo) .lang-switch{color:var(--ink)!important;border-color:var(--line)}
 nav:has(~ .page-hero.has-photo) .logo-text{color:#eef3fb}
 nav:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow)}
 nav.scrolled:has(~ .page-hero.has-photo) .logo-text{color:var(--ink)}
@@ -766,6 +774,7 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
       <li><a href="/diensten/spoedvervoer-rolstoeltaxi" class="nav-spoed"><span class="nav-spoed-dot"></span>Spoed nu</a></li>
       <li><a href="/tarieven">Tarieven</a></li>
       <li><a href="/over-ons">Over ons</a></li>
+      <li><a href="/en" class="lang-switch" aria-label="View in English"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14.5 14.5 0 010 18"/><path d="M12 3a14.5 14.5 0 000 18"/></svg>EN</a></li>
       <li><a href="tel:+31628761078" class="btn btn-nav">Bel direct</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false">☰</button>
@@ -780,6 +789,7 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
   <a href="/tarieven">Tarieven</a>
   <a href="/over-ons">Over ons</a>
   <a href="/contact">Contact</a>
+  <a href="/en" class="lang-switch"><span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14.5 14.5 0 010 18"/><path d="M12 3a14.5 14.5 0 000 18"/></svg></span>View in English</a>
   <a href="tel:+31628761078" class="btn">Bel direct</a>
 </div>
 

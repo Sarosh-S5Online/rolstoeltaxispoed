@@ -79,6 +79,7 @@ const ICONS = {
   calendarCheck: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8.5 15l2 2 4-4"/></svg>`,
   whatsapp: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.8 14.2c-.2.6-1.3 1.2-1.9 1.3-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-5-4.3-5.1-4.5-.2-.2-1.2-1.6-1.2-3.1s.8-2.2 1.1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.2.1.3 0 .5-.1.2-.1.3-.3.5-.1.2-.3.4-.4.5-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.5 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.8.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>`,
   play: `<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`,
+  globe: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14.5 14.5 0 010 18"/><path d="M12 3a14.5 14.5 0 000 18"/></svg>`,
 };
 
 function videoEmbed(videoId, title) {
@@ -88,17 +89,28 @@ function videoEmbed(videoId, title) {
 </div>`;
 }
 
-function head({ title, description, canonicalPath, prefix, extraLd }) {
+function altPathFor(canonicalPath, locale) {
+  if (locale === 'en') return canonicalPath.replace(/^en\/?/, '');
+  return canonicalPath ? `en/${canonicalPath}` : 'en';
+}
+
+function head({ title, description, canonicalPath, prefix, extraLd, locale = 'nl' }) {
+  const altPath = altPathFor(canonicalPath, locale);
+  const nlHref = `${SITE.domain}/${locale === 'en' ? altPath : canonicalPath}`;
+  const enHref = `${SITE.domain}/${locale === 'en' ? canonicalPath : altPath}`;
   return `<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${title}</title>
 <meta name="description" content="${description}">
 <link rel="canonical" href="${SITE.domain}/${canonicalPath}">
+<link rel="alternate" hreflang="nl" href="${nlHref}">
+<link rel="alternate" hreflang="en" href="${enHref}">
+<link rel="alternate" hreflang="x-default" href="${nlHref}">
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${description}">
 <meta property="og:type" content="website">
-<meta property="og:locale" content="nl_NL">
+<meta property="og:locale" content="${locale === 'en' ? 'en_US' : 'nl_NL'}">
 <link rel="icon" type="image/png" href="${prefix}img/logo-icoon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -111,72 +123,104 @@ ${CSS}
 </head>`;
 }
 
-function nav(prefix) {
-  const svcLinks = SERVICES.map(s => `<li><a href="/diensten/${s.slug}">${s.nav}</a></li>`).join('');
-  const cityLinks = TOP_CITIES.map(slug => { const c = cityBySlug(slug); return `<li><a href="${cityPath(c)}">${c.name}</a></li>`; }).join('');
+function nav(prefix, locale = 'nl', altHref = '/') {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
+  const svcLinks = SERVICES.map(s => `<li><a href="${base}/diensten/${s.slug}">${s.nav}</a></li>`).join('');
+  const cityLinks = TOP_CITIES.map(slug => { const c = cityBySlug(slug); return `<li><a href="${base}${cityPath(c)}">${c.name}</a></li>`; }).join('');
+  const t = {
+    diensten: en ? 'Services' : 'Diensten',
+    locaties: en ? 'Locations' : 'Locaties',
+    alleDiensten: en ? 'All services' : 'Alle diensten',
+    alleLocaties: en ? `All ${CITIES.length} locations` : `Alle ${CITIES.length} locaties`,
+    spoedNu: en ? 'Emergency now' : 'Spoed nu',
+    tarieven: en ? 'Rates' : 'Tarieven',
+    overOns: en ? 'About us' : 'Over ons',
+    belDirect: en ? 'Call now' : 'Bel direct',
+    contact: en ? 'Contact' : 'Contact',
+    menuOpen: en ? 'Open menu' : 'Menu openen',
+    menuClose: en ? 'Close menu' : 'Menu sluiten',
+    langLabel: en ? 'Bekijk in het Nederlands' : 'View in English',
+    langShort: en ? 'NL' : 'EN',
+  };
   return `<nav id="nav">
   <div class="wrap nav-inner">
-    <a href="/" class="logo">${logoMark(prefix)}</a>
+    <a href="${base}/" class="logo">${logoMark(prefix)}</a>
     <ul class="nav-links">
-      <li class="has-dd"><a href="/diensten">Diensten <span class="caret">▾</span></a>
-        <div class="dd"><ul>${svcLinks}<li class="dd-all"><a href="/diensten">Alle diensten</a></li></ul></div></li>
-      <li class="has-dd"><a href="/locaties">Locaties <span class="caret">▾</span></a>
-        <div class="dd dd-wide"><ul>${cityLinks}<li class="dd-all"><a href="/locaties">Alle ${CITIES.length} locaties</a></li></ul></div></li>
-      <li><a href="/diensten/spoedvervoer-rolstoeltaxi" class="nav-spoed"><span class="nav-spoed-dot"></span>Spoed nu</a></li>
-      <li><a href="/tarieven">Tarieven</a></li>
-      <li><a href="/over-ons">Over ons</a></li>
-      <li><a href="tel:${SITE.phoneTel}" class="btn btn-nav">Bel direct</a></li>
+      <li class="has-dd"><a href="${base}/diensten">${t.diensten} <span class="caret">▾</span></a>
+        <div class="dd"><ul>${svcLinks}<li class="dd-all"><a href="${base}/diensten">${t.alleDiensten}</a></li></ul></div></li>
+      <li class="has-dd"><a href="${base}/locaties">${t.locaties} <span class="caret">▾</span></a>
+        <div class="dd dd-wide"><ul>${cityLinks}<li class="dd-all"><a href="${base}/locaties">${t.alleLocaties}</a></li></ul></div></li>
+      <li><a href="${base}/diensten/spoedvervoer-rolstoeltaxi" class="nav-spoed"><span class="nav-spoed-dot"></span>${t.spoedNu}</a></li>
+      <li><a href="${base}/tarieven">${t.tarieven}</a></li>
+      <li><a href="${base}/over-ons">${t.overOns}</a></li>
+      <li><a href="${altHref}" class="lang-switch" aria-label="${t.langLabel}">${ICONS.globe}${t.langShort}</a></li>
+      <li><a href="tel:${SITE.phoneTel}" class="btn btn-nav">${t.belDirect}</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false">☰</button>
+    <button class="hamburger" id="hamburger" aria-label="${t.menuOpen}" aria-expanded="false">☰</button>
   </div>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigatiemenu">
-  <button class="mobile-close" id="mobileClose" aria-label="Menu sluiten">✕</button>
-  <a href="/diensten">Diensten</a>
-  <a href="/locaties">Locaties</a>
-  <a href="/diensten/spoedvervoer-rolstoeltaxi" class="nav-spoed"><span class="nav-spoed-dot"></span>Spoed nu</a>
-  <a href="/tarieven">Tarieven</a>
-  <a href="/over-ons">Over ons</a>
-  <a href="/contact">Contact</a>
-  <a href="tel:${SITE.phoneTel}" class="btn">Bel direct</a>
+  <button class="mobile-close" id="mobileClose" aria-label="${t.menuClose}">✕</button>
+  <a href="${base}/diensten">${t.diensten}</a>
+  <a href="${base}/locaties">${t.locaties}</a>
+  <a href="${base}/diensten/spoedvervoer-rolstoeltaxi" class="nav-spoed"><span class="nav-spoed-dot"></span>${t.spoedNu}</a>
+  <a href="${base}/tarieven">${t.tarieven}</a>
+  <a href="${base}/over-ons">${t.overOns}</a>
+  <a href="${base}/contact">${t.contact}</a>
+  <a href="${altHref}" class="lang-switch"><span aria-hidden="true">${ICONS.globe}</span>${t.langLabel}</a>
+  <a href="tel:${SITE.phoneTel}" class="btn">${t.belDirect}</a>
 </div>`;
 }
 
-function footer(prefix) {
-  const serviceLinks = SERVICES.map(s => `<li><a href="/diensten/${s.slug}">${s.nav}</a></li>`).join('\n          ');
-  const cityLinks = TOP_CITIES.map(slug => { const c = cityBySlug(slug); return `<li><a href="${cityPath(c)}">${c.name}</a></li>`; }).join('\n          ');
+function footer(prefix, locale = 'nl') {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
+  const serviceLinks = SERVICES.map(s => `<li><a href="${base}/diensten/${s.slug}">${s.nav}</a></li>`).join('\n          ');
+  const cityLinks = TOP_CITIES.map(slug => { const c = cityBySlug(slug); return `<li><a href="${base}${cityPath(c)}">${c.name}</a></li>`; }).join('\n          ');
+  const t = en ? {
+    tagline: `The emergency branch of ${SITE.parentBrand}: wheelchair transport in the Netherlands, reachable 24 hours a day for rides that can't wait.`,
+    diensten: 'Services', locaties: 'Locations', alleLocaties: 'All locations', contact: 'Contact',
+    onderdeelVan: `Part of ${SITE.parentBrand}`, overOns: 'About us', reserveren: 'Book now', tarieven: 'Rates',
+    faq: 'FAQ', privacy: 'Privacy policy',
+  } : {
+    tagline: `De spoedtak van ${SITE.parentBrand}: rolstoelvervoer in Nederland, 24 uur per dag bereikbaar voor ritten die niet kunnen wachten.`,
+    diensten: 'Diensten', locaties: 'Locaties', alleLocaties: 'Alle locaties', contact: 'Contact',
+    onderdeelVan: `Onderdeel van ${SITE.parentBrand}`, overOns: 'Over ons', reserveren: 'Direct reserveren', tarieven: 'Tarieven',
+    faq: 'Veelgestelde vragen', privacy: 'Privacyverklaring',
+  };
   return `<footer>
   <div class="wrap">
     <div class="foot-grid">
       <div>
         <div class="foot-logo-row">${logoMark(prefix)}</div>
-        <p>De spoedtak van ${SITE.parentBrand}: rolstoelvervoer in Nederland, 24 uur per dag bereikbaar voor ritten die niet kunnen wachten.</p>
+        <p>${t.tagline}</p>
       </div>
       <div>
-        <h4>Diensten</h4>
+        <h4>${t.diensten}</h4>
         <ul>
           ${serviceLinks}
         </ul>
       </div>
       <div>
-        <h4>Locaties</h4>
+        <h4>${t.locaties}</h4>
         <ul class="foot-areas">
           ${cityLinks}
-          <li><a href="/locaties"><b>Alle locaties</b></a></li>
+          <li><a href="${base}/locaties"><b>${t.alleLocaties}</b></a></li>
         </ul>
       </div>
       <div>
-        <h4>Contact</h4>
+        <h4>${t.contact}</h4>
         <ul>
           <li><a href="tel:${SITE.phoneTel}">${SITE.phoneDisplay}</a></li>
           <li><a href="mailto:${SITE.email}">${SITE.email}</a></li>
-          <li>Onderdeel van ${SITE.parentBrand}</li>
-          <li style="margin-top:10px"><a href="/over-ons">Over ons</a></li>
-          <li><a href="/contact">Direct reserveren</a></li>
-          <li><a href="/tarieven">Tarieven</a></li>
-          <li><a href="/veelgestelde-vragen">Veelgestelde vragen</a></li>
-          <li><a href="/privacyverklaring">Privacyverklaring</a></li>
+          <li>${t.onderdeelVan}</li>
+          <li style="margin-top:10px"><a href="${base}/over-ons">${t.overOns}</a></li>
+          <li><a href="${base}/contact">${t.reserveren}</a></li>
+          <li><a href="${base}/tarieven">${t.tarieven}</a></li>
+          <li><a href="${base}/veelgestelde-vragen">${t.faq}</a></li>
+          <li><a href="${base}/privacyverklaring">${t.privacy}</a></li>
         </ul>
       </div>
     </div>
@@ -187,18 +231,25 @@ function footer(prefix) {
 </footer>`;
 }
 
-function stickyCta({ hideBook } = {}) {
+function stickyCta({ hideBook, locale = 'nl' } = {}) {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
   return `<div class="cta-dock" id="ctaDock">
-  <a href="tel:${SITE.phoneTel}" class="dock-call" data-cta="dock">${ICONS.phoneCall}<span><small>Bel direct</small><b>${SITE.phoneDisplay}</b></span></a>
-  <a href="https://wa.me/${SITE.whatsapp}" class="dock-wa" aria-label="WhatsApp ons">${ICONS.whatsapp}</a>
-  ${hideBook ? '' : '<a href="/contact#formulier" class="dock-book">Reserveren</a>'}
+  <a href="tel:${SITE.phoneTel}" class="dock-call" data-cta="dock">${ICONS.phoneCall}<span><small>${en ? 'Call now' : 'Bel direct'}</small><b>${SITE.phoneDisplay}</b></span></a>
+  <a href="https://wa.me/${SITE.whatsapp}" class="dock-wa" aria-label="${en ? 'WhatsApp us' : 'WhatsApp ons'}">${ICONS.whatsapp}</a>
+  ${hideBook ? '' : `<a href="${base}/contact#formulier" class="dock-book">${en ? 'Book' : 'Reserveren'}</a>`}
 </div>`;
 }
 
-function cookieBanner() {
-  return `<div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Cookiemelding">
-  <p>Deze website gebruikt alleen functionele cookies om goed te werken. Meer weten? Lees onze <a href="/privacyverklaring">privacyverklaring</a>.</p>
-  <div class="cb-actions"><button type="button" class="btn btn-yellow" id="cookieAccept">Akkoord</button></div>
+function cookieBanner(locale = 'nl') {
+  const en = locale === 'en';
+  const base = en ? '/en' : '';
+  const text = en
+    ? `This website only uses functional cookies to work properly. Want to know more? Read our <a href="${base}/privacyverklaring">privacy policy</a>.`
+    : `Deze website gebruikt alleen functionele cookies om goed te werken. Meer weten? Lees onze <a href="${base}/privacyverklaring">privacyverklaring</a>.`;
+  return `<div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="${en ? 'Cookie notice' : 'Cookiemelding'}">
+  <p>${text}</p>
+  <div class="cb-actions"><button type="button" class="btn btn-yellow" id="cookieAccept">${en ? 'Accept' : 'Akkoord'}</button></div>
 </div>
 <script>
 (function () {
@@ -315,21 +366,23 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
 </script>`;
 }
 
-function page({ title, description, canonicalPath, prefix, extraLd, bodyHtml, skipSticky, skipFaq, stickyLabel, useScrollThreshold }) {
+function page({ title, description, canonicalPath, prefix, extraLd, bodyHtml, skipSticky, skipFaq, stickyLabel, useScrollThreshold, locale = 'nl' }) {
+  const altHref = '/' + altPathFor(canonicalPath, locale);
+  const isContact = canonicalPath === 'contact' || canonicalPath === 'en/contact';
   return `<!DOCTYPE html>
-<html lang="nl">
-${head({ title, description, canonicalPath, prefix, extraLd })}
+<html lang="${locale === 'en' ? 'en' : 'nl'}">
+${head({ title, description, canonicalPath, prefix, extraLd, locale })}
 <body>
 
-${nav(prefix)}
+${nav(prefix, locale, altHref)}
 
 ${bodyHtml}
 
-${footer(prefix)}
+${footer(prefix, locale)}
 
-${stickyCta({ hideBook: canonicalPath === 'contact' })}
+${stickyCta({ hideBook: isContact, locale })}
 
-${cookieBanner()}
+${cookieBanner(locale)}
 
 ${scripts({ skipSticky, skipFaq, useScrollThreshold })}
 </body>
