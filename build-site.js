@@ -80,6 +80,7 @@ const ICONS = {
   whatsapp: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.8 14.2c-.2.6-1.3 1.2-1.9 1.3-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-5-4.3-5.1-4.5-.2-.2-1.2-1.6-1.2-3.1s.8-2.2 1.1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.2.1.3 0 .5-.1.2-.1.3-.3.5-.1.2-.3.4-.4.5-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.5 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.8.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>`,
   play: `<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`,
   globe: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14.5 14.5 0 010 18"/><path d="M12 3a14.5 14.5 0 000 18"/></svg>`,
+  heart: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.35-9.5-8.8C.86 8.2 2.1 4.8 5.3 4.1c2-.44 3.9.4 5 2.1a1 1 0 001.4 0c1.1-1.7 3-2.54 5-2.1 3.2.7 4.44 4.1 2.8 7.1C19 15.65 12 20 12 20z"/></svg>`,
 };
 
 function videoEmbed(videoId, title) {
@@ -1026,7 +1027,7 @@ function buildHomeBody(locale = 'nl') {
       <div class="stat-col"><div class="num">24/7</div><h3>${en ? 'Available' : 'Bereikbaar'}</h3><p>${en ? 'Also at night and on weekends for emergency rides.' : "Ook 's nachts en in het weekend voor spoedritten."}</p></div>
       <div class="stat-col"><div class="num">10+</div><h3>${en ? 'Years experience' : 'Jaar ervaring'}</h3><p>${en ? `Via ${SITE.parentBrand}, specialist in wheelchair transport.` : `Via ${SITE.parentBrand}, specialist in rolstoelvervoer.`}</p></div>
       <div class="stat-col"><div class="num">5000+</div><h3>${en ? 'Rides completed' : 'Uitgevoerde ritten'}</h3><p>${en ? `Under the ${SITE.parentBrand} flag.` : `Onder de vlag van ${SITE.parentBrand}.`}</p></div>
-      <div class="stat-col"><div class="num">NL</div><h3>${en ? 'Active in the Netherlands' : 'Actief in Nederland'}</h3><p>${en ? 'Rides outside our own region are possible too.' : 'Ook ritten buiten de eigen regio.'}</p></div>
+      <div class="stat-col"><div class="num">100%</div><h3>${en ? 'Door to door' : 'Deur tot deur'}</h3><p>${en ? 'Picked up at your front door, guided to the vehicle and brought right to your destination.' : 'Opgehaald bij uw voordeur, begeleid naar de bus en gebracht tot bij uw bestemming.'}</p></div>
     </div>
   </div>
 </section>
@@ -1132,6 +1133,34 @@ function buildHomeBody(locale = 'nl') {
 <section class="statement night band-line">
   <div class="wrap">
     <p class="big reveal">${en ? 'Most carriers want you to plan at least a day ahead.' : 'De meeste vervoerders willen dat u minstens een dag vooruit plant.'} <span class="serif-i">${en ? "We're here for exactly the moment that isn't possible." : 'Wij zijn er juist voor het moment dat dat niet kan.'}</span></p>
+  </div>
+</section>
+
+<!-- ONZE BELOFTE -->
+<section id="belofte">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">${en ? 'Our promise' : 'Onze belofte'}</span>
+      <h2>${en ? 'Emergency doesn\'t mean' : 'Spoed betekent niet dat het'} <span class="serif-i">${en ? 'rushed' : 'gehaast'}</span>${en ? '' : ' gaat'}</h2>
+      <p>${en ? 'Emergency means we arrange a vehicle quickly. It never means the ride itself feels rushed.' : 'Spoed betekent dat we snel een bus regelen. Niet dat de rit zelf gehaast verloopt.'}</p>
+    </div>
+    <div class="review-grid">
+      <div class="review reveal">
+        <span class="icon">${ICONS.mapPin}</span>
+        <h3>${en ? 'Door-to-door guidance' : 'Deur tot deur begeleiding'}</h3>
+        <p>${en ? "We pick you up at your front door, guide you to the vehicle and bring you right to your destination. Not just the curb: all the way inside." : 'Wij halen u op bij de voordeur, begeleiden u naar de bus en brengen u tot bij uw bestemming. Niet tot de stoep: echt tot binnen.'}</p>
+      </div>
+      <div class="review reveal reveal-d1">
+        <span class="icon">${ICONS.clock}</span>
+        <h3>${en ? 'At your pace, never rushed' : 'Op uw tempo, nooit gehaast'}</h3>
+        <p>${en ? 'Emergency means we act fast to arrange a vehicle. Once underway, the driver takes it calmly, at your pace, for a safe arrival.' : 'Spoed betekent dat we snel schakelen om een bus te regelen. Eenmaal onderweg rijdt en helpt de chauffeur rustig, op uw tempo, voor een veilige aankomst.'}</p>
+      </div>
+      <div class="review reveal reveal-d2">
+        <span class="icon">${ICONS.heart}</span>
+        <h3>${en ? 'Personal care on board' : 'Persoonlijke zorg aan boord'}</h3>
+        <p>${en ? "Our drivers are trained in care transport and take the time for real attention, even during an emergency. That little bit extra that isn't a given." : 'Onze chauffeurs zijn getraind in zorgvervoer en nemen de tijd voor aandacht, ook als het spoed is. Net dat beetje extra dat niet vanzelfsprekend is.'}</p>
+      </div>
+    </div>
   </div>
 </section>
 
