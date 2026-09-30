@@ -189,13 +189,14 @@ canvas.particles{position:absolute;inset:0;z-index:0;pointer-events:none}
 
 /* ---------- phone badge (prominent bel-direct callout) ---------- */
 .phone-badge{
-  display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,.07);
+  display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,var(--yellow),var(--yellow-deep));
   border:1.5px solid var(--yellow);border-radius:var(--radius-sm);padding:13px 22px;margin-bottom:22px;
+  box-shadow:0 10px 26px rgba(245,166,35,.3);
 }
-.phone-badge svg{color:var(--yellow);flex-shrink:0}
-.phone-badge a{color:#fff;text-decoration:none;font-weight:800;font-size:19px;letter-spacing:.01em}
-.phone-badge a:hover{color:var(--yellow)}
-.phone-badge .lbl{color:#c8d6ee;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:1px}
+.phone-badge svg{color:var(--yellow-ink);flex-shrink:0}
+.phone-badge a{color:var(--yellow-ink);text-decoration:none;font-weight:800;font-size:19px;letter-spacing:.01em}
+.phone-badge a:hover{color:#1a1200}
+.phone-badge .lbl{color:var(--yellow-ink);opacity:.8;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:1px}
 
 /* ---------- call banner (mid-page bel-nu band) ---------- */
 .call-banner{background:linear-gradient(135deg,var(--accent-deep),var(--accent));position:relative;overflow:hidden}
@@ -673,6 +674,27 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
 .form-success h3{font-size:26px;margin-bottom:12px}
 .form-success p{color:var(--ink-dim);margin:0 auto 16px;max-width:46ch}
 .demo-note{font-size:13px;background:#fff6e0;border:1px solid #f0d28a;color:#6b4a00!important;border-radius:var(--radius-sm);padding:10px 14px}
+
+/* ---------- home: mobiel-specifieke aanpassingen ---------- */
+@media(max-width:600px){
+  #homeHero{background-image:url('/img/instapklep-schiphol.jpg') !important;background-position:center 70% !important}
+}
+.call-banner-video{display:none}
+@media(max-width:900px){
+  .call-banner-video{display:block;width:100%;max-width:360px;margin:2px auto}
+}
+@media(max-width:560px){
+  #diensten .card{padding:20px 20px}
+  #diensten .card .icon-badge{width:38px;height:38px;margin-bottom:12px}
+  #diensten .card h3{font-size:16.5px;margin-bottom:4px}
+  #diensten .card p{font-size:13px;line-height:1.45}
+}
+@media(max-width:600px){
+  .about-photo{aspect-ratio:16/11}
+  .about-copy h2{font-size:28px}
+  .usp-list{gap:10px}
+  .usp-list span{font-size:14.5px}
+}
 
 /* ---------- video (klik-om-af-te-spelen, geen cookies vooraf) ---------- */
 .video-embed{position:relative;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;background:#000;cursor:pointer;border:1px solid var(--line);box-shadow:var(--shadow)}

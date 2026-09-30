@@ -75,7 +75,7 @@ const ICONS = {
   wheelchair: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="17" cy="18" r="3.5"/><circle cx="8" cy="5" r="1.6" fill="currentColor" stroke="none"/><path d="M8 8v5l3 2 3 6M8 13h6l3-6"/></svg>`,
   plane: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 3L3 10.5l7 2.5m0 0l2.5 7L21 3M10 13l6.5-6.5"/></svg>`,
   medical: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>`,
-  van: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 16V8a2 2 0 012-2h8l4 4h2a2 2 0 012 2v4"/><path d="M3 16h18"/><circle cx="7.5" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/></svg>`,
+  van: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="15" height="10" rx="1"/><path d="M17 16v-5l3-3h1a2 2 0 012 2v6"/><path d="M2 16h20"/><circle cx="7" cy="18" r="1.8"/><circle cx="18.5" cy="18" r="1.8"/></svg>`,
   calendarCheck: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8.5 15l2 2 4-4"/></svg>`,
   whatsapp: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.8 14.2c-.2.6-1.3 1.2-1.9 1.3-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-5-4.3-5.1-4.5-.2-.2-1.2-1.6-1.2-3.1s.8-2.2 1.1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.2.1.3 0 .5-.1.2-.1.3-.3.5-.1.2-.3.4-.4.5-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.5 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.8.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>`,
   play: `<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`,
@@ -907,7 +907,7 @@ function homeLd() {
 
 function buildHomeBody() {
   return `<!-- HERO -->
-<header class="hero night" style="background-image:url('/img/spoedrit-amsterdam-centraal.jpg');background-position:center 55%">
+<header class="hero night" id="homeHero" style="background-image:url('/img/spoedrit-amsterdam-centraal.jpg');background-position:center 55%">
   <canvas class="particles"></canvas>
   <div class="wrap">
     <div class="hero-box reveal">
@@ -919,7 +919,6 @@ function buildHomeBody() {
         <span><span class="lbl">Direct even bellen</span><a href="tel:${SITE.phoneTel}">${SITE.phoneDisplay}</a></span>
       </div>
       <div class="hero-cta reveal-d3">
-        <a href="tel:${SITE.phoneTel}" class="btn btn-yellow">Bel direct: ${SITE.phoneDisplay}</a>
         <a href="/contact" class="btn btn-ghost">Of plan online</a>
       </div>
       <div class="trust reveal-d3">
@@ -955,6 +954,7 @@ function buildHomeBody() {
 <section class="call-banner">
   <div class="wrap">
     <span class="lbl">${ICONS.phoneCall} Bel nu, direct een chauffeur inplannen:</span>
+    <div class="call-banner-video">${videoEmbed('FZnAOHJuVqk', 'Instructiefilm: rolstoel vastzetten in de rolstoelbus')}</div>
     <a href="tel:${SITE.phoneTel}" class="num">${SITE.phoneDisplay}</a>
   </div>
 </section>
@@ -1033,7 +1033,7 @@ function buildHomeBody() {
       ${SERVICES.map((s, i) => `<a href="/diensten/${s.slug}" class="card reveal reveal-d${i}">
         <span class="icon-badge${s.icon === 'wheelchair' ? ' is-logo' : ''}">${s.icon === 'wheelchair' ? '<img src="/img/logo-icoon.png" alt="" width="26" height="17" aria-hidden="true">' : ICONS[s.icon]}</span>
         <h3>${s.h1}</h3>
-        <p>${truncate(s.lead, 90)}</p>
+        <p>${truncate(s.lead, 65)}</p>
       </a>`).join('\n      ')}
     </div>
   </div>
@@ -1106,6 +1106,7 @@ function buildHomeBody() {
       <figure class="photo-card reveal reveal-d2"><img src="/img/rolstoelbus-baksteen-laadklep.jpg" alt="Rolstoelbus met laadklep voor een gebouw van rode baksteen" width="1280" height="960" loading="lazy"></figure>
       <figure class="photo-card reveal reveal-d1"><img src="/img/rolstoelbus-laadklep-hoogbouw.jpg" alt="Rolstoelbus met uitgeklapte laadklep, hoogbouw op de achtergrond" width="1280" height="960" loading="lazy"></figure>
       <figure class="photo-card reveal reveal-d2"><img src="/img/rolstoelbus-landgoed-poort.jpg" alt="Rolstoelbus bij een landgoedpoort met rode baksteen" width="1280" height="960" loading="lazy"></figure>
+      <figure class="photo-card reveal reveal-d1"><img src="/img/amsterdam-gracht-laadklep.jpg" alt="Rolstoelbus met laadklep bij een Amsterdamse gracht" width="1280" height="960" loading="lazy"></figure>
     </div>
   </div>
 </section>
