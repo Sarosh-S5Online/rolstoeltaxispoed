@@ -62,7 +62,7 @@ function svgCheck() {
 }
 
 function logoMark(prefix) {
-  return `<span class="logo-icon"><img src="/img/logo-icoon.png" alt="" width="20" height="20" aria-hidden="true"></span><span class="logo-text">Rolstoeltaxi<b>Spoed</b></span>`;
+  return `<img src="/img/logo-icoon.png" alt="${SITE.name}" width="42" height="40">`;
 }
 
 const ICONS = {
@@ -863,7 +863,7 @@ function buildDienstenHub(locale = 'nl') {
     </div>
     <div class="grid-4">
       ${SERVICES.map((s, i) => { const d = en ? s.en : s; return `<a href="${base}/diensten/${s.slug}" class="card reveal reveal-d${i % 4}">
-        <span class="icon-badge${s.icon === 'wheelchair' ? ' is-logo' : ''}">${s.icon === 'wheelchair' ? '<img src="/img/logo-icoon.png" alt="" width="26" height="17" aria-hidden="true">' : ICONS[s.icon]}</span>
+        <span class="icon-badge${s.icon === 'wheelchair' ? ' is-logo' : ''}">${s.icon === 'wheelchair' ? '<img src="/img/logo-icoon.png" alt="" width="26" height="25" aria-hidden="true">' : ICONS[s.icon]}</span>
         <h3>${d.h1}</h3>
         <p>${truncate(d.lead, 110)}</p>
       </a>`; }).join('\n      ')}
@@ -1174,7 +1174,7 @@ function buildHomeBody(locale = 'nl') {
     </div>
     <div class="grid-4">
       ${SERVICES.map((s, i) => { const d = en ? s.en : s; return `<a href="${base}/diensten/${s.slug}" class="card reveal reveal-d${i}">
-        <span class="icon-badge${s.icon === 'wheelchair' ? ' is-logo' : ''}">${s.icon === 'wheelchair' ? '<img src="/img/logo-icoon.png" alt="" width="26" height="17" aria-hidden="true">' : ICONS[s.icon]}</span>
+        <span class="icon-badge${s.icon === 'wheelchair' ? ' is-logo' : ''}">${s.icon === 'wheelchair' ? '<img src="/img/logo-icoon.png" alt="" width="26" height="25" aria-hidden="true">' : ICONS[s.icon]}</span>
         <h3>${d.h1}</h3>
         <p>${truncate(d.lead, 65)}</p>
       </a>`; }).join('\n      ')}

@@ -114,23 +114,9 @@ nav{
 }
 nav.scrolled{background:rgba(247,249,252,.86);backdrop-filter:blur(14px);padding:14px 0;border-bottom:1px solid var(--line)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:11px;text-decoration:none}
-.logo img{height:42px;width:auto;display:block}
-.logo-icon{
-  width:36px;height:36px;border-radius:9px;flex-shrink:0;
-  background:linear-gradient(135deg,var(--accent-2),var(--accent-deep));
-  display:flex;align-items:center;justify-content:center;
-}
-.logo-icon img{height:20px;width:auto;display:block;filter:brightness(0) invert(1)}
-.logo-text{font-family:'Poppins',sans-serif;font-weight:800;line-height:1.2;font-size:16px;color:var(--ink);letter-spacing:.01em;text-transform:uppercase}
-.logo-text b{color:var(--yellow-deep);display:block;font-size:16px}
-.night .logo-text b,nav:has(~ .hero.night) .logo-text b{color:var(--yellow)}
-.night .logo-text{color:#eef3fb}
-nav:has(~ .hero.night) .logo-text{color:#eef3fb}
-nav.scrolled:has(~ .hero.night) .logo-text{color:var(--ink)}
-.foot-logo-row{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.foot-logo-row .logo-icon{color:var(--accent)}
-.foot-logo-row .logo-text{color:var(--ink)}
+.logo{display:flex;align-items:center;text-decoration:none}
+.logo img{height:46px;width:auto;display:block}
+.foot-logo-row{display:flex;align-items:center;margin-bottom:14px}
 .live-badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#ff8a80}
 .live-dot{width:8px;height:8px;border-radius:50%;background:#ff5449;flex-shrink:0;animation:pulse-dot 1.8s ease-in-out infinite}
 .nav-links{display:flex;gap:30px;align-items:center;list-style:none}
@@ -601,10 +587,6 @@ nav.scrolled:has(~ .page-hero.has-photo) .nav-links>li>a:not(.btn):not(.nav-spoe
 nav.scrolled:has(~ .hero) .nav-spoed,nav.scrolled:has(~ .page-hero.has-photo) .nav-spoed{color:#d64545!important}
 nav.scrolled:has(~ .hero) .hamburger,nav.scrolled:has(~ .page-hero.has-photo) .hamburger{color:var(--ink);border-color:var(--line)}
 nav.scrolled:has(~ .hero) .lang-switch,nav.scrolled:has(~ .page-hero.has-photo) .lang-switch{color:var(--ink)!important;border-color:var(--line)}
-nav:has(~ .page-hero.has-photo) .logo-text{color:#eef3fb}
-nav:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow)}
-nav.scrolled:has(~ .page-hero.has-photo) .logo-text{color:var(--ink)}
-nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
 
 /* ---------- location / hub pages ---------- */
 .proof{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px}
@@ -765,7 +747,7 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
 
 <nav id="nav">
   <div class="wrap nav-inner">
-    <a href="/en/" class="logo"><span class="logo-icon"><img src="/img/logo-icoon.png" alt="" width="20" height="20" aria-hidden="true"></span><span class="logo-text">Rolstoeltaxi<b>Spoed</b></span></a>
+    <a href="/en/" class="logo"><img src="/img/logo-icoon.png" alt="Rolstoeltaxi Spoed" width="42" height="40"></a>
     <ul class="nav-links">
       <li class="has-dd"><a href="/en/diensten">Services <span class="caret">▾</span></a>
         <div class="dd"><ul><li><a href="/en/diensten/spoedvervoer-rolstoeltaxi">Emergency transport</a></li><li><a href="/en/diensten/rolstoelvervoer">Wheelchair transport</a></li><li><a href="/en/diensten/ziekenhuisvervoer">Hospital transport</a></li><li><a href="/en/diensten/elektrische-rolstoelvervoer">Electric wheelchair</a></li><li><a href="/en/diensten/rolstoelbus">Wheelchair vehicle</a></li><li><a href="/en/diensten/schipholvervoer">Schiphol transport</a></li><li><a href="/en/diensten/evenementvervoer">Event transport</a></li><li><a href="/en/diensten/uitvaartvervoer">Funeral transport</a></li><li class="dd-all"><a href="/en/diensten">All services</a></li></ul></div></li>
@@ -957,7 +939,7 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
         <p>Some rides can't be planned two days in advance. Rolstoeltaxi…</p>
       </a>
       <a href="/en/diensten/rolstoelvervoer" class="card reveal reveal-d1">
-        <span class="icon-badge is-logo"><img src="/img/logo-icoon.png" alt="" width="26" height="17" aria-hidden="true"></span>
+        <span class="icon-badge is-logo"><img src="/img/logo-icoon.png" alt="" width="26" height="25" aria-hidden="true"></span>
         <h3>Wheelchair transport, planned too</h3>
         <p>Not every ride needs to be an emergency. Rolstoeltaxi Spoed is…</p>
       </a>
@@ -967,7 +949,7 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
         <p>An appointment with a specialist, an admission or a discharge:…</p>
       </a>
       <a href="/en/diensten/elektrische-rolstoelvervoer" class="card reveal reveal-d3">
-        <span class="icon-badge is-logo"><img src="/img/logo-icoon.png" alt="" width="26" height="17" aria-hidden="true"></span>
+        <span class="icon-badge is-logo"><img src="/img/logo-icoon.png" alt="" width="26" height="25" aria-hidden="true"></span>
         <h3>Transport with an electric wheelchair</h3>
         <p>An electric wheelchair is heavy, large and valuable.…</p>
       </a>
@@ -1203,7 +1185,7 @@ nav.scrolled:has(~ .page-hero.has-photo) .logo-text b{color:var(--yellow-deep)}
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="foot-logo-row"><span class="logo-icon"><img src="/img/logo-icoon.png" alt="" width="20" height="20" aria-hidden="true"></span><span class="logo-text">Rolstoeltaxi<b>Spoed</b></span></div>
+        <div class="foot-logo-row"><img src="/img/logo-icoon.png" alt="Rolstoeltaxi Spoed" width="42" height="40"></div>
         <p>The emergency branch of Rolstoeltaxi Holland: wheelchair transport in the Netherlands, reachable 24 hours a day for rides that can't wait.</p>
       </div>
       <div>
