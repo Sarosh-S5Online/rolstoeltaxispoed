@@ -6,7 +6,7 @@ const ROOT = __dirname;
 const SITE = {
   name: 'Rolstoeltaxi Spoed',
   parentBrand: 'Rolstoeltaxi Holland',
-  domain: 'https://rolstoeltaxispoed.nl',
+  domain: 'https://www.rolstoeltaxispoed.nl',
   phoneDisplay: '06 2876 1078',
   phoneTel: '+31628761078',
   whatsapp: '31628761078',
@@ -112,6 +112,8 @@ function head({ title, description, canonicalPath, prefix, extraLd, locale = 'nl
 <meta property="og:description" content="${description}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="${locale === 'en' ? 'en_US' : 'nl_NL'}">
+<meta property="og:url" content="${SITE.domain}/${canonicalPath}">
+<meta property="og:image" content="${SITE.domain}/img/logo-rolstoeltaxi-spoed-nobg.png">
 <link rel="icon" type="image/png" href="${prefix}img/logo-icoon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -158,7 +160,10 @@ function nav(prefix, locale = 'nl', altHref = '/') {
       <li><a href="${altHref}" class="lang-switch" aria-label="${t.langLabel}">${ICONS.globe}${t.langShort}</a></li>
       <li><a href="tel:${SITE.phoneTel}" class="btn btn-nav">${t.belDirect}</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="${t.menuOpen}" aria-expanded="false">☰</button>
+    <div class="nav-mobile-actions">
+      <a href="${altHref}" class="lang-switch lang-switch-mobile" aria-label="${t.langLabel}">${ICONS.globe}${t.langShort}</a>
+      <button class="hamburger" id="hamburger" aria-label="${t.menuOpen}" aria-expanded="false">☰</button>
+    </div>
   </div>
 </nav>
 
@@ -245,10 +250,12 @@ function stickyCta({ hideBook, locale = 'nl' } = {}) {
 function cookieBanner(locale = 'nl') {
   const en = locale === 'en';
   const base = en ? '/en' : '';
+  const heading = en ? 'We use cookies' : 'Wij gebruiken cookies';
   const text = en
     ? `This website only uses functional cookies to work properly. Want to know more? Read our <a href="${base}/privacyverklaring">privacy policy</a>.`
     : `Deze website gebruikt alleen functionele cookies om goed te werken. Meer weten? Lees onze <a href="${base}/privacyverklaring">privacyverklaring</a>.`;
   return `<div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="${en ? 'Cookie notice' : 'Cookiemelding'}">
+  <h2>${heading}</h2>
   <p>${text}</p>
   <div class="cb-actions"><button type="button" class="btn btn-yellow" id="cookieAccept">${en ? 'Accept' : 'Akkoord'}</button></div>
 </div>
@@ -260,9 +267,10 @@ function cookieBanner(locale = 'nl') {
   if (!banner || !btn) return;
   var seen = false;
   try { seen = !!localStorage.getItem(KEY); } catch (e) {}
-  if (!seen) setTimeout(function () { banner.classList.add('show'); }, 800);
+  if (!seen) setTimeout(function () { banner.classList.add('show'); document.body.classList.add('cc-open'); }, 800);
   btn.addEventListener('click', function () {
     banner.classList.remove('show');
+    document.body.classList.remove('cc-open');
     try { localStorage.setItem(KEY, '1'); } catch (e) {}
   });
 })();
@@ -1004,12 +1012,9 @@ function buildHomeBody(locale = 'nl') {
       <span class="live-badge"><span class="live-dot"></span>${en ? '24/7 emergency line available' : '24/7 spoedlijn bereikbaar'}</span>
       <h1 class="reveal-d1" style="margin-top:16px">${en ? 'Emergency wheelchair transport?' : 'Spoed rolstoelvervoer?'} <span class="serif-i">${en ? 'We come now.' : 'Wij komen nu.'}</span></h1>
       <p class="lead reveal-d2">${en ? "One phone call and a wheelchair-accessible vehicle is ready for you. Fast, safe and calm, throughout the Netherlands." : 'Eén telefoontje en er staat een rolstoelbus voor u klaar. Snel, veilig en rustig, in Nederland.'}</p>
-      <div class="phone-badge reveal-d2">
-        ${ICONS.phoneCall}
-        <span><span class="lbl">${en ? 'Call now' : 'Direct even bellen'}</span><a href="tel:${SITE.phoneTel}">${SITE.phoneDisplay}</a></span>
-      </div>
-      <div class="hero-cta reveal-d3">
-        <a href="${base}/contact" class="btn btn-ghost">${en ? 'Or book online' : 'Of plan online'}</a>
+      <div class="hero-cta-main reveal-d2">
+        <a href="tel:${SITE.phoneTel}" class="btn btn-yellow">${ICONS.phoneCall}${en ? 'Call now' : 'Bel direct'}</a>
+        <a href="${base}/contact" class="btn btn-ghost">${en ? 'Book now' : 'Plan nu'}</a>
       </div>
       <div class="trust reveal-d3">
         <span class="trust-item">${svgCheck()}<b>24/7</b> ${en ? 'available' : 'bereikbaar'}</span>

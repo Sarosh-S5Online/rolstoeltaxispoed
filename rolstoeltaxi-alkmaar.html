@@ -5,14 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rolstoeltaxi Alkmaar in de buurt: spoedvervoer 24/7</title>
 <meta name="description" content="Rolstoeltaxi Alkmaar: rolstoelvervoer naar de kaasmarkt, het centrum en de zorg, vanuit Noord-Holland. Elektrische laadklep, 24/7 spoedservice. Bel direct.">
-<link rel="canonical" href="https://rolstoeltaxispoed.nl/rolstoeltaxi-alkmaar">
-<link rel="alternate" hreflang="nl" href="https://rolstoeltaxispoed.nl/rolstoeltaxi-alkmaar">
-<link rel="alternate" hreflang="en" href="https://rolstoeltaxispoed.nl/en/rolstoeltaxi-alkmaar">
-<link rel="alternate" hreflang="x-default" href="https://rolstoeltaxispoed.nl/rolstoeltaxi-alkmaar">
+<link rel="canonical" href="https://www.rolstoeltaxispoed.nl/rolstoeltaxi-alkmaar">
+<link rel="alternate" hreflang="nl" href="https://www.rolstoeltaxispoed.nl/rolstoeltaxi-alkmaar">
+<link rel="alternate" hreflang="en" href="https://www.rolstoeltaxispoed.nl/en/rolstoeltaxi-alkmaar">
+<link rel="alternate" hreflang="x-default" href="https://www.rolstoeltaxispoed.nl/rolstoeltaxi-alkmaar">
 <meta property="og:title" content="Rolstoeltaxi Alkmaar in de buurt: spoedvervoer 24/7">
 <meta property="og:description" content="Rolstoeltaxi Alkmaar: rolstoelvervoer naar de kaasmarkt, het centrum en de zorg, vanuit Noord-Holland. Elektrische laadklep, 24/7 spoedservice. Bel direct.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="nl_NL">
+<meta property="og:url" content="https://www.rolstoeltaxispoed.nl/rolstoeltaxi-alkmaar">
+<meta property="og:image" content="https://www.rolstoeltaxispoed.nl/img/logo-rolstoeltaxi-spoed-nobg.png">
 <link rel="icon" type="image/png" href="img/logo-icoon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,9 +27,9 @@
   "name": "Rolstoeltaxi Spoed",
   "serviceType": "Rolstoeltaxi Alkmaar",
   "telephone": "+31628761078",
-  "image": "https://rolstoeltaxispoed.nl/img/logo-icoon.png",
+  "image": "https://www.rolstoeltaxispoed.nl/img/logo-icoon.png",
   "areaServed": {"@type":"City","name":"Alkmaar"},
-  "url": "https://rolstoeltaxispoed.nl/rolstoeltaxi-alkmaar",
+  "url": "https://www.rolstoeltaxispoed.nl/rolstoeltaxi-alkmaar",
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
@@ -53,8 +55,8 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {"@type":"ListItem","position":1,"name":"Home","item":"https://rolstoeltaxispoed.nl/"},
-    {"@type":"ListItem","position":2,"name":"Locaties","item":"https://rolstoeltaxispoed.nl/locaties"},
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://www.rolstoeltaxispoed.nl/"},
+    {"@type":"ListItem","position":2,"name":"Locaties","item":"https://www.rolstoeltaxispoed.nl/locaties"},
     {"@type":"ListItem","position":3,"name":"Alkmaar"}
   ]
 }
@@ -119,10 +121,10 @@ section{padding:110px 0}
 /* ---------- nav ---------- */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:20px 0;transition:background .35s ease,padding .35s ease,border-color .35s ease;
-  border-bottom:1px solid transparent;
+  padding:20px 0;transition:padding .35s ease,box-shadow .35s ease;
+  background:#fff;border-bottom:1px solid var(--line);
 }
-nav.scrolled{background:rgba(247,249,252,.86);backdrop-filter:blur(14px);padding:14px 0;border-bottom:1px solid var(--line)}
+nav.scrolled{padding:14px 0;box-shadow:0 2px 18px rgba(15,26,46,.06)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between}
 .logo{display:flex;align-items:center;text-decoration:none}
 .logo img{height:46px;width:auto;display:block}
@@ -143,6 +145,9 @@ nav.scrolled{background:rgba(247,249,252,.86);backdrop-filter:blur(14px);padding
 .lang-switch{display:flex!important;align-items:center;gap:6px;font-weight:700!important;font-size:13px!important;padding:7px 12px;border:1.5px solid var(--line);border-radius:20px;color:var(--ink)!important}
 .lang-switch:hover{border-color:var(--accent);color:var(--accent)!important}
 .mobile-menu a.lang-switch{border:1.5px solid rgba(255,255,255,.25);border-radius:24px;padding:10px 18px;justify-content:center;color:#eef3fb!important}
+.nav-mobile-actions{display:flex;align-items:center;gap:10px}
+.lang-switch-mobile{display:none!important;padding:6px 10px;font-size:12px!important}
+@media(max-width:900px){.lang-switch-mobile{display:flex!important}}
 .nav-links a.btn{color:#fff}
 .btn{
   display:inline-block;background-color:var(--accent-deep);background-image:linear-gradient(135deg,var(--accent-2),var(--accent-deep));color:#fff;
@@ -212,16 +217,10 @@ canvas.particles{position:absolute;inset:0;z-index:0;pointer-events:none}
 .trust-item svg{flex-shrink:0;color:var(--accent-2)}
 .trust b{color:var(--ink)}
 
-/* ---------- phone badge (prominent bel-direct callout) ---------- */
-.phone-badge{
-  display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,var(--yellow),var(--yellow-deep));
-  border:1.5px solid var(--yellow);border-radius:var(--radius-sm);padding:13px 22px;margin-bottom:22px;
-  box-shadow:0 10px 26px rgba(245,166,35,.3);
-}
-.phone-badge svg{color:var(--yellow-ink);flex-shrink:0}
-.phone-badge a{color:var(--yellow-ink);text-decoration:none;font-weight:800;font-size:19px;letter-spacing:.01em}
-.phone-badge a:hover{color:#1a1200}
-.phone-badge .lbl{color:var(--yellow-ink);opacity:.8;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:1px}
+/* ---------- hero: Bel direct + Plan nu, even groot naast elkaar ---------- */
+.hero-cta-main{display:flex;gap:14px;margin-bottom:26px}
+.hero-cta-main .btn{flex:1;display:flex;align-items:center;justify-content:center;gap:9px;padding:16px 22px;font-size:16px}
+@media(max-width:420px){.hero-cta-main{flex-direction:column}}
 
 /* ---------- call banner (mid-page bel-nu band) ---------- */
 .call-banner{background:linear-gradient(135deg,var(--accent-deep),var(--accent));position:relative;overflow:hidden}
@@ -587,18 +586,6 @@ footer .foot-logo{height:32px;width:auto;margin-bottom:14px;display:block}
 .dd a:hover{background:var(--bg-2);color:var(--accent)!important}
 .dd-all{grid-column:1/-1;border-top:1px solid var(--line);margin-top:6px;padding-top:6px}
 .dd-all a{font-weight:700;color:var(--accent)!important}
-nav:has(~ .hero) .nav-links>li>a:not(.btn):not(.nav-spoed),
-nav:has(~ .page-hero.has-photo) .nav-links>li>a:not(.btn):not(.nav-spoed){color:#e6edf9}
-nav:has(~ .hero) .nav-links>li>a:not(.btn):not(.nav-spoed):hover,
-nav:has(~ .page-hero.has-photo) .nav-links>li>a:not(.btn):not(.nav-spoed):hover{color:#fff}
-nav:has(~ .hero) .nav-spoed,nav:has(~ .page-hero.has-photo) .nav-spoed{color:#ff8a80!important}
-nav:has(~ .hero) .hamburger,nav:has(~ .page-hero.has-photo) .hamburger{color:#eef3fb;border-color:rgba(238,243,251,.35)}
-nav:has(~ .hero) .lang-switch,nav:has(~ .page-hero.has-photo) .lang-switch{color:#eef3fb!important;border-color:rgba(238,243,251,.35)}
-nav.scrolled:has(~ .hero) .nav-links>li>a:not(.btn):not(.nav-spoed),
-nav.scrolled:has(~ .page-hero.has-photo) .nav-links>li>a:not(.btn):not(.nav-spoed){color:#3d4a63}
-nav.scrolled:has(~ .hero) .nav-spoed,nav.scrolled:has(~ .page-hero.has-photo) .nav-spoed{color:#d64545!important}
-nav.scrolled:has(~ .hero) .hamburger,nav.scrolled:has(~ .page-hero.has-photo) .hamburger{color:var(--ink);border-color:var(--line)}
-nav.scrolled:has(~ .hero) .lang-switch,nav.scrolled:has(~ .page-hero.has-photo) .lang-switch{color:var(--ink)!important;border-color:var(--line)}
 
 /* ---------- location / hub pages ---------- */
 .proof{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px}
@@ -741,17 +728,23 @@ nav.scrolled:has(~ .hero) .lang-switch,nav.scrolled:has(~ .page-hero.has-photo) 
 
 /* ---------- cookiemelding ---------- */
 .cookie-banner{
-  position:fixed;left:20px;bottom:20px;z-index:160;max-width:400px;
-  background:#0d1c34;color:#eef3fb;border:1px solid rgba(238,243,251,.16);border-radius:var(--radius);
-  padding:20px 22px;box-shadow:0 20px 50px rgba(0,0,0,.35);
+  position:fixed;left:16px;right:16px;bottom:16px;z-index:160;max-width:620px;margin:0 auto;
+  background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:20px;
+  padding:26px 28px;box-shadow:0 30px 70px -20px rgba(15,26,46,.35);
   display:none;flex-direction:column;gap:14px;
 }
-.cookie-banner.show{display:flex}
-.cookie-banner p{font-size:13.5px;color:#c8d6ee;line-height:1.55;margin:0}
-.cookie-banner a{color:var(--yellow);font-weight:600}
+.cookie-banner.show{display:flex;animation:ccIn .35s ease}
+@keyframes ccIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.cookie-banner h2{font-size:19px;margin:0;font-family:'Poppins',sans-serif}
+.cookie-banner p{font-size:14px;color:var(--ink-dim);line-height:1.6;margin:0}
+.cookie-banner a{color:var(--accent);font-weight:600}
 .cookie-banner .cb-actions{display:flex;gap:10px;flex-wrap:wrap}
-.cookie-banner .btn{padding:9px 18px;font-size:14px;box-shadow:none}
-@media(max-width:900px){.cookie-banner{left:12px;right:12px;bottom:calc(76px + 12px);max-width:none}}
+.cookie-banner .btn{padding:12px 22px;font-size:14px;box-shadow:none}
+body.cc-open .cta-dock{display:none!important}
+@media(max-width:680px){
+  .cookie-banner{left:10px;right:10px;bottom:10px;padding:20px 18px}
+  .cookie-banner .cb-actions .btn{width:100%;justify-content:center}
+}
 
 </style>
 </head>
@@ -771,7 +764,10 @@ nav.scrolled:has(~ .hero) .lang-switch,nav.scrolled:has(~ .page-hero.has-photo) 
       <li><a href="/en/rolstoeltaxi-alkmaar" class="lang-switch" aria-label="View in English"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14.5 14.5 0 010 18"/><path d="M12 3a14.5 14.5 0 000 18"/></svg>EN</a></li>
       <li><a href="tel:+31628761078" class="btn btn-nav">Bel direct</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false">☰</button>
+    <div class="nav-mobile-actions">
+      <a href="/en/rolstoeltaxi-alkmaar" class="lang-switch lang-switch-mobile" aria-label="View in English"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14.5 14.5 0 010 18"/><path d="M12 3a14.5 14.5 0 000 18"/></svg>EN</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false">☰</button>
+    </div>
   </div>
 </nav>
 
@@ -1052,6 +1048,7 @@ nav.scrolled:has(~ .hero) .lang-switch,nav.scrolled:has(~ .page-hero.has-photo) 
 </div>
 
 <div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Cookiemelding">
+  <h2>Wij gebruiken cookies</h2>
   <p>Deze website gebruikt alleen functionele cookies om goed te werken. Meer weten? Lees onze <a href="/privacyverklaring">privacyverklaring</a>.</p>
   <div class="cb-actions"><button type="button" class="btn btn-yellow" id="cookieAccept">Akkoord</button></div>
 </div>
@@ -1063,9 +1060,10 @@ nav.scrolled:has(~ .hero) .lang-switch,nav.scrolled:has(~ .page-hero.has-photo) 
   if (!banner || !btn) return;
   var seen = false;
   try { seen = !!localStorage.getItem(KEY); } catch (e) {}
-  if (!seen) setTimeout(function () { banner.classList.add('show'); }, 800);
+  if (!seen) setTimeout(function () { banner.classList.add('show'); document.body.classList.add('cc-open'); }, 800);
   btn.addEventListener('click', function () {
     banner.classList.remove('show');
+    document.body.classList.remove('cc-open');
     try { localStorage.setItem(KEY, '1'); } catch (e) {}
   });
 })();
